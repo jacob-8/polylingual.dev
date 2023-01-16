@@ -1,4 +1,4 @@
-import type { DirectoryStub, Exercise, FileStub } from '$lib/types';
+import type { ChapterMeta, ChapterStub, DirectoryStub, Exercise, ExerciseRaw, FileStub, PartMeta, PartStub } from '$lib/types';
 import fs from 'node:fs';
 import path from 'node:path';
 import { transform } from './markdown.js';
@@ -18,47 +18,41 @@ const text_files = new Set([
 
 const excluded = new Set(['.DS_Store', '.gitkeep', '.svelte-kit', 'package-lock.json']);
 
-function json(file: string) {
+function loadJson(file: string) {
 	return JSON.parse(fs.readFileSync(file, 'utf-8'));
 }
 
-export function get_index() {
-	const parts = [];
-	let last_exercise: import('$lib/types').ExerciseRaw | null = null;
-	let last_part_meta = null;
-	let last_chapter_meta = null;
+export function get_tree(): PartStub[] {
+	const parts: PartStub[] = [];
+	let last_exercise: ExerciseRaw | null = null;
+	let last_part_meta: PartMeta | null = null;
+	let last_chapter_meta: ChapterMeta | null = null;
 
-	for (const part of fs.readdirSync('content/tutorial')) {
-		if (!/^\d{2}-/.test(part)) continue;
+	for (const partPath of fs.readdirSync('content/tutorial')) {
+		if (!startsWith2DigitsAndHyphen(partPath)) continue;
 
-		const part_meta = {
-			...json(`content/tutorial/${part}/meta.json`),
-			slug: part
-		};
+		const part_meta: PartMeta = loadJson(`content/tutorial/${partPath}/meta.json`);
 
-		const chapters = [];
+		const chapters: ChapterStub[] = [];
 
-		for (const chapter of fs.readdirSync(`content/tutorial/${part}`)) {
-			if (!/^\d{2}-/.test(chapter)) continue;
+		for (const chapterPath of fs.readdirSync(`content/tutorial/${partPath}`)) {
+			if (!startsWith2DigitsAndHyphen(chapterPath)) continue;
 
-			const chapter_meta = {
-				...json(`content/tutorial/${part}/${chapter}/meta.json`),
-				slug: chapter
-			};
+			const chapter_meta: ChapterMeta = loadJson(`content/tutorial/${partPath}/${chapterPath}/meta.json`);
 
-			const exercises = [];
+			const exercises: ExerciseRaw[] = [];
 
-			for (const exercise of fs.readdirSync(`content/tutorial/${part}/${chapter}`)) {
-				if (!/^\d{2}-/.test(exercise)) continue;
+			for (const exercisePath of fs.readdirSync(`content/tutorial/${partPath}/${chapterPath}`)) {
+				if (!startsWith2DigitsAndHyphen(exercisePath)) continue;
 
-				const dir = `content/tutorial/${part}/${chapter}/${exercise}`;
+				const dir = `content/tutorial/${partPath}/${chapterPath}/${exercisePath}`;
 				if (!fs.statSync(dir).isDirectory()) continue;
 
 				const text = fs.readFileSync(`${dir}/README.md`, 'utf-8');
 				const { frontmatter, markdown } = extract_frontmatter(text, dir);
 				const { title, path = '/', focus } = frontmatter;
-				const slug = exercise.slice(3);
-				const meta = fs.existsSync(`${dir}/meta.json`) ? json(`${dir}/meta.json`) : {};
+				const slug = exercisePath.slice(3);
+				const meta = fs.existsSync(`${dir}/meta.json`) ? loadJson(`${dir}/meta.json`) : {};
 
 				if (last_exercise) {
 					last_exercise.next = {
@@ -72,35 +66,36 @@ export function get_index() {
 					};
 				}
 
-				exercises.push(
-					(last_exercise = {
-						slug: exercise.slice(3),
-						title,
-						path,
-						focus,
-						markdown,
-						dir,
-						prev: last_exercise ? { slug: last_exercise.slug } : null,
-						meta,
-						next: null
-					})
-				);
+				const exercise: ExerciseRaw = {
+					title,
+					path,
+					focus,
+					slug: exercisePath.slice(3),
+					prev: last_exercise ? { slug: last_exercise.slug } : null,
+					next: null,
+					meta,
+					markdown,
+					dir,
+				}
+				exercises.push(exercise);
+				last_exercise = exercise;
 
 				last_chapter_meta = chapter_meta;
 				last_part_meta = part_meta;
 			}
 
 			chapters.push({
+				slug: chapterPath,
 				meta: {
 					...part_meta,
 					...chapter_meta
 				},
-				exercises
+				exercises,
 			});
 		}
 
 		parts.push({
-			slug: part,
+			slug: partPath,
 			meta: part_meta,
 			chapters
 		});
@@ -109,21 +104,22 @@ export function get_index() {
 	return parts;
 }
 
-export function get_exercise(slug: string): Exercise | undefined {
-	const index = get_index();
+function startsWith2DigitsAndHyphen(text: string) {
+	return /^\d{2}-/.test(text);
+}
 
-	for (let i = 0; i < index.length; i += 1) {
-		const part = index[i];
-
+export function get_exercise(tree: PartStub[], slug: string): Exercise | undefined {
+	for (const [index, part] of tree.entries()) {
 		const chain: string[] = [];
-
+		
 		for (const chapter of part.chapters) {
+			
 			for (const exercise of chapter.exercises) {
 				if (fs.existsSync(`${exercise.dir}/app-a`)) {
 					chain.length = 0;
 					chain.push(`${exercise.dir}/app-a`);
 				}
-
+				
 				if (exercise.slug === slug) {
 					const a = {
 						...listFilesInDirectory('content/tutorial/common', {
@@ -149,12 +145,12 @@ export function get_exercise(slug: string): Exercise | undefined {
 
 					return {
 						part: {
-							slug: part.meta.slug,
+							slug: part.slug,
 							title: part.meta.title,
-							index: i
+							index
 						},
 						chapter: {
-							slug: chapter.meta.slug,
+							slug: chapter.slug,
 							title: chapter.meta.title
 						},
 						scope,
@@ -165,10 +161,7 @@ export function get_exercise(slug: string): Exercise | undefined {
 						prev: exercise.prev,
 						next: exercise.next,
 						dir: exercise.dir,
-						editing_constraints: {
-							create: exercise.meta.editing_constraints?.create ?? [],
-							remove: exercise.meta.editing_constraints?.remove ?? []
-						},
+						meta: exercise.meta, // watch out for empty meta when checking editing_constraints
 						html: transform(exercise.markdown, {
 							codespan: (text: string) =>
 								filenames.size > 1 && filenames.has(text)

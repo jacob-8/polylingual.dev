@@ -1,5 +1,5 @@
 ---
-title: Welcome to Svelte
+title: Welcome
 ---
 
 Welcome to the Svelte tutorial! This will teach you everything you need to know to easily build fast, small web applications.

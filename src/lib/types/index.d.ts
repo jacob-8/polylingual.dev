@@ -1,3 +1,5 @@
+export type Stub = FileStub | DirectoryStub;
+
 export interface FileStub {
 	type: 'file';
 	name: string;
@@ -12,8 +14,6 @@ export interface DirectoryStub {
 	basename: string;
 }
 
-export type Stub = FileStub | DirectoryStub;
-
 export interface Adapter {
 	base: string;
 	/** Returns `false` if the reset was in such a way that a reload of the iframe isn't needed */
@@ -22,13 +22,29 @@ export interface Adapter {
 	destroy(): Promise<void>;
 }
 
-export interface Scope {
-	prefix: string;
-	depth: number;
-	name: string;
+// TREE
+
+export interface PartStub { // refactor to LessonStub?
+	slug: string;
+	meta: PartMeta;
+	chapters: ChapterStub[];
 }
 
-export interface Exercise {
+export interface PartMeta {
+	title: string;
+	focus: string;
+	scope: Scope;
+}
+
+export interface ChapterStub {
+	slug: string;
+	meta: ChapterMeta;
+	exercises: ExerciseRaw[];
+}
+
+export type ChapterMeta = PartMeta;
+
+export interface Exercise extends Omit<ExerciseRaw, 'markdown'> {
 	part: {
 		slug: string;
 		title: string;
@@ -39,55 +55,34 @@ export interface Exercise {
 		title: string;
 	};
 	scope: Scope;
-	focus: string;
-	title: string;
-	/** the initial path to navigate to */
-	path: string;
-	slug: string;
-	prev: { slug: string } | null;
-	next: { slug: string; title: string } | null;
 	html: string;
-	dir: string;
-	editing_constraints: {
-		create: string[];
-		remove: string[];
-	};
 	a: Record<string, Stub>;
 	b: Record<string, Stub>;
 }
 
 export interface ExerciseRaw {
 	title: string;
-	path: string;
+	slug: string;
+	prev: { slug: string } | null;
+	next: { slug: string; title: string } | null;
+	path: string; // the initial path to navigate to
 	focus: string;
-	slug: string;
-	prev: { slug: string } | null;
-	next: { slug: string; title: string } | null;
-	meta: any;
-	markdown: string;
 	dir: string;
+	meta: ExerciseMeta;
+	markdown: string;
 }
 
-export interface ExerciseStub {
-	title: string;
-	slug: string;
-	prev: { slug: string } | null;
-	next: { slug: string; title: string } | null;
-}
-
-export interface ChapterStub {
-	slug: string;
-	title: string;
-	exercises: ExerciseStub[];
-}
-
-export interface PartStub {
-	slug: string;
-	title: string;
-	chapters: ChapterStub[];
+export interface ExerciseMeta {
+	editing_constraints: EditingConstraints;
 }
 
 export interface EditingConstraints {
 	create: string[];
 	remove: string[];
+}
+
+export interface Scope {
+	prefix: string;
+	depth: number;
+	name: string;
 }
