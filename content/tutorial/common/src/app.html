@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" href="%sveltekit.assets%/favicon.png" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="color-scheme" content="dark light" />
+		%sveltekit.head%
+
+		<style>
+			body {
+				font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu,
+					Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+				color: #222;
+			}
+
+			h1,
+			h2,
+			h3,
+			h4,
+			h5,
+			h6 {
+				font-weight: normal;
+				font-variant-numeric: tabular-nums;
+			}
+
+			nav {
+				position: relative;
+				display: flex;
+				gap: 1em;
+				padding: 1em;
+				background-color: #ffeedd;
+				z-index: 2;
+				margin: 0 0 1em 0;
+				border-radius: 2px;
+			}
+
+			button,
+			input {
+				font-family: inherit;
+				font-size: inherit;
+			}
+
+			input {
+				display: block;
+				margin: 0.5em 0;
+			}
+
+			ul:has(form) {
+				list-style: none;
+				padding: 0;
+			}
+
+			.error {
+				color: red;
+			}
+
+			code {
+				background: hsl(206, 20%, 80%);
+			}
+
+			@media (prefers-color-scheme: dark) {
+				body {
+					background: hsl(0, 0%, 18%);
+					color: rgb(230, 230, 230);
+				}
+				code {
+					background: hsl(0, 0%, 40%);
+				}
+				a {
+					color: hsl(204, 100%, 83%);
+				}
+				nav {
+					background-color: #345;
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<div style="display: contents">%sveltekit.body%</div>
+	</body>
+</html>
