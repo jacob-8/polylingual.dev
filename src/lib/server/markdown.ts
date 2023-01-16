@@ -17,15 +17,13 @@ const languages = {
 	'': ''
 };
 
-/** @type {Record<string, string>} */
-const chars = {
+const chars: Record<string, string> = {
 	'&': '&amp;',
 	'<': '&lt;',
 	'>': '&gt;'
 };
 
-/** @param {string} html */
-function escape(html) {
+function escape(html: string) {
 	return html.replace(/[&<>]/g, (c) => chars[c]);
 }
 
@@ -35,22 +33,16 @@ const delimiter_substitutes = {
 	':::': '         '
 };
 
-/**
- * @param {string} content
- * @param {string} classname
- */
-function highlight_spans(content, classname) {
+function highlight_spans(content: string, classname: string) {
 	return `<span class="${classname}">${content}</span>`;
 	// return content.replace(/<span class="([^"]+)"/g, (_, classnames) => {
 	// 	return `<span class="${classname} ${classnames}"`;
 	// });
 }
 
-/** @type {Partial<import('marked').Renderer>} */
-const default_renderer = {
-	code: (source, language = '') => {
-		/** @type {Record<string, string>} */
-		const options = {};
+const default_renderer: Partial<import('marked').Renderer> = {
+	code: (source, language: keyof typeof languages = '') => {
+		const options: Record<string, string> = {};
 
 		let html = '';
 
@@ -59,7 +51,7 @@ const default_renderer = {
 				options[key] = value;
 				return '';
 			})
-			.replace(/^([\-\+])?((?:    )+)/gm, (match, prefix = '', spaces) => {
+			.replace(/^([-+])?((?: {4})+)/gm, (match, prefix = '', spaces) => {
 				if (prefix && language !== 'diff') return match;
 
 				// for no good reason at all, marked replaces tabs with spaces
@@ -69,7 +61,7 @@ const default_renderer = {
 				}
 				return prefix + tabs;
 			})
-			.replace(/(\+\+\+|---|:::)/g, (_, /** @type {keyof delimiter_substitutes} */ delimiter) => {
+			.replace(/(\+\+\+|---|:::)/g, (_, delimiter: keyof typeof delimiter_substitutes) => {
 				return delimiter_substitutes[delimiter];
 			})
 			.replace(/\*\\\//g, '*/');
@@ -77,7 +69,7 @@ const default_renderer = {
 		if (language === 'diff') {
 			const lines = source.split('\n').map((content) => {
 				let type = null;
-				if (/^[\+\-]/.test(content)) {
+				if (/^[+-]/.test(content)) {
 					type = content[0] === '+' ? 'inserted' : 'deleted';
 					content = content.slice(1);
 				}
@@ -95,15 +87,14 @@ const default_renderer = {
 				})
 				.join('')}</code></pre></div>`;
 		} else {
-			const lang = /** @type {keyof languages} */ (language);
+			const lang: keyof typeof languages = (language);
 			const plang = languages[lang];
 			const highlighted = plang
 				? PrismJS.highlight(source, PrismJS.languages[plang], language)
 				: escape(source);
 
-			html = `<div class="code-block">${
-				options.file ? `<span class="filename">${options.file}</span>` : ''
-			}<pre class='language-${plang}'><code>${highlighted}</code></pre></div>`;
+			html = `<div class="code-block">${options.file ? `<span class="filename">${options.file}</span>` : ''
+				}<pre class='language-${plang}'><code>${highlighted}</code></pre></div>`;
 		}
 
 		return html
@@ -123,11 +114,7 @@ marked.use({
 	renderer: {}
 });
 
-/**
- * @param {string} markdown
- * @param {Partial<import('marked').Renderer>} options
- */
-export function transform(markdown, options) {
+export function transform(markdown: string, options: Partial<import('marked').Renderer>) {
 	marked.use({
 		renderer: {
 			...default_renderer,

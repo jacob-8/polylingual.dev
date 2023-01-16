@@ -7,6 +7,8 @@ specifiers:
   '@sveltejs/adapter-vercel': ^1.0.0
   '@sveltejs/kit': ^1.0.0
   '@types/cookie': ^0.5.1
+  '@types/marked': ^4.0.8
+  '@types/prismjs': ^1.26.0
   '@typescript-eslint/eslint-plugin': ^5.45.0
   '@typescript-eslint/parser': ^5.45.0
   eslint: ^8.28.0
@@ -16,6 +18,7 @@ specifiers:
   monaco-editor: ^0.34.1
   prettier: ^2.8.0
   prettier-plugin-svelte: ^2.8.1
+  prism-svelte: ^0.5.0
   prismjs: ^1.29.0
   svelte: ^3.54.0
   svelte-check: ^3.0.1
@@ -33,6 +36,8 @@ devDependencies:
   '@sveltejs/adapter-vercel': 1.0.4_@sveltejs+kit@1.1.1
   '@sveltejs/kit': 1.1.1_svelte@3.55.1+vite@4.0.4
   '@types/cookie': 0.5.1
+  '@types/marked': 4.0.8
+  '@types/prismjs': 1.26.0
   '@typescript-eslint/eslint-plugin': 5.48.1_oomjohfipuyaxs2zyomcx4f5by
   '@typescript-eslint/parser': 5.48.1_7uibuqfxkfaozanbtbziikiqje
   eslint: 8.32.0
@@ -42,6 +47,7 @@ devDependencies:
   monaco-editor: 0.34.1
   prettier: 2.8.3
   prettier-plugin-svelte: 2.9.0_kdmmghgdi3ngrsq6otxkjilbry
+  prism-svelte: 0.5.0
   prismjs: 1.29.0
   svelte: 3.55.1
   svelte-check: 3.0.2_svelte@3.55.1
@@ -517,8 +523,16 @@ packages:
     resolution: {integrity: sha512-wOuvG1SN4Us4rez+tylwwwCV1psiNVOkJeM3AUWUNWg/jDQY2+HE/444y5gc+jBmRqASOm2Oeh5c1axHobwRKQ==}
     dev: true
 
+  /@types/marked/4.0.8:
+    resolution: {integrity: sha512-HVNzMT5QlWCOdeuBsgXP8EZzKUf0+AXzN+sLmjvaB3ZlLqO+e4u0uXrdw9ub69wBKFs+c6/pA4r9sy6cCDvImw==}
+    dev: true
+
   /@types/node/18.11.18:
     resolution: {integrity: sha512-DHQpWGjyQKSHj3ebjFI/wRKcqQcdR+MoFBygntYOZytCqNfkd2ZC4ARDJ2DQqhjH5p85Nnd3jhUJIXrszFX/JA==}
+    dev: true
+
+  /@types/prismjs/1.26.0:
+    resolution: {integrity: sha512-ZTaqn/qSqUuAq1YwvOFQfVW1AR/oQJlLSZVustdjwI+GZ8kr0MSHBj0tsXPW1EqHubx50gtBEjbPGsdZwQwCjQ==}
     dev: true
 
   /@types/pug/2.0.6:
@@ -2053,6 +2067,10 @@ packages:
     resolution: {integrity: sha512-tJ/oJ4amDihPoufT5sM0Z1SKEuKay8LfVAMlbbhnnkvt6BUserZylqo2PN+p9KeljLr0OHa2rXHU1T8reeoTrw==}
     engines: {node: '>=10.13.0'}
     hasBin: true
+    dev: true
+
+  /prism-svelte/0.5.0:
+    resolution: {integrity: sha512-db91Bf3pRGKDPz1lAqLFSJXeW13mulUJxhycysFpfXV5MIK7RgWWK2E5aPAa71s8TCzQUXxF5JOV42/iOs6QkA==}
     dev: true
 
   /prismjs/1.29.0:

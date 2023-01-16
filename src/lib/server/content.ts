@@ -1,3 +1,4 @@
+import type { DirectoryStub, Exercise, FileStub } from '$lib/types';
 import fs from 'node:fs';
 import path from 'node:path';
 import { transform } from './markdown.js';
@@ -17,17 +18,13 @@ const text_files = new Set([
 
 const excluded = new Set(['.DS_Store', '.gitkeep', '.svelte-kit', 'package-lock.json']);
 
-/** @param {string} file */
-function json(file) {
+function json(file: string) {
 	return JSON.parse(fs.readFileSync(file, 'utf-8'));
 }
 
 export function get_index() {
 	const parts = [];
-
-	/** @type {import('$lib/types').ExerciseRaw | null} */
-	let last_exercise = null;
-
+	let last_exercise: import('$lib/types').ExerciseRaw | null = null;
 	let last_part_meta = null;
 	let last_chapter_meta = null;
 
@@ -70,8 +67,8 @@ export function get_index() {
 							last_part_meta !== part_meta
 								? part_meta.title
 								: last_chapter_meta !== chapter_meta
-								? chapter_meta.title
-								: title
+									? chapter_meta.title
+									: title
 					};
 				}
 
@@ -112,18 +109,13 @@ export function get_index() {
 	return parts;
 }
 
-/**
- * @param {string} slug
- * @returns {import('$lib/types').Exercise | undefined}
- */
-export function get_exercise(slug) {
+export function get_exercise(slug: string): Exercise | undefined {
 	const index = get_index();
 
 	for (let i = 0; i < index.length; i += 1) {
 		const part = index[i];
 
-		/** @type {string[]} */
-		const chain = [];
+		const chain: string[] = [];
 
 		for (const chapter of part.chapters) {
 			for (const exercise of chapter.exercises) {
@@ -134,17 +126,17 @@ export function get_exercise(slug) {
 
 				if (exercise.slug === slug) {
 					const a = {
-						...walk('content/tutorial/common', {
+						...listFilesInDirectory('content/tutorial/common', {
 							exclude: ['node_modules', 'static/tutorial', 'static/svelte-logo-mask.svg']
 						}),
-						...walk(`content/tutorial/${part.slug}/common`)
+						...listFilesInDirectory(`content/tutorial/${part.slug}/common`)
 					};
 
 					for (const dir of chain) {
-						Object.assign(a, walk(dir));
+						Object.assign(a, listFilesInDirectory(dir));
 					}
 
-					const b = walk(`${exercise.dir}/app-b`);
+					const b = listFilesInDirectory(`${exercise.dir}/app-b`);
 
 					const scope = chapter.meta.scope ?? part.meta.scope;
 					const filenames = new Set(
@@ -178,7 +170,7 @@ export function get_exercise(slug) {
 							remove: exercise.meta.editing_constraints?.remove ?? []
 						},
 						html: transform(exercise.markdown, {
-							codespan: (text) =>
+							codespan: (text: string) =>
 								filenames.size > 1 && filenames.has(text)
 									? `<code data-file="${scope.prefix + text}">${text}</code>`
 									: `<code>${text}</code>`
@@ -194,18 +186,13 @@ export function get_exercise(slug) {
 	}
 }
 
-/**
- * @param {string} markdown
- * @param {string} dir
- */
-function extract_frontmatter(markdown, dir) {
+function extract_frontmatter(markdown: string, dir: string) {
 	const match = /---\n([^]+?)\n---\n([^]+)/.exec(markdown);
 	if (!match) {
 		throw new Error(`bad markdown for ${dir}`);
 	}
 
-	/** @type {Record<string, string>} */
-	const frontmatter = {};
+	const frontmatter: Record<string, string> = {};
 
 	for (const line of match[1].split('\n')) {
 		const index = line.indexOf(':');
@@ -217,25 +204,15 @@ function extract_frontmatter(markdown, dir) {
 	return { frontmatter, markdown: match[2] };
 }
 
-/**
- * Get a list of all files in a directory
- * @param {string} cwd - the directory to walk
- * @param {{
- *   exclude?: string[]
- * }} options
- */
-export function walk(cwd, options = {}) {
-	/** @type {Record<string, import('$lib/types').FileStub | import('$lib/types').DirectoryStub>} */
-	const result = {};
+export function listFilesInDirectory(directory: string, options: {
+	exclude?: string[];
+} = {}) {
+	const result: Record<string, FileStub | DirectoryStub> = {};
 
-	if (!fs.existsSync(cwd)) return result;
+	if (!fs.existsSync(directory)) return result;
 
-	/**
-	 * @param {string} dir
-	 * @param {number} depth
-	 */
-	function walk_dir(dir, depth) {
-		const files = fs.readdirSync(path.join(cwd, dir));
+	function walk_dir(dir: string, depth: number) {
+		const files = fs.readdirSync(path.join(directory, dir));
 
 		for (const basename of files) {
 			if (excluded.has(basename)) continue;
@@ -244,7 +221,7 @@ export function walk(cwd, options = {}) {
 
 			if (options.exclude?.some((exclude) => name.replace(/\\/g, '/').endsWith(exclude))) continue;
 
-			const resolved = path.join(cwd, name);
+			const resolved = path.join(directory, name);
 			const stats = fs.statSync(resolved);
 
 			if (stats.isDirectory()) {
