@@ -3,6 +3,9 @@ import type { UserConfig } from 'vite';
 import UnoCSS from 'unocss/vite';
 
 const config: UserConfig = {
+	build: {
+		target: 'esnext'
+	},
 	plugins: [
 		UnoCSS({
 			mode: 'svelte-scoped',
