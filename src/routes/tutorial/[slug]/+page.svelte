@@ -1,6 +1,9 @@
 <script lang="ts">
-  import type { PageData } from './$types';
   import SplitPane from 'svelte-pieces/ui/SplitPane.svelte';
+  import Stackblitz from './Stackblitz.svelte';
+  import { browser } from '$app/environment';
+
+  import type { PageData } from './$types';
   export let data: PageData;
 </script>
 
@@ -14,7 +17,11 @@
           <section class="text-center" slot="b">Editor</section>
         </SplitPane>
       </section>
-      <section class="text-center" slot="b">Iframe result</section>
+      <section class="h-full" slot="b">
+        {#if browser}
+          <Stackblitz />
+        {/if}
+      </section>
     </SplitPane>
   </section>
 </SplitPane>
