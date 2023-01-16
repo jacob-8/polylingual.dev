@@ -1,15 +1,30 @@
 <script lang="ts">
+  import { writable } from 'svelte/store';
   import SplitPane from 'svelte-pieces/ui/SplitPane.svelte';
-  import Stackblitz from './Stackblitz.svelte';
   import { browser } from '$app/environment';
-
-  import type { PageData } from './$types';
+  import Sidebar from './Sidebar.svelte';
+  import Stackblitz from './Stackblitz.svelte';
   import MonacoEditor from '$lib/monaco/MonacoEditor.svelte';
+  import type { FileStub } from '$lib/types';
+  import type { PageData } from './$types';
   export let data: PageData;
+
+  const selected = writable<FileStub | null>(null);
 </script>
 
-<SplitPane pos={33}>
-  <section class="bg-black/10 h-full" slot="a">Tutorial</section>
+<SplitPane pos={33} min={0}>
+  <section class="h-full" slot="a">
+    <Sidebar
+      index={data.tree}
+      exercise={data.exercise}
+      on:select={(e) => {
+        const file = data.exercise.a[e.detail.file];
+        if (file.type === 'file') {
+          selected.set(file);
+        }
+      }}
+    />
+  </section>
   <section class="h-full" slot="b">
     <SplitPane pos={50} type="vertical">
       <section class="h-full" slot="a">
