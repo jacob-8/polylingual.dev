@@ -1,6 +1,6 @@
 <script lang="ts">
   import type { FileStub } from '$lib/types/index.js';
-  import * as context from './context.js';
+  import * as context from './context';
   import Item from './Item.svelte';
   import type { MenuItem } from './ContextMenu.svelte';
   export let file: FileStub;

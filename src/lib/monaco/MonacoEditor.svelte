@@ -29,7 +29,6 @@
    * This boolean tracks whether or not the editor should be refocused.
    */
   let preserve_focus = true;
-  /** @type {any} */
   let remove_focus_timeout: any;
 
   onMount(() => {

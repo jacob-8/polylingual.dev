@@ -1,7 +1,7 @@
 <script lang="ts">
   import { createEventDispatcher } from 'svelte';
   import Folder from './Folder.svelte';
-  import * as context from './context.js';
+  import * as context from './context';
   import Modal from './Modal.svelte';
   import { writable, type Writable } from 'svelte/store';
   import type { DirectoryStub, EditingConstraints, FileStub, Scope, Stub } from '$lib/types';

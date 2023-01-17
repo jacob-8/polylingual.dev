@@ -1,8 +1,9 @@
 <script lang="ts">
   import File from './File.svelte';
-  import * as context from './context.js';
+  import * as context from './context';
   import Item from './Item.svelte';
   import type { DirectoryStub, FileStub, Stub } from '$lib/types';
+    import type { MenuItem } from './ContextMenu.svelte';
 
   function get_depth(name: string) {
     return name.split('/').length - 1;
@@ -65,7 +66,7 @@
   // fake root directory has no name
   $: can_remove = !$readonly && directory.name ? !$endstate[directory.name] : false;
 
-  /** @type {import('./ContextMenu.svelte').MenuItem[]} */
+  let actions: MenuItem[];
   $: actions = [
     can_create.file && {
       icon: 'file-new',
@@ -95,7 +96,7 @@
         remove(directory);
       },
     },
-  ].filter(Boolean);
+  ].filter(Boolean) as MenuItem[];
 </script>
 
 <div class="directory row" class:expanded style="--depth: {depth - $scope.depth};">

@@ -111,7 +111,7 @@
     />
   </section>
   <section class="h-full" slot="b">
-    <SplitPane pos={50} type="vertical">
+    <SplitPane pos={50} type="vertical" min={0}>
       <section class="h-full" slot="a">
         <SplitPane pos={27}>
           <section class="h-full" slot="a">
