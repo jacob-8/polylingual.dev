@@ -13,6 +13,8 @@ const config: UserConfig = {
 		sveltekit()
 	],
 	test: {
+    globals: true,
+    includeSource: ['src/**/*.ts'],
 		include: ['src/**/*.test.ts']
 	}
 };

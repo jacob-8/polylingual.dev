@@ -8,6 +8,7 @@
   import type { Adapter, EditingConstraints, Exercise, FileStub, Scope, Stub } from '$lib/types';
   import type { PageData } from './$types';
   import Filetree from '$lib/filetree/Filetree.svelte';
+  import { prepareFilesForStackblitz } from './prepareFilesForStackblitz';
   export let data: PageData;
 
   let path = data.exercise.path;
@@ -18,6 +19,8 @@
   const editing_constraints = writable<EditingConstraints>({ create: [], remove: [] });
 
   let adapter: Adapter | undefined;
+
+  $: console.log($files);
 
   $: new_exercise(data.exercise);
   function new_exercise(exercise: Exercise) {
@@ -88,17 +91,16 @@
 
   function set_iframe_src(url: string) {}
 
-	function update_stub(event: CustomEvent<FileStub>) {
-		const stub = event.detail;
-		const index = $files.findIndex((s) => s.name === stub.name);
-		$files[index] = stub;
-		// adapter?.update([stub]).then((reload) => {
-		// 	if (reload) {
-				// schedule_iframe_reload();
-		// 	}
-		// });
-		update_complete_states([stub]);
-	}
+  function update_stub({ detail: stub }: CustomEvent<FileStub>) {
+    const index = $files.findIndex((s) => s.name === stub.name);
+    $files[index] = stub;
+    // adapter?.update([stub]).then((reload) => {
+    // 	if (reload) {
+    // schedule_iframe_reload();
+    // 	}
+    // });
+    update_complete_states([stub]);
+  }
 </script>
 
 <SplitPane pos={33} min={0}>
@@ -156,7 +158,10 @@
       </section>
       <section class="h-full" slot="b">
         {#if browser}
-          <!-- <Stackblitz /> -->
+          <Stackblitz
+            title={`${data.exercise.part.title}, ${data.exercise.chapter.title}, ${data.exercise.title}`}
+            files={prepareFilesForStackblitz($files)}
+          />
         {/if}
       </section>
     </SplitPane>

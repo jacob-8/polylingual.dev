@@ -2,15 +2,18 @@
 	"name": "~TODO~",
 	"version": "0.0.1",
 	"scripts": {
-		"dev": "./node_modules/vite/bin/vite.js dev",
-		"build": "./node_modules/vite/bin/vite.js build",
-		"preview": "./node_modules/vite/bin/vite.js preview"
+		"dev": "vite dev",
+		"build": "vite build",
+		"preview": "vite preview"
 	},
 	"devDependencies": {
-		"@sveltejs/kit": "latest",
-		"esbuild-wasm": "^0.16.4",
+		"@sveltejs/kit": "^1.0.0",
 		"svelte": "^3.55.0",
 		"vite": "^4.0.0"
 	},
-	"type": "module"
+	"type": "module",
+	"stackblitz": {
+		"installDependencies": true,
+		"startCommand": "npm run dev"
+	}
 }

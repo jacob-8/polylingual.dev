@@ -1,6 +1,6 @@
 <script lang="ts">
   import { dev } from '$app/environment';
-    import type { FileStub, Stub } from '$lib/types';
+  import type { FileStub, Stub } from '$lib/types';
   import { createEventDispatcher, onMount } from 'svelte';
   import { svelteLight, svelteDark } from './monaco-themes.js';
 
@@ -15,7 +15,7 @@
   export let stubs: Stub[];
   export let selected: Stub | null = null;
 
-  const dispatch = createEventDispatcher();
+  const dispatch = createEventDispatcher<{ change: FileStub }>();
 
   let container: HTMLDivElement;
   let instance: ReturnType<typeof init> | undefined;
@@ -127,8 +127,7 @@
     }
 
     function create_file(stub: FileStub) {
-      // deep-copy stub so we can mutate it and not create a memory leak
-      stub = JSON.parse(JSON.stringify(stub));
+      stub = deepCopyToAvoidMemoryLeak(stub);
 
       const type: string = stub.basename.split('.').pop() as string;
 
@@ -158,24 +157,22 @@
       update_files,
       create_file,
     };
+
+    function deepCopyToAvoidMemoryLeak(stub: FileStub): FileStub {
+      return JSON.parse(JSON.stringify(stub));
+    }
   }
 
   $: if (instance) {
     instance.update_files(stubs);
   }
 
-  // $: if (instance) {
-  //   instance.editor.updateOptions({ readOnly: read_only });
-  // }
-
   $: if (instance && stubs) {
     const model = selected && mapOfURLtoModel.get(selected.name);
     instance.editor.setModel(model ?? null);
   }
 
-  $: if (instance && (width || height)) {
-    instance.editor.layout();
-  }
+  $: if (instance && (width || height)) instance.editor.layout();
 </script>
 
 <svelte:window
