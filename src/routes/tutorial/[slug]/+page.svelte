@@ -1,7 +1,7 @@
 <script lang="ts">
   import { writable } from 'svelte/store';
   import SplitPane from 'svelte-pieces/ui/SplitPane.svelte';
-  import { browser } from '$app/environment';
+  import { browser, dev } from '$app/environment';
   import Sidebar from './Sidebar.svelte';
   import Stackblitz from './Stackblitz.svelte';
   import MonacoEditor from '$lib/monaco/MonacoEditor.svelte';
@@ -34,13 +34,47 @@
       }
       $endstate[stub.name] = exercise.b[stub.name];
     }
+
+    reset_complete_states();
+    reset_adapter($files);
   }
 
-  // Loads the adapter initially or resets it. This method can throw.
+  let expected: Record<string, string> = {};
+  let complete_states: Record<string, boolean> = {};
+  $: completed =
+    Object.keys(complete_states).length > 0 && Object.values(complete_states).every(Boolean);
+
+  function reset_complete_states() {
+    expected = {};
+    complete_states = {};
+    for (const stub of Object.values($endstate)) {
+      if (stub.type === 'file') {
+        complete_states[stub.name] = false;
+        expected[stub.name] = normalise(stub.contents);
+      }
+    }
+  }
+
+  function normalise(code: string) {
+    // TODO think about more sophisticated normalisation (e.g. truncate multiple newlines)
+    return code.replace(/\s+/g, ' ').trim();
+  }
+
+  function update_complete_states(stubs: Stub[]) {
+    for (const stub of stubs) {
+      if (stub.type === 'file' && stub.name in complete_states) {
+        complete_states[stub.name] = expected[stub.name] === normalise(stub.contents);
+        // if (dev) {
+        //   compare(stub.name, normalise(stub.contents), expected[stub.name]);
+        // }
+      }
+    }
+  }
+
   async function reset_adapter(stubs: Stub[]) {
     let reload_iframe = true;
     if (adapter) {
-      reload_iframe = await adapter.reset(stubs);
+      // reload_iframe = await adapter.reset(stubs);
     } else {
       // @ts-ignore
       adapter = {};
@@ -81,6 +115,27 @@
                 reset_adapter($files);
               }}
             />
+
+            <button
+              class:text-blue={completed}
+              disabled={Object.keys(data.exercise.b).length === 0}
+              on:click={() => {
+                $files = Object.values(completed ? data.exercise.a : $endstate);
+                if (completed) {
+                  reset_complete_states();
+                } else {
+                  update_complete_states($files);
+                }
+                reset_adapter($files);
+              }}
+            >
+              {#if completed && Object.keys(data.exercise.b).length > 0}
+                reset
+              {:else}
+                solve 
+                <!-- arrow-right -->
+              {/if}
+            </button>
           </section>
           <section class="bg-green/25 h-full" slot="b">
             <MonacoEditor stubs={[]} />
