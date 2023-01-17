@@ -1,6 +1,6 @@
 import type { ChapterMeta, ChapterStub, DirectoryStub, Exercise, ExerciseRaw, FileStub, PartMeta, PartStub } from '$lib/types';
-import fs from 'fs';
-import path from 'path';
+import fs from 'node:fs';
+import path from 'node:path';
 import { transform } from './markdown.js';
 
 const text_files = new Set([

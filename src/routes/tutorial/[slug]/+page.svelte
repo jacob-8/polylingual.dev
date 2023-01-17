@@ -92,11 +92,11 @@
 		const stub = event.detail;
 		const index = $files.findIndex((s) => s.name === stub.name);
 		$files[index] = stub;
-		adapter?.update([stub]).then((reload) => {
-			if (reload) {
+		// adapter?.update([stub]).then((reload) => {
+		// 	if (reload) {
 				// schedule_iframe_reload();
-			}
-		});
+		// 	}
+		// });
 		update_complete_states([stub]);
 	}
 </script>
