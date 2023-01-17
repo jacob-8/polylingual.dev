@@ -87,6 +87,18 @@
   }
 
   function set_iframe_src(url: string) {}
+
+	function update_stub(event: CustomEvent<FileStub>) {
+		const stub = event.detail;
+		const index = $files.findIndex((s) => s.name === stub.name);
+		$files[index] = stub;
+		adapter?.update([stub]).then((reload) => {
+			if (reload) {
+				// schedule_iframe_reload();
+			}
+		});
+		update_complete_states([stub]);
+	}
 </script>
 
 <SplitPane pos={33} min={0}>
@@ -132,13 +144,13 @@
               {#if completed && Object.keys(data.exercise.b).length > 0}
                 reset
               {:else}
-                solve 
+                solve
                 <!-- arrow-right -->
               {/if}
             </button>
           </section>
-          <section class="bg-green/25 h-full" slot="b">
-            <MonacoEditor stubs={[]} />
+          <section class="bg-black h-full" slot="b">
+            <MonacoEditor stubs={$files} selected={$selected} on:change={update_stub} />
           </section>
         </SplitPane>
       </section>

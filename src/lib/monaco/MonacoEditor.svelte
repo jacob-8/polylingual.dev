@@ -1,5 +1,6 @@
 <script lang="ts">
   import { dev } from '$app/environment';
+    import type { FileStub, Stub } from '$lib/types';
   import { createEventDispatcher, onMount } from 'svelte';
   import { svelteLight, svelteDark } from './monaco-themes.js';
 
@@ -11,8 +12,8 @@
 
   const mapOfURLtoModel = new Map<string, import('monaco-editor').editor.ITextModel>();
 
-  export let stubs: import('$lib/types').Stub[];
-  export let selected: import('$lib/types').Stub | null = null;
+  export let stubs: Stub[];
+  export let selected: Stub | null = null;
 
   const dispatch = createEventDispatcher();
 
@@ -87,7 +88,7 @@
 
     let notify = true;
 
-    function update_files(stubs: import('$lib/types').Stub[]) {
+    function update_files(stubs: Stub[]) {
       notify = false;
       for (const stub of stubs) {
         if (stub.type === 'directory') {
@@ -125,7 +126,7 @@
       notify = true;
     }
 
-    function create_file(stub: import('$lib/types').FileStub) {
+    function create_file(stub: FileStub) {
       // deep-copy stub so we can mutate it and not create a memory leak
       stub = JSON.parse(JSON.stringify(stub));
 
@@ -159,18 +160,18 @@
     };
   }
 
-  // $: if (instance) {
-  //   instance.update_files(stubs);
-  // }
+  $: if (instance) {
+    instance.update_files(stubs);
+  }
 
   // $: if (instance) {
   //   instance.editor.updateOptions({ readOnly: read_only });
   // }
 
-  // $: if (instance && stubs /* to retrigger on stubs change */) {
-  //   const model = selected && mapOfURLtoModel.get(selected.name);
-  //   instance.editor.setModel(model ?? null);
-  // }
+  $: if (instance && stubs) {
+    const model = selected && mapOfURLtoModel.get(selected.name);
+    instance.editor.setModel(model ?? null);
+  }
 
   $: if (instance && (width || height)) {
     instance.editor.layout();
