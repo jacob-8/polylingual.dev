@@ -6,7 +6,7 @@
   import { afterNavigate } from '$app/navigation';
     import type { Exercise, PartStub } from '$lib/types';
 
-  export let index: PartStub[];
+  export let tree: PartStub[];
   export let current: Exercise;
 
   let is_open = false;
@@ -30,7 +30,7 @@
 
   $: regex = new RegExp(`\\b${search.length >= 2 ? search : ''}`, 'i');
 
-  $: filtered = index
+  $: filtered = tree
     .map((part, i) => {
       const chapters = part.chapters
         .map((chapter, i) => ({

@@ -105,12 +105,9 @@
 <SplitPane pos={33} min={0}>
   <section class="h-full" slot="a">
     <Sidebar
-      index={data.tree}
+      tree={data.tree}
       exercise={data.exercise}
-      on:select={(e) => {
-        const file = data.exercise.a[e.detail.file];
-        if (file.type === 'file') selected.set(file);
-      }}
+      on:selected={({ detail: { file } }) => selected.set(file)}
     />
   </section>
   <section class="h-full" slot="b">

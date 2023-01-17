@@ -2,12 +2,12 @@
   import { createEventDispatcher } from 'svelte';
   import { afterNavigate } from '$app/navigation';
   import Menu from './Menu.svelte';
-  import type { Exercise, PartStub } from '$lib/types';
+  import type { Exercise, FileStub, PartStub } from '$lib/types';
 
-  export let index: PartStub[];
+  export let tree: PartStub[];
   export let exercise: Exercise;
 
-  const dispatch = createEventDispatcher<{ select: { file: string } }>();
+  const dispatch = createEventDispatcher<{ selected: { file: FileStub } }>();
 
   const namespace = 'learn.polylingual.dev';
   const copy_enabled = `${namespace}:copy_enabled`;
@@ -20,47 +20,45 @@
     // so for now just always reset sidebar scroll
     sidebar.scrollTop = 0;
   });
-</script>
 
-<Menu {index} current={exercise} />
-
-<div
-  bind:this={sidebar}
-  class="text"
-  on:copy={(e) => {
+  function encourage_not_to_copy(e: ClipboardEvent) {
     if (sessionStorage[copy_enabled]) return;
 
-    /** @type {HTMLElement | null} */
-    let node = /** @type {HTMLElement} */ (e.target);
+    let node = e.target as HTMLElement;
 
     while (node && node !== e.currentTarget) {
       if (node.nodeName === 'PRE') {
         const enable_copy = confirm(
-          'Copy and paste is currently disabled! We recommend typing the code into the editor to complete the exercise, as this results in better retention and understanding. Do you want to enable copy-and-paste for the duration of this session?'
+          'Copy and paste is disabled We recommend typing the code into the editor to complete the exercise, as this results in better learning. Do you want to enable copy-and-paste for the duration of this session?'
         );
-        sessionStorage[copy_enabled] = enable_copy;
+        if (enable_copy) sessionStorage[copy_enabled] = enable_copy;
 
         e.preventDefault();
         return;
       }
 
-      node = /** @type {HTMLElement | null} */ (node.parentNode);
+      node = node.parentNode as HTMLElement;
     }
-  }}
->
-  <!-- svelte-ignore a11y-click-events-have-key-events -->
-  <div
-    on:click={(e) => {
-      const node = /** @type {HTMLElement} */ (e.target);
+  }
 
-      if (node.nodeName === 'CODE') {
-        const { file } = node.dataset;
-        if (file) {
-          dispatch('select', { file });
-        }
+  function respond_to_file_name_clicked(e: MouseEvent) {
+    const node = e.target as HTMLElement;
+
+    if (node.nodeName === 'CODE') {
+      const { file: filename } = node.dataset;
+      if (filename) {
+        const file = exercise.a[filename];
+        if (file.type === 'file') dispatch('selected', { file });
       }
-    }}
-  >
+    }
+  }
+</script>
+
+<Menu {tree} current={exercise} />
+
+<div bind:this={sidebar} class="text" on:copy={encourage_not_to_copy}>
+  <!-- svelte-ignore a11y-click-events-have-key-events -->
+  <div on:click={respond_to_file_name_clicked}>
     {@html exercise.html}
   </div>
 
@@ -74,7 +72,7 @@
     target="_blank"
     rel="noreferrer"
     class="edit"
-    href="https://github.com/sveltejs/learn.svelte.dev/tree/main/{exercise.dir}"
+    href="https://github.com/jacob-8/learn.polylingual.dev/tree/main/{exercise.dir}"
   >
     Edit this page
   </a>

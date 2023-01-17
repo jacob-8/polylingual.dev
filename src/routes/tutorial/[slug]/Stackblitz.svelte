@@ -8,8 +8,10 @@
   import { onMount } from 'svelte';
 
   export let files: ProjectFiles;
+  let filesInVm: ProjectFiles;
+
   export let title: string;
-	export let hideExplorer = false;
+  export let hideExplorer = false;
 
   let embedElement: HTMLDivElement;
   let vm: VM;
@@ -33,22 +35,36 @@
   };
 
   onMount(async () => {
-    console.log({ project });
+    filesInVm = project.files;
     vm = await sdk.embedProject(embedElement, project, embedOptions);
   });
 
-  async function writeToFiles() {
-    if (!vm) {
-      console.error('Stackblitz SDK vm is not available');
-      return;
+  $: updateFiles(files);
+
+  function updateFiles(updatedFiles: ProjectFiles) {
+    if (!vm) return;
+
+    const _filesWithChanges = filesWithChanges(filesInVm, updatedFiles);
+    if (Object.keys(_filesWithChanges).length > 0) writeToFiles(_filesWithChanges);
+  }
+
+	function filesWithChanges(currentFiles: ProjectFiles, updatedFiles: ProjectFiles): ProjectFiles {
+    const filesWithChanges: ProjectFiles = {};
+    for (const [key, value] of Object.entries(updatedFiles)) {
+      if (currentFiles[key] !== value) {
+        filesWithChanges[key] = value;
+      }
     }
+    return filesWithChanges;
+  }
+
+  async function writeToFiles(updatedFiles: ProjectFiles) {
+    if (!vm) return;
 
     await vm.applyFsDiff({
-      create: {
-        'index.js': `console.log('Hello World!')`,
-        'package.json': `{ "scripts": { "start": "node index.js" } }`,
-      },
-      destroy: ['test.js', 'error.log'],
+      create: updatedFiles,
+      destroy: [],
+      // destroy: ['test.js', 'error.log'],
     });
   }
 </script>
