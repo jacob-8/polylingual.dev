@@ -12,6 +12,7 @@
   export let data: PageData;
 
   let path = data.exercise.path;
+  // const stubs = writable<Stub[]>([]);
   const files = writable<Stub[]>([]);
   const endstate = writable<Record<string, Stub>>({});
   const selected = writable<FileStub | null>(null);
@@ -19,8 +20,6 @@
   const editing_constraints = writable<EditingConstraints>({ create: [], remove: [] });
 
   let adapter: Adapter | undefined;
-
-  $: console.log($files);
 
   $: new_exercise(data.exercise);
   function new_exercise(exercise: Exercise) {

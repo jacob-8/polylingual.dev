@@ -1,13 +1,12 @@
-<script>
+<script lang="ts">
 	import { onMount } from 'svelte';
 
-	/** @type {HTMLDialogElement} */
-	let modal;
+	let modal: HTMLDialogElement;
 
 	onMount(() => {
 		const selection = window.getSelection();
 
-		const active = /** @type {HTMLElement} */ (document.activeElement);
+		const active = document.activeElement as HTMLElement;
 		const sfnsp = selection?.focusNode?.parentElement;
 
 		if (modal.showModal) modal.showModal();
