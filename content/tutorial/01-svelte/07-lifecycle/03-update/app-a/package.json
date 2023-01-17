@@ -1,0 +1,8 @@
+{
+	"name": "~TODO~",
+	"version": "0.0.1",
+	"dependencies": {
+		"elizabot": "^0.0.3"
+	},
+	"type": "module"
+}
