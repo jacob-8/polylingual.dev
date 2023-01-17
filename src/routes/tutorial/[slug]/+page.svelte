@@ -1,14 +1,14 @@
 <script lang="ts">
   import { writable } from 'svelte/store';
   import SplitPane from 'svelte-pieces/ui/SplitPane.svelte';
-  import { browser, dev } from '$app/environment';
+  import { browser } from '$app/environment';
   import Sidebar from './Sidebar.svelte';
-  import Stackblitz from './Stackblitz.svelte';
   import MonacoEditor from '$lib/monaco/MonacoEditor.svelte';
-  import type { Adapter, EditingConstraints, Exercise, FileStub, Scope, Stub } from '$lib/types';
+  import type { EditingConstraints, Exercise, FileStub, Scope, Stub } from '$lib/types';
   import type { PageData } from './$types';
   import Filetree from '$lib/filetree/Filetree.svelte';
-  import { prepareFilesForStackblitz } from './prepareFilesForStackblitz';
+  import Stackblitz from '$lib/stackblitz/Stackblitz.svelte';
+  import { prepareFilesForStackblitz } from '$lib/stackblitz/prepareFilesForStackblitz';
   export let data: PageData;
 
   let path = data.exercise.path;
@@ -18,8 +18,10 @@
   const selected = writable<FileStub | null>(null);
   const scope = writable<Scope>({ depth: 0, name: '', prefix: '' });
   const editing_constraints = writable<EditingConstraints>({ create: [], remove: [] });
-
-  let adapter: Adapter | undefined;
+  let expected: Record<string, string> = {};
+  let complete_states: Record<string, boolean> = {};
+  $: completed =
+    Object.keys(complete_states).length > 0 && Object.values(complete_states).every(Boolean);
 
   $: new_exercise(data.exercise);
   function new_exercise(exercise: Exercise) {
@@ -36,15 +38,8 @@
       }
       $endstate[stub.name] = exercise.b[stub.name];
     }
-
     reset_complete_states();
-    reset_adapter($files);
   }
-
-  let expected: Record<string, string> = {};
-  let complete_states: Record<string, boolean> = {};
-  $: completed =
-    Object.keys(complete_states).length > 0 && Object.values(complete_states).every(Boolean);
 
   function reset_complete_states() {
     expected = {};
@@ -57,47 +52,21 @@
     }
   }
 
-  function normalise(code: string) {
-    // TODO think about more sophisticated normalisation (e.g. truncate multiple newlines)
-    return code.replace(/\s+/g, ' ').trim();
-  }
-
   function update_complete_states(stubs: Stub[]) {
     for (const stub of stubs) {
       if (stub.type === 'file' && stub.name in complete_states) {
         complete_states[stub.name] = expected[stub.name] === normalise(stub.contents);
-        // if (dev) {
-        //   compare(stub.name, normalise(stub.contents), expected[stub.name]);
-        // }
       }
     }
   }
 
-  async function reset_adapter(stubs: Stub[]) {
-    let reload_iframe = true;
-    if (adapter) {
-      // reload_iframe = await adapter.reset(stubs);
-    } else {
-      // @ts-ignore
-      adapter = {};
-      set_iframe_src(adapter?.base + path);
-    }
-    if (reload_iframe) {
-      set_iframe_src(adapter?.base + path);
-    }
-    return adapter;
+  function normalise(code: string) {
+    return code.replace(/\s+/g, ' ').trim();
   }
-
-  function set_iframe_src(url: string) {}
 
   function update_stub({ detail: stub }: CustomEvent<FileStub>) {
     const index = $files.findIndex((s) => s.name === stub.name);
     $files[index] = stub;
-    // adapter?.update([stub]).then((reload) => {
-    // 	if (reload) {
-    // schedule_iframe_reload();
-    // 	}
-    // });
     update_complete_states([stub]);
   }
 </script>
@@ -122,13 +91,14 @@
               constraints={editing_constraints}
               {selected}
               on:change={() => {
-                reset_adapter($files);
+                // do I need this? reset_adapter($files);
               }}
             />
 
+            {@const has_b_files = Object.keys(data.exercise.b).length > 0}
             <button
               class:text-blue={completed}
-              disabled={Object.keys(data.exercise.b).length === 0}
+              disabled={!has_b_files}
               on:click={() => {
                 $files = Object.values(completed ? data.exercise.a : $endstate);
                 if (completed) {
@@ -136,10 +106,9 @@
                 } else {
                   update_complete_states($files);
                 }
-                reset_adapter($files);
               }}
             >
-              {#if completed && Object.keys(data.exercise.b).length > 0}
+              {#if completed && has_b_files}
                 reset
               {:else}
                 solve
@@ -155,6 +124,7 @@
       <section class="h-full" slot="b">
         {#if browser}
           <Stackblitz
+            hideExplorer={false}
             title={`${data.exercise.part.title}, ${data.exercise.chapter.title}, ${data.exercise.title}`}
             files={prepareFilesForStackblitz($files)}
           />

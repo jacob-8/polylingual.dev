@@ -1,4 +1,9 @@
 <script lang="ts">
+  // https://developer.stackblitz.com/platform/api/javascript-sdk-vm
+  // await vm.editor.setTheme('light');
+  // await vm.preview.setUrl('/about');
+
+  import { filesWithChanges } from './filesWithChanges';
   import sdk, {
     type VM,
     type Project,
@@ -8,15 +13,10 @@
   import { onMount } from 'svelte';
 
   export let files: ProjectFiles;
-  let filesInVm: ProjectFiles;
-
   export let title: string;
   export let hideExplorer = false;
 
-  let embedElement: HTMLDivElement;
-  let vm: VM;
-
-  $: project = {
+  const project: Project = {
     title,
     files,
     description: 'Created by Polylingual Development for learning via learn.polylingual.dev',
@@ -24,47 +24,37 @@
     settings: {
       compile: { trigger: 'keystroke' },
     },
-  } satisfies Project;
+  };
 
   const embedOptions: EmbedOptions = {
-    // openFile: 'index.js',
     // hideNavigation: true,
     hideExplorer,
     terminalHeight: 80,
     view: 'preview',
   };
+  
+  let embedElement: HTMLDivElement;
+  let stackblitzVM: VM;
 
   onMount(async () => {
-    filesInVm = project.files;
-    vm = await sdk.embedProject(embedElement, project, embedOptions);
+    stackblitzVM = await sdk.embedProject(embedElement, project, embedOptions);
   });
 
   $: updateFiles(files);
 
-  function updateFiles(updatedFiles: ProjectFiles) {
-    if (!vm) return;
+  async function updateFiles(updatedFiles: ProjectFiles) {
+    const filesInVm = await stackblitzVM?.getFsSnapshot();
+    if (!filesInVm) return;
 
-    const _filesWithChanges = filesWithChanges(filesInVm, updatedFiles);
-    if (Object.keys(_filesWithChanges).length > 0) writeToFiles(_filesWithChanges);
-  }
-
-	function filesWithChanges(currentFiles: ProjectFiles, updatedFiles: ProjectFiles): ProjectFiles {
-    const filesWithChanges: ProjectFiles = {};
-    for (const [key, value] of Object.entries(updatedFiles)) {
-      if (currentFiles[key] !== value) {
-        filesWithChanges[key] = value;
-      }
-    }
-    return filesWithChanges;
+    const changedFiles = filesWithChanges(filesInVm, updatedFiles);
+    const hasChanges = Object.keys(changedFiles).length > 0;
+    if (hasChanges) writeToFiles(changedFiles);
   }
 
   async function writeToFiles(updatedFiles: ProjectFiles) {
-    if (!vm) return;
-
-    await vm.applyFsDiff({
+    await stackblitzVM.applyFsDiff({
       create: updatedFiles,
-      destroy: [],
-      // destroy: ['test.js', 'error.log'],
+      destroy: [], // TODO: handle deleted files ['test.js', 'error.log'],
     });
   }
 </script>

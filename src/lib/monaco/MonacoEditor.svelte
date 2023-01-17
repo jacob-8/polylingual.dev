@@ -202,13 +202,6 @@
 </div>
 
 <style>
-  /* div {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    tab-size: 2;
-  } */
-
   /* TODO figure out how to make the indent guides
 	   play nicely with fonts other than Menlo */
   div :global(.core-guide-indent.vertical),
