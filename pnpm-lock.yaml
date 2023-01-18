@@ -2,6 +2,7 @@ lockfileVersion: 5.4
 
 specifiers:
   '@fontsource/fira-mono': ^4.5.10
+  '@iconify/json': ^2.2.8
   '@neoconfetti/svelte': ^1.0.0
   '@stackblitz/sdk': ^1.8.1
   '@sveltejs/adapter-vercel': ^1.0.0
@@ -31,6 +32,7 @@ specifiers:
 
 devDependencies:
   '@fontsource/fira-mono': 4.5.10
+  '@iconify/json': 2.2.8
   '@neoconfetti/svelte': 1.0.0
   '@stackblitz/sdk': 1.8.1
   '@sveltejs/adapter-vercel': 1.0.4_@sveltejs+kit@1.1.1
@@ -320,6 +322,13 @@ packages:
 
   /@humanwhocodes/object-schema/1.2.1:
     resolution: {integrity: sha512-ZnQMnLV4e7hDlUvw8H+U8ASL02SS2Gn6+9Ac3wGGLIe7+je2AeAOxPY+izIPJDfFDb7eDjev0Us8MO1iFRN8hA==}
+    dev: true
+
+  /@iconify/json/2.2.8:
+    resolution: {integrity: sha512-Vusnz/QRrTmGFzzmZ1Mf6mG2OEbBWLrd/gXgaBpCbjP/abDLdKd7+DMRJlaZA/jqMJ0rsIL0juZ9FwApBnh/ww==}
+    dependencies:
+      '@iconify/types': 2.0.0
+      pathe: 1.0.0
     dev: true
 
   /@iconify/types/2.0.0:
