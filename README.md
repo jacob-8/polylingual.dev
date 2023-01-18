@@ -1,38 +1,15 @@
-# create-svelte
+# learn.polylingual.dev
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).
+A hands-on multilingual interactive tutorial on how to build real world complex web apps with Svelte.
 
-## Creating a project
+This is a rebuilt version of learn.svelte.dev relying on Stackblitz JavaScript SDK embed option instead of the not yet released WebContainer API. As it's implementation proves to be tremendously simple, this project has no plans to switch over to the WebContainer API once it's released.
 
-If you're seeing this, you've probably already done this step. Congrats!
+## Running the app
 
-```bash
-# create a new project in the current directory
-npm create svelte@latest
+This repo uses [pnpm](https://pnpm.io/).
 
-# create a new project in my-app
-npm create svelte@latest my-app
-```
+Run the app with `pnpm dev` or `pnpm build && pnpm preview`.
 
-## Developing
+## Creating new tutorials
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
-
-```bash
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
-
-## Building
-
-To create a production version of your app:
-
-```bash
-npm run build
-```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
+Tutorials live inside `content`. Each tutorial consists of a `README.md`, which is the text to the left, and `app-a` and `app-b` folders, which represent the initial and solved state. Files that stay the same can be omitted from `app-b`. Files are marked as deleted in `app-b` if they start with `__delete`. Folders that are marked as deleted in `app-b` if they contain a file named `__delete`.
