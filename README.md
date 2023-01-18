@@ -13,3 +13,10 @@ Run the app with `pnpm dev` or `pnpm build && pnpm preview`.
 ## Creating new tutorials
 
 Tutorials live inside `content`. Each tutorial consists of a `README.md`, which is the text to the left, and `app-a` and `app-b` folders, which represent the initial and solved state. Files that stay the same can be omitted from `app-b`. Files are marked as deleted in `app-b` if they start with `__delete`. Folders that are marked as deleted in `app-b` if they contain a file named `__delete`.
+
+## TODO
+
+- styling for content
+- handle multilingual markers in content
+- add i18n
+- strip out unused styles

@@ -32,30 +32,36 @@
     terminalHeight: 80,
     view: 'preview',
   };
-  
+
   let embedElement: HTMLDivElement;
   let stackblitzVM: VM;
+  let filesSentToVM: ProjectFiles;
 
   onMount(async () => {
     stackblitzVM = await sdk.embedProject(embedElement, project, embedOptions);
+    filesSentToVM = { ...project.files };
   });
 
   $: updateFiles(files);
 
   async function updateFiles(updatedFiles: ProjectFiles) {
-    const filesInVm = await stackblitzVM?.getFsSnapshot();
-    if (!filesInVm) return;
+    if (!stackblitzVM) return;
 
-    const changedFiles = filesWithChanges(filesInVm, updatedFiles);
-    const hasChanges = Object.keys(changedFiles).length > 0;
-    if (hasChanges) writeToFiles(changedFiles);
+    const { filesToCreate, filenamesToDestroy } = filesWithChanges(filesSentToVM, updatedFiles);
+    const hasFilesToCreate = Object.keys(filesToCreate).length > 0;
+    const hasFilenamesToDestroy = filenamesToDestroy.length > 0;
+    if (hasFilesToCreate || hasFilenamesToDestroy) {
+      writeToFiles(filesToCreate, filenamesToDestroy);
+      filesSentToVM = { ...updatedFiles};
+    } 
   }
 
-  async function writeToFiles(updatedFiles: ProjectFiles) {
+  async function writeToFiles(filesToCreate: ProjectFiles, deletedFilenames: string[] = []) {
     await stackblitzVM.applyFsDiff({
-      create: updatedFiles,
-      destroy: [], // TODO: handle deleted files ['test.js', 'error.log'],
+      create: filesToCreate,
+      destroy: deletedFilenames,
     });
+
   }
 </script>
 
