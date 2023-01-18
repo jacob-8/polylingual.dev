@@ -33,10 +33,30 @@
     $endstate = { ...exercise.a };
 
     for (const stub of Object.values(exercise.b)) {
-      if (!$endstate[stub.name] && !$editing_constraints.create.includes(stub.name)) {
-        $editing_constraints.create.push(stub.name);
+      if (stub.type === 'file' && stub.contents.startsWith('__delete')) {
+        // remove file
+        if (!$editing_constraints.remove.includes(stub.name)) {
+          $editing_constraints.remove.push(stub.name);
+        }
+        delete $endstate[stub.name];
+      } else if (stub.name.endsWith('/__delete')) {
+        // remove directory
+        const parent = stub.name.slice(0, stub.name.lastIndexOf('/'));
+        if (!$editing_constraints.remove.includes(parent)) {
+          $editing_constraints.remove.push(parent);
+        }
+        delete $endstate[parent];
+        for (const k in $endstate) {
+          if (k.startsWith(parent + '/')) {
+            delete $endstate[k];
+          }
+        }
+      } else {
+        if (!$endstate[stub.name] && !$editing_constraints.create.includes(stub.name)) {
+          $editing_constraints.create.push(stub.name);
+        }
+        $endstate[stub.name] = data.exercise.b[stub.name];
       }
-      $endstate[stub.name] = exercise.b[stub.name];
     }
     reset_complete_states();
   }
@@ -69,6 +89,16 @@
     $files[index] = stub;
     update_complete_states([stub]);
   }
+
+  function toggle_solution() {
+    if (completed) {
+      $files = Object.values(data.exercise.a);
+      reset_complete_states();
+    } else {
+      $files = Object.values($endstate);
+      update_complete_states($files);
+    }
+  }
 </script>
 
 <SplitPane pos={33} min={0}>
@@ -81,9 +111,9 @@
   </section>
   <section class="h-full" slot="b">
     <SplitPane pos={50} type="vertical" min={0}>
-      <section class="h-full" slot="a">
+      <section class="h-full bg-black" slot="a">
         <SplitPane pos={27}>
-          <section class="h-full" slot="a">
+          <section class="h-full flex flex-col border-r border-gray-500/50" slot="a">
             <Filetree
               {scope}
               {endstate}
@@ -97,22 +127,16 @@
 
             {@const has_b_files = Object.keys(data.exercise.b).length > 0}
             <button
-              class:text-blue={completed}
+              class:bg-gray-500={completed}
               disabled={!has_b_files}
-              on:click={() => {
-                $files = Object.values(completed ? data.exercise.a : $endstate);
-                if (completed) {
-                  reset_complete_states();
-                } else {
-                  update_complete_states($files);
-                }
-              }}
+              on:click={toggle_solution}
+              class="bg-blue text-white p-2 text-lg"
             >
               {#if completed && has_b_files}
                 reset
               {:else}
                 solve
-                <!-- arrow-right -->
+                <span class="i-carbon-arrow-right" />
               {/if}
             </button>
           </section>

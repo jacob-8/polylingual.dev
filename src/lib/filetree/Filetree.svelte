@@ -150,7 +150,7 @@
   }
 </script>
 
-<div class="filetree">
+<div class="filetree grow bg-[#1e1e1e] overflow-y-auto overflow-x-hidden py-2 text-white/70 text-sm">
   <Folder
     prefix={$scope.prefix}
     depth={$scope.depth}
@@ -175,53 +175,6 @@
 {/if}
 
 <style>
-  .filetree {
-    --font-size: 1.4rem;
-    flex: 1;
-    overflow-y: auto;
-    overflow-x: hidden;
-    padding: 2rem;
-    background: var(--sk-back-1);
-  }
-
-  .filetree::before {
-    content: '';
-    position: absolute;
-    width: 0;
-    height: 100%;
-    top: 0;
-    right: 0;
-    border-right: 1px solid var(--sk-back-4);
-  }
-
-  .filetree :global(.row) {
-    --bg: var(--sk-back-1);
-    --inset: calc((var(--depth) * 1.2rem) + 1.5rem);
-    position: relative;
-    width: calc(100% - 1px);
-    padding: 0 0 0 var(--inset);
-    height: 1.4em;
-    z-index: 1;
-    background: var(--bg);
-    color: var(--sk-text-2);
-  }
-
-  .filetree :global(.row:hover) {
-    --bg: var(--sk-back-3);
-  }
-
-  .filetree :global(button),
-  .filetree :global(input) {
-    background-size: 1.2rem 1.2rem;
-    background-position: 0 45%;
-    background-repeat: no-repeat;
-  }
-
-  .filetree :global(:focus-visible) {
-    outline: none;
-    border: 2px solid var(--sk-theme-3) !important;
-  }
-
   .modal-contents p {
     white-space: pre-line;
   }

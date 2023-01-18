@@ -3,7 +3,6 @@
   import * as context from './context';
   import Item from './Item.svelte';
   import type { DirectoryStub, FileStub, Stub } from '$lib/types';
-    import type { MenuItem } from './ContextMenu.svelte';
 
   function get_depth(name: string) {
     return name.split('/').length - 1;
@@ -14,7 +13,6 @@
   export let prefix: string;
   export let depth: number;
   export let files: Stub[];
-  let state: 'idle' | 'add_file' | 'add_directory' | 'renaming' = 'idle';
 
   const { endstate, files: all_files, rename, add, remove, readonly, scope } = context.get();
 
@@ -66,135 +64,50 @@
   // fake root directory has no name
   $: can_remove = !$readonly && directory.name ? !$endstate[directory.name] : false;
 
-  let actions: MenuItem[];
-  $: actions = [
-    can_create.file && {
-      icon: 'file-new',
-      label: 'New file',
-      fn: () => {
-        state = 'add_file';
-      },
-    },
-    can_create.directory && {
-      icon: 'folder-new',
-      label: 'New folder',
-      fn: () => {
-        state = 'add_directory';
-      },
-    },
-    can_remove && {
-      icon: 'rename',
-      label: 'Rename',
-      fn: () => {
-        state = 'renaming';
-      },
-    },
-    can_remove && {
-      icon: 'delete',
-      label: 'Delete',
-      fn: () => {
-        remove(directory);
-      },
-    },
-  ].filter(Boolean) as MenuItem[];
+  function add_file() {
+    const name = prompt('File name?');
+    if (name) add(prefix + name, 'file');
+  }
+  function add_folder() {
+    const name = prompt('Folder name?');
+    if (name) add(prefix + name, 'directory');
+  }
 </script>
 
-<div class="directory row" class:expanded style="--depth: {depth - $scope.depth};">
+<div
+  class="flex hover:bg-gray-500/25 pl-[calc((var(--depth)*.6rem)+1rem)]"
+  style="--depth: {depth - $scope.depth};"
+>
   <Item
-    can_rename={can_remove}
-    renaming={state === 'renaming'}
+    isDirectory
+    {can_remove}
     basename={directory.basename}
-    {actions}
-    on:click={() => {
-      expanded = !expanded;
-    }}
-    on:edit={() => {
-      state = 'renaming';
-    }}
-    on:rename={(e) => {
-      rename(directory, e.detail.basename);
-    }}
-    on:cancel={() => {
-      state = 'idle';
-    }}
-  />
+    {expanded}
+    on:click={() => (expanded = !expanded)}
+    on:rename={({ detail }) => rename(directory, detail)}
+    on:remove={() => remove(directory)}
+  >
+    <svelte:fragment slot="buttons">
+      {#if can_create.file}
+        <button class="px-1 hover:bg-gray-500/25" aria-label="New File" on:click={add_file}><span class="i-codicon-new-file" /></button>
+      {/if}
+      {#if can_create.directory}
+        <button class="px-1 hover:bg-gray-500/25" aria-label="New Folder" on:click={add_folder}><span class="i-codicon-new-folder" /></button>
+      {/if}
+    </svelte:fragment>
+  </Item>
 </div>
 
 {#if expanded}
-  <ul style="--depth: {depth - $scope.depth}">
-    {#if state === 'add_directory'}
-      <li>
-        <div class="directory row" style="--depth: {depth - $scope.depth + 1}">
-          <Item
-            renaming
-            on:rename={(e) => {
-              add(prefix + e.detail.basename, 'directory');
-            }}
-            on:cancel={() => {
-              state = 'idle';
-            }}
-          />
-        </div>
-      </li>
-    {/if}
-
+  <ul style="--depth: {depth - $scope.depth + 1}">
     {#each child_directories as directory}
       <li>
         <svelte:self {directory} prefix={directory.name + '/'} depth={depth + 1} files={children} />
       </li>
     {/each}
 
-    {#if state === 'add_file'}
-      <li>
-        <div class="row">
-          <Item
-            renaming
-            on:rename={(e) => {
-              add(prefix + e.detail.basename, 'file');
-            }}
-            on:cancel={() => {
-              state = 'idle';
-            }}
-          />
-        </div>
-      </li>
-    {/if}
-
     {#each child_files as file}
       <li><File {file} /></li>
     {/each}
   </ul>
 {/if}
-
-<style>
-  .directory::before {
-    content: '';
-    position: absolute;
-    left: calc(var(--inset) - 1.5rem);
-    top: 0rem;
-    width: 1.2rem;
-    height: 100%;
-    /* background: url(../../icons/folder.svg) 0 45% no-repeat; */
-    background-size: 100% auto;
-  }
-
-  .directory.expanded::before {
-    /* background-image: url(../../icons/folder-open.svg); */
-  }
-
-  ul {
-    padding: 0 0 0 0.3em;
-    margin: 0 0 0 0.5em;
-    padding: 0;
-    margin: 0;
-    list-style: none;
-    /* border-left: 1px solid #eee; */
-    line-height: 1.3;
-    max-width: 100%;
-    /* overflow: hidden; */
-  }
-
-  li {
-    padding: 0;
-  }
-</style>

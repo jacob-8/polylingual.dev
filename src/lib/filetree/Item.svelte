@@ -1,152 +1,54 @@
 <script lang="ts">
+  import FileIcons from './FileIcons.svelte';
+
   import { createEventDispatcher } from 'svelte';
-  import { open, type MenuItem } from './ContextMenu.svelte';
 
   export let basename = '';
-  export let can_rename = false;
-  export let renaming: boolean;
-  export let actions: MenuItem[] = [];
+  export let can_remove = false;
+  export let isDirectory = false;
+  export let expanded = false;
+  export let selected = false;
 
-  const dispatch = createEventDispatcher();
+  const dispatch = createEventDispatcher<{ rename: string; remove: boolean }>();
 
-  let cancelling = false;
-
-  function commit(e: Event) {
-    const input = e.target as HTMLInputElement;
-    if (input.value && input.value !== basename) {
-      dispatch('rename', { basename: input.value });
+  function rename() {
+    const newName = prompt('Rename: ', basename);
+    if (newName && newName !== basename) {
+      dispatch('rename', newName);
     }
-
-    cancel();
-  }
-
-  function cancel() {
-    cancelling = true;
-    dispatch('cancel');
-    cancelling = false;
   }
 </script>
 
-{#if renaming}
-  <!-- svelte-ignore a11y-autofocus -->
-  <input
-    class="basename"
-    type="text"
-    autofocus
-    autocomplete="off"
-    spellcheck="false"
-    value={basename}
-    on:blur={(e) => {
-      if (!cancelling) return;
-      commit(e);
-    }}
-    on:keyup={(e) => {
-      if (e.key === 'Enter') {
-        commit(e);
-      }
-
-      if (e.key === 'Escape') {
-        cancel();
-      }
-    }}
-  />
-{:else}
-  <button
-    class="basename"
-    on:click
-    on:dblclick={() => {
-      if (can_rename) {
-        dispatch('edit');
-      }
-    }}
-    on:contextmenu|preventDefault={(e) => {
-      open(e.clientX, e.clientY, actions);
-    }}
-  >
-    {basename}
-  </button>
-
-  {#if actions.length > 0}
-    <div class="actions">
-      {#each actions as action}
-        <button aria-label={action.label} class="icon {action.icon}" on:click={action.fn} />
-      {/each}
-    </div>
+<button
+  class="overflow-hidden w-full text-left bg-opacity-40 pb-2px"
+  class:text-white={selected}
+  style="white-space: nowrap;"
+  on:click
+  on:dblclick={() => {
+    if (can_remove) rename();
+  }}
+>
+  {#if isDirectory}
+    {#if expanded}
+      <span class="i-material-symbols-folder-open" />
+    {:else}
+      <span class="i-material-symbols-folder" />
+    {/if}
+  {:else}
+    <FileIcons {basename} />
   {/if}
+  {basename}
+</button>
+
+<slot name="buttons" />
+
+{#if can_remove}
+  <button class="px-1 hover:bg-gray-500/25" aria-label="Rename" on:click={rename}
+    ><span class="i-codicon-edit" /></button
+  >
+  <button class="px-1 hover:bg-gray-500/25" aria-label="Delete" on:click={() => dispatch('remove')}
+    ><span class="i-codicon-trash" /></button
+  >
 {/if}
 
-<style>
-  input {
-    background: var(--sk-back-1);
-    color: var(--sk-text-1) !important;
-  }
-
-  .basename {
-    position: relative;
-    margin: 0;
-    font-size: var(--font-size);
-    font-family: inherit;
-    color: inherit;
-    width: calc(100% + 2rem);
-    text-align: left;
-    border: 2px solid transparent;
-    white-space: nowrap;
-    overflow: hidden;
-  }
-
-  input {
-    width: 100%;
-    height: 100%;
-  }
-
-  .actions {
-    position: absolute;
-    display: flex;
-    right: -1rem;
-    top: 0;
-    height: 100%;
-    background-color: var(--bg);
-    white-space: pre;
-  }
-
-  .actions::before {
-    content: '';
-    position: absolute;
-    width: 1rem;
-    height: 100%;
-    left: -1rem;
-    top: 0;
-    background: linear-gradient(to right, transparent, var(--bg));
-  }
-
-  .actions::after {
-    content: '';
-    position: absolute;
-    width: 1rem;
-    height: 100%;
-    right: calc(-1rem + 1px);
-    top: 0;
-    background: var(--sk-back-1);
-  }
-
-  .icon {
-    height: 100%;
-    width: 1.5rem;
-  }
-
-  .icon.rename {
-    /* background-image: url(../../icons/rename.svg); */
-  }
-
-  .icon.delete {
-    /* background-image: url(../../icons/delete.svg); */
-  }
-
-  .icon.file-new {
-    /* background-image: url(../../icons/file-new.svg); */
-  }
-
-  .icon.folder-new {
-    /* background-image: url(../../icons/folder-new.svg); */
-  }
-</style>
+<div class="w-2" />
