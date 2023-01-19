@@ -14,13 +14,15 @@ Run the app with `pnpm dev` or `pnpm build && pnpm preview`.
 
 Tutorials live inside `content`. Each tutorial consists of a `README.md`, which is the text to the left, and `app-a` and `app-b` folders, which represent the initial and solved state. Files that stay the same can be omitted from `app-b`. Files are marked as deleted in `app-b` if they start with `__delete`. Folders that are marked as deleted in `app-b` if they contain a file named `__delete`.
 
-## TODO
+## TODO before first lesson
 
+- make content updates use HMR
+- fix build errors
+- write first lesson
 - handle multilingual markers in content
 - add i18n
-- mobile mode
-- strip out unused styles
-- make content updates use HMR
+
+## Future TODO
 - use Svelte inspector
 - update URL of Stackblitz vm if possible
 - fix uno:preflights in proper spot

@@ -9,7 +9,7 @@
   import Filetree from '$lib/filetree/Filetree.svelte';
   import Stackblitz from '$lib/stackblitz/Stackblitz.svelte';
   import { prepareFilesForStackblitz } from '$lib/stackblitz/prepareFilesForStackblitz';
-    import Header from './Header.svelte';
+  import Header from './Header.svelte';
   export let data: PageData;
 
   let path = data.exercise.path;
@@ -100,62 +100,96 @@
       update_complete_states($files);
     }
   }
+
+  let width = browser ? window.innerWidth : 1000;
+  $: mobile = width < 768;
+  let mobile_view: 'tutorial' | 'editor' | 'preview' = 'tutorial';
 </script>
 
-<SplitPane pos={33} min={0}>
-  <section class="h-full border-r flex flex-col" slot="a">
-    <Header />
-    <Sidebar
-      tree={data.tree}
-      exercise={data.exercise}
-      on:selected={({ detail: { file } }) => selected.set(file)}
-    />
-  </section>
-  <section class="h-full" slot="b">
-    <SplitPane pos={50} type="vertical" min={0}>
-      <section class="h-full bg-black" slot="a">
-        <SplitPane pos={27}>
-          <section class="h-full flex flex-col border-r border-gray-500/50" slot="a">
-            <Filetree
-              {scope}
-              {endstate}
-              {files}
-              constraints={editing_constraints}
-              {selected}
-              on:change={() => {
-                // do I need this? reset_adapter($files);
-              }}
-            />
+<svelte:window bind:innerWidth={width} />
 
-            {@const has_b_files = Object.keys(data.exercise.b).length > 0}
-            <button
-              class:bg-gray-500={completed}
-              disabled={!has_b_files}
-              on:click={toggle_solution}
-              class="bg-blue text-white p-2 text-lg"
-            >
-              {#if completed && has_b_files}
-                reset
-              {:else}
-                solve
-                <span class="i-carbon-arrow-right" />
-              {/if}
-            </button>
+<div class="flex h-full flex-col">
+  {#if mobile}
+    <Header>
+      <button
+        class="text-xs py-1 px-2 rounded"
+        class:bg-gray-300={mobile_view === 'tutorial'}
+        type="button"
+        on:click={() => (mobile_view = 'tutorial')}>Tutorial</button
+      >
+      <button
+        class="text-xs py-1 px-2 rounded"
+        class:bg-gray-300={mobile_view === 'editor'}
+        type="button"
+        on:click={() => (mobile_view = 'editor')}>Editor</button
+      >
+      <button
+        class="text-xs py-1 px-2 rounded"
+        class:bg-gray-300={mobile_view === 'preview'}
+        type="button"
+        on:click={() => (mobile_view = 'preview')}>Preview</button
+      >
+    </Header>
+  {/if}
+  <div class="h-[200px] grow">
+    <SplitPane pos={mobile ? (mobile_view === 'tutorial' ? 100 : 0) : 33} min={0}>
+      <section class="h-full border-r flex flex-col" slot="a">
+        {#if !mobile}
+          <Header />
+        {/if}
+        <Sidebar
+          tree={data.tree}
+          exercise={data.exercise}
+          on:selected={({ detail: { file } }) => selected.set(file)}
+        />
+      </section>
+      <section class="h-full" slot="b">
+        <SplitPane pos={mobile ? (mobile_view === 'editor' ? 100 : 0) : 50} type="vertical" min={0}>
+          <section class="h-full bg-black" slot="a">
+            <SplitPane pos={27}>
+              <section class="h-full flex flex-col border-r border-gray-500/50" slot="a">
+                <Filetree
+                  {scope}
+                  {endstate}
+                  {files}
+                  constraints={editing_constraints}
+                  {selected}
+                  on:change={() => {
+                    // do I need this? reset_adapter($files);
+                  }}
+                />
+
+                {@const has_b_files = Object.keys(data.exercise.b).length > 0}
+                <button
+                  class:bg-gray-500={completed}
+                  disabled={!has_b_files}
+                  on:click={toggle_solution}
+                  class="bg-blue text-white p-2 text-lg"
+                >
+                  {#if completed && has_b_files}
+                    reset
+                  {:else}
+                    solve
+                    <span class="i-carbon-arrow-right" />
+                  {/if}
+                </button>
+              </section>
+              <section class="bg-black h-full" slot="b">
+                <MonacoEditor stubs={$files} selected={$selected} on:change={update_stub} />
+              </section>
+            </SplitPane>
           </section>
-          <section class="bg-black h-full" slot="b">
-            <MonacoEditor stubs={$files} selected={$selected} on:change={update_stub} />
+          <section class="h-full" slot="b">
+            {#if browser}
+              <Stackblitz
+                hideExplorer={false}
+                title={`${data.exercise.part.title}, ${data.exercise.chapter.title}, ${data.exercise.title}`}
+                files={prepareFilesForStackblitz($files)}
+              />
+            {/if}
           </section>
         </SplitPane>
       </section>
-      <section class="h-full" slot="b">
-        {#if browser}
-          <Stackblitz
-            hideExplorer={false}
-            title={`${data.exercise.part.title}, ${data.exercise.chapter.title}, ${data.exercise.title}`}
-            files={prepareFilesForStackblitz($files)}
-          />
-        {/if}
-      </section>
     </SplitPane>
-  </section>
-</SplitPane>
+  </div>
+</div>

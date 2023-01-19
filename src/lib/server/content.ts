@@ -161,7 +161,7 @@ export function get_exercise(tree: PartStub[], slug: string): Exercise | undefin
 						prev: exercise.prev,
 						next: exercise.next,
 						dir: exercise.dir,
-						meta: exercise.meta, // watch out for empty meta when checking editing_constraints
+						meta: exercise.meta,
 						html: transform(exercise.markdown, {
 							codespan: (text: string) =>
 								filenames.size > 1 && filenames.has(text)
