@@ -15,9 +15,6 @@
   let sidebar: HTMLElement;
 
   afterNavigate(async () => {
-    // TODO ideally we would associate scroll state with
-    // history. That's a little tricky to do right now,
-    // so for now just always reset sidebar scroll
     sidebar.scrollTop = 0;
   });
 
@@ -56,44 +53,41 @@
 
 <Menu {tree} current={exercise} />
 
-<div bind:this={sidebar} class="text" on:copy={encourage_not_to_copy}>
-  <!-- svelte-ignore a11y-click-events-have-key-events -->
-  <div on:click={respond_to_file_name_clicked}>
-    {@html exercise.html}
-  </div>
+<div class="overflow-y-auto grow flex flex-col">
+  <main bind:this={sidebar} class="p-3" on:copy={encourage_not_to_copy}>
+    <!-- svelte-ignore a11y-click-events-have-key-events -->
+    <div on:click={respond_to_file_name_clicked}>
+      {@html exercise.html}
+    </div>
 
-  {#if exercise.next}
-    <p><a href="/tutorial/{exercise.next.slug}">Next: {exercise.next.title}</a></p>
-  {/if}
+    {#if exercise.next}
+      <div class="my-4">
+        <a
+          class="text-blue-700 text-sm font-semibold hover:underline"
+          href="/tutorial/{exercise.next.slug}"
+          >{exercise.next.title} <span class="i-carbon-arrow-right" /></a
+        >
+      </div>
+    {/if}
+  </main>
+  <footer class="border-t p-3 mt-auto">
+    <a
+      target="_blank"
+      class="hover:underline"
+      rel="noreferrer"
+      href="https://github.com/jacob-8/learn.polylingual.dev/tree/main/{exercise.dir}"
+    >
+      <span class="i-codicon-edit" />
+      Edit this page
+    </a>
+  </footer>
 </div>
 
-<footer>
-  <a
-    target="_blank"
-    rel="noreferrer"
-    class="edit"
-    href="https://github.com/jacob-8/learn.polylingual.dev/tree/main/{exercise.dir}"
-  >
-    Edit this page
-  </a>
-</footer>
-
 <style>
-  .text {
-    flex: 1 1;
-    overflow-y: auto;
-    padding: 2.2rem 3rem;
-    border-right: 1px solid var(--sk-back-4);
-    background: var(--sk-back-3);
+  :global(pre) {
+    overflow-x: auto;
   }
-
-  .text :global(pre) {
-    background: var(--sk-back-1);
-    box-shadow: inset 1px 1px 3px rgba(0, 0, 0, 0.1);
-    border-radius: var(--sk-border-radius);
-  }
-
-  .text :global(pre) :global(.highlight) {
+  /* .text :global(pre) :global(.highlight) {
     --color: rgba(220, 220, 0, 0.2);
     background: var(--color);
     outline: 2px solid var(--color);
@@ -106,22 +100,5 @@
 
   .text :global(pre) :global(.highlight.remove) {
     --color: rgba(255, 0, 0, 0.1);
-  }
-
-  footer {
-    padding: 1rem 3rem;
-    display: flex;
-    justify-content: space-between;
-    background: var(--sk-back-3);
-    border-top: 1px solid var(--sk-back-4);
-    border-right: 1px solid var(--sk-back-4);
-  }
-
-  footer .edit {
-    color: var(--sk-text-2);
-    font-size: 1.4rem;
-    padding: 0 0 0 1.4em;
-    /* TODO: background: url($lib/icons/file-edit.svg) no-repeat 0 calc(50% - 0.1em); */
-    background-size: 1em 1em;
-  }
+  } */
 </style>

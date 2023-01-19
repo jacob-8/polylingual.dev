@@ -150,7 +150,10 @@
   }
 </script>
 
-<div class="filetree grow bg-[#1e1e1e] overflow-y-auto overflow-x-hidden py-2 text-white/70 text-sm">
+<div
+  class="filetree grow bg-[#1e1e1e] overflow-y-auto overflow-x-hidden py-2 text-white/70 text-sm"
+  style="--scrollbar-border-color: #1e1e1e;"
+>
   <Folder
     prefix={$scope.prefix}
     depth={$scope.depth}

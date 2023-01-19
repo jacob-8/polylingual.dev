@@ -2,6 +2,7 @@
   // https://developer.stackblitz.com/platform/api/javascript-sdk-vm
   // await vm.editor.setTheme('light');
   // await vm.preview.setUrl('/about');
+  // const url = await vm.preview.getUrl();
 
   import { filesWithChanges } from './filesWithChanges';
   import sdk, {

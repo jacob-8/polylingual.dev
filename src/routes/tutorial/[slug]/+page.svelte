@@ -9,6 +9,7 @@
   import Filetree from '$lib/filetree/Filetree.svelte';
   import Stackblitz from '$lib/stackblitz/Stackblitz.svelte';
   import { prepareFilesForStackblitz } from '$lib/stackblitz/prepareFilesForStackblitz';
+    import Header from './Header.svelte';
   export let data: PageData;
 
   let path = data.exercise.path;
@@ -102,7 +103,8 @@
 </script>
 
 <SplitPane pos={33} min={0}>
-  <section class="h-full" slot="a">
+  <section class="h-full border-r flex flex-col" slot="a">
+    <Header />
     <Sidebar
       tree={data.tree}
       exercise={data.exercise}
