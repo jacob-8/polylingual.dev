@@ -42,26 +42,6 @@
 </script>
 
 <!-- svelte-ignore a11y-click-events-have-key-events -->
-<div on:click={respond_to_file_name_clicked} on:copy={encourage_not_to_copy}>
+<div class="tw-prose" on:click={respond_to_file_name_clicked} on:copy={encourage_not_to_copy}>
   {@html exercise.html}
 </div>
-
-<style>
-  :global(pre) {
-    overflow-x: auto;
-  }
-  /* .text :global(pre) :global(.highlight) {
-    --color: rgba(220, 220, 0, 0.2);
-    background: var(--color);
-    outline: 2px solid var(--color);
-    border-radius: 2px;
-  }
-
-  .text :global(pre) :global(.highlight.add) {
-    --color: rgba(0, 255, 0, 0.1);
-  }
-
-  .text :global(pre) :global(.highlight.remove) {
-    --color: rgba(255, 0, 0, 0.1);
-  } */
-</style>

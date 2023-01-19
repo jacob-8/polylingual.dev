@@ -98,9 +98,7 @@
       {#each filtered as part (part.slug)}
         {@const partExpanded = part.slug === expanded_part}
 
-        <li
-          aria-current={part.slug === current.part.slug ? 'step' : undefined}
-        >
+        <li aria-current={part.slug === current.part.slug ? 'step' : undefined}>
           <button
             class:font-semibold={partExpanded}
             on:click={() => {
@@ -136,11 +134,7 @@
                           class:font-semibold={current}
                           aria-current={current ? 'page' : undefined}
                         >
-                          <a
-                            data-sveltekit-preload-data
-                            href="/tutorial/{exercise.slug}"
-                            on:click={() => (is_open = false)}
-                          >
+                          <a href="/tutorial/{exercise.slug}" on:click={() => (is_open = false)}>
                             {exercise.title}
                           </a>
                         </li>

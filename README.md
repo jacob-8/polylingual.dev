@@ -16,7 +16,6 @@ Tutorials live inside `content`. Each tutorial consists of a `README.md`, which 
 
 ## TODO
 
-- styling for content
 - handle multilingual markers in content
 - add i18n
 - mobile mode

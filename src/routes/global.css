@@ -34,3 +34,76 @@ body {
 		background: hsla(0, 0%, 50%, 0.5);
 	}
 }
+
+pre {
+	overflow-x: auto;
+	padding: 8px;
+	border: 1px solid hsla(0, 0%, 50%, 0.5);
+	border-radius: 4px;
+	margin-bottom: 8px;
+}
+
+pre .highlight {
+	--color: rgba(220, 220, 0, 0.2);
+	background: var(--color);
+	outline: 2px solid var(--color);
+	border-radius: 2px;
+}
+
+pre .highlight.add {
+	--color: rgba(0, 255, 0, 0.1);
+}
+
+pre .highlight.remove {
+	--color: rgba(255, 0, 0, 0.1);
+}
+
+blockquote {
+	/* background: var(--sk-back-1); */
+	/* color: var(--sk-text-1); */
+	border: 1px solid blue;
+	border-radius: 4px;
+	padding: 0 .5rem;
+	filter: drop-shadow(2px 2px 6px hsla(15, 100%, 50%, .2));
+}
+
+blockquote p {
+	margin-top: .5rem !important;
+	margin-bottom: .5rem !important;
+}
+
+/* diff language only used in 2 files in Svelte tutorial */
+
+pre.language-diff code {
+	color: rgba(0, 0, 0, 0.4);
+}
+
+.language-diff .inserted,
+.language-diff .deleted {
+	position: relative;
+}
+
+.language-diff .inserted {
+	color: hsl(120, 100%, 25%);
+}
+
+.language-diff .deleted {
+	color: hsl(2, 80%, 47%);
+	user-select: none;
+}
+
+.language-diff .inserted::before,
+.language-diff .deleted::before {
+	position: absolute;
+	left: -1rem;
+	top: -0.2rem;
+	font-size: 1.2rem;
+}
+
+.language-diff .inserted::before {
+	content: '+';
+}
+
+.language-diff .deleted::before {
+	content: '-';
+}
