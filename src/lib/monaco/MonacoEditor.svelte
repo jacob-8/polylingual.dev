@@ -7,7 +7,7 @@
   const mapOfExtensionToLanguage: Record<string, string> = {
     js: 'javascript',
     ts: 'typescript',
-    svelte: 'html',
+    svelte: 'handlebars',
     md: 'markdown', // TODO
   };
 

@@ -3,7 +3,9 @@
   import SplitPane from 'svelte-pieces/ui/SplitPane.svelte';
   import { browser } from '$app/environment';
   import Sidebar from './Sidebar.svelte';
-  import MonacoEditor from '$lib/monaco/MonacoEditor.svelte';
+  // import MonacoEditor from '$lib/monaco/MonacoEditor.svelte';
+  import MonacoEditorScripts from '$lib/monaco/MonacoEditorScripts.svelte';
+  import { DEFAULT_MONACO_OPTIONS } from '$lib/monaco/options';
   import type { EditingConstraints, Exercise, FileStub, Scope, Stub } from '$lib/types';
   import type { PageData } from './$types';
   import Filetree from '$lib/filetree/Filetree.svelte';
@@ -99,6 +101,7 @@
       $files = Object.values($endstate);
       update_complete_states($files);
     }
+    $selected = $files.find((stub) => stub.name === $selected?.name) as FileStub;
   }
 
   let width = browser ? window.innerWidth : 1000;
@@ -140,7 +143,12 @@
         <Sidebar
           tree={data.tree}
           exercise={data.exercise}
-          on:selected={({ detail: { file } }) => selected.set(file)}
+          on:selected={({
+            detail: {
+              file: { name },
+            },
+            // @ts-ignore
+          }) => ($selected = $files.find((stub) => stub.name === name) || null)}
         />
       </section>
       <section class="h-full" slot="b">
@@ -175,7 +183,14 @@
                 </button>
               </section>
               <section class="bg-black h-full" slot="b">
-                <MonacoEditor stubs={$files} selected={$selected} on:change={update_stub} />
+                <!-- <MonacoEditor stubs={$files} selected={$selected} on:change={update_stub} /> -->
+                {#if $selected}
+                  <MonacoEditorScripts
+                    stub={$selected}
+                    options={DEFAULT_MONACO_OPTIONS}
+                    on:change={update_stub}
+                  />
+                {/if}
               </section>
             </SplitPane>
           </section>

@@ -21,8 +21,6 @@ if (browser) {
 				case 'json':
 					return new jsonWorker();
 				case 'css':
-				case 'scss':
-				case 'less':
 					return new cssWorker();
 				case 'html':
 					return new htmlWorker();

@@ -16,13 +16,15 @@ Tutorials live inside `content`. Each tutorial consists of a `README.md`, which 
 
 ## TODO before first lesson
 
-- make content updates use HMR
 - fix build errors
-- write first lesson
-- handle multilingual markers in content
 - add i18n
+- write first lesson
+- add diff editor
+- handle multilingual markers in content
 
-## Future TODO
-- use Svelte inspector
+## After first lesson
+- use updated UnoCSS w/ web fonts and typography
+- make content updates use HMR
+- flesh out how to how to make progression through code easier as each exercise picks up from where the last left off; endstate is built up from the accumulation of instructed changes (each illustrated with a diff monaco editor) and actionable with a click
+- use Svelte inspector by catching message from iframe and opening applicable file in the editor
 - update URL of Stackblitz vm if possible
-- fix uno:preflights in proper spot

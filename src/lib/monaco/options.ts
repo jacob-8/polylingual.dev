@@ -1,0 +1,26 @@
+export const DEFAULT_MONACO_OPTIONS: import('monaco-editor').editor.IStandaloneEditorConstructionOptions = {
+  autoClosingBrackets: 'languageDefined',
+  autoClosingQuotes: 'beforeWhitespace',
+  autoIndent: 'full',
+  autoSurround: 'languageDefined',
+  // highlightActiveIndentGuide: true,
+  automaticLayout: true,
+  lineNumbersMinChars: 3,
+  // fontFamily: 'Roboto Mono',
+  fontSize: 15,
+  // fontWeight: '500',
+  formatOnType: true,
+  formatOnPaste: true,
+  padding: {
+    top: 8,
+    bottom: 40,
+  },
+  minimap: {
+    enabled: false,
+  },
+  scrollBeyondLastLine: false,
+  // showFoldingControls: 'always',
+  // tabCompletion: 'on',
+  wordWrap: 'on',
+  wrappingIndent: 'same',
+}
