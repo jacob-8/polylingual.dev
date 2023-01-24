@@ -10,6 +10,7 @@
   import type { FileStub } from '$lib/types';
   export let stub: FileStub;
   export let options: editor.IStandaloneEditorConstructionOptions;
+  export let version = '0.34.1';
   let editor: editor.IStandaloneCodeEditor;
   let container: HTMLDivElement;
 
@@ -25,11 +26,11 @@
       createEditor();
     } else {
       const script = document.createElement('script');
-      script.src = `https://unpkg.com/monaco-editor@0.27.0/min/vs/loader.js`;
+      script.src = `https://unpkg.com/monaco-editor@${version}/min/vs/loader.js`;
       document.head.appendChild(script);
       script.onload = () => {
         require.config({
-          paths: { vs: 'https://unpkg.com/monaco-editor@0.27.0/min/vs' },
+          paths: { vs: `https://unpkg.com/monaco-editor@${version}/min/vs` },
         });
         // Before loading vs/editor/editor.main, define a global MonacoEnvironment that overwrites the default worker url location (used when creating WebWorkers). The problem here is that HTML5 does not allow cross-domain web workers, so we need to proxy the instantiation of a web worker through a same-domain script
         window.MonacoEnvironment = { getWorkerUrl: () => proxy };
@@ -37,9 +38,9 @@
           new Blob(
             [
               `self.MonacoEnvironment = {
-                baseUrl: 'https://unpkg.com/monaco-editor@0.27.0/min/'
+                baseUrl: 'https://unpkg.com/monaco-editor@${version}/min/'
               };
-              importScripts('https://unpkg.com/monaco-editor@0.27.0/min/vs/base/worker/workerMain.js');`,
+              importScripts('https://unpkg.com/monaco-editor@${version}/min/vs/base/worker/workerMain.js');`,
             ],
             { type: 'text/javascript' }
           )
