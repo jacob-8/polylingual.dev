@@ -1,7 +1,7 @@
 <script lang="ts">
+  // import MonacoDiffEditor from '$lib/monaco/MonacoDiffEditor.svelte';
   import type { Exercise, FileStub } from '$lib/types';
   import { createEventDispatcher } from 'svelte';
-  
   export let exercise: Exercise;
   const dispatch = createEventDispatcher<{ selected: { file: FileStub } }>();
 
@@ -40,6 +40,14 @@
     }
   }
 </script>
+
+<!-- <div class="h-400px">
+  <MonacoDiffEditor
+    original="hello to the world!"
+    modified="hello world!"
+    options={{ renderSideBySide: true }}
+  />
+</div> -->
 
 <!-- svelte-ignore a11y-click-events-have-key-events -->
 <div class="tw-prose" on:click={respond_to_file_name_clicked} on:copy={encourage_not_to_copy}>

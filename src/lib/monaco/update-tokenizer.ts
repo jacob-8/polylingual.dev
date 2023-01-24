@@ -1,5 +1,7 @@
 import type { languages } from 'monaco-editor/esm/vs/editor/editor.api.js';
 
+// https://github.com/Pranomvignesh/extend-monaco-language-tokenizer
+// https://blog.checklyhq.com/customizing-monaco/
 // export async function languages() {
 //   const allLangs = monaco.languages.getLanguages();
 //   const { language: handlebarsLang } = (await allLangs
