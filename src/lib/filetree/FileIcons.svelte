@@ -13,6 +13,10 @@
   <span class="i-vscode-icons-file-type-js" />
 {:else if ext === 'ts'}
   <span class="i-vscode-icons-file-type-typescript" />
+{:else if ext === 'css'}
+  <span class="i-vscode-icons-file-type-css" />
+{:else if ext === 'json'}
+  <span class="i-vscode-icons-file-type-json" />
 {:else if ext === 'html'}
   <span class="i-vscode-icons-file-type-html" />
 {:else if ext === 'png'}

@@ -13,3 +13,68 @@ Checkly customized Monaco with tokenizer, autocomplete, and hover: https://blog.
 
 ## Other
 research setting locale: https://unpkg.com/monaco-editor/0.27.0/min/vs/editor/editor.main.nls.js
+
+
+## Sync typescript between models
+
+```typescript
+monaco.languages.typescript.typescriptDefaults.setEagerModelSync(true); // works on start or restart so probably need to dispose and re-create when changing lessons
+
+const model1 = monaco.editor.createModel(`
+        import { type Model2 } from "./model2";
+        const foo: Model2 = {
+            box: true,
+        }
+    `, "typescript", monaco.Uri.parse("model1.ts"));
+
+const model2 = monaco.editor.createModel(`
+        export interface Model2 {
+            box: boolean 
+        }
+    `, "typescript", monaco.Uri.parse("model2.ts"));
+
+const editor = monaco.editor.create(document.getElementById("container"));
+editor.setModel(model1);
+```
+
+## Focused diff
+
+https://microsoft.github.io/monaco-editor/playground.html#interacting-with-the-editor-line-and-inline-decorations
+```javascript
+const jsCode = [
+    '"use strict";',
+    'function Person(age) {',
+    '	if (age) {',
+    '		this.age = age;',
+    '	}',
+    '}',
+    'Person.prototype.getAge = function () {',
+    '	return this.age;',
+    '};'
+].join('\n');
+
+const editor = monaco.editor.create(document.getElementById('container'), {
+    value: jsCode,
+    language: 'javascript'
+});
+
+const decorations = editor.deltaDecorations([],
+    [{
+        range: new monaco.Range(7, 8, 8, 13),
+        options: {
+            inlineClassName: 'myInlineDecoration',
+            marginClassName: 'rightLineDecoration'
+        }
+    }]);
+editor.setHiddenAreas([new monaco.Range(1, 0, 6, 0)])
+```
+
+```javascript
+interface IMyStandaloneCodeEditor extends monaco.editor.IStandaloneCodeEditor {
+  setHiddenAreas(range: monaco.IRange[]): void;
+}
+
+const casted = editor as IMyStandaloneCodeEditor;
+const range = new monaco.Range(1, 0, 1, 0);
+casted.setHiddenAreas([range]);
+```

@@ -16,6 +16,7 @@
   export let files: ProjectFiles;
   export let title: string;
   export let hideExplorer = false;
+  export let hideNavigation = false;
 
   const project: Project = {
     title,
@@ -28,9 +29,9 @@
   };
 
   const embedOptions: EmbedOptions = {
-    // hideNavigation: true,
+    hideNavigation,
     hideExplorer,
-    terminalHeight: 80,
+    terminalHeight: 50,
     view: 'preview',
   };
 
@@ -62,7 +63,12 @@
       create: filesToCreate,
       destroy: deletedFilenames,
     });
+  }
 
+  let sidebarShown = false;
+  export function toggleSidebar() {
+    stackblitzVM?.editor.showSidebar(!sidebarShown);
+    sidebarShown = !sidebarShown;
   }
 </script>
 

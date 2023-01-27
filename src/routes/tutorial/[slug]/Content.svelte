@@ -43,8 +43,8 @@
 
 <!-- <div class="h-400px">
   <MonacoDiffEditor
-    original="hello to the world!"
-    modified="hello world!"
+    original={"hello to the world!\n\nhi there!\n\n"}
+    modified={"hello world\n\n!"}
     options={{ renderSideBySide: true }}
   />
 </div> -->

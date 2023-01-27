@@ -3,7 +3,6 @@
   import SplitPane from 'svelte-pieces/ui/SplitPane.svelte';
   import { browser } from '$app/environment';
   import Sidebar from './Sidebar.svelte';
-  // import MonacoEditor from '$lib/monaco/MonacoEditor.svelte';
   import MonacoEditorScripts from '$lib/monaco/MonacoEditorScripts.svelte';
   import { DEFAULT_MONACO_OPTIONS } from '$lib/monaco/options';
   import type { EditingConstraints, Exercise, FileStub, Scope, Stub } from '$lib/types';
@@ -183,14 +182,11 @@
                 </button>
               </section>
               <section class="bg-black h-full" slot="b">
-                <!-- <MonacoEditor stubs={$files} selected={$selected} on:change={update_stub} /> -->
-                {#if $selected}
-                  <MonacoEditorScripts
-                    stub={$selected}
-                    options={DEFAULT_MONACO_OPTIONS}
-                    on:change={update_stub}
-                  />
-                {/if}
+                <MonacoEditorScripts
+                  stub={$selected}
+                  options={DEFAULT_MONACO_OPTIONS}
+                  on:change={update_stub}
+                />
               </section>
             </SplitPane>
           </section>

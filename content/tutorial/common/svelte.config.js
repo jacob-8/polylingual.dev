@@ -1,4 +1,4 @@
-// import adapter from '@sveltejs/adapter-auto'; // must be installed first
+// import adapter from '@sveltejs/adapter-auto'; // use for deploying to production - package must be installed first
 import { vitePreprocess } from '@sveltejs/kit/vite';
 
 /** @type {import('@sveltejs/kit').Config} */
@@ -13,7 +13,7 @@ const config = {
 		// See https://kit.svelte.dev/docs/configuration#csrf for more info.
 		csrf: false
 
-		// adapter: adapter() // uncomment this line to deploy to production
+		// adapter: adapter() // use for deploying to production
 	},
 
 	vitePlugin: {

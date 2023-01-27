@@ -11,7 +11,7 @@
   export let options: editor.IDiffEditorConstructionOptions;
   let editor: editor.IStandaloneDiffEditor;
   let container: HTMLDivElement;
-  let language = 'html'
+  let language = 'html';
 
   onMount(() => {
     let destroyed = false;

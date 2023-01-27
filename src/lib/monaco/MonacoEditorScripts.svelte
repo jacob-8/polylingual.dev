@@ -7,7 +7,7 @@
   import { vs_dark_plus } from './monaco-themes';
   import type { editor } from 'monaco-editor/esm/vs/editor/editor.api.js';
   import type { FileStub } from '$lib/types';
-  export let stub: FileStub;
+  export let stub: FileStub | null;
   export let options: editor.IStandaloneEditorConstructionOptions;
   let editor: editor.IStandaloneCodeEditor;
   let container: HTMLDivElement;
@@ -38,8 +38,8 @@
     monaco.editor.setTheme('vs-dark-plus');
     editor = monaco.editor.create(container, {
       ...options,
-      language: languageOfStub(stub),
-      value: stub.contents,
+      language: 'handlebars',
+      value: '',
     });
   }
 
@@ -48,7 +48,7 @@
     return mapOfExtensionToLanguage[extension] || extension;
   }
 
-  $: if (editor) {
+  $: if (editor && stub) {
     const model = editor.getModel();
     if (model && stub.contents !== model.getValue()) {
       monaco.editor.setModelLanguage(model, languageOfStub(stub));
@@ -58,6 +58,7 @@
 
   const dispatch = createEventDispatcher<{ change: FileStub }>();
   function emitChange() {
+    if (!stub) return;
     dispatch('change', {
       ...stub,
       contents: editor.getValue(),
