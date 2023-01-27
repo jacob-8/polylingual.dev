@@ -1,0 +1,9 @@
+{
+  "title": "Proof of Concept",
+  "scope": {
+    "prefix": "/src/",
+    "depth": 1,
+    "name": "src"
+  },
+  "focus": "/src/lib/App.svelte"
+}
