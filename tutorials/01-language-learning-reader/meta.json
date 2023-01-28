@@ -1,9 +1,0 @@
-{
-  "title": "Build a Language Learning Reader Web App",
-  "scope": {
-    "prefix": "/src/",
-    "depth": 1,
-    "name": "src"
-  },
-  "focus": "/src/lib/App.svelte"
-}
