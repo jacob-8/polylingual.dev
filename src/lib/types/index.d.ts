@@ -10,6 +10,7 @@ export type FileType =
 export interface Project {
   name: string; // needed?
   lessons: Record<string, Lesson>;
+  // app: Record<string, string>; // common-app + project-common-app
   meta?: {
     scope: Scope;
   }
@@ -28,7 +29,6 @@ export interface Lesson {
 export interface Page {
   name: string; // needed?
   markdown: string;
-  // read from frontmatter
   initial_url?: string;
   file_to_focus?: string;
   // computed after tree parsing:

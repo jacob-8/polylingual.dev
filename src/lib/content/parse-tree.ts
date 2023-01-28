@@ -1,4 +1,5 @@
 import type { FileType, Lesson, Project } from "$lib/types";
+import { extract_frontmatter } from "./extract-frontmatter";
 const pathInitial = '/projects/';
 
 export function parseTree(rawProjects: Record<string, string>): Record<string, Project> {
@@ -6,6 +7,7 @@ export function parseTree(rawProjects: Record<string, string>): Record<string, P
   const projects: Record<string, Project> = {};
 
   for (const path of filepaths) {
+    const content = rawProjects[path];
     const simplifiedPath = path.replace(pathInitial, '');
     const parsedFile = parseFile(simplifiedPath);
     const { type, project, lesson, name } = parsedFile;
@@ -22,11 +24,14 @@ export function parseTree(rawProjects: Record<string, string>): Record<string, P
     }
 
     if (type === 'page-markdown') {
+      const { frontmatter, markdown } = extract_frontmatter(content);
+      const { initial_url, file_to_focus } = frontmatter;
+
       projects[project].lessons[lesson].pages[name] = {
         name,
-        markdown: rawProjects[path],
-        // initial_url: '',
-        // file_to_focus: '',
+        markdown,
+        initial_url,
+        file_to_focus,
         previous_page_path: null,
         next_page_path: null,
         steps: [],
@@ -34,15 +39,32 @@ export function parseTree(rawProjects: Record<string, string>): Record<string, P
         app_finish: {},
       }
     } else if (type === 'lesson-app') {
+      projects[project].lessons[lesson].app_start[name] = content;
+      
     } else if (type === 'lesson-steps') {
+      projects[project].lessons[lesson].steps_files[name] = content;
+    
     } else if (type === 'lesson-meta') {
-      const meta = JSON.parse(rawProjects[path]) as Lesson['meta'];
+      const meta = JSON.parse(content) as Lesson['meta'];
       projects[project].lessons[lesson].meta = meta;
-    } else if (type === 'project-common-app') {
+    
     } else if (type === 'project-meta') {
-      const meta = JSON.parse(rawProjects[path]) as Project['meta'];
+      const meta = JSON.parse(content) as Project['meta'];
       projects[project].meta = meta;
+    
+    } else if (type === 'project-common-app') {
+      for (const lesson of Object.keys(projects[project].lessons)) {
+        if (!projects[project].lessons[lesson].app_start[name])
+          projects[project].lessons[lesson].app_start[name] = content;
+      }
+    
     } else if (type === 'common-app') {
+      for (const project of Object.keys(projects)) {
+        for (const lesson of Object.keys(projects[project].lessons)) {
+          if (!projects[project].lessons[lesson].app_start[name])
+            projects[project].lessons[lesson].app_start[name] = content;
+        }
+      }
     }
   }
 
@@ -92,25 +114,6 @@ export function parseFile(path: string): { project: string, lesson: string, name
 
   throw new Error('Could not parse file: ' + path);
 }
-
-// const start_of_string = '^'
-// const capture_name_starting_with_2_digits_and_hyphen = '(\\d{2}-[^/]+)'
-// const slash = '\\/'
-// const meta_json_file = 'meta\\.json$'
-
-// const project_meta_regex = new RegExp(start_of_string + capture_name_starting_with_2_digits_and_hyphen + slash + meta_json_file)
-
-// const lesson_meta_regex = new RegExp(start_of_string + capture_name_starting_with_2_digits_and_hyphen + slash + capture_name_starting_with_2_digits_and_hyphen + slash + meta_json_file)
-
-// export function getProjectNameFromMetaJsonPath(text: string): string | null {
-//   return text.match(project_meta_regex)?.[1] ?? null;
-// }
-
-// export function getLessonAndProjectNameFromMetaJsonPath(text: string): string | null {
-//   const match = text.match(lesson_meta_regex);
-//   if (match) return `${match[1]}/${match[2]}`;
-//   return null;
-// }
 
 
 

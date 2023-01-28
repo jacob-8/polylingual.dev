@@ -1,7 +1,3 @@
----
-title: Introduction
----
-
 Building a web application is like building a house. We must determine our goal and start with the **end** 目的 in mind. 
 - What would we like to build?
 - Why?

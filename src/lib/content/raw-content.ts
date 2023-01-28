@@ -1,4 +1,4 @@
-export const projects = import.meta.glob(['/projects/**'], { as: 'raw', eager: true });
+export const projects = import.meta.glob(['/projects/**', '!/projects/common/package-lock.json'], { as: 'raw', eager: true });
 
 import { updatedProjects } from "./hmrUpdatedContent";
 import { browser } from "$app/environment";
