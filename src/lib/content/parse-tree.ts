@@ -1,4 +1,4 @@
-import type { Lesson, Stage, Project } from "$lib/types";
+import type { Lesson, Stage, Project, StageLocation } from "$lib/types";
 import { extract_frontmatter } from "./extract-frontmatter";
 import { parseFileType } from "./parse-file-type";
 const pathInitial = '/projects/';
@@ -26,15 +26,14 @@ export function parseTree(rawProjects: Record<string, string>): Record<string, P
       const { frontmatter, markdown } = extract_frontmatter(content);
       const { initial_url, file_to_focus } = frontmatter;
 
+      const location: StageLocation = { project, lesson, name };
       const stage: Stage = {
-        name,
-        lesson,
-        project,
+        location,
         markdown,
         initial_url,
         file_to_focus,
-        previous_stage_path: previous_stage?.name ? `${project}/${lesson}/${previous_stage.name}` : null,
-        next_stage_path: null,
+        previous_stage_location: previous_stage?.location || null,
+        next_stage_location: null,
         steps: [],
         app_start: {},
         app_finish: {},
@@ -42,7 +41,7 @@ export function parseTree(rawProjects: Record<string, string>): Record<string, P
       projects[project].lessons[lesson].stages[name] = stage;
 
       if (previous_stage)
-        previous_stage.next_stage_path = `${project}/${lesson}/${name}`;
+        previous_stage.next_stage_location = location;
       previous_stage = stage;
 
     } else if (type === 'lesson-app') {

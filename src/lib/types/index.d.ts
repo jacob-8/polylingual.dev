@@ -27,19 +27,23 @@ export interface Lesson {
 }
 
 export interface Stage {
-  name: string;
-  lesson: string;
-  project: string;
+  location: StageLocation;
   markdown: string;
   initial_url?: string;
   file_to_focus?: string;
-  previous_stage_path: string | null;
-  next_stage_path: string | null;
+  previous_stage_location: StageLocation | null;
+  next_stage_location: StageLocation | null;
   // computed after tree parsing:
   steps: Step[];
   markdown_with_steps?: string;
   app_start: Record<string, string>; // take app_start from lesson and add all steps from previous stages
   app_finish: Record<string, string>; // add this stage's steps to app_start
+}
+
+export interface StageLocation {
+  project: string;
+  lesson: string;
+  name: string;
 }
 
 export interface Step {

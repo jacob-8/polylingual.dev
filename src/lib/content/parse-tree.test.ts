@@ -30,12 +30,18 @@ describe('parseTree', () => {
                   "app_start": {},
                   "file_to_focus": undefined,
                   "initial_url": undefined,
-                  "lesson": "01-proof-of-concept",
+                  "location": {
+                    "lesson": "01-proof-of-concept",
+                    "name": "01-introduction",
+                    "project": "01-language-learning-reader",
+                  },
                   "markdown": "Building a web application is like building a house.",
-                  "name": "01-introduction",
-                  "next_stage_path": "01-language-learning-reader/01-proof-of-concept/02-adding-foo",
-                  "previous_stage_path": null,
-                  "project": "01-language-learning-reader",
+                  "next_stage_location": {
+                    "lesson": "01-proof-of-concept",
+                    "name": "02-adding-foo",
+                    "project": "01-language-learning-reader",
+                  },
+                  "previous_stage_location": null,
                   "steps": [],
                 },
                 "02-adding-foo": {
@@ -43,17 +49,27 @@ describe('parseTree', () => {
                   "app_start": {},
                   "file_to_focus": undefined,
                   "initial_url": undefined,
-                  "lesson": "01-proof-of-concept",
+                  "location": {
+                    "lesson": "01-proof-of-concept",
+                    "name": "02-adding-foo",
+                    "project": "01-language-learning-reader",
+                  },
                   "markdown": "---
         # initial_url: /hello
         file_to_focus: /src/routes/+page.svelte
         ---
         
         Here we started building...",
-                  "name": "02-adding-foo",
-                  "next_stage_path": "01-language-learning-reader/01-proof-of-concept/03-another",
-                  "previous_stage_path": "01-language-learning-reader/01-proof-of-concept/01-introduction",
-                  "project": "01-language-learning-reader",
+                  "next_stage_location": {
+                    "lesson": "01-proof-of-concept",
+                    "name": "03-another",
+                    "project": "01-language-learning-reader",
+                  },
+                  "previous_stage_location": {
+                    "lesson": "01-proof-of-concept",
+                    "name": "01-introduction",
+                    "project": "01-language-learning-reader",
+                  },
                   "steps": [],
                 },
                 "03-another": {
@@ -61,15 +77,21 @@ describe('parseTree', () => {
                   "app_start": {},
                   "file_to_focus": undefined,
                   "initial_url": undefined,
-                  "lesson": "01-proof-of-concept",
+                  "location": {
+                    "lesson": "01-proof-of-concept",
+                    "name": "03-another",
+                    "project": "01-language-learning-reader",
+                  },
                   "markdown": "---
         ---
         
         # Empty Frontmatter block",
-                  "name": "03-another",
-                  "next_stage_path": null,
-                  "previous_stage_path": "01-language-learning-reader/01-proof-of-concept/02-adding-foo",
-                  "project": "01-language-learning-reader",
+                  "next_stage_location": null,
+                  "previous_stage_location": {
+                    "lesson": "01-proof-of-concept",
+                    "name": "02-adding-foo",
+                    "project": "01-language-learning-reader",
+                  },
                   "steps": [],
                 },
               },
