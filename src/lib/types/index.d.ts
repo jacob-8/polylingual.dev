@@ -32,7 +32,7 @@ export interface Stage {
   previous_stage_location: StageLocation | null;
   next_stage_location: StageLocation | null;
   // computed after tree parsing:
-  steps: Steps;
+  steps: StepsByFilename;
   markdown_with_steps?: string;
   app_start: Record<string, string>; // take app_start from lesson and add all steps from previous stages
   app_finish: Record<string, string>; // add this stage's steps to app_start
@@ -44,8 +44,16 @@ export interface StageLocation {
   name: string;
 }
 
-export interface Steps {
-  [filename: string]: Record<[stepNumber: string], string>;
+export interface StepsByFilename {
+  [filename: string]: Steps;
+}
+
+export type Steps = Record<[stepNumber: string], string>;
+
+export interface Scope {
+  prefix: string;
+  depth: number;
+  name: string;
 }
 
 // OLD below
@@ -123,10 +131,4 @@ export interface ExerciseMeta {
 export interface EditingConstraints {
   create: string[];
   remove: string[];
-}
-
-export interface Scope {
-  prefix: string;
-  depth: number;
-  name: string;
 }
