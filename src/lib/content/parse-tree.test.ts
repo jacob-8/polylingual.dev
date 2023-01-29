@@ -95,8 +95,7 @@ describe('parseTree', () => {
                 },
               },
               "steps_files": {
-                "src/routes/+page.svelte": "
-        reTypewriter Snapshots v1
+                "src/routes/+page.svelte": "reTypewriter Snapshots v1
 
       --01----------
 
@@ -111,7 +110,8 @@ describe('parseTree', () => {
 
       <div style=\\"display: flex; flex-direction: column; height: 100%;\\">
       </div>
-      --------------",
+      --------------
+      ",
               },
             },
           },

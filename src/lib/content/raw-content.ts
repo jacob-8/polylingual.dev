@@ -1,15 +1,15 @@
-export const projects = import.meta.glob(['/projects/**', '!/projects/common/package-lock.json'], { as: 'raw', eager: true });
+export const projectsDirectory = import.meta.glob(['/projects/**', '!/projects/common/package-lock.json'], { as: 'raw', eager: true });
 
-import { updatedProjects } from "./hmrUpdatedContent";
+import { updatedProjectsDirectory } from "./hmrUpdatedContent";
 import { browser } from "$app/environment";
 if (browser) {
-  updatedProjects.set(projects); // optional to switch right from SSR to Client loaded
+  updatedProjectsDirectory.set(projectsDirectory); // optional to switch right from SSR to Client loaded
 }
 
 if (import.meta.hot) {
   import.meta.hot.accept((module) => {
-    if (module?.projects) {
-      // updatedProjects.set(module.projects) // if the set is run at the base level, then this can just be an empty accept handler
-    }
+    // if (module?.projectsDirectory) {
+      // updatedProjectsDirectory.set(module.projectsDirectory) // if the set is run at the base level, then this can just be an empty accept handler
+    // }
   })
 }

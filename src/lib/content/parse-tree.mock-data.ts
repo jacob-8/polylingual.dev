@@ -11,8 +11,7 @@ export default {
   
   # Empty Frontmatter block`,
   "/projects/01-language-learning-reader/01-proof-of-concept/app/src/routes/+page.svelte": "<h1>歡迎上課！ 這是邊做邊學的地方。</h1>",
-  "/projects/01-language-learning-reader/01-proof-of-concept/app/src/routes/+page.svelte.retypewriter": `
-  reTypewriter Snapshots v1
+  "/projects/01-language-learning-reader/01-proof-of-concept/app/src/routes/+page.svelte.retypewriter": `reTypewriter Snapshots v1
 
 --01----------
 
@@ -27,7 +26,8 @@ export default {
 
 <div style="display: flex; flex-direction: column; height: 100%;">
 </div>
---------------`,
+--------------
+`,
   "/projects/01-language-learning-reader/common/src/routes/data/swords_and_shields.json": `[
     {
       "classical": "矛盾 (韓非子)",
