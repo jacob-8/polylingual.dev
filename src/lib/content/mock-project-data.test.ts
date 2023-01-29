@@ -18,12 +18,15 @@ test('mockProjectsDirectory', () => {
 
     And some more prose.
     ",
-      "/src/lib/content/mock-projects/01-first-project/01-first-lesson/02-adding-foo.md": "---
+      "/src/lib/content/mock-projects/01-first-project/01-first-lesson/02-simplfy-into-class.md": "---
     # initial_url: /hello
     file_to_focus: /src/routes/+page.svelte
     ---
 
-    I have frontmatter with a comment",
+    I have frontmatter with a comment and here we are going to simplify the styles into a class:
+
+    [[src/routes/+page.svelte#04]]  
+    ",
       "/src/lib/content/mock-projects/01-first-project/01-first-lesson/03-another.md": "---
     ---
 
@@ -46,6 +49,14 @@ test('mockProjectsDirectory', () => {
     </script>
 
     <div style=\\"display: flex; flex-direction: column; height: 100%;\\">
+    </div>
+
+    --04----------
+    <script lang=\\"ts\\">
+    	import '../global.css';
+    </script>
+
+    <div class=\\"simplify\\">
     </div>
 
     --------------

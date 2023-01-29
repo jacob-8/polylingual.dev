@@ -101,23 +101,70 @@ describe('prepareLessonStages', () => {
       ",
             "next_stage_location": {
               "lesson": "01-first-lesson",
-              "name": "02-adding-foo",
+              "name": "02-simplfy-into-class",
               "project": "01-first-project",
             },
             "previous_stage_location": null,
             "steps": {},
           },
-          "02-adding-foo": {
-            "app_finish": {},
-            "app_start": {},
+          "02-simplfy-into-class": {
+            "app_finish": {
+              "package.txt": "root level",
+              "src/a.txt": "I'm just in the first project's first lesson and should overwrite the common \`a.txt\` file and the project's common \`a.txt\` file.",
+              "src/b.txt": "I'm shared by all lessons in this project.",
+              "src/c.txt": "I'm shared by all projects and should show up.",
+              "src/routes/+page.svelte": "<script lang=\\"ts\\">
+      	import '../global.css';
+      </script>
+
+      <div class=\\"simplify\\">
+      </div>",
+              "src/routes/Hello.svelte": "<h1>歡迎上課！ 這是邊做邊學的地方。</h1>
+      <h2>Welcome to the lesson! Here is where we learn by doing.</h2>
+      ",
+            },
+            "app_start": {
+              "package.txt": "root level",
+              "src/a.txt": "I'm just in the first project's first lesson and should overwrite the common \`a.txt\` file and the project's common \`a.txt\` file.",
+              "src/b.txt": "I'm shared by all lessons in this project.",
+              "src/c.txt": "I'm shared by all projects and should show up.",
+              "src/routes/+page.svelte": "<script lang=\\"ts\\">
+      	import '../global__普.css';
+      </script>
+
+      <div style=\\"display: flex; flex-direction: column; height: 100%;\\">
+      </div>",
+              "src/routes/Hello.svelte": "<h1>歡迎上課！ 這是邊做邊學的地方。</h1>
+      <h2>Welcome to the lesson! Here is where we learn by doing.</h2>
+      ",
+            },
             "file_to_focus": "/src/routes/+page.svelte",
             "initial_url": undefined,
             "location": {
               "lesson": "01-first-lesson",
-              "name": "02-adding-foo",
+              "name": "02-simplfy-into-class",
               "project": "01-first-project",
             },
-            "markdown": "I have frontmatter with a comment",
+            "markdown": "I have frontmatter with a comment and here we are going to simplify the styles into a class:
+
+      [[src/routes/+page.svelte#04]]",
+            "markdown_with_steps": "I have frontmatter with a comment and here we are going to simplify the styles into a class:
+
+      \`\`\`diff
+      <script lang=\\"ts\\">
+      	import '../global__普.css';
+      </script>
+
+      <div style=\\"display: flex; flex-direction: column; height: 100%;\\">
+      </div>
+      --diff-border--
+      <script lang=\\"ts\\">
+      	import '../global.css';
+      </script>
+
+      <div class=\\"simplify\\">
+      </div>
+      \`\`\`",
             "next_stage_location": {
               "lesson": "01-first-lesson",
               "name": "03-another",
@@ -131,8 +178,36 @@ describe('prepareLessonStages', () => {
             "steps": {},
           },
           "03-another": {
-            "app_finish": {},
-            "app_start": {},
+            "app_finish": {
+              "package.txt": "root level",
+              "src/a.txt": "I'm just in the first project's first lesson and should overwrite the common \`a.txt\` file and the project's common \`a.txt\` file.",
+              "src/b.txt": "I'm shared by all lessons in this project.",
+              "src/c.txt": "I'm shared by all projects and should show up.",
+              "src/routes/+page.svelte": "<script lang=\\"ts\\">
+      	import '../global.css';
+      </script>
+
+      <div class=\\"simplify\\">
+      </div>",
+              "src/routes/Hello.svelte": "<h1>歡迎上課！ 這是邊做邊學的地方。</h1>
+      <h2>Welcome to the lesson! Here is where we learn by doing.</h2>
+      ",
+            },
+            "app_start": {
+              "package.txt": "root level",
+              "src/a.txt": "I'm just in the first project's first lesson and should overwrite the common \`a.txt\` file and the project's common \`a.txt\` file.",
+              "src/b.txt": "I'm shared by all lessons in this project.",
+              "src/c.txt": "I'm shared by all projects and should show up.",
+              "src/routes/+page.svelte": "<script lang=\\"ts\\">
+      	import '../global.css';
+      </script>
+
+      <div class=\\"simplify\\">
+      </div>",
+              "src/routes/Hello.svelte": "<h1>歡迎上課！ 這是邊做邊學的地方。</h1>
+      <h2>Welcome to the lesson! Here is where we learn by doing.</h2>
+      ",
+            },
             "file_to_focus": undefined,
             "initial_url": undefined,
             "location": {
@@ -146,6 +221,12 @@ describe('prepareLessonStages', () => {
       # I have empty frontmatter
 
       And some **markdown** that will turn into html",
+            "markdown_with_steps": "---
+      ---
+
+      # I have empty frontmatter
+
+      And some **markdown** that will turn into html",
             "next_stage_location": {
               "lesson": "02-second-lesson",
               "name": "01-introduction",
@@ -153,7 +234,7 @@ describe('prepareLessonStages', () => {
             },
             "previous_stage_location": {
               "lesson": "01-first-lesson",
-              "name": "02-adding-foo",
+              "name": "02-simplfy-into-class",
               "project": "01-first-project",
             },
             "steps": {},
@@ -174,6 +255,14 @@ describe('prepareLessonStages', () => {
       </script>
 
       <div style=\\"display: flex; flex-direction: column; height: 100%;\\">
+      </div>
+
+      --04----------
+      <script lang=\\"ts\\">
+      	import '../global.css';
+      </script>
+
+      <div class=\\"simplify\\">
       </div>
 
       --------------

@@ -4,19 +4,32 @@ import { parseSnapshots } from "./parse-snapshots";
 
 export function prepareLessonStages({ projects, project, lesson }: { projects: Record<string, Project>, project: string, lesson: string }): Lesson {
   const lessonObj = projects[project].lessons[lesson];
-  const firstStageName = Object.keys(lessonObj.stages).find(stage => stage.startsWith('01-')) as string;
-  const unusedStepsForAllStages = parseStepsFiles(lessonObj.steps_files);
+  const stepsByFilename = parseStepsFiles(lessonObj.steps_files);
 
-  // loop over stages
-  const firstStage = lessonObj.stages[firstStageName];
-  firstStage.app_start = lessonObj.app_start;
-  // if later stage, then stage's app_start equals previous stage's app_finish
+  // The object comes ordered already but in case that doesn't always hold true we are manually sorting:
+  const sortedStages = Object.values(lessonObj.stages).sort((a, b) => {
+    if (a.location.name < b.location.name) {
+      return -1;
+    }
+    if (a.location.name > b.location.name) {
+      return 1;
+    }
+    return 0;
+  })
+  for (const [index, stage] of sortedStages.entries()) {
+    if (index === 0) {
+      stage.app_start = lessonObj.app_start
+    } else {
+      const previousStage = sortedStages[index - 1]
+      stage.app_start = previousStage.app_finish
+    }
+    const { markdown_with_steps, app_changes } = addStepsToMarkdown({ markdown: stage.markdown, stepsByFilename });
+    stage.markdown_with_steps = markdown_with_steps;
+    stage.app_finish = { ...stage.app_start, ...app_changes };
+    lessonObj.stages[stage.location.name] = stage;
+  }
 
-  const { markdown_with_steps, app_changes } = addStepsToMarkdown({ markdown: firstStage.markdown, stepsByFilename: unusedStepsForAllStages });
-  firstStage.markdown_with_steps = markdown_with_steps;
-  firstStage.app_finish = { ...firstStage.app_start, ...app_changes };
-
-  return projects[project].lessons[lesson];
+  return lessonObj;
 }
 
 export function parseStepsFiles(steps_files: Record<string, string>): StepsByFilename {

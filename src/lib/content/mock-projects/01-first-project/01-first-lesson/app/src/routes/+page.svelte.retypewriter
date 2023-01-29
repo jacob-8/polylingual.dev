@@ -14,4 +14,12 @@ reTypewriter Snapshots v1
 <div style="display: flex; flex-direction: column; height: 100%;">
 </div>
 
+--04----------
+<script lang="ts">
+	import '../global.css';
+</script>
+
+<div class="simplify">
+</div>
+
 --------------
