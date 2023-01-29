@@ -32,7 +32,7 @@ export interface Stage {
   previous_stage_location: StageLocation | null;
   next_stage_location: StageLocation | null;
   // computed after tree parsing:
-  steps: Step[];
+  steps: Steps;
   markdown_with_steps?: string;
   app_start: Record<string, string>; // take app_start from lesson and add all steps from previous stages
   app_finish: Record<string, string>; // add this stage's steps to app_start
@@ -44,11 +44,8 @@ export interface StageLocation {
   name: string;
 }
 
-export interface Step {
-  name: string; // 01, 02
-  file: string;
-  code: string;
-  // changed sections
+export interface Steps {
+  [filename: string]: Record<[stepNumber: string], string>;
 }
 
 // OLD below
