@@ -1,0 +1,1 @@
+I'm just in the first project's first lesson and should overwrite the common `a.txt` file and the project's common `a.txt` file.

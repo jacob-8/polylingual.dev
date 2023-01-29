@@ -7,9 +7,10 @@ export function prepareLessonStages({ projects, project, lesson }: { projects: R
   const unusedStepsForAllStages = parseStepsFiles(lessonObj.steps_files);
   
   const firstStage = lessonObj.stages[firstStageName];
-  // if first stage, then stage's app_start equals lesson's app_start 
+  firstStage.app_start = lessonObj.app_start;
   // if later stage, then stage's app_start equals previous stage's app_finish
-  
+
+  // const markdown_with_steps = addStepsToMarkdown({ markdown: firstStage.markdown, steps: unusedStepsForAllStages });
   // 1. read the markdown of each stage and find the referred to steps in the parsed steps of that stage's lesson
   
   // 2. add those steps into the markdown where they are reference and return it to markdown_with_steps

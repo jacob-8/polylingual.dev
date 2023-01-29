@@ -1,0 +1,17 @@
+reTypewriter Snapshots v1
+
+--01----------
+
+--02----------
+<script lang="ts">
+	import '../global__普.css';
+</script>
+--03----------
+<script lang="ts">
+	import '../global__普.css';
+</script>
+
+<div style="display: flex; flex-direction: column; height: 100%;">
+</div>
+
+--------------

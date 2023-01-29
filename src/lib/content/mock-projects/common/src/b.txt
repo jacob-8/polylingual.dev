@@ -1,0 +1,1 @@
+I'm shared by all projects, but should be overwritten in the first project by it's common `b.txt` file. I'll be in the 2nd project though.

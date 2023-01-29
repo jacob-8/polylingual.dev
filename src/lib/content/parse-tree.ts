@@ -1,9 +1,8 @@
 import type { Lesson, Stage, Project, StageLocation } from "$lib/types";
 import { extract_frontmatter } from "./extract-frontmatter";
 import { parseFileType } from "./parse-file-type";
-const pathInitial = '/projects/';
 
-export function parseTree(rawProjects: Record<string, string>): Record<string, Project> {
+export function parseTree(rawProjects: Record<string, string>, pathInitial = '/projects/'): Record<string, Project> {
   const projects: Record<string, Project> = {};
   let previous_stage: Stage | null = null;
 
@@ -34,7 +33,7 @@ export function parseTree(rawProjects: Record<string, string>): Record<string, P
         file_to_focus,
         previous_stage_location: previous_stage?.location || null,
         next_stage_location: null,
-        steps: [],
+        steps: {},
         app_start: {},
         app_finish: {},
       }
