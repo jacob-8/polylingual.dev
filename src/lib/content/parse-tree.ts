@@ -1,17 +1,15 @@
-import type { FileType, Lesson, Stage, Project } from "$lib/types";
+import type { Lesson, Stage, Project } from "$lib/types";
 import { extract_frontmatter } from "./extract-frontmatter";
+import { parseFileType } from "./parse-file-type";
 const pathInitial = '/projects/';
 
 export function parseTree(rawProjects: Record<string, string>): Record<string, Project> {
-  const filepaths = Object.keys(rawProjects);
   const projects: Record<string, Project> = {};
   let previous_stage: Stage | null = null;
 
-  for (const path of filepaths) {
-    const content = rawProjects[path];
+  for (const [path, content] of Object.entries(rawProjects)) {
     const simplifiedPath = path.replace(pathInitial, '');
-    const parsedFile = parseFile(simplifiedPath);
-    const { type, project, lesson, name } = parsedFile;
+    const { type, project, lesson, name } = parseFileType(simplifiedPath);
 
     // setup initial empty objects
     if (project) {
@@ -79,50 +77,3 @@ export function parseTree(rawProjects: Record<string, string>): Record<string, P
 
   return projects;
 }
-
-export function parseFile(path: string): { project: string, lesson: string, name: string, type: FileType } {
-  const [project, lesson, name] = path.split('/');
-
-  if (path.endsWith('.retypewriter')) return {
-    type: 'lesson-steps',
-    name: path.split('/app/')[1].replace('.retypewriter', ''),
-    project,
-    lesson,
-  }
-
-  if (path.startsWith('common')) return {
-    type: 'common-app',
-    name: path.replace('common/', ''),
-    project: '',
-    lesson: '',
-  };
-  if (path.includes('/common/')) return {
-    type: 'project-common-app',
-    name: path.split('/common/')[1],
-    project,
-    lesson: '',
-  }
-  if (path.includes('/app/')) return {
-    type: 'lesson-app',
-    name: path.split('/app/')[1],
-    project,
-    lesson,
-  }
-
-  if (path.endsWith('meta.json')) {
-    if (path.split('/').length === 2) return { project, lesson: '', name: 'meta', type: 'project-meta' };
-    if (path.split('/').length === 3) return { project, lesson, name: 'meta', type: 'lesson-meta' };
-  }
-
-  if (path.endsWith('.md')) return {
-    type: 'stage-markdown',
-    project,
-    lesson,
-    name: name.replace('.md', ''),
-  }
-
-  throw new Error('Could not parse file: ' + path);
-}
-
-
-
