@@ -3,26 +3,32 @@ import { addStepsToMarkdown } from "./add-steps-to-markdown";
 
 describe('addStepsToMarkdown', () => {
   test('initial', () => {
+    const filename = 'src/routes/+page.svelte';
+    const file_start = 'hi';
     const markdown = `# Normal Heading
 Explain what we're going to do:
 
-[[src/routes/+page.svelte#02]]  
+[[${filename}#02]]  
 
 And then
 
-[[src/routes/+page.svelte#03]]  
+[[${filename}#03]]  
 
 And some more prose.`;
     const steps: Steps = {
-      '01': 'hi',
+      '01': file_start,
       '02': 'hello',
       '03': 'hello world!',
     };
     const stepsByFilename: StepsByFilename = {
-      'src/routes/+page.svelte': steps
+      [filename]: steps
     };
     expect(addStepsToMarkdown({ markdown, stepsByFilename })).toMatchInlineSnapshot(`
-      "# Normal Heading
+      {
+        "app_changes": {
+          "src/routes/+page.svelte": "hello world!",
+        },
+        "markdown_with_steps": "# Normal Heading
       Explain what we're going to do:
 
       \`\`\`diff
@@ -39,7 +45,8 @@ And some more prose.`;
       hello world!
       \`\`\`  
 
-      And some more prose."
+      And some more prose.",
+      }
     `);
   });
 });

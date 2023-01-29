@@ -4,8 +4,9 @@ const CAPTURE_FILENAME = '(.+?)';
 const CAPTURE_SNAPSHOT_NUMBER = '(\\d{2})';
 const STEP_REFERENCE_MATCHER = new RegExp(`\\[\\[${CAPTURE_FILENAME}#${CAPTURE_SNAPSHOT_NUMBER}\\]\\]`, 'g');
 
-export function addStepsToMarkdown({ markdown, stepsByFilename }: { markdown: string, stepsByFilename: StepsByFilename }): string {
-  const updateMarkdown = new MagicString(markdown);
+export function addStepsToMarkdown({ markdown, stepsByFilename }: { markdown: string, stepsByFilename: StepsByFilename }): { markdown_with_steps: string, app_changes: Record<string, string> } {
+  const app_changes: Record<string, string> = {};
+  const markdown_with_steps = new MagicString(markdown);
 
   const stepReferences = Array.from(markdown.matchAll(STEP_REFERENCE_MATCHER));
   for (const reference of stepReferences) {
@@ -23,10 +24,12 @@ ${previousState}
 --diff-border--
 ${currentState}
 \`\`\``
-    updateMarkdown.update(startOfMatch, startOfMatch + referenceLength, diffBlock)
+    markdown_with_steps.update(startOfMatch, startOfMatch + referenceLength, diffBlock)
+    
+    app_changes[filename] = currentState;
   }
 
-  return updateMarkdown.toString();
+  return { markdown_with_steps: markdown_with_steps.toString(), app_changes };
 }
 
 function convertNumberToTwoDigitString(number: number): string {

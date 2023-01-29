@@ -26,7 +26,21 @@ describe('prepareLessonStages', () => {
         },
         "stages": {
           "01-introduction": {
-            "app_finish": {},
+            "app_finish": {
+              "package.txt": "root level",
+              "src/a.txt": "I'm just in the first project's first lesson and should overwrite the common \`a.txt\` file and the project's common \`a.txt\` file.",
+              "src/b.txt": "I'm shared by all lessons in this project.",
+              "src/c.txt": "I'm shared by all projects and should show up.",
+              "src/routes/+page.svelte": "<script lang=\\"ts\\">
+      	import '../global__普.css';
+      </script>
+
+      <div style=\\"display: flex; flex-direction: column; height: 100%;\\">
+      </div>",
+              "src/routes/Hello.svelte": "<h1>歡迎上課！ 這是邊做邊學的地方。</h1>
+      <h2>Welcome to the lesson! Here is where we learn by doing.</h2>
+      ",
+            },
             "app_start": {
               "package.txt": "root level",
               "src/a.txt": "I'm just in the first project's first lesson and should overwrite the common \`a.txt\` file and the project's common \`a.txt\` file.",

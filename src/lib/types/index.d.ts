@@ -24,7 +24,7 @@ export interface Lesson {
   }
 }
 
-export interface Stage {
+export interface Stage { // split into StageRaw and StagePrepared/Stage?
   location: StageLocation;
   markdown: string;
   initial_url?: string;
