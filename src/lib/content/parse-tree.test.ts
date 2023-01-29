@@ -23,7 +23,6 @@ describe('parseTree', () => {
         ]",
                 "static/robots.txt": "I should override the common robots.txt",
               },
-              "name": "01-proof-of-concept",
               "stages": {
                 "01-introduction": {
                   "app_finish": {},
@@ -123,7 +122,6 @@ describe('parseTree', () => {
               "prefix": "/src/",
             },
           },
-          "name": "01-language-learning-reader",
         },
       }
     `);

@@ -14,11 +14,11 @@ export function parseTree(rawProjects: Record<string, string>): Record<string, P
     // setup initial empty objects
     if (project) {
       if (!projects[project])
-        projects[project] = { name: project, lessons: {} };
+        projects[project] = { lessons: {} };
 
       if (lesson) {
         if (!projects[project].lessons[lesson])
-          projects[project].lessons[lesson] = { name: lesson, stages: {}, app_start: {}, steps_files: {} };
+          projects[project].lessons[lesson] = { stages: {}, app_start: {}, steps_files: {} };
       }
     }
 

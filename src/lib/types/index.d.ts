@@ -8,7 +8,6 @@ export type FileType =
   'stage-markdown';
 
 export interface Project {
-  name: string; // needed?
   lessons: Record<string, Lesson>;
   // app: Record<string, string>; // common-app + project-common-app
   meta?: {
@@ -17,7 +16,6 @@ export interface Project {
 }
 
 export interface Lesson {
-  name: string; // needed?
   stages: Record<string, Stage>;
   app_start: Record<string, string>; // common-app + project-common-app + lesson-app
   steps_files: Record<string, string>; // retypewriter extension
