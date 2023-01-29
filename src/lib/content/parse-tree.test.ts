@@ -37,7 +37,18 @@ describe('parseTree', () => {
                     "name": "01-introduction",
                     "project": "01-first-project",
                   },
-                  "markdown": "1st project, 1st lesson, 1st stage; no frontmatter",
+                  "markdown": "1st project, 1st lesson, 1st stage; no frontmatter
+
+      Explain what we're going to do:
+
+      [[src/routes/+page.svelte#02]]  
+
+      And then
+
+      [[src/routes/+page.svelte#03]]  
+
+      And some more prose.
+      ",
                   "next_stage_location": {
                     "lesson": "01-first-lesson",
                     "name": "02-adding-foo",

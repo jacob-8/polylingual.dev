@@ -48,7 +48,9 @@ export interface StepsByFilename {
   [filename: string]: Steps;
 }
 
-export type Steps = Record<[stepNumber: string], string>;
+export interface Steps {
+  [stepNumber: string]: string
+};
 
 export interface Scope {
   prefix: string;

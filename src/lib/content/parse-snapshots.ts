@@ -11,9 +11,9 @@ export function parseSnapshots(raw: string): Record<string, string> {
   const rawWithoutEnd = raw.replace(SNAP_END, '')
   const snapshots: Record<string, string> = {};
 
-  const matches = Array.from(rawWithoutEnd.matchAll(SNAP_SEPERATOR_MATCHER))
-  matches.forEach((match, idx) => {
-    const nextMatch = matches[idx + 1]
+  const snapshotSeparators = Array.from(rawWithoutEnd.matchAll(SNAP_SEPERATOR_MATCHER))
+  snapshotSeparators.forEach((match, idx) => {
+    const nextMatch = snapshotSeparators[idx + 1]
     const startOfMatch = match.index as number;
     const beginningOfNextMatch = nextMatch?.index ?? raw.length
     const separatorLength = match[0].length

@@ -44,7 +44,47 @@ describe('prepareLessonStages', () => {
               "name": "01-introduction",
               "project": "01-first-project",
             },
-            "markdown": "1st project, 1st lesson, 1st stage; no frontmatter",
+            "markdown": "1st project, 1st lesson, 1st stage; no frontmatter
+
+      Explain what we're going to do:
+
+      [[src/routes/+page.svelte#02]]  
+
+      And then
+
+      [[src/routes/+page.svelte#03]]  
+
+      And some more prose.
+      ",
+            "markdown_with_steps": "1st project, 1st lesson, 1st stage; no frontmatter
+
+      Explain what we're going to do:
+
+      \`\`\`diff
+
+      --diff-border--
+      <script lang=\\"ts\\">
+      	import '../global__普.css';
+      </script>
+      \`\`\`  
+
+      And then
+
+      \`\`\`diff
+      <script lang=\\"ts\\">
+      	import '../global__普.css';
+      </script>
+      --diff-border--
+      <script lang=\\"ts\\">
+      	import '../global__普.css';
+      </script>
+
+      <div style=\\"display: flex; flex-direction: column; height: 100%;\\">
+      </div>
+      \`\`\`  
+
+      And some more prose.
+      ",
             "next_stage_location": {
               "lesson": "01-first-lesson",
               "name": "02-adding-foo",

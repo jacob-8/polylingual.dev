@@ -6,7 +6,18 @@ export const mockProjectsFirstLessonName = '01-first-lesson';
 test('mockProjectsDirectory', () => {
   expect(mockProjectsDirectory).toMatchInlineSnapshot(`
     {
-      "/src/lib/content/mock-projects/01-first-project/01-first-lesson/01-introduction.md": "1st project, 1st lesson, 1st stage; no frontmatter",
+      "/src/lib/content/mock-projects/01-first-project/01-first-lesson/01-introduction.md": "1st project, 1st lesson, 1st stage; no frontmatter
+
+    Explain what we're going to do:
+
+    [[src/routes/+page.svelte#02]]  
+
+    And then
+
+    [[src/routes/+page.svelte#03]]  
+
+    And some more prose.
+    ",
       "/src/lib/content/mock-projects/01-first-project/01-first-lesson/02-adding-foo.md": "---
     # initial_url: /hello
     file_to_focus: /src/routes/+page.svelte

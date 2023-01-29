@@ -16,6 +16,7 @@ importers:
       eslint: ^8.28.0
       eslint-config-prettier: ^8.5.0
       eslint-plugin-svelte3: ^4.0.0
+      magic-string: ^0.27.0
       marked: ^4.2.12
       monaco-editor: ^0.34.1
       prettier: ^2.8.0
@@ -43,6 +44,7 @@ importers:
       eslint: 8.32.0
       eslint-config-prettier: 8.6.0_eslint@8.32.0
       eslint-plugin-svelte3: 4.0.0_tmo5zkisvhu6htudosk5k7m6pu
+      magic-string: 0.27.0
       marked: 4.2.12
       monaco-editor: 0.34.1
       prettier: 2.8.3

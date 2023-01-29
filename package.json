@@ -27,6 +27,7 @@
     "eslint": "^8.28.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-svelte3": "^4.0.0",
+    "magic-string": "^0.27.0",
     "marked": "^4.2.12",
     "monaco-editor": "^0.34.1",
     "prettier": "^2.8.0",
