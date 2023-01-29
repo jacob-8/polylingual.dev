@@ -85,14 +85,14 @@ describe('parseFile', () => {
     `);
   });
 
-  test('page-markdown', () => {
+  test('stage-markdown', () => {
     const path = "01-language-learning-reader/01-proof-of-concept/01-introduction.md";
     expect(parseFile(path)).toMatchInlineSnapshot(`
       {
         "lesson": "01-proof-of-concept",
         "name": "01-introduction",
         "project": "01-language-learning-reader",
-        "type": "page-markdown",
+        "type": "stage-markdown",
       }
     `);
   });

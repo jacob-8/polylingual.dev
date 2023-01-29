@@ -1,10 +1,11 @@
-import type { FileType, Lesson, Project } from "$lib/types";
+import type { FileType, Lesson, Stage, Project } from "$lib/types";
 import { extract_frontmatter } from "./extract-frontmatter";
 const pathInitial = '/projects/';
 
 export function parseTree(rawProjects: Record<string, string>): Record<string, Project> {
   const filepaths = Object.keys(rawProjects);
   const projects: Record<string, Project> = {};
+  let previous_stage: Stage | null = null;
 
   for (const path of filepaths) {
     const content = rawProjects[path];
@@ -19,45 +20,53 @@ export function parseTree(rawProjects: Record<string, string>): Record<string, P
 
       if (lesson) {
         if (!projects[project].lessons[lesson])
-          projects[project].lessons[lesson] = { name: lesson, pages: {}, app_start: {}, steps_files: {} };
+          projects[project].lessons[lesson] = { name: lesson, stages: {}, app_start: {}, steps_files: {} };
       }
     }
 
-    if (type === 'page-markdown') {
+    if (type === 'stage-markdown') {
       const { frontmatter, markdown } = extract_frontmatter(content);
       const { initial_url, file_to_focus } = frontmatter;
 
-      projects[project].lessons[lesson].pages[name] = {
+      const stage: Stage = {
         name,
+        lesson,
+        project,
         markdown,
         initial_url,
         file_to_focus,
-        previous_page_path: null,
-        next_page_path: null,
+        previous_stage_path: previous_stage?.name ? `${project}/${lesson}/${previous_stage.name}` : null,
+        next_stage_path: null,
         steps: [],
         app_start: {},
         app_finish: {},
       }
+      projects[project].lessons[lesson].stages[name] = stage;
+
+      if (previous_stage)
+        previous_stage.next_stage_path = `${project}/${lesson}/${name}`;
+      previous_stage = stage;
+
     } else if (type === 'lesson-app') {
       projects[project].lessons[lesson].app_start[name] = content;
-      
+
     } else if (type === 'lesson-steps') {
       projects[project].lessons[lesson].steps_files[name] = content;
-    
+
     } else if (type === 'lesson-meta') {
       const meta = JSON.parse(content) as Lesson['meta'];
       projects[project].lessons[lesson].meta = meta;
-    
+
     } else if (type === 'project-meta') {
       const meta = JSON.parse(content) as Project['meta'];
       projects[project].meta = meta;
-    
+
     } else if (type === 'project-common-app') {
       for (const lesson of Object.keys(projects[project].lessons)) {
         if (!projects[project].lessons[lesson].app_start[name])
           projects[project].lessons[lesson].app_start[name] = content;
       }
-    
+
     } else if (type === 'common-app') {
       for (const project of Object.keys(projects)) {
         for (const lesson of Object.keys(projects[project].lessons)) {
@@ -106,7 +115,7 @@ export function parseFile(path: string): { project: string, lesson: string, name
   }
 
   if (path.endsWith('.md')) return {
-    type: 'page-markdown',
+    type: 'stage-markdown',
     project,
     lesson,
     name: name.replace('.md', ''),

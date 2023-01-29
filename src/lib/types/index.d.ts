@@ -5,7 +5,7 @@ export type FileType =
   'lesson-meta' |
   'lesson-app' |
   'lesson-steps' |
-  'page-markdown';
+  'stage-markdown';
 
 export interface Project {
   name: string; // needed?
@@ -18,7 +18,7 @@ export interface Project {
 
 export interface Lesson {
   name: string; // needed?
-  pages: Record<string, Page>;
+  stages: Record<string, Stage>;
   app_start: Record<string, string>; // common-app + project-common-app + lesson-app
   steps_files: Record<string, string>; // retypewriter extension
   meta?: {
@@ -26,18 +26,20 @@ export interface Lesson {
   }
 }
 
-export interface Page {
-  name: string; // needed?
+export interface Stage {
+  name: string;
+  lesson: string;
+  project: string;
   markdown: string;
   initial_url?: string;
   file_to_focus?: string;
+  previous_stage_path: string | null;
+  next_stage_path: string | null;
   // computed after tree parsing:
-  previous_page_path: string | null;
-  next_page_path: string | null;
   steps: Step[];
   markdown_with_steps?: string;
-  app_start: Record<string, string>; // take app_start from lesson and add all steps from previous pages
-  app_finish: Record<string, string>; // add this page's steps to app_start
+  app_start: Record<string, string>; // take app_start from lesson and add all steps from previous stages
+  app_finish: Record<string, string>; // add this stage's steps to app_start
 }
 
 export interface Step {
