@@ -81,7 +81,7 @@
   <Item
     isDirectory
     {can_remove}
-    basename={directory.basename}
+    name={directory.basename}
     {expanded}
     on:click={() => (expanded = !expanded)}
     on:rename={({ detail }) => rename(directory, detail)}

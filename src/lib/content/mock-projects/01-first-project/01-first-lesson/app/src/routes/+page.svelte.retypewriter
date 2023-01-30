@@ -4,11 +4,11 @@ reTypewriter Snapshots v1
 
 --02----------
 <script lang="ts">
-	import '../global__普.css';
+	// import '../global__普.css';
 </script>
 --03----------
 <script lang="ts">
-	import '../global__普.css';
+	// import '../global__普.css';
 </script>
 
 <div style="display: flex; flex-direction: column; height: 100%;">
@@ -16,7 +16,7 @@ reTypewriter Snapshots v1
 
 --04----------
 <script lang="ts">
-	import '../global.css';
+	// import '../global.css';
 </script>
 
 <div class="simplify">

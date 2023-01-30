@@ -30,8 +30,8 @@ export interface Stage { // split into StageRaw and StagePrepared/Stage?
   file_to_focus?: string;
   previous_stage_location: StageLocation | null;
   next_stage_location: StageLocation | null;
+  meta: Meta; // inherited from project and lesson
   // computed after tree parsing:
-  meta?: Meta; // inherited from project and lesson
   steps: StepsByFilename;
   markdown_with_steps?: string;
   app_start: Record<string, string>;
@@ -53,26 +53,32 @@ export interface Steps {
 };
 
 export interface Scope {
-  prefix: string;
-  depth: number;
-  name: string;
+  directory: string; // '' for root, 'src/' for src (default), 'src/lib/' for src/lib
 }
 
 export interface Meta {
   scope: Scope;
 }
 
+export interface Tree {
+  [folderOrFilename: string]: Tree | string;
+}
+
+export interface StageFiles {
+  [path: string]: string;
+}
+
+export interface FileStub {
+  name: string; // path
+  basename: string; // filename
+  contents: string;
+  text: boolean;
+}
+
 // OLD below
 
 export type Stub = FileStub | DirectoryStub;
 
-export interface FileStub {
-  type: 'file';
-  name: string;
-  basename: string;
-  contents: string;
-  text: boolean;
-}
 
 export interface DirectoryStub {
   type: 'directory';

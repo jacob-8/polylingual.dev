@@ -7,15 +7,17 @@
   import SplitPane from 'svelte-pieces/ui/SplitPane.svelte';
   import Header from './Header.svelte';
   import Sidebar from './Sidebar.svelte';
+  import Practice from './Practice.svelte';
 
   export let data: PageData;
   $: projectsDirectory = $updatedProjectsDirectory || data.projectsDirectory;
   $: projects = parseTree(projectsDirectory);
   $: lesson = prepareLessonStages({ projects, project: data.project, lesson: data.lesson });
+  $: stage = lesson.stages[data.stage];
 
   let width = browser ? window.innerWidth : 1000;
   $: mobile = width < 768;
-  let mobile_view: 'tutorial' | 'editor' | 'preview' = 'tutorial';
+  let mobile_view: 'tutorial' | 'editor' | 'preview' = 'editor';
 </script>
 
 <svelte:window bind:innerWidth={width} />
@@ -47,24 +49,11 @@
     <SplitPane pos={mobile ? (mobile_view === 'tutorial' ? 100 : 0) : 33} min={0}>
       <section class="h-full border-r flex flex-col" slot="a">
         {#if !mobile}<Header />{/if}
-        <Sidebar {projects} stage={lesson.stages[data.stage]} />
+        <Sidebar {projects} {stage} />
+        <!-- on:selected={({ detail }) => console.log(`selected filename: ${detail}`)} -->
       </section>
       <section class="h-full" slot="b">
-        <SplitPane pos={mobile ? (mobile_view === 'editor' ? 100 : 0) : 50} type="vertical" min={0}>
-          <section class="h-full bg-black" slot="a">
-            <SplitPane pos={27}>
-              <section class="h-full flex flex-col border-r border-gray-500/50" slot="a">
-                filetree solve
-              </section>
-              <section class="bg-black h-full" slot="b">editor</section>
-            </SplitPane>
-          </section>
-          <section class="h-full" slot="b">
-            {#if browser}
-              stackblitz
-            {/if}
-          </section>
-        </SplitPane>
+        <Practice {stage} {mobile} {mobile_view} />
       </section>
     </SplitPane>
   </div>

@@ -3,17 +3,17 @@
 
   import { createEventDispatcher } from 'svelte';
 
-  export let basename = '';
+  export let name = '';
   export let can_remove = false;
   export let isDirectory = false;
   export let expanded = false;
-  export let selected = false;
+  export let isSelected = false;
 
   const dispatch = createEventDispatcher<{ rename: string; remove: boolean }>();
 
   function rename() {
-    const newName = prompt('Rename: ', basename);
-    if (newName && newName !== basename) {
+    const newName = prompt('Rename: ', name);
+    if (newName && newName !== name) {
       dispatch('rename', newName);
     }
   }
@@ -21,7 +21,7 @@
 
 <button
   class="overflow-hidden w-full text-left bg-opacity-40 pb-2px"
-  class:text-white={selected}
+  class:text-white={isSelected}
   style="white-space: nowrap;"
   on:click
   on:dblclick={() => {
@@ -35,9 +35,9 @@
       <span class="i-material-symbols-folder" />
     {/if}
   {:else}
-    <FileIcons {basename} />
+    <FileIcons basename={name} />
   {/if}
-  {basename}
+  {name}
 </button>
 
 <slot name="buttons" />

@@ -35,6 +35,7 @@ export function parseTree(rawProjects: Record<string, string>, pathInitial = '/p
         file_to_focus,
         previous_stage_location: previous_stage?.location || null,
         next_stage_location: null,
+        meta: default_meta,
         steps: {},
         app_start: {},
         app_finish: {},

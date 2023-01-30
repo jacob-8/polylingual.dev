@@ -8,3 +8,13 @@ Right now I'm learning Chinese. A year and a half ago I wanted to find a tool th
 Since the tool didn't exist, I started to build it. My purpose was to build a tool that would make learning to read Chinese more effective by helping me with characters and words I didn't yet know. I now have that tool and enjoy it very much. Now I want to improve it so I have a new goal in mind. I want a tool that can help me learn to read in any language, not just Chinese. Maybe classical Greek, Latin, or even English (for those who are learning English).
 
 That's the tool we're going to build together in this lesson series. If you want to become better at building useful web applications that will improve your life or help your company offer a valuable service. In our **JavaScript Explained** lessons, we will build an entire web application together, from start to finish, frontend and backend, that will be used by real users to learn real languages. Let's get started!
+
+Explain what we're going to do:
+
+[[src/routes/+page.svelte#02]]  
+
+And then
+
+[[src/routes/+page.svelte#03]]  
+
+And some more prose.

@@ -15,8 +15,8 @@
 >
   <Item
     {can_remove}
-    basename={file.basename}
-    selected={file === $selected}
+    name={file.basename}
+    isSelected={file === $selected}
     on:click={() => select(file)}
     on:rename={({ detail }) => rename(file, detail)}
     on:remove={() => remove(file)}

@@ -3,7 +3,7 @@
   import type { Stage } from '$lib/types';
   import { createEventDispatcher } from 'svelte';
   export let stage: Stage;
-  const dispatch = createEventDispatcher<{ selected: { file: string } }>();
+  const dispatch = createEventDispatcher<{ selected: string }>();
 
   function encourage_not_to_copy(e: ClipboardEvent) {
     const namespace = 'learn.polylingual.dev';
@@ -33,10 +33,7 @@
 
     if (node.nodeName === 'CODE') {
       const { file: filename } = node.dataset;
-      if (filename) {
-        const file = stage.app_start[filename] || stage.app_finish[filename];
-        dispatch('selected', { file });
-      }
+      dispatch('selected', filename);
     }
   }
 </script>
