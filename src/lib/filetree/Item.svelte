@@ -1,22 +1,21 @@
 <script lang="ts">
+  // import { createEventDispatcher } from 'svelte';
   import FileIcons from './FileIcons.svelte';
 
-  import { createEventDispatcher } from 'svelte';
-
   export let name = '';
-  export let can_remove = false;
+  // export let can_remove = false;
   export let isDirectory = false;
   export let expanded = false;
   export let isSelected = false;
 
-  const dispatch = createEventDispatcher<{ rename: string; remove: boolean }>();
+  // const dispatch = createEventDispatcher<{ rename: string; remove: boolean }>();
 
-  function rename() {
-    const newName = prompt('Rename: ', name);
-    if (newName && newName !== name) {
-      dispatch('rename', newName);
-    }
-  }
+  // function rename() {
+  //   const newName = prompt('Rename: ', name);
+  //   if (newName && newName !== name) {
+  //     dispatch('rename', newName);
+  //   }
+  // }
 </script>
 
 <button
@@ -25,7 +24,7 @@
   style="white-space: nowrap;"
   on:click
   on:dblclick={() => {
-    if (can_remove) rename();
+    // if (can_remove) rename();
   }}
 >
   {#if isDirectory}
@@ -42,13 +41,13 @@
 
 <slot name="buttons" />
 
-{#if can_remove}
+<!-- {#if can_remove}
   <button class="px-1 hover:bg-gray-500/25" aria-label="Rename" on:click={rename}
     ><span class="i-codicon-edit" /></button
   >
   <button class="px-1 hover:bg-gray-500/25" aria-label="Delete" on:click={() => dispatch('remove')}
     ><span class="i-codicon-trash" /></button
   >
-{/if}
+{/if} -->
 
 <div class="w-2" />
