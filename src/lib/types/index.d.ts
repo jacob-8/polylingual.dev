@@ -11,9 +11,7 @@ export interface Project {
   name: string;
   lessons: Record<string, Lesson>;
   // app: Record<string, string>; // common-app + project-common-app
-  meta?: {
-    scope: Scope;
-  }
+  meta: Meta;
 }
 
 export interface Lesson {
@@ -21,9 +19,7 @@ export interface Lesson {
   stages: Record<string, Stage>;
   app_start: Record<string, string>; // common-app + project-common-app + lesson-app
   steps_files: Record<string, string>; // retypewriter extension
-  meta?: {
-    scope: Scope;
-  }
+  meta?: Meta;
 }
 
 export interface Stage { // split into StageRaw and StagePrepared/Stage?
@@ -35,6 +31,7 @@ export interface Stage { // split into StageRaw and StagePrepared/Stage?
   previous_stage_location: StageLocation | null;
   next_stage_location: StageLocation | null;
   // computed after tree parsing:
+  meta?: Meta; // inherited from project and lesson
   steps: StepsByFilename;
   markdown_with_steps?: string;
   app_start: Record<string, string>;
@@ -59,6 +56,10 @@ export interface Scope {
   prefix: string;
   depth: number;
   name: string;
+}
+
+export interface Meta {
+  scope: Scope;
 }
 
 // OLD below

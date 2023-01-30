@@ -3,7 +3,8 @@ import { addStepsToMarkdown } from "./add-steps-to-markdown";
 import { parseSnapshots } from "./parse-snapshots";
 
 export function prepareLessonStages({ projects, project, lesson }: { projects: Record<string, Project>, project: string, lesson: string }): Lesson {
-  const lessonObj = projects[project].lessons[lesson];
+  const projectObj = projects[project];
+  const lessonObj = projectObj.lessons[lesson];
   const stepsByFilename = parseStepsFiles(lessonObj.steps_files);
 
   // The object comes ordered already but in case that doesn't always hold true we are manually sorting:
@@ -23,6 +24,8 @@ export function prepareLessonStages({ projects, project, lesson }: { projects: R
       const previousStage = sortedStages[index - 1]
       stage.app_start = previousStage.app_finish
     }
+    stage.meta = { ...lessonObj.meta, ...projectObj.meta }
+
     const { markdown_with_steps, app_changes } = addStepsToMarkdown({ markdown: stage.markdown, stepsByFilename });
     stage.markdown_with_steps = markdown_with_steps;
     stage.app_finish = { ...stage.app_start, ...app_changes };

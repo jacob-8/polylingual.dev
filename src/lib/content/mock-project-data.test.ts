@@ -76,6 +76,14 @@ test('mockProjectsDirectory', () => {
       "/src/lib/content/mock-projects/01-first-project/02-second-lesson/app/src/routes/+page.svelte": "I'm a simple page with nothing that will be added to me.",
       "/src/lib/content/mock-projects/01-first-project/common/src/a.txt": "I'm shared by all lessons in the first projects, but should be overwritten in the first project by it's common \`a.txt\` file, but I should be in the first project's 2nd lesson.",
       "/src/lib/content/mock-projects/01-first-project/common/src/b.txt": "I'm shared by all lessons in this project.",
+      "/src/lib/content/mock-projects/01-first-project/meta.json": "{
+      \\"scope\\": {
+        \\"prefix\\": \\"/\\",
+        \\"depth\\": 0,
+        \\"name\\": \\"project\\"
+      }
+    }
+    ",
       "/src/lib/content/mock-projects/02-second-project/01-first-lesson-in-2nd-project/01-2nd-project-1st-lesson-1st-stage.md": "I'm the first stage in the 2nd project's first lesson.",
       "/src/lib/content/mock-projects/common/package.txt": "root level",
       "/src/lib/content/mock-projects/common/src/a.txt": "I'm shared by all projects, but should be overwritten in the first project by it's common \`a.txt\` and it's first lesson's \`a.txt\` file.",

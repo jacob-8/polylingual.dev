@@ -24,6 +24,7 @@ describe('prepareLessonStages', () => {
             "prefix": "/src/",
           },
         },
+        "name": "01-first-lesson",
         "stages": {
           "01-introduction": {
             "app_finish": {
@@ -51,6 +52,7 @@ describe('prepareLessonStages', () => {
       <h2>Welcome to the lesson! Here is where we learn by doing.</h2>
       ",
             },
+            "directory": "/src/lib/content/mock-projects/01-first-project/01-first-lesson/01-introduction.md",
             "file_to_focus": undefined,
             "initial_url": undefined,
             "location": {
@@ -99,6 +101,13 @@ describe('prepareLessonStages', () => {
 
       And some more prose.
       ",
+            "meta": {
+              "scope": {
+                "depth": 0,
+                "name": "project",
+                "prefix": "/",
+              },
+            },
             "next_stage_location": {
               "lesson": "01-first-lesson",
               "name": "02-simplfy-into-class",
@@ -138,6 +147,7 @@ describe('prepareLessonStages', () => {
       <h2>Welcome to the lesson! Here is where we learn by doing.</h2>
       ",
             },
+            "directory": "/src/lib/content/mock-projects/01-first-project/01-first-lesson/02-simplfy-into-class.md",
             "file_to_focus": "/src/routes/+page.svelte",
             "initial_url": undefined,
             "location": {
@@ -165,6 +175,13 @@ describe('prepareLessonStages', () => {
       <div class=\\"simplify\\">
       </div>
       \`\`\`",
+            "meta": {
+              "scope": {
+                "depth": 0,
+                "name": "project",
+                "prefix": "/",
+              },
+            },
             "next_stage_location": {
               "lesson": "01-first-lesson",
               "name": "03-another",
@@ -208,6 +225,7 @@ describe('prepareLessonStages', () => {
       <h2>Welcome to the lesson! Here is where we learn by doing.</h2>
       ",
             },
+            "directory": "/src/lib/content/mock-projects/01-first-project/01-first-lesson/03-another.md",
             "file_to_focus": undefined,
             "initial_url": undefined,
             "location": {
@@ -227,6 +245,13 @@ describe('prepareLessonStages', () => {
       # I have empty frontmatter
 
       And some **markdown** that will turn into html",
+            "meta": {
+              "scope": {
+                "depth": 0,
+                "name": "project",
+                "prefix": "/",
+              },
+            },
             "next_stage_location": {
               "lesson": "02-second-lesson",
               "name": "01-introduction",

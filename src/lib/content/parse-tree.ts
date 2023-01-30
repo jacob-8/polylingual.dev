@@ -1,6 +1,7 @@
 import type { Lesson, Stage, Project, StageLocation } from "$lib/types";
 import { extract_frontmatter } from "./extract-frontmatter";
 import { parseFileType } from "./parse-file-type";
+import default_meta from './default-meta.json'
 
 export function parseTree(rawProjects: Record<string, string>, pathInitial = '/projects/'): Record<string, Project> {
   const projects: Record<string, Project> = {};
@@ -13,7 +14,7 @@ export function parseTree(rawProjects: Record<string, string>, pathInitial = '/p
     // setup initial empty objects
     if (project) {
       if (!projects[project])
-        projects[project] = { name: project, lessons: {} };
+        projects[project] = { name: project, lessons: {}, meta: default_meta };
 
       if (lesson) {
         if (!projects[project].lessons[lesson])

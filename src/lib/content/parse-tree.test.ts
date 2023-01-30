@@ -31,6 +31,7 @@ describe('parseTree', () => {
                 "01-introduction": {
                   "app_finish": {},
                   "app_start": {},
+                  "directory": "/src/lib/content/mock-projects/01-first-project/01-first-lesson/01-introduction.md",
                   "file_to_focus": undefined,
                   "initial_url": undefined,
                   "location": {
@@ -61,6 +62,7 @@ describe('parseTree', () => {
                 "02-simplfy-into-class": {
                   "app_finish": {},
                   "app_start": {},
+                  "directory": "/src/lib/content/mock-projects/01-first-project/01-first-lesson/02-simplfy-into-class.md",
                   "file_to_focus": "/src/routes/+page.svelte",
                   "initial_url": undefined,
                   "location": {
@@ -86,6 +88,7 @@ describe('parseTree', () => {
                 "03-another": {
                   "app_finish": {},
                   "app_start": {},
+                  "directory": "/src/lib/content/mock-projects/01-first-project/01-first-lesson/03-another.md",
                   "file_to_focus": undefined,
                   "initial_url": undefined,
                   "location": {
@@ -154,6 +157,7 @@ describe('parseTree', () => {
                 "01-introduction": {
                   "app_finish": {},
                   "app_start": {},
+                  "directory": "/src/lib/content/mock-projects/01-first-project/02-second-lesson/01-introduction.md",
                   "file_to_focus": undefined,
                   "initial_url": undefined,
                   "location": {
@@ -178,6 +182,13 @@ describe('parseTree', () => {
               "steps_files": {},
             },
           },
+          "meta": {
+            "scope": {
+              "depth": 0,
+              "name": "project",
+              "prefix": "/",
+            },
+          },
           "name": "01-first-project",
         },
         "02-second-project": {
@@ -194,6 +205,7 @@ describe('parseTree', () => {
                 "01-2nd-project-1st-lesson-1st-stage": {
                   "app_finish": {},
                   "app_start": {},
+                  "directory": "/src/lib/content/mock-projects/02-second-project/01-first-lesson-in-2nd-project/01-2nd-project-1st-lesson-1st-stage.md",
                   "file_to_focus": undefined,
                   "initial_url": undefined,
                   "location": {
@@ -212,6 +224,13 @@ describe('parseTree', () => {
                 },
               },
               "steps_files": {},
+            },
+          },
+          "meta": {
+            "scope": {
+              "depth": 1,
+              "name": "src",
+              "prefix": "/src/",
             },
           },
           "name": "02-second-project",
