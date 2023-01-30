@@ -10,18 +10,18 @@ This repo uses [pnpm](https://pnpm.io/).
 
 Run the app with `pnpm dev` or `pnpm build && pnpm preview`.
 
-## Creating new tutorials
+## Creating new project tutorials
 
-Tutorials live inside `content`. Each tutorial consists of a `README.md`, which is the text to the left, and `app-a` and `app-b` folders, which represent the initial and solved state. Files that stay the same can be omitted from `app-b`. Files are marked as deleted in `app-b` if they start with `__delete`. Folders that are marked as deleted in `app-b` if they contain a file named `__delete`.
+Projects live inside `projects`. Each project has a lesson consisting of stages which are each a markdown file, which is the instructions to the left, an `app` folder, which represents the initial  state along with corresponding steps files that will be referenced in the instructions markdown files. Files are marked as deleted in the finish state if their last step is blank.
 
 ## TODO before first lesson
 
-- make content updates use HMR
 - fix build errors
-- write first lesson
 - use svelte-markdown
+- write first lesson
 - add i18n
 - handle multilingual :zh markers in content
+- update error page
 
 ## After first lesson
 - use updated UnoCSS w/ web fonts and typography
