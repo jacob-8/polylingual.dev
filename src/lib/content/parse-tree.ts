@@ -28,6 +28,7 @@ export function parseTree(rawProjects: Record<string, string>, pathInitial = '/p
       const location: StageLocation = { project, lesson, name };
       const stage: Stage = {
         location,
+        directory: path,
         markdown,
         initial_url,
         file_to_focus,

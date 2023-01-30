@@ -28,7 +28,7 @@ export interface Lesson {
 
 export interface Stage { // split into StageRaw and StagePrepared/Stage?
   location: StageLocation;
-  directory?: string; // for GitHub url
+  directory: string;
   markdown: string;
   initial_url?: string;
   file_to_focus?: string;
