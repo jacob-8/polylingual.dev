@@ -8,6 +8,7 @@ export type FileType =
   'stage-markdown';
 
 export interface Project {
+  name: string;
   lessons: Record<string, Lesson>;
   // app: Record<string, string>; // common-app + project-common-app
   meta?: {
@@ -16,6 +17,7 @@ export interface Project {
 }
 
 export interface Lesson {
+  name: string;
   stages: Record<string, Stage>;
   app_start: Record<string, string>; // common-app + project-common-app + lesson-app
   steps_files: Record<string, string>; // retypewriter extension
@@ -26,6 +28,7 @@ export interface Lesson {
 
 export interface Stage { // split into StageRaw and StagePrepared/Stage?
   location: StageLocation;
+  directory?: string; // for GitHub url
   markdown: string;
   initial_url?: string;
   file_to_focus?: string;
@@ -34,8 +37,8 @@ export interface Stage { // split into StageRaw and StagePrepared/Stage?
   // computed after tree parsing:
   steps: StepsByFilename;
   markdown_with_steps?: string;
-  app_start: Record<string, string>; // take app_start from lesson and add all steps from previous stages
-  app_finish: Record<string, string>; // add this stage's steps to app_start
+  app_start: Record<string, string>;
+  app_finish: Record<string, string>; 
 }
 
 export interface StageLocation {

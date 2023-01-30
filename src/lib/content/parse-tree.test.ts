@@ -26,6 +26,7 @@ describe('parseTree', () => {
                   "prefix": "/src/",
                 },
               },
+              "name": "01-first-lesson",
               "stages": {
                 "01-introduction": {
                   "app_finish": {},
@@ -51,23 +52,25 @@ describe('parseTree', () => {
       ",
                   "next_stage_location": {
                     "lesson": "01-first-lesson",
-                    "name": "02-adding-foo",
+                    "name": "02-simplfy-into-class",
                     "project": "01-first-project",
                   },
                   "previous_stage_location": null,
                   "steps": {},
                 },
-                "02-adding-foo": {
+                "02-simplfy-into-class": {
                   "app_finish": {},
                   "app_start": {},
                   "file_to_focus": "/src/routes/+page.svelte",
                   "initial_url": undefined,
                   "location": {
                     "lesson": "01-first-lesson",
-                    "name": "02-adding-foo",
+                    "name": "02-simplfy-into-class",
                     "project": "01-first-project",
                   },
-                  "markdown": "I have frontmatter with a comment",
+                  "markdown": "I have frontmatter with a comment and here we are going to simplify the styles into a class:
+
+      [[src/routes/+page.svelte#04]]",
                   "next_stage_location": {
                     "lesson": "01-first-lesson",
                     "name": "03-another",
@@ -103,7 +106,7 @@ describe('parseTree', () => {
                   },
                   "previous_stage_location": {
                     "lesson": "01-first-lesson",
-                    "name": "02-adding-foo",
+                    "name": "02-simplfy-into-class",
                     "project": "01-first-project",
                   },
                   "steps": {},
@@ -126,6 +129,14 @@ describe('parseTree', () => {
       <div style=\\"display: flex; flex-direction: column; height: 100%;\\">
       </div>
 
+      --04----------
+      <script lang=\\"ts\\">
+      	import '../global.css';
+      </script>
+
+      <div class=\\"simplify\\">
+      </div>
+
       --------------
       ",
               },
@@ -138,6 +149,7 @@ describe('parseTree', () => {
                 "src/c.txt": "I'm shared by all projects and should show up.",
                 "src/routes/+page.svelte": "I'm a simple page with nothing that will be added to me.",
               },
+              "name": "02-second-lesson",
               "stages": {
                 "01-introduction": {
                   "app_finish": {},
@@ -166,6 +178,7 @@ describe('parseTree', () => {
               "steps_files": {},
             },
           },
+          "name": "01-first-project",
         },
         "02-second-project": {
           "lessons": {
@@ -176,6 +189,7 @@ describe('parseTree', () => {
                 "src/b.txt": "I'm shared by all projects, but should be overwritten in the first project by it's common \`b.txt\` file. I'll be in the 2nd project though.",
                 "src/c.txt": "I'm shared by all projects and should show up.",
               },
+              "name": "01-first-lesson-in-2nd-project",
               "stages": {
                 "01-2nd-project-1st-lesson-1st-stage": {
                   "app_finish": {},
@@ -200,6 +214,7 @@ describe('parseTree', () => {
               "steps_files": {},
             },
           },
+          "name": "02-second-project",
         },
       }
     `);

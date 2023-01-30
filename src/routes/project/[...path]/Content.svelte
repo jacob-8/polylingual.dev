@@ -1,9 +1,9 @@
 <script lang="ts">
   // import MonacoDiffEditor from '$lib/monaco/MonacoDiffEditor.svelte';
-  import type { Exercise, FileStub } from '$lib/types';
+  import type { Stage } from '$lib/types';
   import { createEventDispatcher } from 'svelte';
-  export let exercise: Exercise;
-  const dispatch = createEventDispatcher<{ selected: { file: FileStub } }>();
+  export let stage: Stage;
+  const dispatch = createEventDispatcher<{ selected: { file: string } }>();
 
   function encourage_not_to_copy(e: ClipboardEvent) {
     const namespace = 'learn.polylingual.dev';
@@ -34,8 +34,8 @@
     if (node.nodeName === 'CODE') {
       const { file: filename } = node.dataset;
       if (filename) {
-        const file = exercise.a[filename];
-        if (file.type === 'file') dispatch('selected', { file });
+        const file = stage.app_start[filename] || stage.app_finish[filename];
+        dispatch('selected', { file });
       }
     }
   }
@@ -51,5 +51,5 @@
 
 <!-- svelte-ignore a11y-click-events-have-key-events -->
 <div class="tw-prose" on:click={respond_to_file_name_clicked} on:copy={encourage_not_to_copy}>
-  {@html exercise.html}
+  {stage.markdown_with_steps}
 </div>

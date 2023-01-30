@@ -2,10 +2,10 @@
   import { afterNavigate } from '$app/navigation';
   import Menu from './Menu.svelte';
   import Content from './Content.svelte';
-  import type { Exercise, PartStub } from '$lib/types';
+  import type { Stage, Project } from '$lib/types';
 
-  export let tree: PartStub[];
-  export let exercise: Exercise;
+  export let projects: Record<string, Project>;
+  export let stage: Stage;
 
   let sidebar: HTMLElement;
 
@@ -14,18 +14,18 @@
   });
 </script>
 
-<Menu {tree} current={exercise} />
+<Menu {projects} {stage} />
 
 <div class="overflow-y-auto grow flex flex-col">
   <main bind:this={sidebar} class="p-3">
-    <Content {exercise} on:selected />
+    <Content {stage} on:selected />
 
-    {#if exercise.next}
+    {#if stage.next_stage_location}
       <div class="my-4">
         <a
           class="text-blue-700 text-sm font-semibold hover:underline"
-          href="/tutorial/{exercise.next.slug}"
-          >{exercise.next.title} <span class="i-carbon-arrow-right" /></a
+          href="/project/{stage.next_stage_location.project}/{stage.next_stage_location.lesson}/{stage.next_stage_location.name}"
+          >{stage.next_stage_location.name} <span class="i-carbon-arrow-right" /></a
         >
       </div>
     {/if}
@@ -35,7 +35,7 @@
       target="_blank"
       class="hover:underline"
       rel="noreferrer"
-      href="https://github.com/jacob-8/learn.polylingual.dev/tree/main/{exercise.dir}"
+      href="https://github.com/jacob-8/learn.polylingual.dev/tree/main/{stage.directory}"
     >
       <span class="i-codicon-edit" />
       Edit this page

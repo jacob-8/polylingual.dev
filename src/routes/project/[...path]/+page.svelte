@@ -1,19 +1,71 @@
 <script lang="ts">
+  import { browser } from '$app/environment';
   import type { PageData } from './$types';
   import { parseTree } from '$lib/content/parse-tree';
   import { updatedProjectsDirectory } from '$lib/content/hmrUpdatedContent';
   import { prepareLessonStages } from '$lib/content/prepare-lesson-stages';
+  import SplitPane from 'svelte-pieces/ui/SplitPane.svelte';
+  import Header from './Header.svelte';
+  import Sidebar from './Sidebar.svelte';
 
   export let data: PageData;
   $: projectsDirectory = $updatedProjectsDirectory || data.projectsDirectory;
   $: projects = parseTree(projectsDirectory);
   $: lesson = prepareLessonStages({ projects, project: data.project, lesson: data.lesson });
+
+  let width = browser ? window.innerWidth : 1000;
+  $: mobile = width < 768;
+  let mobile_view: 'tutorial' | 'editor' | 'preview' = 'tutorial';
 </script>
 
-{data.project}
-{data.lesson}
-{data.stage}
+<svelte:window bind:innerWidth={width} />
 
-<pre>{JSON.stringify(lesson, null, 2)}</pre>
-<pre>{JSON.stringify(projects, null, 2)}</pre>
-<pre>{JSON.stringify(projectsDirectory, null, 2)}</pre>
+<div class="flex h-full flex-col">
+  {#if mobile}
+    <Header>
+      <button
+        class="text-xs py-1 px-2 rounded"
+        class:bg-gray-300={mobile_view === 'tutorial'}
+        type="button"
+        on:click={() => (mobile_view = 'tutorial')}>Tutorial</button
+      >
+      <button
+        class="text-xs py-1 px-2 rounded"
+        class:bg-gray-300={mobile_view === 'editor'}
+        type="button"
+        on:click={() => (mobile_view = 'editor')}>Editor</button
+      >
+      <button
+        class="text-xs py-1 px-2 rounded"
+        class:bg-gray-300={mobile_view === 'preview'}
+        type="button"
+        on:click={() => (mobile_view = 'preview')}>Preview</button
+      >
+    </Header>
+  {/if}
+  <div class="h-[200px] grow">
+    <SplitPane pos={mobile ? (mobile_view === 'tutorial' ? 100 : 0) : 33} min={0}>
+      <section class="h-full border-r flex flex-col" slot="a">
+        {#if !mobile}<Header />{/if}
+        <Sidebar {projects} stage={lesson.stages[data.stage]} />
+      </section>
+      <section class="h-full" slot="b">
+        <SplitPane pos={mobile ? (mobile_view === 'editor' ? 100 : 0) : 50} type="vertical" min={0}>
+          <section class="h-full bg-black" slot="a">
+            <SplitPane pos={27}>
+              <section class="h-full flex flex-col border-r border-gray-500/50" slot="a">
+                filetree solve
+              </section>
+              <section class="bg-black h-full" slot="b">editor</section>
+            </SplitPane>
+          </section>
+          <section class="h-full" slot="b">
+            {#if browser}
+              stackblitz
+            {/if}
+          </section>
+        </SplitPane>
+      </section>
+    </SplitPane>
+  </div>
+</div>

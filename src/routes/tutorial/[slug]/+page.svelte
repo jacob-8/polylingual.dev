@@ -10,7 +10,7 @@
   import Filetree from '$lib/filetree/Filetree.svelte';
   import Stackblitz from '$lib/stackblitz/Stackblitz.svelte';
   import { prepareFilesForStackblitz } from '$lib/stackblitz/prepareFilesForStackblitz';
-  import Header from './Header.svelte';
+  import Header from '../../project/[...path]/Header.svelte';
   export let data: PageData;
 
   let path = data.exercise.path;
