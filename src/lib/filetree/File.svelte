@@ -1,6 +1,6 @@
 <script lang="ts">
   import type { Writable } from 'svelte/store';
-  import Item from '../Item.svelte';
+  import Item from './Item.svelte';
 
   export let selected: Writable<string>;
   export let directory: string;

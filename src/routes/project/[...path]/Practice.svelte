@@ -1,6 +1,6 @@
 <script lang="ts">
   import { browser } from '$app/environment';
-  import Explorer from '$lib/filetree/v2/Explorer.svelte';
+  import Explorer from '$lib/filetree/Explorer.svelte';
   import MonacoEditorScripts from '$lib/monaco/MonacoEditorScripts.svelte';
   import { DEFAULT_MONACO_OPTIONS } from '$lib/monaco/options';
   import Stackblitz from '$lib/stackblitz/Stackblitz.svelte';

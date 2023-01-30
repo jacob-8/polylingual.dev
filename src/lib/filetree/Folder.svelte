@@ -1,7 +1,7 @@
 <script lang="ts">
   import type { Tree } from '$lib/types';
   import type { Writable } from 'svelte/store';
-  import Item from '../Item.svelte';
+  import Item from './Item.svelte';
   import File from './File.svelte';
   export let tree: Tree;
   export let depth: number;

@@ -1,6 +1,6 @@
 <script lang="ts">
   export let basename = '';
-  $: ext = basename.split('.').pop();
+  $: ext = basename.split('.').pop() as string;
 </script>
 
 {#if ext === 'svelte'}
