@@ -1,5 +1,0 @@
----
-title: page
----
-
-> Coming soon

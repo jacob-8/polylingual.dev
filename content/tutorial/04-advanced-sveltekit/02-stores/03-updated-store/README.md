@@ -1,5 +1,0 @@
----
-title: updated
----
-
-> Coming soon

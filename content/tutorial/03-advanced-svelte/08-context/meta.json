@@ -1,9 +1,0 @@
-{
-	"title": "Context API",
-	"scope": {
-		"prefix": "/src/lib/",
-		"depth": 2,
-		"name": "src"
-	},
-	"focus": "/src/lib/App.svelte"
-}
