@@ -3,9 +3,9 @@
   import Item from './Item.svelte';
 
   export let selected: Writable<string>;
-  export let directory: string;
+  export let directoryPath: string;
   export let name: string;
-  $: path = directory + '/' + name;
+  $: path = directoryPath + '/' + name;
   $: isSelected = $selected === path;
 </script>
 

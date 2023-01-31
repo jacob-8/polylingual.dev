@@ -38,7 +38,11 @@ export function prepareLessonStages({ projects, project, lesson }: { projects: R
 export function parseStepsFiles(steps_files: Record<string, string>): StepsByFilename {
   const stepsByFilename: StepsByFilename = {};
   for (const [filename, content] of Object.entries(steps_files)) {
-    stepsByFilename[filename] = parseSnapshots(content);
+    try {
+      stepsByFilename[filename] = parseSnapshots(content);
+    } catch (err) {
+      console.warn(`Error parsing steps file ${filename}: ${err}`)
+    }
   }
   return stepsByFilename;
 }

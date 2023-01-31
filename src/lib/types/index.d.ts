@@ -64,6 +64,11 @@ export interface Tree {
   [folderOrFilename: string]: Tree | string;
 }
 
+export interface Directory {
+  directories: Record<string, Directory>;
+  filenames: string[];
+}
+
 export interface StageFiles {
   [path: string]: string;
 }

@@ -16,9 +16,9 @@ Projects live inside `projects`. Each project has a lesson consisting of stages 
 
 ## TODO before first lesson
 
-- fix build errors
-- use svelte-markdown
+- remove unneeded packages
 - write first lesson
+
 - add i18n
 - handle multilingual :zh markers in content
 - update error page

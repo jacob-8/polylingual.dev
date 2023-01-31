@@ -33,7 +33,7 @@ describe('prepareLessonStages', () => {
               "src/b.txt": "I'm shared by all lessons in this project.",
               "src/c.txt": "I'm shared by all projects and should show up.",
               "src/routes/+page.svelte": "<script lang=\\"ts\\">
-      	import '../global__普.css';
+      	// import '../global__普.css';
       </script>
 
       <div style=\\"display: flex; flex-direction: column; height: 100%;\\">
@@ -80,7 +80,7 @@ describe('prepareLessonStages', () => {
 
       --diff-border--
       <script lang=\\"ts\\">
-      	import '../global__普.css';
+      	// import '../global__普.css';
       </script>
       \`\`\`  
 
@@ -88,11 +88,11 @@ describe('prepareLessonStages', () => {
 
       \`\`\`diff
       <script lang=\\"ts\\">
-      	import '../global__普.css';
+      	// import '../global__普.css';
       </script>
       --diff-border--
       <script lang=\\"ts\\">
-      	import '../global__普.css';
+      	// import '../global__普.css';
       </script>
 
       <div style=\\"display: flex; flex-direction: column; height: 100%;\\">
@@ -103,9 +103,7 @@ describe('prepareLessonStages', () => {
       ",
             "meta": {
               "scope": {
-                "depth": 0,
-                "name": "project",
-                "prefix": "/",
+                "directory": "src",
               },
             },
             "next_stage_location": {
@@ -123,7 +121,7 @@ describe('prepareLessonStages', () => {
               "src/b.txt": "I'm shared by all lessons in this project.",
               "src/c.txt": "I'm shared by all projects and should show up.",
               "src/routes/+page.svelte": "<script lang=\\"ts\\">
-      	import '../global.css';
+      	// import '../global.css';
       </script>
 
       <div class=\\"simplify\\">
@@ -138,7 +136,7 @@ describe('prepareLessonStages', () => {
               "src/b.txt": "I'm shared by all lessons in this project.",
               "src/c.txt": "I'm shared by all projects and should show up.",
               "src/routes/+page.svelte": "<script lang=\\"ts\\">
-      	import '../global__普.css';
+      	// import '../global__普.css';
       </script>
 
       <div style=\\"display: flex; flex-direction: column; height: 100%;\\">
@@ -162,14 +160,14 @@ describe('prepareLessonStages', () => {
 
       \`\`\`diff
       <script lang=\\"ts\\">
-      	import '../global__普.css';
+      	// import '../global__普.css';
       </script>
 
       <div style=\\"display: flex; flex-direction: column; height: 100%;\\">
       </div>
       --diff-border--
       <script lang=\\"ts\\">
-      	import '../global.css';
+      	// import '../global.css';
       </script>
 
       <div class=\\"simplify\\">
@@ -177,9 +175,7 @@ describe('prepareLessonStages', () => {
       \`\`\`",
             "meta": {
               "scope": {
-                "depth": 0,
-                "name": "project",
-                "prefix": "/",
+                "directory": "src",
               },
             },
             "next_stage_location": {
@@ -201,7 +197,7 @@ describe('prepareLessonStages', () => {
               "src/b.txt": "I'm shared by all lessons in this project.",
               "src/c.txt": "I'm shared by all projects and should show up.",
               "src/routes/+page.svelte": "<script lang=\\"ts\\">
-      	import '../global.css';
+      	// import '../global.css';
       </script>
 
       <div class=\\"simplify\\">
@@ -216,7 +212,7 @@ describe('prepareLessonStages', () => {
               "src/b.txt": "I'm shared by all lessons in this project.",
               "src/c.txt": "I'm shared by all projects and should show up.",
               "src/routes/+page.svelte": "<script lang=\\"ts\\">
-      	import '../global.css';
+      	// import '../global.css';
       </script>
 
       <div class=\\"simplify\\">
@@ -247,9 +243,7 @@ describe('prepareLessonStages', () => {
       And some **markdown** that will turn into html",
             "meta": {
               "scope": {
-                "depth": 0,
-                "name": "project",
-                "prefix": "/",
+                "directory": "src",
               },
             },
             "next_stage_location": {
@@ -272,11 +266,11 @@ describe('prepareLessonStages', () => {
 
       --02----------
       <script lang=\\"ts\\">
-      	import '../global__普.css';
+      	// import '../global__普.css';
       </script>
       --03----------
       <script lang=\\"ts\\">
-      	import '../global__普.css';
+      	// import '../global__普.css';
       </script>
 
       <div style=\\"display: flex; flex-direction: column; height: 100%;\\">
@@ -284,7 +278,7 @@ describe('prepareLessonStages', () => {
 
       --04----------
       <script lang=\\"ts\\">
-      	import '../global.css';
+      	// import '../global.css';
       </script>
 
       <div class=\\"simplify\\">

@@ -1,7 +1,7 @@
 <script lang="ts">
-  // import MonacoDiffEditor from '$lib/monaco/MonacoDiffEditor.svelte';
   import type { Stage } from '$lib/types';
   import { createEventDispatcher } from 'svelte';
+  import Markdown from '../../../lib/markdown/Markdown.svelte';
   export let stage: Stage;
   const dispatch = createEventDispatcher<{ selected: string }>();
 
@@ -29,24 +29,16 @@
   }
 
   function respond_to_file_name_clicked(e: MouseEvent) {
-    const node = e.target as HTMLElement;
+    // const node = e.target as HTMLElement;
 
-    if (node.nodeName === 'CODE') {
-      const { file: filename } = node.dataset;
-      dispatch('selected', filename);
-    }
+    // if (node.nodeName === 'CODE') {
+    //   const { file: filename } = node.dataset;
+    //   dispatch('selected', filename);
+    // }
   }
 </script>
 
-<!-- <div class="h-400px">
-  <MonacoDiffEditor
-    original={"hello to the world!\n\nhi there!\n\n"}
-    modified={"hello world\n\n!"}
-    options={{ renderSideBySide: true }}
-  />
-</div> -->
-
 <!-- svelte-ignore a11y-click-events-have-key-events -->
-<div class="tw-prose" on:click={respond_to_file_name_clicked} on:copy={encourage_not_to_copy}>
-  {stage.markdown_with_steps}
+<div class="tw-prose max-w-full" on:click={respond_to_file_name_clicked} on:copy={encourage_not_to_copy}>
+  <Markdown markdown={stage.markdown_with_steps || ''} />
 </div>

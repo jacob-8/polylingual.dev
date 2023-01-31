@@ -1,14 +1,16 @@
 reTypewriter Snapshots v1
 
 --01----------
+<h1>歡迎上課！ 這是邊做邊學的地方。</h1>
+<h2>Welcome to the lesson! Here is where we learn by doing.</h2>
 
 --02----------
 <script lang="ts">
-  // import '../global__普.css';
+  import '../global__普.css';
 </script>
 --03----------
 <script lang="ts">
-  // import '../global__普.css';
+  import '../global__普.css';
 </script>
 
 <div style="display: flex; flex-direction: column; height: 100%;">
@@ -22,7 +24,7 @@ reTypewriter Snapshots v1
 </div>
 --04----------
 <script lang="ts">
-  // import '../global__普.css';
+  import '../global__普.css';
 </script>
 
 <div style="display: flex; flex-direction: column; height: 100%;">
@@ -39,7 +41,7 @@ reTypewriter Snapshots v1
 
 --05----------
 <script lang="ts">
-  // import '../global__普.css';
+  import '../global__普.css';
   import swords_and_shields__矛盾 from './data/swords_and_shields__矛盾.json';
   import ClassicalText__文言文本 from './ClassicalText.svelte';
 </script>
@@ -60,7 +62,7 @@ reTypewriter Snapshots v1
 
 --06----------
 <script lang="ts">
-  // import '../global__普.css';
+  import '../global__普.css';
   import swords_and_shields__矛盾 from './data/swords_and_shields__矛盾.json';
   import ClassicalText__文言文本 from './ClassicalText.svelte';
   import ReadClipboard__讀剪貼板 from './ReadClipboard__讀剪貼板.svelte';
@@ -84,7 +86,7 @@ reTypewriter Snapshots v1
 
 --07----------
 <script lang="ts">
-  // import '../global__普.css';
+  import '../global__普.css';
   import swords_and_shields__矛盾 from './data/swords_and_shields__矛盾.json';
   import ClassicalText__文言文本 from './ClassicalText.svelte';
   import ReadClipboard__讀剪貼板 from './ReadClipboard__讀剪貼板.svelte';
@@ -109,7 +111,7 @@ reTypewriter Snapshots v1
 
 --08----------
 <script lang="ts">
-  // import '../global__普.css';
+  import '../global__普.css';
   import swords_and_shields__矛盾 from './data/swords_and_shields__矛盾.json';
   import ClassicalText__文言文本 from './ClassicalText.svelte';
   import ReadClipboard__讀剪貼板 from './ReadClipboard__讀剪貼板.svelte';

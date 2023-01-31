@@ -43,7 +43,7 @@
   <section class="h-full bg-black" slot="a">
     <SplitPane pos={27} max={100}>
       <section class="h-full flex flex-col border-r border-gray-500/50" slot="a">
-        <Explorer directory={stage.meta.scope.directory} files={$files} {selected} />
+        <Explorer directoryPath={stage.meta.scope.directory} files={$files} {selected} />
 
         <button
           class:bg-gray-500={completed}

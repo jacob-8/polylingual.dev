@@ -1,0 +1,23 @@
+<script lang="ts">
+	import '../global__普.css';
+	import swords_and_shields__矛盾 from './data/swords_and_shields__矛盾.json';
+	import ClassicalText__文言文本 from './ClassicalText.svelte';
+	import ReadClipboard__讀剪貼板 from './ReadClipboard__讀剪貼板.svelte';
+	import ClassicalDefinitions__文言文定義 from './ClassicalDefinitions__文言文定義.svelte';
+</script>
+
+<div style="display: flex; flex-direction: column; height: 100%;">
+	<div style="height: 50%; overflow-y: auto;">
+		<h3 style="text-align: center;" class="chinese-font__中文字體">
+			Language Learning Reader__語言學習閱讀器
+		</h3>
+
+		<ClassicalText__文言文本 sentences__句子數組={swords_and_shields__矛盾} />
+	</div>
+
+	<div style="height: 50%; overflow-y: auto; padding: 1rem; border-top: 1px dashed gray;">
+		<ReadClipboard__讀剪貼板 let:text__字符串>
+			<ClassicalDefinitions__文言文定義 {text__字符串} />
+		</ReadClipboard__讀剪貼板>
+	</div>
+</div>

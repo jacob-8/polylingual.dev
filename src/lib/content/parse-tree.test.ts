@@ -51,6 +51,11 @@ describe('parseTree', () => {
 
       And some more prose.
       ",
+                  "meta": {
+                    "scope": {
+                      "directory": "src",
+                    },
+                  },
                   "next_stage_location": {
                     "lesson": "01-first-lesson",
                     "name": "02-simplfy-into-class",
@@ -73,6 +78,11 @@ describe('parseTree', () => {
                   "markdown": "I have frontmatter with a comment and here we are going to simplify the styles into a class:
 
       [[src/routes/+page.svelte#04]]",
+                  "meta": {
+                    "scope": {
+                      "directory": "src",
+                    },
+                  },
                   "next_stage_location": {
                     "lesson": "01-first-lesson",
                     "name": "03-another",
@@ -102,6 +112,11 @@ describe('parseTree', () => {
       # I have empty frontmatter
 
       And some **markdown** that will turn into html",
+                  "meta": {
+                    "scope": {
+                      "directory": "src",
+                    },
+                  },
                   "next_stage_location": {
                     "lesson": "02-second-lesson",
                     "name": "01-introduction",
@@ -122,11 +137,11 @@ describe('parseTree', () => {
 
       --02----------
       <script lang=\\"ts\\">
-      	import '../global__普.css';
+      	// import '../global__普.css';
       </script>
       --03----------
       <script lang=\\"ts\\">
-      	import '../global__普.css';
+      	// import '../global__普.css';
       </script>
 
       <div style=\\"display: flex; flex-direction: column; height: 100%;\\">
@@ -134,7 +149,7 @@ describe('parseTree', () => {
 
       --04----------
       <script lang=\\"ts\\">
-      	import '../global.css';
+      	// import '../global.css';
       </script>
 
       <div class=\\"simplify\\">
@@ -166,6 +181,11 @@ describe('parseTree', () => {
                     "project": "01-first-project",
                   },
                   "markdown": "1st project, 2nd lesson, 1st stage; no frills",
+                  "meta": {
+                    "scope": {
+                      "directory": "src",
+                    },
+                  },
                   "next_stage_location": {
                     "lesson": "01-first-lesson-in-2nd-project",
                     "name": "01-2nd-project-1st-lesson-1st-stage",
@@ -184,9 +204,7 @@ describe('parseTree', () => {
           },
           "meta": {
             "scope": {
-              "depth": 0,
-              "name": "project",
-              "prefix": "/",
+              "directory": "src",
             },
           },
           "name": "01-first-project",
@@ -214,6 +232,11 @@ describe('parseTree', () => {
                     "project": "02-second-project",
                   },
                   "markdown": "I'm the first stage in the 2nd project's first lesson.",
+                  "meta": {
+                    "scope": {
+                      "directory": "src",
+                    },
+                  },
                   "next_stage_location": null,
                   "previous_stage_location": {
                     "lesson": "02-second-lesson",
@@ -228,9 +251,7 @@ describe('parseTree', () => {
           },
           "meta": {
             "scope": {
-              "depth": 1,
-              "name": "src",
-              "prefix": "/src/",
+              "directory": "src",
             },
           },
           "name": "02-second-project",

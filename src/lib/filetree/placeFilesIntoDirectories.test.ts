@@ -1,129 +1,162 @@
-import type { Tree } from "$lib/types";
-import { extractDirectoriesFromFilepath, placeFilesIntoDirectories, zoomIntoScope } from "./placeFilesIntoDirectories";
+import type { Directory } from "$lib/types";
+import { extractDirectoryNamesFromFilepath, placeFilesIntoDirectories, zoomIntoScope } from "./placeFilesIntoDirectories";
 
-describe('placeFilesIntoDirectories', () => {
-  const files: Record<string, string> = {
-    "package.txt": "root level",
-    "src/a.txt": "a",
-    "src/b.txt": "b",
-    "src/folder/c.txt": "c",
-    "src/folder/another/d.txt": "d",
-    "src/routes/+page.svelte": "route file",
-  }
-  test('receives files and passes back the same', () => {
-    expect(placeFilesIntoDirectories(files)).toMatchInlineSnapshot(`
-      {
-        "package.txt": "root level",
-        "src": {
-          "a.txt": "a",
-          "b.txt": "b",
-          "folder": {
-            "another": {
-              "d.txt": "d",
-            },
-            "c.txt": "c",
-          },
-          "routes": {
-            "+page.svelte": "route file",
+const expectedDirectories: Directory = {
+  filenames: ['package.json'],
+  directories: {
+    'src': {
+      directories: {
+        'folder': {
+          filenames: ['c.txt'],
+          directories: {
+            'another': {
+              filenames: ['d.txt'],
+              directories: {},
+            }
           },
         },
-      }
-    `);
+        'routes': {
+          filenames: ['+page.svelte'],
+          directories: {},
+        }
+      },
+      filenames: ['a.txt', 'b.txt'],
+    },
+  },
+}
+
+describe('placeFilesIntoDirectories', () => {
+  test('transforms files into a directory', () => {
+    const files: Record<string, string> = {
+      "package.json": "root level",
+      "src/a.txt": "a",
+      "src/b.txt": "b",
+      "src/folder/c.txt": "c",
+      "src/folder/another/d.txt": "d",
+      "src/routes/+page.svelte": "route file",
+    }
+    expect(placeFilesIntoDirectories(files)).toEqual(expectedDirectories)
   });
-
-  // a file needs to be named by it's name but emit it's path when clicked (should that be calculated here or just a passed in property?)
-
-  // heeds depth by hiding outer directories
 });
 
-describe('extractDirectoriesFromFilepath', () => {
+describe('extractDirectoryNamesFromFilepath', () => {
   test('return object with directories and name', () => {
     const filepath = 'src/a/b/c.txt';
     const expected = {
-      "directories": ['src', 'a', 'b'],
-      "name": 'c.txt'
+      "directoryNames": ['src', 'a', 'b'],
+      "filename": 'c.txt'
     }
-    expect(extractDirectoriesFromFilepath(filepath)).toStrictEqual(expected);
+    expect(extractDirectoryNamesFromFilepath(filepath)).toStrictEqual(expected);
   });
   test('returns empty directories array if root level', () => {
-    expect(extractDirectoriesFromFilepath('root.txt')).toStrictEqual({
-      "directories": [],
-      "name": 'root.txt'
+    expect(extractDirectoryNamesFromFilepath('root.txt')).toStrictEqual({
+      "directoryNames": [],
+      "filename": 'root.txt'
     });
   });
 });
 
 describe('zoomIntoScope', () => {
-  const tree: Tree = {
-    "package.txt": "root level",
-    "src": {
-      "a.txt": "a",
-      "b.txt": "b",
-      "folder": {
-        "another": {
-          "d.txt": "d",
-        },
-        "c.txt": "c",
-      },
-      "routes": {
-        "+page.svelte": "route file",
-      },
-    },
-  }
   test('2 folders zoomed', () => {
-    expect(zoomIntoScope(tree, 'src/folder')).toMatchInlineSnapshot(`
-    {
-      "another": {
-        "d.txt": "d",
-      },
-      "c.txt": "c",
-    }
+    expect(zoomIntoScope(expectedDirectories, 'src/folder')).toMatchInlineSnapshot(`
+      {
+        "directories": {
+          "another": {
+            "directories": {},
+            "filenames": [
+              "d.txt",
+            ],
+          },
+        },
+        "filenames": [
+          "c.txt",
+        ],
+      }
     `);
   });
   test('trailing slash makes no difference', () => {
-    expect(zoomIntoScope(tree, 'src/folder/')).toMatchInlineSnapshot(`
+    expect(zoomIntoScope(expectedDirectories, 'src/folder/')).toMatchInlineSnapshot(`
       {
-        "another": {
-          "d.txt": "d",
+        "directories": {
+          "another": {
+            "directories": {},
+            "filenames": [
+              "d.txt",
+            ],
+          },
         },
-        "c.txt": "c",
+        "filenames": [
+          "c.txt",
+        ],
       }
     `);
   });
   test('1 folder zoomed (src is default)', () => {
-    expect(zoomIntoScope(tree, 'src')).toMatchInlineSnapshot(`
+    expect(zoomIntoScope(expectedDirectories, 'src')).toMatchInlineSnapshot(`
       {
-        "a.txt": "a",
-        "b.txt": "b",
-        "folder": {
-          "another": {
-            "d.txt": "d",
+        "directories": {
+          "folder": {
+            "directories": {
+              "another": {
+                "directories": {},
+                "filenames": [
+                  "d.txt",
+                ],
+              },
+            },
+            "filenames": [
+              "c.txt",
+            ],
           },
-          "c.txt": "c",
+          "routes": {
+            "directories": {},
+            "filenames": [
+              "+page.svelte",
+            ],
+          },
         },
-        "routes": {
-          "+page.svelte": "route file",
-        },
+        "filenames": [
+          "a.txt",
+          "b.txt",
+        ],
       }
     `);
   });
   test('no zoom, root folder', () => {
-    expect(zoomIntoScope(tree, '')).toMatchInlineSnapshot(`
+    expect(zoomIntoScope(expectedDirectories, '')).toMatchInlineSnapshot(`
       {
-        "package.txt": "root level",
-        "src": {
-          "a.txt": "a",
-          "b.txt": "b",
-          "folder": {
-            "another": {
-              "d.txt": "d",
+        "directories": {
+          "src": {
+            "directories": {
+              "folder": {
+                "directories": {
+                  "another": {
+                    "directories": {},
+                    "filenames": [
+                      "d.txt",
+                    ],
+                  },
+                },
+                "filenames": [
+                  "c.txt",
+                ],
+              },
+              "routes": {
+                "directories": {},
+                "filenames": [
+                  "+page.svelte",
+                ],
+              },
             },
-            "c.txt": "c",
-          },
-          "routes": {
-            "+page.svelte": "route file",
+            "filenames": [
+              "a.txt",
+              "b.txt",
+            ],
           },
         },
+        "filenames": [
+          "package.json",
+        ],
       }
     `);
   });

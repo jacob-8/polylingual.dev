@@ -34,16 +34,15 @@
     editor = monaco.editor.createDiffEditor(container, {
       ...options,
       lineNumbersMinChars: 2,
+      automaticLayout: true,
       scrollBeyondLastLine: false,
       scrollbar: {
         alwaysConsumeMouseWheel: false,
-        // verticalScrollbarSize: 0,
-        // horizontalScrollbarSize: 0,
-        // useShadows: false,
       },
       readOnly: true,
       renderOverviewRuler: false,
-      // diffCodeLens: true,
+      wordWrap: 'on',
+      wrappingIndent: 'same',
     });
 
     editor.setModel({

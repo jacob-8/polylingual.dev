@@ -1,0 +1,16 @@
+html, body {
+  padding: 0;
+  margin: 0;
+  height: 100%;
+}
+
+.chinese-font__中文字體 {
+  font-family: 'biao_kaiti_windows', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI',
+    Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji',
+    'Segoe UI Emoji', 'Segoe UI Symbol';
+}
+
+@font-face {
+  font-family: 'biao_kaiti_windows';
+  src: url('https://learn.polylingual.dev/fonts/biao_kaiti_windows.ttf') format('truetype');
+}

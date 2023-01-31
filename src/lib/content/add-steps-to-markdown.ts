@@ -1,5 +1,8 @@
 import MagicString from 'magic-string';
 import type { StepsByFilename } from "$lib/types";
+
+export const DIFF_BORDER = '--diff-border--';
+
 const CAPTURE_FILENAME = '(.+?)';
 const CAPTURE_SNAPSHOT_NUMBER = '(\\d{2})';
 const STEP_REFERENCE_MATCHER = new RegExp(`\\[\\[${CAPTURE_FILENAME}#${CAPTURE_SNAPSHOT_NUMBER}\\]\\]`, 'g');
@@ -21,7 +24,7 @@ export function addStepsToMarkdown({ markdown, stepsByFilename }: { markdown: st
 
     const diffBlock = `\`\`\`diff
 ${previousState}
---diff-border--
+${DIFF_BORDER}
 ${currentState}
 \`\`\``
     markdown_with_steps.update(startOfMatch, startOfMatch + referenceLength, diffBlock)

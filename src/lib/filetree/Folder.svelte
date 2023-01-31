@@ -1,21 +1,18 @@
 <script lang="ts">
-  import type { Tree } from '$lib/types';
+  import type { Directory } from '$lib/types';
   import type { Writable } from 'svelte/store';
   import Item from './Item.svelte';
   import File from './File.svelte';
-  export let tree: Tree;
+  export let directory: Directory;
   export let depth: number;
   export let name: string;
   export let expanded: boolean;
   export let selected: Writable<string>;
-  export let directory: string;
-
-  $: child_directories = Object.entries(tree).filter(([name, child]) => typeof child !== 'string');
-  $: child_files = Object.entries(tree).filter(([name, child]) => typeof child === 'string');
+  export let directoryPath: string;
 
   $: openFolderOfSelected($selected);
   function openFolderOfSelected(selected: string) {
-    if (selected.startsWith(directory)) {
+    if (selected.startsWith(directoryPath)) {
       expanded = true;
     }
   }
@@ -45,20 +42,20 @@
 
 {#if expanded}
   <ul style="--depth: {depth + 1}">
-    {#each child_directories as [child_name, child_tree]}
+    {#each Object.entries(directory.directories) as [name, subdirectory]}
       <li>
         <svelte:self
-          tree={child_tree}
+          directory={subdirectory}
           depth={depth + 1}
-          directory={`${directory}/${child_name}`}
-          name={child_name}
+          directoryPath={`${directoryPath}/${name}`}
+          {name}
           {selected}
         />
       </li>
     {/each}
-    {#each child_files as [child_name]}
+    {#each directory.filenames as name}
       <li>
-        <File name={child_name} {directory} {selected} />
+        <File {name} {directoryPath} {selected} />
       </li>
     {/each}
   </ul>
