@@ -1,53 +1,42 @@
 import type { StageFiles } from "$lib/types";
 
-export function pathsInFinishNotExisting(current: StageFiles, finish: StageFiles): string[] {
-  const currentPaths = Object.keys(current);
-  const finishPaths = Object.keys(finish);
-  const missingPaths = finishPaths.filter((path) => !currentPaths.includes(path));
-  return missingPaths
+export function filesNotInTarget({ take, compareTo }: { take: StageFiles, compareTo: StageFiles }): string[] {
+  const given = Object.keys(take);
+  const goal = Object.keys(compareTo);
+  const shortFall = goal.filter((path) => !given.includes(path));
+  return shortFall
 }
 
 if (import.meta.vitest) {
-  describe('pathsInFinishNotExisting', () => {
-    test('return missing filepath', () => {
+  describe('filesNotInTarget', () => {
+    test('returns missing filepath when calculating add for finish', () => {
       const current = { 'a.txt': '' };
       const finish = { 'a.txt': '', 'b.txt': '' };
-      expect(pathsInFinishNotExisting(current, finish)).toEqual(['b.txt']);
+      expect(filesNotInTarget({ take: current, compareTo: finish })).toEqual(['b.txt']);
     });
-    
-    test('handles empty finish', () => {
+
+    test('handles empty finish when calculating add', () => {
       const current = { 'a.txt': '' };
-      const finish = { };
-      expect(pathsInFinishNotExisting(current, finish)).toEqual([]);
+      const finish = {};
+      expect(filesNotInTarget({ take: current, compareTo: finish })).toEqual([]);
     });
-  });
-}
 
-export function currentPathsNotInFinish(current: StageFiles, finish: StageFiles): string[] {
-  const currentPaths = Object.keys(current);
-  const finishPaths = Object.keys(finish);
-  const extraPaths = currentPaths.filter((path) => !finishPaths.includes(path));
-  return extraPaths
-}
-
-if (import.meta.vitest) {
-  describe('currentPathsNotInFinish', () => {
-    test('return extra filepath', () => {
+    test('returns extra filepath when calculating delete', () => {
       const current = { 'a.txt': '', 'b.txt': '' };
       const finish = { 'a.txt': '' };
-      expect(currentPathsNotInFinish(current, finish)).toEqual(['b.txt']);
+      expect(filesNotInTarget({ take: finish, compareTo: current })).toEqual(['b.txt']);
     });
-    
-    test('handles empty finish', () => {
+
+    test('handles empty finish when calculating delete', () => {
       const current = { 'a.txt': '' };
-      const finish = { };
-      expect(currentPathsNotInFinish(current, finish)).toEqual(['a.txt']);
+      const finish = {};
+      expect(filesNotInTarget({ take: finish, compareTo: current })).toEqual(['a.txt']);
     });
-    
-    test('handles nothing to delete', () => {
-      const current = { };
+
+    test('handles nothing to delete (empty beginning)', () => {
+      const current = {};
       const finish = { 'a.txt': '' };
-      expect(currentPathsNotInFinish(current, finish)).toEqual([]);
+      expect(filesNotInTarget({ take: finish, compareTo: current })).toEqual([]);
     });
   });
 }

@@ -1,7 +1,7 @@
 <script lang="ts">
   import type { Stage } from '$lib/types';
   import { createEventDispatcher } from 'svelte';
-  import Markdown from '../../../lib/markdown/Markdown.svelte';
+  import Markdown from '$lib/markdown/Markdown.svelte';
   export let stage: Stage;
   const dispatch = createEventDispatcher<{ selected: string }>();
 

@@ -22,7 +22,7 @@ export function addStepsToMarkdown({ markdown, stepsByFilename }: { markdown: st
     const currentState = stepsByFilename[filename][convertNumberToTwoDigitString(stepNumber)];
     const previousState = stepsByFilename[filename][convertNumberToTwoDigitString(previousStepNumber)];
 
-    const diffBlock = `\`\`\`diff
+    const diffBlock = `\`\`\`diff file="${filename}"
 ${previousState}
 ${DIFF_BORDER}
 ${currentState}

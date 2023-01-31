@@ -1,8 +1,8 @@
 ---
-# initial_url: /hello
+initial_url: /hello
 file_to_focus: /src/routes/+page.svelte
 ---
 
-Here we started building...
+Add text
 
 [[src/routes/ClassicalDefinitions__文言文定義.svelte#02]]

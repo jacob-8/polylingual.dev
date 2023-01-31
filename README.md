@@ -21,6 +21,8 @@ Projects live inside `projects`. Each project has a lesson consisting of stages 
 - write prose for stages
 - add i18n
 - handle multilingual :zh markers in content
+- adjust prose styles
+- pretty print stage titles
 - update error page
 
 ## After first lesson
@@ -29,6 +31,7 @@ Projects live inside `projects`. Each project has a lesson consisting of stages 
 - update URL of Stackblitz vm if possible
 - use updated UnoCSS w/ web fonts and typography
 - flesh out how to how to make progression actionable with a click (especially add and remove files or rename)
+- fork retypewriter and start from 00 so first step is 01
 - use Svelte inspector by catching message from iframe and opening applicable file in the editor
 
 ## Stackblitz Embedded Environment Notes

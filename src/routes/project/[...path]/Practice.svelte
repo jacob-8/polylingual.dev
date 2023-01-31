@@ -8,7 +8,7 @@
   import { DEFAULT_MONACO_OPTIONS } from '$lib/monaco/options';
   import Stackblitz from '$lib/stackblitz/Stackblitz.svelte';
   import { objectsAreSame } from './helpers/objectsAreSame';
-  import { currentPathsNotInFinish, pathsInFinishNotExisting } from './helpers/pathsInFinishNotExisting';
+  import { filesNotInTarget } from './helpers/pathsInFinishNotExisting';
 
   export let stage: Stage;
   export let mobile: boolean;
@@ -29,8 +29,8 @@
   }
 
   $: completed = objectsAreSame($files, stage.app_finish);
-  $: can_add_paths = pathsInFinishNotExisting($files, stage.app_finish);
-  // $: can_remove_paths = currentPathsNotInFinish($files, stage.app_finish); // will not work until we can scan last step of stepfiles to see which files to remove from app_finish
+  $: can_add_paths = filesNotInTarget({ take: $files, compareTo: stage.app_finish });
+  // $: can_remove_paths = filesNotInTarget({ take: stage.app_finish, compareTo: $files }); // will not work until we can scan last step of stepfiles to see which files to remove from app_finish
 
   function toggle_solution() {
     if (completed) {
@@ -48,18 +48,20 @@
       <section class="h-full flex flex-col border-r border-gray-500/50" slot="a">
         <Explorer directoryPath={stage.meta.scope.directory} {files} {selected} {can_add_paths} />
 
-        <button
-          class:bg-gray-500={completed}
-          on:click={toggle_solution}
-          class="bg-blue text-white p-2 text-lg"
-        >
-          {#if completed}
-            reset
-          {:else}
-            solve
-            <span class="i-carbon-arrow-right" />
-          {/if}
-        </button>
+        {#if !objectsAreSame(stage.app_start, stage.app_finish)}
+          <button
+            class:bg-gray-500={completed}
+            on:click={toggle_solution}
+            class="bg-blue text-white p-2 text-lg"
+          >
+            {#if completed}
+              reset
+            {:else}
+              solve
+              <span class="i-carbon-arrow-right" />
+            {/if}
+          </button>
+        {/if}
       </section>
       <section class="bg-black h-full" slot="b">
         <MonacoEditorScripts

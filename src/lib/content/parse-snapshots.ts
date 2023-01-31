@@ -1,10 +1,10 @@
-const newline = '\r?\n'
-const SNAP_HEADING = 'reTypewriter Snapshots v1'
-const SNAP_SEPERATOR_PRE = '-'.repeat(2)
-const SNAP_CAPTURE_NUMBER = '(\\d{2})'
-const SNAP_SEPERATOR_POST = '-'.repeat(10)
-const SNAP_SEPERATOR_MATCHER = new RegExp(`${newline}?${SNAP_SEPERATOR_PRE}${SNAP_CAPTURE_NUMBER}${SNAP_SEPERATOR_POST}${newline}`, 'g')
-const SNAP_END = '-'.repeat(14)
+const newline = '\r?\n';
+const SNAP_HEADING = 'reTypewriter Snapshots v1';
+const SNAP_SEPERATOR_PRE = '-'.repeat(2);
+const SNAP_CAPTURE_NUMBER = '(\\d{2})';
+const SNAP_SEPERATOR_POST = '-'.repeat(10);
+const SNAP_SEPERATOR_MATCHER = new RegExp(`${newline}?${SNAP_SEPERATOR_PRE}${SNAP_CAPTURE_NUMBER}${SNAP_SEPERATOR_POST}${newline}`, 'g');
+const SNAP_END = '-'.repeat(14);
 
 export function parseSnapshots(raw: string): Record<string, string> {
   if (!raw.startsWith(SNAP_HEADING))
@@ -23,5 +23,5 @@ export function parseSnapshots(raw: string): Record<string, string> {
     snapshots[match[1]] = body
   })
 
-  return snapshots
+  return snapshots;
 }

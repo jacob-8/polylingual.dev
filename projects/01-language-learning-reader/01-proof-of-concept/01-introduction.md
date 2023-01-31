@@ -1,12 +1,6 @@
-Explain what we're going to do:
-
-[[src/global__普.css#02]]
-
-[[src/routes/+page.svelte#02]]  
-
-And then
-
-[[src/routes/+page.svelte#03]]  
+---
+file_to_focus: src/routes/+page.svelte
+---
 
 Building a web application is like building a house. We must determine our goal and start with the **end** 目的 in mind. 
 - What would we like to build?
