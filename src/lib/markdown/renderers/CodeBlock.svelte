@@ -11,7 +11,7 @@
     <MonacoDiffEditor
       original={original.trim()}
       modified={modified.trim()}
-      options={{ renderSideBySide: true }}
+      options={{ renderSideBySide: false }}
     />
   </div>
 {:else}

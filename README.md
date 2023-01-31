@@ -16,15 +16,23 @@ Projects live inside `projects`. Each project has a lesson consisting of stages 
 
 ## TODO before first lesson
 
-- remove unneeded packages
-- write first lesson
-
+- place steps into stages
+- auto-adjust diff height
+- write prose for stages
 - add i18n
 - handle multilingual :zh markers in content
 - update error page
 
 ## After first lesson
-- use updated UnoCSS w/ web fonts and typography
-- flesh out how to how to make progression through code easier as each exercise picks up from where the last left off; endstate is built up from the accumulation of instructed changes (each illustrated with a diff monaco editor) and actionable with a click
-- use Svelte inspector by catching message from iframe and opening applicable file in the editor
+- allow deleting files that end in an empty step
+  - scan last step of stepfiles to see which files to remove from app_finish and add remove buttons where appropriate
 - update URL of Stackblitz vm if possible
+- use updated UnoCSS w/ web fonts and typography
+- flesh out how to how to make progression actionable with a click (especially add and remove files or rename)
+- use Svelte inspector by catching message from iframe and opening applicable file in the editor
+
+## Stackblitz Embedded Environment Notes
+
+Since we have no control over the iframe permissions, clipboard read and writes can't be done programmatically. If the following could be set properly there's a chance it could be workable:
+- `<iframe src="..." allow="clipboard-read; clipboard-write"></iframe>`
+- `clipboard-read self ${URL}; clipboard-write self ${URL};`

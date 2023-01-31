@@ -1,6 +1,6 @@
-import type { Directory } from "$lib/types";
+import type { Directory, StageFiles } from "$lib/types";
 
-export function placeFilesIntoDirectories(files: Record<string, string>): Directory {
+export function placeFilesIntoDirectories(files: StageFiles): Directory {
   const rootDirectory: Directory = { directories: {}, filenames: [] };
 
   for (const filepath in files) {

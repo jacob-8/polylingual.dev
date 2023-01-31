@@ -1,13 +1,14 @@
 <script lang="ts">
+  import { writable } from 'svelte/store';
   import { browser } from '$app/environment';
+  import SplitPane from 'svelte-pieces/ui/SplitPane.svelte';
+  import type { Stage, StageFiles } from '$lib/types';
   import Explorer from '$lib/filetree/Explorer.svelte';
   import MonacoEditorScripts from '$lib/monaco/MonacoEditorScripts.svelte';
   import { DEFAULT_MONACO_OPTIONS } from '$lib/monaco/options';
   import Stackblitz from '$lib/stackblitz/Stackblitz.svelte';
-  import type { Stage, StageFiles } from '$lib/types';
-  import SplitPane from 'svelte-pieces/ui/SplitPane.svelte';
-  import { writable } from 'svelte/store';
-  import { filesObjectsAreSame } from './helpers/filesObjectsAreSame';
+  import { objectsAreSame } from './helpers/objectsAreSame';
+  import { currentPathsNotInFinish, pathsInFinishNotExisting } from './helpers/pathsInFinishNotExisting';
 
   export let stage: Stage;
   export let mobile: boolean;
@@ -18,7 +19,7 @@
 
   $: setup_stage(stage);
   function setup_stage(stage: Stage) {
-    $files = { ...stage.app_start };
+    $files = { ...stage.app_start }; // deep copy to avoid editing app_start when editing $files
     setFocus();
   }
 
@@ -27,7 +28,9 @@
     $selected = stage.file_to_focus || firstFile;
   }
 
-  $: completed = filesObjectsAreSame($files, stage.app_finish);
+  $: completed = objectsAreSame($files, stage.app_finish);
+  $: can_add_paths = pathsInFinishNotExisting($files, stage.app_finish);
+  // $: can_remove_paths = currentPathsNotInFinish($files, stage.app_finish); // will not work until we can scan last step of stepfiles to see which files to remove from app_finish
 
   function toggle_solution() {
     if (completed) {
@@ -43,7 +46,7 @@
   <section class="h-full bg-black" slot="a">
     <SplitPane pos={27} max={100}>
       <section class="h-full flex flex-col border-r border-gray-500/50" slot="a">
-        <Explorer directoryPath={stage.meta.scope.directory} files={$files} {selected} />
+        <Explorer directoryPath={stage.meta.scope.directory} {files} {selected} {can_add_paths} />
 
         <button
           class:bg-gray-500={completed}

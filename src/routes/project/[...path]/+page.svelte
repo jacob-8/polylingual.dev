@@ -17,7 +17,7 @@
 
   let width = browser ? window.innerWidth : 1000;
   $: mobile = width < 768;
-  let mobile_view: 'tutorial' | 'editor' | 'preview' = 'editor';
+  let mobile_view: 'tutorial' | 'editor' | 'preview' = 'tutorial';
 </script>
 
 <svelte:window bind:innerWidth={width} />
@@ -50,7 +50,6 @@
       <section class="h-full border-r flex flex-col" slot="a">
         {#if !mobile}<Header />{/if}
         <Sidebar {projects} {stage} />
-        <!-- on:selected={({ detail }) => console.log(`selected filename: ${detail}`)} -->
       </section>
       <section class="h-full" slot="b">
         <Practice {stage} {mobile} {mobile_view} />

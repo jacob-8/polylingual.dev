@@ -1,14 +1,18 @@
 <script lang="ts">
-  import type { Directory } from '$lib/types';
+  import { createEventDispatcher } from 'svelte';
   import type { Writable } from 'svelte/store';
+  import type { Directory } from '$lib/types';
   import Item from './Item.svelte';
   import File from './File.svelte';
+  import { directoryPathIncludesAddableFilepath } from './canAdd';
+
   export let directory: Directory;
   export let depth: number;
   export let name: string;
   export let expanded: boolean;
   export let selected: Writable<string>;
   export let directoryPath: string;
+  export let can_add_paths: string[];
 
   $: openFolderOfSelected($selected);
   function openFolderOfSelected(selected: string) {
@@ -17,12 +21,14 @@
     }
   }
 
-  // $: can_remove = directory.name ? !$endstate[directory.name] : false;
+  $: can_add = directoryPathIncludesAddableFilepath(directoryPath, can_add_paths);
 
-  // function add_file() {
-  //   const name = prompt('File name?');
-  //   if (name) add(prefix + name, 'file');
-  // }
+  const dispatch = createEventDispatcher<{ add: string }>();
+
+  function add_file() {
+    const name = prompt('File name?');
+    if (name) dispatch('add', `${directoryPath}/${name}`);
+  }
 </script>
 
 <div
@@ -30,13 +36,13 @@
   style="--depth: {depth};"
 >
   <Item {name} {expanded} isDirectory on:click={() => (expanded = !expanded)}>
-    <!-- <svelte:fragment slot="buttons">
-      {#if can_create.file}
+    <svelte:fragment slot="buttons">
+      {#if can_add}
         <button class="px-1 hover:bg-gray-500/25" aria-label="New File" on:click={add_file}
           ><span class="i-codicon-new-file" /></button
         >
       {/if}
-    </svelte:fragment> -->
+    </svelte:fragment>
   </Item>
 </div>
 
@@ -45,6 +51,8 @@
     {#each Object.entries(directory.directories) as [name, subdirectory]}
       <li>
         <svelte:self
+          on:add
+          {can_add_paths}
           directory={subdirectory}
           depth={depth + 1}
           directoryPath={`${directoryPath}/${name}`}
