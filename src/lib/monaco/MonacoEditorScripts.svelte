@@ -7,17 +7,11 @@
   import { vs_dark_plus } from './monaco-themes';
   import type { editor } from 'monaco-editor/esm/vs/editor/editor.api.js';
   import type { FileStub } from '$lib/types';
+  import { mapOfExtensionToLanguage } from './languages';
   export let stub: FileStub | null;
   export let options: editor.IStandaloneEditorConstructionOptions;
   let editor: editor.IStandaloneCodeEditor;
   let container: HTMLDivElement;
-
-  const mapOfExtensionToLanguage: Record<string, string> = {
-    js: 'javascript',
-    ts: 'typescript',
-    svelte: 'handlebars',
-    md: 'markdown', // TODO
-  };
 
   onMount(() => {
     let destroyed = false;

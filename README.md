@@ -17,7 +17,6 @@ Projects live inside `projects`. Each project has a lesson consisting of stages 
 ## TODO before first lesson
 
 - place steps into stages
-- auto-adjust diff height
 - write prose for stages
 - add i18n
 - handle multilingual :zh markers in content

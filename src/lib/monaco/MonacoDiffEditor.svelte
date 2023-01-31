@@ -6,12 +6,16 @@
   import { onMount } from 'svelte';
   import { vs_dark_plus } from './monaco-themes';
   import type { editor } from 'monaco-editor/esm/vs/editor/editor.api.js';
+  import { mapOfExtensionToLanguage } from './languages';
+
   export let original: string;
   export let modified: string;
   export let options: editor.IDiffEditorConstructionOptions;
-  let editor: editor.IStandaloneDiffEditor;
+  export let extension = 'html';
+
+  let diffEditor: editor.IStandaloneDiffEditor;
   let container: HTMLDivElement;
-  let language = 'html';
+  let heightPixels = 100;
 
   onMount(() => {
     let destroyed = false;
@@ -19,21 +23,23 @@
     import('./load-monaco-scripts').then(() => {
       if (destroyed) return;
       createEditor();
+      autoSetHeight();
     });
 
     return () => {
       destroyed = true;
-      editor?.dispose();
+      diffEditor?.dispose();
     };
   });
 
-  // https://github.com/microsoft/monaco-editor/issues/794 - autoheight
   function createEditor() {
     monaco.editor.defineTheme('vs-dark-plus', vs_dark_plus);
     monaco.editor.setTheme('vs-dark-plus');
-    editor = monaco.editor.createDiffEditor(container, {
+    diffEditor = monaco.editor.createDiffEditor(container, {
       ...options,
-      lineNumbersMinChars: 2,
+      // lineNumbersMinChars: 2,
+      // @ts-ignore
+      lineNumbers: false,
       automaticLayout: true,
       scrollBeyondLastLine: false,
       scrollbar: {
@@ -43,16 +49,37 @@
       renderOverviewRuler: false,
       wordWrap: 'on',
       wrappingIndent: 'same',
+      renderIndicators: false,
     });
 
-    editor.setModel({
+    const language = mapOfExtensionToLanguage[extension] || extension;
+
+    diffEditor.setModel({
       original: monaco.editor.createModel(original, language),
       modified: monaco.editor.createModel(modified, language),
     });
   }
+
+  async function autoSetHeight(): Promise<void> {
+    // from https://github.com/microsoft/monaco-editor/issues/794
+    // still have no way to count wrapped lines in diff editor, but will not be an issue if switching to normal editor + highlights for diff
+    const changes = diffEditor.getLineChanges();
+    if (!changes) {
+      await new Promise((resolve) => setTimeout(resolve, 50));
+      return autoSetHeight();
+    }
+    const originalLineCount = diffEditor.getModel()?.original.getLineCount() || 0;
+
+    let finalLineCount = originalLineCount;
+    for (let change of changes || []) {
+      let diff = change.modifiedEndLineNumber - change.modifiedStartLineNumber + 1;
+      finalLineCount += Math.abs(diff);
+    }
+    heightPixels = finalLineCount * 19;
+  }
 </script>
 
-<div class="w-full h-full relative overflow-hidden">
+<div class="w-full relative overflow-hidden" style="height: {heightPixels}px">
   <div class="absolute inset-0 w-full h-full" bind:this={container} />
 </div>
 
