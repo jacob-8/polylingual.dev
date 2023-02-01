@@ -53,7 +53,7 @@ reTypewriter Snapshots v1
 
 {#each sentences as sentence}
   <div style="display: flex;">
-    <div style="flex: 2;" class="chinese-font to-learn box">
+    <div style="flex: 2;" class="chinese-font box">
       {sentence.classical}
     </div>
     <div style="flex: 1;" class="box">
@@ -66,15 +66,6 @@ reTypewriter Snapshots v1
 {/each}
 
 <style>
-  .to-learn {
-    cursor: pointer;
-    display: flex;
-    flex-wrap: wrap;
-    font-size: 2rem;
-  }
-  .to-learn:hover {
-    background: lightgray;
-  }
   .box {
     padding: 0.5rem;
     border: 1px dashed lightgray;
@@ -94,11 +85,9 @@ reTypewriter Snapshots v1
 
 {#each sentences as sentence}
   <div style="display: flex;">
-    <div style="flex: 2;" class="chinese-font to-learn box"
-      on:click={() => alert(sentence.classical)}>
-      {sentence.classical}
+    <div style="flex: 2;" class="chinese-font box to-learn">
       {#each sentence.classical as character}
-        <div on:click|stopPropagation={() => alert(character)}>
+        <div class="to-learn">
           {character}
         </div>
       {/each}
@@ -113,18 +102,66 @@ reTypewriter Snapshots v1
 {/each}
 
 <style>
+  .box {
+    padding: 0.5rem;
+    border: 1px dashed lightgray;
+  }
   .to-learn {
     cursor: pointer;
     display: flex;
     flex-wrap: wrap;
+    align-content: flex-start;
     font-size: 2rem;
   }
   .to-learn:hover {
-    background: lightgray;
+    background: hsla(0, 0%, 0%, 0.15);
   }
+</style>
+
+--06----------
+<script lang="ts">
+  interface MultilingualSentence {
+    classical: string;
+    mandarin: string;
+    english: string;
+  }
+
+  export let sentences: MultilingualSentence[] = [];
+</script>
+
+{#each sentences as sentence}
+  <div style="display: flex;">
+    <div style="flex: 2;" class="chinese-font box to-learn"
+      on:click={() => alert(sentence.classical)}>
+      {#each sentence.classical as character}
+        <div class="to-learn" on:click|stopPropagation={() => alert(character)}>
+          {character}
+        </div>
+      {/each}
+    </div>
+    <div style="flex: 1;" class="box">
+      {sentence.mandarin}
+    </div>
+    <div style="flex: 1;" class="box">
+      {sentence.english}
+    </div>
+  </div>
+{/each}
+
+<style>
   .box {
     padding: 0.5rem;
     border: 1px dashed lightgray;
+  }
+  .to-learn {
+    cursor: pointer;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    font-size: 2rem;
+  }
+  .to-learn:hover {
+    background: hsla(0, 0%, 0%, 0.15);
   }
 </style>
 

@@ -26,6 +26,7 @@ Projects live inside `projects`. Each project has a lesson consisting of stages 
 - update error page
 
 ## After first lesson
+- handle scroll to top on stage navigation
 - auto focus on file in first step (unless it's adding a file)
 - add i18n
 - allow deleting files that end in an empty step
