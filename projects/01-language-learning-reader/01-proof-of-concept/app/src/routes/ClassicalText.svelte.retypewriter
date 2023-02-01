@@ -1,0 +1,131 @@
+reTypewriter Snapshots v1
+
+--01----------
+
+--02----------
+<script lang="ts">
+  interface MultilingualSentence {
+    classical: string;
+    mandarin: string;
+    english: string;
+  }
+
+  export let sentences: MultilingualSentence[] = [];
+</script>
+
+<pre>{JSON.stringify(sentences, null, 2)}</pre>
+
+--03----------
+<script lang="ts">
+  interface MultilingualSentence {
+    classical: string;
+    mandarin: string;
+    english: string;
+  }
+
+  export let sentences: MultilingualSentence[] = [];
+</script>
+
+{#each sentences as sentence}
+  <div style="display: flex;">
+    <div style="flex: 1;" class="chinese-font">
+      {sentence.classical}
+    </div>
+    <div style="flex: 1;">
+      {sentence.mandarin}
+    </div>
+    <div style="flex: 1;">
+      {sentence.english}
+    </div>
+  </div>
+{/each}
+
+--04----------
+<script lang="ts">
+  interface MultilingualSentence {
+    classical: string;
+    mandarin: string;
+    english: string;
+  }
+
+  export let sentences: MultilingualSentence[] = [];
+</script>
+
+{#each sentences as sentence}
+  <div style="display: flex;">
+    <div style="flex: 2;" class="chinese-font to-learn box">
+      {sentence.classical}
+    </div>
+    <div style="flex: 1;" class="box">
+      {sentence.mandarin}
+    </div>
+    <div style="flex: 1;" class="box">
+      {sentence.english}
+    </div>
+  </div>
+{/each}
+
+<style>
+  .to-learn {
+    cursor: pointer;
+    display: flex;
+    flex-wrap: wrap;
+    font-size: 2rem;
+  }
+  .to-learn:hover {
+    background: lightgray;
+  }
+  .box {
+    padding: 0.5rem;
+    border: 1px dashed lightgray;
+  }
+</style>
+
+--05----------
+<script lang="ts">
+  interface MultilingualSentence {
+    classical: string;
+    mandarin: string;
+    english: string;
+  }
+
+  export let sentences: MultilingualSentence[] = [];
+</script>
+
+{#each sentences as sentence}
+  <div style="display: flex;">
+    <div style="flex: 2;" class="chinese-font to-learn box"
+      on:click={() => alert(sentence.classical)}>
+      {sentence.classical}
+      {#each sentence.classical as character}
+        <div on:click|stopPropagation={() => alert(character)}>
+          {character}
+        </div>
+      {/each}
+    </div>
+    <div style="flex: 1;" class="box">
+      {sentence.mandarin}
+    </div>
+    <div style="flex: 1;" class="box">
+      {sentence.english}
+    </div>
+  </div>
+{/each}
+
+<style>
+  .to-learn {
+    cursor: pointer;
+    display: flex;
+    flex-wrap: wrap;
+    font-size: 2rem;
+  }
+  .to-learn:hover {
+    background: lightgray;
+  }
+  .box {
+    padding: 0.5rem;
+    border: 1px dashed lightgray;
+  }
+</style>
+
+--------------

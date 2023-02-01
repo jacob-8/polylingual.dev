@@ -16,7 +16,7 @@ html, body {
   height: 100%;
 }
 
-.chinese-font__中文字體 {
+.chinese-font {
   font-family: 'biao_kaiti_windows', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI',
     Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji',
     'Segoe UI Emoji', 'Segoe UI Symbol';
