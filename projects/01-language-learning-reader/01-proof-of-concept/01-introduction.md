@@ -2,7 +2,7 @@ Right now I'm learning Chinese. A year and a half ago I wanted to find a tool th
 
 The tool is kind of like my own private Chinese teacher, always ready to help me read Chinese by explaining new characters using English. It's a wonderful help, but now I want to improve it. I want a tool that can help me learn to read in any language using any language, not just Chinese using English.
 
-You're here because you want to improve your understanding of JavaScript and how to build web applications. Maybe you would also like to improve your understanding of another language? Great! I'm glad you've joined.
+You're here because you want to improve your understanding of JavaScript and how to build web applications. Maybe you would also like to improve your understanding of another spoken language? Great! I'm glad you've joined. We will use the [Svelte](https://svelte.dev/) JavaScript framework and the [SvelteKit](https://kit.svelte.dev/) metaframework because they are powerful but simple.
 
 To build a web application we start with the **end** in mind, we determine our goal by asking a few questions:
 

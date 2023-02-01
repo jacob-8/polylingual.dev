@@ -92,7 +92,7 @@
   }
 </script>
 
-<div class="w-full relative overflow-hidden" style="height: {heightPixels}px">
+<div class="w-full relative overflow-hidden" style="height: {Math.min(500, heightPixels)}px">
   <div class="absolute inset-0 w-full h-full" bind:this={container} />
 </div>
 

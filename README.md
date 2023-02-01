@@ -26,6 +26,7 @@ Projects live inside `projects`. Each project has a lesson consisting of stages 
 - update error page
 
 ## After first lesson
+- auto focus on file in first step (unless it's adding a file)
 - add i18n
 - allow deleting files that end in an empty step
   - scan last step of stepfiles to see which files to remove from app_finish and add remove buttons where appropriate

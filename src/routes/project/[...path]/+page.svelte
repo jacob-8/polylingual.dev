@@ -29,20 +29,29 @@
         class="text-xs py-1 px-2 rounded"
         class:bg-gray-300={mobile_view === 'tutorial'}
         type="button"
-        on:click={() => (mobile_view = 'tutorial')}>Tutorial</button
+        on:click={() => (mobile_view = 'tutorial')}
       >
+        課程
+        <!-- Tutorial -->
+      </button>
       <button
         class="text-xs py-1 px-2 rounded"
         class:bg-gray-300={mobile_view === 'editor'}
         type="button"
-        on:click={() => (mobile_view = 'editor')}>Editor</button
+        on:click={() => (mobile_view = 'editor')}
       >
+        編輯器
+        <!-- Editor -->
+      </button>
       <button
         class="text-xs py-1 px-2 rounded"
         class:bg-gray-300={mobile_view === 'preview'}
         type="button"
-        on:click={() => (mobile_view = 'preview')}>Preview</button
+        on:click={() => (mobile_view = 'preview')}
       >
+        結果
+        <!-- Preview -->
+      </button>
     </Header>
   {/if}
   <div class="h-[200px] grow">

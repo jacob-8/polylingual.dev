@@ -76,9 +76,7 @@ describe('prepareLessonStages', () => {
 
       Explain what we're going to do:
 
-      \`\`\`diff
-
-      --diff-border--
+      \`\`\`svelte file=\\"src/routes/+page.svelte\\"
       <script lang=\\"ts\\">
       	// import '../global__普.css';
       </script>
@@ -86,7 +84,7 @@ describe('prepareLessonStages', () => {
 
       And then
 
-      \`\`\`diff
+      \`\`\`diff file=\\"src/routes/+page.svelte\\"
       <script lang=\\"ts\\">
       	// import '../global__普.css';
       </script>
@@ -158,7 +156,7 @@ describe('prepareLessonStages', () => {
       [[src/routes/+page.svelte#04]]",
             "markdown_with_steps": "I have frontmatter with a comment and here we are going to simplify the styles into a class:
 
-      \`\`\`diff
+      \`\`\`diff file=\\"src/routes/+page.svelte\\"
       <script lang=\\"ts\\">
       	// import '../global__普.css';
       </script>

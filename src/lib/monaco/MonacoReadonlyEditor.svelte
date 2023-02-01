@@ -44,6 +44,9 @@
       },
       automaticLayout: true,
       scrollBeyondLastLine: false,
+      scrollbar: {
+        alwaysConsumeMouseWheel: false,
+      },
       readOnly: true,
       wordWrap: 'on',
       wrappingIndent: 'same',
@@ -69,13 +72,12 @@
 
   async function updateHeight(): Promise<void> {
     // from https://github.com/microsoft/monaco-editor/issues/794
-    const contentHeight = editor.getContentHeight();
-    console.log({ contentHeight });
-    heightPixels = Math.min(600, contentHeight);
+    heightPixels = editor.getContentHeight();
+    // TODO: magic height used here, in diff editor, and Code.svelte needs refactored out
   }
 </script>
 
-<div class="w-full relative overflow-hidden" style="height: {heightPixels}px">
+<div class="w-full relative overflow-hidden" style="height: {Math.min(500, heightPixels)}px">
   <div class="absolute inset-0 w-full h-full" bind:this={container} />
 </div>
 
