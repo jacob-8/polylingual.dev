@@ -16,15 +16,17 @@ Projects live inside `projects`. Each project has a lesson consisting of stages 
 
 ## TODO before first lesson
 
+- simplify variable names
 - place steps into stages
 - write prose for stages
-- add i18n
-- handle multilingual :zh markers in content
+- translate prose
+- handle multilingual :zh markers in content w/ toggle switch
 - adjust prose styles
 - pretty print stage titles
 - update error page
 
 ## After first lesson
+- add i18n
 - allow deleting files that end in an empty step
   - scan last step of stepfiles to see which files to remove from app_finish and add remove buttons where appropriate
 - emit selected to queryparam from `Codeblock.svelte`

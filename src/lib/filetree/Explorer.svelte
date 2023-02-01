@@ -14,10 +14,11 @@
   $: directory = zoomIntoScope(rootDirectory, directoryPath);
   $: name = directoryPath.split('/').pop() || 'project';
 
-  function add_if_allowed(pathname: string, { instruct } = { instruct: true }) {
+  function add_if_allowed_and_focus(pathname: string, { instruct } = { instruct: true }): boolean {
     if (can_add_paths.includes(pathname)) {
-      $files = { ...$files, [pathname]: '' };
+      $files = { ...$files, [pathname]: '\n' };
       $selected = pathname;
+      return true;
     } else {
       instruct &&
         alert(
@@ -25,31 +26,49 @@
             .map((path) => path.split('/').pop())
             .join(', ')} are your options.`
         );
+      return false;
     }
   }
 
   afterNavigate((navigation) => {
     const file_to_focus = navigation.to?.url?.searchParams.get('focus');
     if (file_to_focus) {
-      // check for exact match
-      if ($files[file_to_focus]) return ($selected = file_to_focus);
-      
-      // check for first partial match
-      for (const file in $files) {
-        if (file.endsWith(file_to_focus)) return ($selected = file);
+      const focusSuccess = focus(file_to_focus);
+      if (focusSuccess) {
+        const content = navigation.to?.url?.searchParams.get('edit');
+        if (typeof content === 'string') edit(content);
       }
-      
-      // add exact match and focus if it was successful
-      if (!$files[file_to_focus]) add_if_allowed(file_to_focus, { instruct: false });
-      if ($files[file_to_focus]) return ($selected = file_to_focus);
-      
-      // add first partial match and focus
-      for (const path of can_add_paths) {
-        if (path.endsWith(file_to_focus)) add_if_allowed(path, { instruct: false });
-      }
-      if ($files[file_to_focus]) return ($selected = file_to_focus);
     }
   });
+
+  function focus(file_to_focus: string): string | false {
+    // check for exact match
+    if ($files[file_to_focus]) return ($selected = file_to_focus);
+
+    // check for first partial match
+    for (const file in $files) {
+      if (file.endsWith(file_to_focus)) return ($selected = file);
+    }
+
+    // try to add exact match
+    if (!$files[file_to_focus]) {
+      const added = add_if_allowed_and_focus(file_to_focus, { instruct: false });
+      if (added) return file_to_focus;
+    }
+
+    // add first partial match
+    for (const path of can_add_paths) {
+      if (path.endsWith(file_to_focus)) {
+        const added = add_if_allowed_and_focus(path, { instruct: false });
+        if (added) return file_to_focus;
+      }
+    }
+    return false;
+  }
+
+  function edit(content: string) {
+    $files = { ...$files, [$selected]: content };
+  }
 </script>
 
 <div
@@ -57,7 +76,7 @@
   style="--scrollbar-border-color: #1e1e1e;"
 >
   <Folder
-    on:add={({ detail }) => add_if_allowed(detail)}
+    on:add={({ detail }) => add_if_allowed_and_focus(detail)}
     {can_add_paths}
     {directory}
     depth={0}

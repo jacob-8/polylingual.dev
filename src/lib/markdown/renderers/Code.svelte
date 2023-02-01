@@ -1,8 +1,8 @@
 <script lang="ts">
-  import { page } from '$app/stores';
+  import { dev } from '$app/environment';
   import { DIFF_BORDER } from '$lib/content/add-steps-to-markdown';
   import MonacoDiffEditor from '$lib/monaco/MonacoDiffEditor.svelte';
-  import { focus_file } from './focus_file';
+  import { edit_file, focus_file } from './focus_file';
   export let lang: string;
   export let text: string;
 
@@ -10,16 +10,34 @@
   $: language = meta.split(' ')[0];
   $: options = meta.split(' ').slice(1).join(' ');
   $: [, file, extension] = options.match(/file="(.+?)\.(.+?)"/) as [unknown, string, string];
+
+  $: [original, modified] = text.split(DIFF_BORDER);
 </script>
 
 {#if file}
-  <button
-    on:click={() => focus_file($page.url.pathname, `${file}.${extension}`)}
-    class="text-sm font-semibold mb-1 hover:underline">{file}.{extension}</button
-  >
+  <div class="flex">
+    <button
+      on:click={() => focus_file(`${file}.${extension}`)}
+      class="text-sm font-semibold mb-1 hover:underline">{file}.{extension}</button
+    >
+
+    {#if dev}
+      <button
+        on:click={() => edit_file(`${file}.${extension}`, original.trim())}
+        class="text-sm font-semibold mb-1 hover:underline ml-auto"
+      >
+        <span class="i-carbon-close" />
+      </button>
+    {/if}
+    <button
+      on:click={() => edit_file(`${file}.${extension}`, modified.trim())}
+      class="text-sm font-semibold mb-1 hover:underline"
+    >
+      <span class="i-carbon-arrow-right" />
+    </button>
+  </div>
 {/if}
 {#if language === 'diff' && text.includes(DIFF_BORDER)}
-  {@const [original, modified] = text.split(DIFF_BORDER)}
   <div class="max-h-600px -mx-3">
     <MonacoDiffEditor
       {extension}
