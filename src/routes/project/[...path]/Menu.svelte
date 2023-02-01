@@ -2,6 +2,7 @@
   import { page } from '$app/stores';
   import { slide } from 'svelte/transition';
   import type { Stage, Project } from '$lib/types';
+  import { prettifyName } from './helpers/prettifyName';
 
   export let projects: Record<string, Project>;
   export let stage: Stage;
@@ -55,10 +56,8 @@
   <!-- svelte-ignore a11y-click-events-have-key-events -->
   <h1 class="grow px-1 truncate" on:click={() => (is_open = true)}>
     <!-- {stage.location.project} -->
-    LLR
-    <span class="opacity-30">/</span>
-    {stage.location.lesson} <span class="opacity-30">/</span>
-    <strong class="text-blue-700">{stage.location.name}</strong>
+    {prettifyName(stage.location.lesson)} <span class="opacity-30">/</span>
+    <strong class="text-blue-700">{prettifyName(stage.location.name)}</strong>
   </h1>
   {#if stage.next_stage_location}
     <a
@@ -93,7 +92,7 @@
               }
             }}
           >
-            {project.name}
+            {prettifyName(project.name)}
           </button>
 
           {#if projectExpanded}
@@ -106,7 +105,7 @@
                     on:click={() => (expanded_lesson = lesson.name)}
                   >
                     <span class:!rotate-90={lessonExpanded} class="i-carbon-chevron-right?bg" />
-                    {lesson.name}
+                    {prettifyName(lesson.name)}
                   </button>
 
                   {#if lessonExpanded}
@@ -121,7 +120,7 @@
                           aria-current={current ? 'page' : undefined}
                         >
                           <a href={stageUrl} on:click={() => (is_open = false)}>
-                            {stage.location.name}
+                            {prettifyName(stage.location.name)}
                           </a>
                         </li>
                       {/each}

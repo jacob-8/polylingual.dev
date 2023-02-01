@@ -8,7 +8,7 @@
   import { DEFAULT_MONACO_OPTIONS } from '$lib/monaco/options';
   import Stackblitz from '$lib/stackblitz/Stackblitz.svelte';
   import { objectsAreSame } from './helpers/objectsAreSame';
-  import { filesNotInTarget } from './helpers/pathsInFinishNotExisting';
+  import { filesNotInTarget } from './helpers/filesNotInTarget';
 
   export let stage: Stage;
   export let mobile: boolean;
