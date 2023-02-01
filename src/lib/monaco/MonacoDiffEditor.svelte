@@ -60,6 +60,15 @@
     });
   }
 
+  $: if (diffEditor && original && modified) {
+    const model = diffEditor.getModel();
+    if (model) {
+      model.original.setValue(original);
+      model.modified.setValue(modified);
+      autoSetHeight();
+    }
+  }
+
   async function autoSetHeight(): Promise<void> {
     // from https://github.com/microsoft/monaco-editor/issues/794
     // still have no way to count wrapped lines in diff editor, but will not be an issue if switching to normal editor + highlights for diff

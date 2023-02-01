@@ -18,7 +18,7 @@
 
 <div class="overflow-y-auto grow flex flex-col">
   <main bind:this={sidebar} class="p-3">
-    <Content {stage} on:selected />
+    <Content {stage} />
 
     {#if stage.next_stage_location}
       <div class="my-4">

@@ -27,6 +27,7 @@ Projects live inside `projects`. Each project has a lesson consisting of stages 
 ## After first lesson
 - allow deleting files that end in an empty step
   - scan last step of stepfiles to see which files to remove from app_finish and add remove buttons where appropriate
+- emit selected to queryparam from `Codeblock.svelte`
 - update URL of Stackblitz vm if possible
 - use updated UnoCSS w/ web fonts and typography
 - flesh out how to how to make progression actionable with a click (especially add and remove files or rename)

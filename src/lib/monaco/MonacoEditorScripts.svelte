@@ -6,8 +6,9 @@
   import { createEventDispatcher, onMount } from 'svelte';
   import { vs_dark_plus } from './monaco-themes';
   import type { editor } from 'monaco-editor/esm/vs/editor/editor.api.js';
-  import type { FileStub } from '$lib/types';
   import { mapOfExtensionToLanguage } from './languages';
+  import type { FileStub } from '$lib/types';
+
   export let stub: FileStub | null;
   export let options: editor.IStandaloneEditorConstructionOptions;
   let editor: editor.IStandaloneCodeEditor;

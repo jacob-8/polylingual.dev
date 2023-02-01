@@ -17,7 +17,7 @@
   {@const [original, modified] = text.split(DIFF_BORDER)}
   <div class="max-h-600px -mx-3">
     <MonacoDiffEditor
-    extension={extension}
+      {extension}
       original={original.trim()}
       modified={modified.trim()}
       options={{ renderSideBySide: false }}
