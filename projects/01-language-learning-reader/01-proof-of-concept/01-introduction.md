@@ -2,13 +2,19 @@
 file_to_focus: src/routes/+page.svelte
 ---
 
-Building a web application is like building a house. We must determine our goal and start with the **end** 目的 in mind. 
-- What would we like to build?
-- Why?
-- How will this tool improve our life after we build it?
+Right now I'm learning Chinese. A year and a half ago I wanted to find a tool that helped me learn to read Chinese by giving pronunciation help and English definitions just for the characters I didn't know. I couldn't find a tool like this so I built one. 
 
-Right now I'm learning Chinese. A year and a half ago I wanted to find a tool that helped me learn to read Chinese more efficiently. I wanted to be able to read Chinese sentences in a tool that let me read the character if I already knew it, but gave me pinyin pronunciation helps and English definitions for the characters that I didn't know. I couldn't find a tool like this. Every language learning tool showed the pinyin for every character and I would never learn the Chinese characters if I was always reading pinyin. Sure, I could always cover up the pinyin with a piece of paper until I needed it, but this isn't very efficient. Really, I wanted to find a tool that would serve kind of like my own private Chinese teacher sitting in my back pocket, always ready to help me read Chinese and to learn the character.
+The tool is kind of like my own private Chinese teacher, always ready to help me read Chinese by explaining new characters using English. It's a wonderful help, but now I want to improve it. I want a tool that can help me learn to read in any language using any language, not just Chinese using English.
 
-Since the tool didn't exist, I started to build it. My purpose was to build a tool that would make learning to read Chinese more effective by helping me with characters and words I didn't yet know. I now have that tool and enjoy it very much. Now I want to improve it so I have a new goal in mind. I want a tool that can help me learn to read in any language, not just Chinese. Maybe classical Greek, Latin, or even English (for those who are learning English).
+You're here because you want to improve your understanding of JavaScript and how to build web applications. Maybe you would also like to improve your understanding of another language? Great! I'm glad you've joined.
 
-That's the tool we're going to build together in this lesson series. If you want to become better at building useful web applications that will improve your life or help your company offer a valuable service. In our **JavaScript Explained** lessons, we will build an entire web application together, from start to finish, frontend and backend, that will be used by real users to learn real languages. Let's get started!
+To build a web application we start with the **end** in mind, we determine our goal by asking a few questions:
+
+- **What would we like to build?**
+  - A language learning reader that can use any language to help you learn to read in any language. We'll start by using Mandarin to learn Classical Chinese. 
+- **Why?**
+  - Because we want to make language learning faster, more useful, and more enjoyable.
+- **How will this tool improve our life after we build it?**
+  - We will find it easier to read difficult material.
+
+Now that we know what we are going to build, I want you to join me in writing every single line of code, frontend and backend, so you can become better at building useful web applications. Then, if you're a language learner (I hope you are), you can use it and make it even better! Let's get started!

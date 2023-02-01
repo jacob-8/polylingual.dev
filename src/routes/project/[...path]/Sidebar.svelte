@@ -3,6 +3,7 @@
   import Menu from './Menu.svelte';
   import Content from './Content.svelte';
   import type { Stage, Project } from '$lib/types';
+  import { prettifyName } from './helpers/prettifyName';
 
   export let projects: Record<string, Project>;
   export let stage: Stage;
@@ -24,8 +25,9 @@
       <div class="my-4">
         <a
           class="text-blue-700 text-sm font-semibold hover:underline"
-          href="/project/{stage.next_stage_location.project}/{stage.next_stage_location.lesson}/{stage.next_stage_location.name}"
-          >{stage.next_stage_location.name} <span class="i-carbon-arrow-right" /></a
+          href="/project/{stage.next_stage_location.project}/{stage.next_stage_location
+            .lesson}/{stage.next_stage_location.name}"
+          >{prettifyName(stage.next_stage_location.name)} <span class="i-carbon-arrow-right" /></a
         >
       </div>
     {/if}
