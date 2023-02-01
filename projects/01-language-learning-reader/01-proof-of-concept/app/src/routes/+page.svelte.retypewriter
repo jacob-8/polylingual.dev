@@ -5,7 +5,7 @@ reTypewriter Snapshots v1
 <h2>Welcome to the lesson! Here is where we learn by doing.</h2>
 
 --02----------
-<div style="display: flex; flex-direction: column; height: 100%;">
+<div>
   <div style="height: 50%; background: red;">
     <h2 style="text-align: center;">
       Language Learning Reader 語言學習閱讀器
@@ -16,12 +16,13 @@ reTypewriter Snapshots v1
     Dictionary
   </div>
 </div>
+
 --03----------
 <script lang="ts">
   import '../global__普.css';
 </script>
 
-<div style="display: flex; flex-direction: column; height: 100%;">
+<div>
   <div style="height: 50%; background: red;">
     <h2 style="text-align: center;">
       Language Learning Reader 語言學習閱讀器
@@ -32,19 +33,20 @@ reTypewriter Snapshots v1
     Dictionary
   </div>
 </div>
+
 --04----------
 <script lang="ts">
   import '../global__普.css';
 </script>
 
 <div style="display: flex; flex-direction: column; height: 100%;">
-  <div style="height: 50%; overflow-y: auto;">
-    <h2 style="text-align: center;" class="chinese-font__中文字體">
+  <div style="height: 50%; background: red;">
+    <h2 style="text-align: center;">
       Language Learning Reader 語言學習閱讀器
     </h2>
   </div>
 
-  <div style="height: 50%; overflow-y: auto; padding: 1rem; border-top: 1px dashed gray;">
+  <div style="height: 50%; background: yellow;">
     Dictionary
   </div>
 </div>
@@ -52,14 +54,55 @@ reTypewriter Snapshots v1
 --05----------
 <script lang="ts">
   import '../global__普.css';
-  import swords_and_shields__矛盾 from './data/swords_and_shields__矛盾.json';
-  import ClassicalText__文言文本 from './ClassicalText.svelte';
+</script>
+
+<div style="display: flex; flex-direction: column; height: 100%;">
+  <div style="height: 50%;">
+    <h2 style="text-align: center;">
+      Language Learning Reader 
+      <span class="chinese-font__中文字體">語言學習閱讀器</span>
+    </h2>
+  </div>
+
+  <div style="height: 50%; padding: 1rem; border-top: 1px dashed gray;">
+    Dictionary
+  </div>
+</div>
+
+--06----------
+<script lang="ts">
+  import '../global__普.css';
+  import swords_and_shields__矛盾 from '../data/swords_and_shields__矛盾.json';
+  import ClassicalText__文言文本 from './ClassicalText__文言文本.svelte';
+</script>
+
+<div style="display: flex; flex-direction: column; height: 100%;">
+  <div style="height: 50%;">
+    <h2 style="text-align: center;">
+      Language Learning Reader 
+      <span class="chinese-font__中文字體">語言學習閱讀器</span>
+    </h2>
+
+    <ClassicalText__文言文本 sentences__句子數組={swords_and_shields__矛盾} />
+  </div>
+
+  <div style="height: 50%; padding: 1rem; border-top: 1px dashed gray;">
+    Dictionary
+  </div>
+</div>
+
+--07----------
+<script lang="ts">
+  import '../global__普.css';
+  import swords_and_shields__矛盾 from '../data/swords_and_shields__矛盾.json';
+  import ClassicalText__文言文本 from './ClassicalText__文言文本.svelte';
 </script>
 
 <div style="display: flex; flex-direction: column; height: 100%;">
   <div style="height: 50%; overflow-y: auto;">
-    <h2 style="text-align: center;" class="chinese-font__中文字體">
-      Language Learning Reader 語言學習閱讀器
+    <h2 style="text-align: center;">
+      Language Learning Reader 
+      <span class="chinese-font__中文字體">語言學習閱讀器</span>
     </h2>
 
     <ClassicalText__文言文本 sentences__句子數組={swords_and_shields__矛盾} />
@@ -70,18 +113,19 @@ reTypewriter Snapshots v1
   </div>
 </div>
 
---06----------
+--08----------
 <script lang="ts">
   import '../global__普.css';
-  import swords_and_shields__矛盾 from './data/swords_and_shields__矛盾.json';
-  import ClassicalText__文言文本 from './ClassicalText.svelte';
+  import swords_and_shields__矛盾 from '../data/swords_and_shields__矛盾.json';
+  import ClassicalText__文言文本 from './ClassicalText__文言文本.svelte';
   import ReadClipboard__讀剪貼板 from './ReadClipboard__讀剪貼板.svelte';
 </script>
 
 <div style="display: flex; flex-direction: column; height: 100%;">
   <div style="height: 50%; overflow-y: auto;">
-    <h2 style="text-align: center;" class="chinese-font__中文字體">
-      Language Learning Reader 語言學習閱讀器
+    <h2 style="text-align: center;">
+      Language Learning Reader 
+      <span class="chinese-font__中文字體">語言學習閱讀器</span>
     </h2>
 
     <ClassicalText__文言文本 sentences__句子數組={swords_and_shields__矛盾} />
@@ -94,19 +138,20 @@ reTypewriter Snapshots v1
   </div>
 </div>
 
---07----------
+--08----------
 <script lang="ts">
   import '../global__普.css';
-  import swords_and_shields__矛盾 from './data/swords_and_shields__矛盾.json';
-  import ClassicalText__文言文本 from './ClassicalText.svelte';
+  import swords_and_shields__矛盾 from '../data/swords_and_shields__矛盾.json';
+  import ClassicalText__文言文本 from './ClassicalText__文言文本.svelte';
   import ReadClipboard__讀剪貼板 from './ReadClipboard__讀剪貼板.svelte';
   import ClassicalDefinitions__文言文定義 from './ClassicalDefinitions__文言文定義.svelte';
 </script>
 
 <div style="display: flex; flex-direction: column; height: 100%;">
   <div style="height: 50%; overflow-y: auto;">
-    <h2 style="text-align: center;" class="chinese-font__中文字體">
-      Language Learning Reader 語言學習閱讀器
+    <h2 style="text-align: center;">
+      Language Learning Reader 
+      <span class="chinese-font__中文字體">語言學習閱讀器</span>
     </h2>
 
     <ClassicalText__文言文本 sentences__句子數組={swords_and_shields__矛盾} />

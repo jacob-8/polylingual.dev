@@ -24,8 +24,10 @@
   }
 
   function setFocus() {
+    const baseRouteFile = 'src/routes/+page.svelte';
     const firstFile = Object.keys($files)[0];
-    $selected = stage.file_to_focus || firstFile;
+    const defaultFile = $files[baseRouteFile] ? baseRouteFile : firstFile;
+    $selected = stage.file_to_focus || defaultFile;
   }
 
   $: completed = objectsAreSame($files, stage.app_finish);
@@ -55,9 +57,12 @@
             class="bg-blue text-white p-2 text-lg"
           >
             {#if completed}
-              reset
+              復原
+              <!-- reset -->
+              <!-- 重置 -->
             {:else}
-              solve
+              解決
+              <!-- solve -->
               <span class="i-carbon-arrow-right" />
             {/if}
           </button>
@@ -82,7 +87,7 @@
   <section class="h-full" slot="b">
     {#if browser}
       <Stackblitz
-        hideExplorer={true}
+        hideExplorer={false}
         title={`${stage.location.project}, ${stage.location.lesson}, ${stage.location.name}`}
         files={$files}
       />

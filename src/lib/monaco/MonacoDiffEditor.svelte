@@ -50,6 +50,10 @@
       wordWrap: 'on',
       wrappingIndent: 'same',
       renderIndicators: false,
+      padding: {
+        top: 8,
+        bottom: 8,
+      },
     });
 
     const language = mapOfExtensionToLanguage[extension] || extension;
@@ -84,7 +88,7 @@
       let diff = change.modifiedEndLineNumber - change.modifiedStartLineNumber + 2; // started with 1 but we give an extra line per diff to help with line wraps
       finalLineCount += Math.abs(diff);
     }
-    heightPixels = finalLineCount * 19;
+    heightPixels = finalLineCount * 19 + 16;
   }
 </script>
 

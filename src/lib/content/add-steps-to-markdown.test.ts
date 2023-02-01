@@ -1,11 +1,10 @@
 import type { Steps, StepsByFilename } from "$lib/types";
-import { addStepsToMarkdown } from "./add-steps-to-markdown";
+import { addStepsToMarkdown, writeCodeBlock } from "./add-steps-to-markdown";
 
 describe('addStepsToMarkdown', () => {
-  test('initial', () => {
-    const filename = 'src/routes/+page.svelte';
-    const file_start = 'hi';
-    const markdown = `# Normal Heading
+  const filename = 'src/routes/+page.svelte';
+
+  const markdown = `# Normal Heading
 Explain what we're going to do:
 
 [[${filename}#02]]  
@@ -15,6 +14,9 @@ And then
 [[${filename}#03]]  
 
 And some more prose.`;
+
+  test('initial', () => {
+    const file_start = 'hi';
     const steps: Steps = {
       '01': file_start,
       '02': 'hello',
@@ -23,23 +25,24 @@ And some more prose.`;
     const stepsByFilename: StepsByFilename = {
       [filename]: steps
     };
+
     expect(addStepsToMarkdown({ markdown, stepsByFilename })).toMatchInlineSnapshot(`
       {
         "app_changes": {
-          "src/routes/+page.svelte": "hello world!",
+          "${filename}": "hello world!",
         },
         "markdown_with_steps": "# Normal Heading
       Explain what we're going to do:
 
-      \`\`\`diff
-      hi
+      \`\`\`diff file=\\"${filename}\\"
+      ${file_start}
       --diff-border--
       hello
       \`\`\`  
 
       And then
 
-      \`\`\`diff
+      \`\`\`diff file=\\"${filename}\\"
       hello
       --diff-border--
       hello world!
@@ -47,6 +50,59 @@ And some more prose.`;
 
       And some more prose.",
       }
+    `);
+  });
+
+  test('does not return a diff if former step is empty (meaning they are creating a new file)', () => {
+    expect(addStepsToMarkdown({
+      markdown, stepsByFilename: {
+        [filename]: {
+          '01': '',
+          '02': 'hello',
+          '03': 'hello world!',
+        }
+      }
+    })).toMatchInlineSnapshot(`
+      {
+        "app_changes": {
+          "src/routes/+page.svelte": "hello world!",
+        },
+        "markdown_with_steps": "# Normal Heading
+      Explain what we're going to do:
+
+      \`\`\`svelte file=\\"src/routes/+page.svelte\\"
+      hello
+      \`\`\`  
+
+      And then
+
+      \`\`\`diff file=\\"src/routes/+page.svelte\\"
+      hello
+      --diff-border--
+      hello world!
+      \`\`\`  
+
+      And some more prose.",
+      }
+    `);
+  });
+});
+
+describe('writeCodeBlock', () => {
+  test('creates a diff if previousState has content', () => {
+    expect(writeCodeBlock('test.svelte', 'hi', 'hello')).toMatchInlineSnapshot(`
+      "\`\`\`diff file=\\"test.svelte\\"
+      hi
+      --diff-border--
+      hello
+      \`\`\`"
+    `);
+  });
+  test('does not create a diff if previousState is falsy', () => {
+    expect(writeCodeBlock('test.svelte', '', 'hello')).toMatchInlineSnapshot(`
+      "\`\`\`svelte file=\\"test.svelte\\"
+      hello
+      \`\`\`"
     `);
   });
 });

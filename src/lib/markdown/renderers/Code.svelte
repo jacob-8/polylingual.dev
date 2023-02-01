@@ -2,6 +2,7 @@
   import { dev } from '$app/environment';
   import { DIFF_BORDER } from '$lib/content/add-steps-to-markdown';
   import MonacoDiffEditor from '$lib/monaco/MonacoDiffEditor.svelte';
+  import MonacoReadonlyEditor from '$lib/monaco/MonacoReadonlyEditor.svelte';
   import { edit_file, focus_file } from './focus_file';
   export let lang: string;
   export let text: string;
@@ -47,5 +48,7 @@
     />
   </div>
 {:else}
-  <pre class={lang}><code>{text}</code></pre>
+  <div class="max-h-600px -mx-3">
+    <MonacoReadonlyEditor {extension} value={text} />
+  </div>
 {/if}

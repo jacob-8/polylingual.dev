@@ -1,11 +1,11 @@
 ---
-file_to_focus: src/routes/+page.svelte
+file_to_focus: src/global__普.css
 ---
 
-Let's add a new Chinese font
+Let's add an enjoyable Chinese font called `biao_kaiti_windows` in select places:
 
 [[src/global__普.css#03]]
 
-Let's remove our background colors, add a border and apply our font
+Now let's apply our font to the title and remove our backgrounds and just leave a small border between the two sections.
 
-[[src/routes/+page.svelte#04]]
+[[src/routes/+page.svelte#05]]

@@ -54,7 +54,7 @@
   {/if}
 
   <!-- svelte-ignore a11y-click-events-have-key-events -->
-  <h1 class="grow px-1 truncate" on:click={() => (is_open = true)}>
+  <h1 class="grow px-1 truncate" on:click={() => (is_open = !is_open)}>
     <!-- {stage.location.project} -->
     {prettifyName(stage.location.lesson)} <span class="opacity-30">/</span>
     <strong class="text-blue-700">{prettifyName(stage.location.name)}</strong>

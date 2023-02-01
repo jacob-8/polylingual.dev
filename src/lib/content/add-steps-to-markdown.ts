@@ -22,13 +22,9 @@ export function addStepsToMarkdown({ markdown, stepsByFilename }: { markdown: st
     const currentState = stepsByFilename[filename][convertNumberToTwoDigitString(stepNumber)];
     const previousState = stepsByFilename[filename][convertNumberToTwoDigitString(previousStepNumber)];
 
-    const diffBlock = `\`\`\`diff file="${filename}"
-${previousState}
-${DIFF_BORDER}
-${currentState}
-\`\`\``
-    markdown_with_steps.update(startOfMatch, startOfMatch + referenceLength, diffBlock)
-    
+    const codeBlock = writeCodeBlock(filename, previousState, currentState)
+    markdown_with_steps.update(startOfMatch, startOfMatch + referenceLength, codeBlock)
+
     app_changes[filename] = currentState;
   }
 
@@ -37,4 +33,17 @@ ${currentState}
 
 function convertNumberToTwoDigitString(number: number): string {
   return number.toString().padStart(2, '0');
+}
+
+export function writeCodeBlock(filename: string, previousState: string, currentState: string) {
+  if (previousState) {
+    return `\`\`\`diff file="${filename}"
+${previousState}
+${DIFF_BORDER}
+${currentState}
+\`\`\``;
+  }
+  return `\`\`\`${filename.split('.').pop()} file="${filename}"
+${currentState}
+\`\`\``;
 }
