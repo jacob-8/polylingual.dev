@@ -82,7 +82,7 @@
   <section class="h-full" slot="b">
     {#if browser}
       <Stackblitz
-        hideExplorer={false}
+        hideExplorer={true}
         title={`${stage.location.project}, ${stage.location.lesson}, ${stage.location.name}`}
         files={$files}
       />

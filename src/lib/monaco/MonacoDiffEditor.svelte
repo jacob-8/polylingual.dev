@@ -60,7 +60,7 @@
     });
   }
 
-  $: if (diffEditor && original && modified) {
+  $: if (diffEditor && typeof original === 'string' && typeof modified === 'string') {
     const model = diffEditor.getModel();
     if (model) {
       model.original.setValue(original);
@@ -81,7 +81,7 @@
 
     let finalLineCount = originalLineCount;
     for (let change of changes || []) {
-      let diff = change.modifiedEndLineNumber - change.modifiedStartLineNumber + 1;
+      let diff = change.modifiedEndLineNumber - change.modifiedStartLineNumber + 2; // started with 1 but we give an extra line per diff to help with line wraps
       finalLineCount += Math.abs(diff);
     }
     heightPixels = finalLineCount * 19;

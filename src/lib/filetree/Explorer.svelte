@@ -1,6 +1,7 @@
 <script lang="ts">
-  import type { StageFiles } from '$lib/types';
   import type { Writable } from 'svelte/store';
+  import { afterNavigate } from '$app/navigation';
+  import type { StageFiles } from '$lib/types';
   import Folder from './Folder.svelte';
   import { placeFilesIntoDirectories, zoomIntoScope } from './placeFilesIntoDirectories';
 
@@ -14,15 +15,25 @@
   $: name = directoryPath.split('/').pop() || 'project';
 
   function add_if_allowed(pathname: string) {
-    console.log({pathname})
     if (can_add_paths.includes(pathname)) {
       $files = { ...$files, [pathname]: '' };
       $selected = pathname;
-      console.log({files: $files})
     } else {
-      alert(`${pathname} does not need to be added.`);
+      alert(
+        `${pathname} does not need to be added. ${can_add_paths
+          .map((path) => path.split('/').pop())
+          .join(', ')} are your options.`
+      );
     }
   }
+
+  afterNavigate((navigation) => {
+    const file_to_focus = navigation.to?.url?.searchParams.get('focus');
+    if (file_to_focus) {
+      if (!$files[file_to_focus]) add_if_allowed(file_to_focus);
+      $selected = file_to_focus;
+    } 
+  });
 </script>
 
 <div

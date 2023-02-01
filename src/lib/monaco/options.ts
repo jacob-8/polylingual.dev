@@ -23,4 +23,5 @@ export const DEFAULT_MONACO_OPTIONS: import('monaco-editor').editor.IStandaloneE
   // tabCompletion: 'on',
   wordWrap: 'on',
   wrappingIndent: 'same',
+  tabSize: 2,
 }

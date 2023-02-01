@@ -3,6 +3,10 @@ reTypewriter Snapshots v1
 --01----------
 
 --02----------
+body {
+  background: yellow;
+}
+
 html, body {
   padding: 0;
   margin: 0;
@@ -10,6 +14,10 @@ html, body {
 }
 
 --03----------
+body {
+  background: yellow;
+}
+
 html, body {
   padding: 0;
   margin: 0;

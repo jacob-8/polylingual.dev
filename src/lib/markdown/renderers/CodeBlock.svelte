@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { goto } from '$app/navigation';
+  import { page } from '$app/stores';
   import { DIFF_BORDER } from '$lib/content/add-steps-to-markdown';
   import MonacoDiffEditor from '$lib/monaco/MonacoDiffEditor.svelte';
   export let lang: string;
@@ -8,10 +10,17 @@
   $: language = meta.split(' ')[0];
   $: options = meta.split(' ').slice(1).join(' ');
   $: [, file, extension] = options.match(/file="(.+?)\.(.+?)"/) as [unknown, string, string];
+
+  function focus_file() {
+    const encodedFilepath = encodeURIComponent(file + '.' + extension);
+    goto(`${$page.url.pathname}?focus=${encodedFilepath}`);
+  }
 </script>
 
 {#if file}
-  <div class="text-sm font-semibold mb-1">{file}.{extension}</div>
+  <button on:click={focus_file} class="text-sm font-semibold mb-1 hover:underline"
+    >{file}.{extension}</button
+  >
 {/if}
 {#if language === 'diff' && text.includes(DIFF_BORDER)}
   {@const [original, modified] = text.split(DIFF_BORDER)}
