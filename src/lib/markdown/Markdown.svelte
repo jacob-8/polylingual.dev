@@ -1,9 +1,13 @@
 <script lang="ts">
   import SvelteMarkdown from 'svelte-markdown';
-  import CodeBlock from './renderers/CodeBlock.svelte';
+  import Code from './renderers/Code.svelte';
   import Blockquote from './renderers/Blockquote.svelte';
-  
+  import Codespan from './renderers/Codespan.svelte';
+
   export let markdown: string;
 </script>
 
-<SvelteMarkdown source={markdown} renderers={{ code: CodeBlock, blockquote: Blockquote }} />
+<SvelteMarkdown
+  source={markdown}
+  renderers={{ code: Code, codespan: Codespan, blockquote: Blockquote }}
+/>

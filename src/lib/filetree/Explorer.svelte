@@ -14,25 +14,41 @@
   $: directory = zoomIntoScope(rootDirectory, directoryPath);
   $: name = directoryPath.split('/').pop() || 'project';
 
-  function add_if_allowed(pathname: string) {
+  function add_if_allowed(pathname: string, { instruct } = { instruct: true }) {
     if (can_add_paths.includes(pathname)) {
       $files = { ...$files, [pathname]: '' };
       $selected = pathname;
     } else {
-      alert(
-        `${pathname} does not need to be added. ${can_add_paths
-          .map((path) => path.split('/').pop())
-          .join(', ')} are your options.`
-      );
+      instruct &&
+        alert(
+          `${pathname} does not need to be added. ${can_add_paths
+            .map((path) => path.split('/').pop())
+            .join(', ')} are your options.`
+        );
     }
   }
 
   afterNavigate((navigation) => {
     const file_to_focus = navigation.to?.url?.searchParams.get('focus');
     if (file_to_focus) {
-      if (!$files[file_to_focus]) add_if_allowed(file_to_focus);
-      $selected = file_to_focus;
-    } 
+      // check for exact match
+      if ($files[file_to_focus]) return ($selected = file_to_focus);
+      
+      // check for first partial match
+      for (const file in $files) {
+        if (file.endsWith(file_to_focus)) return ($selected = file);
+      }
+      
+      // add exact match and focus if it was successful
+      if (!$files[file_to_focus]) add_if_allowed(file_to_focus, { instruct: false });
+      if ($files[file_to_focus]) return ($selected = file_to_focus);
+      
+      // add first partial match and focus
+      for (const path of can_add_paths) {
+        if (path.endsWith(file_to_focus)) add_if_allowed(path, { instruct: false });
+      }
+      if ($files[file_to_focus]) return ($selected = file_to_focus);
+    }
   });
 </script>
 
