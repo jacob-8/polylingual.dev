@@ -33,7 +33,7 @@ describe('prepareLessonStages', () => {
               "src/b.txt": "I'm shared by all lessons in this project.",
               "src/c.txt": "I'm shared by all projects and should show up.",
               "src/routes/+page.svelte": "<script lang=\\"ts\\">
-      	// import '../global__普.css';
+      	// import '../global.css';
       </script>
 
       <div style=\\"display: flex; flex-direction: column; height: 100%;\\">
@@ -78,7 +78,7 @@ describe('prepareLessonStages', () => {
 
       \`\`\`svelte file=\\"src/routes/+page.svelte\\"
       <script lang=\\"ts\\">
-      	// import '../global__普.css';
+      	// import '../global.css';
       </script>
       \`\`\`  
 
@@ -86,11 +86,11 @@ describe('prepareLessonStages', () => {
 
       \`\`\`diff file=\\"src/routes/+page.svelte\\"
       <script lang=\\"ts\\">
-      	// import '../global__普.css';
+      	// import '../global.css';
       </script>
       --diff-border--
       <script lang=\\"ts\\">
-      	// import '../global__普.css';
+      	// import '../global.css';
       </script>
 
       <div style=\\"display: flex; flex-direction: column; height: 100%;\\">
@@ -134,7 +134,7 @@ describe('prepareLessonStages', () => {
               "src/b.txt": "I'm shared by all lessons in this project.",
               "src/c.txt": "I'm shared by all projects and should show up.",
               "src/routes/+page.svelte": "<script lang=\\"ts\\">
-      	// import '../global__普.css';
+      	// import '../global.css';
       </script>
 
       <div style=\\"display: flex; flex-direction: column; height: 100%;\\">
@@ -158,7 +158,7 @@ describe('prepareLessonStages', () => {
 
       \`\`\`diff file=\\"src/routes/+page.svelte\\"
       <script lang=\\"ts\\">
-      	// import '../global__普.css';
+      	// import '../global.css';
       </script>
 
       <div style=\\"display: flex; flex-direction: column; height: 100%;\\">
@@ -264,11 +264,11 @@ describe('prepareLessonStages', () => {
 
       --02----------
       <script lang=\\"ts\\">
-      	// import '../global__普.css';
+      	// import '../global.css';
       </script>
       --03----------
       <script lang=\\"ts\\">
-      	// import '../global__普.css';
+      	// import '../global.css';
       </script>
 
       <div style=\\"display: flex; flex-direction: column; height: 100%;\\">

@@ -9,11 +9,11 @@ reTypewriter Snapshots v1
 
 --02----------
 <script lang="ts">
-  import '../global__普.css';
+  import '../global.css';
 </script>
 --03----------
 <script lang="ts">
-  import '../global__普.css';
+  import '../global.css';
 </script>
 
 <div style="display: flex; flex-direction: column; height: 100%;">
@@ -26,10 +26,10 @@ reTypewriter Snapshots v1
       {
         "01": "",
         "02": "<script lang=\\"ts\\">
-        import '../global__普.css';
+        import '../global.css';
       </script>",
         "03": "<script lang=\\"ts\\">
-        import '../global__普.css';
+        import '../global.css';
       </script>
 
       <div style=\\"display: flex; flex-direction: column; height: 100%;\\">

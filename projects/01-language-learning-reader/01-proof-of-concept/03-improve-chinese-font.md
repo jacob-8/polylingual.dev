@@ -1,10 +1,10 @@
 ---
-file_to_focus: src/global__普.css
+file_to_focus: src/global.css
 ---
 
 Let's add an enjoyable Chinese font called `biao_kaiti_windows` in select places:
 
-[[src/global__普.css#03]]
+[[src/global.css#03]]
 
 Now let's apply our font to the title and remove our backgrounds and just leave a small border between the two sections.
 
