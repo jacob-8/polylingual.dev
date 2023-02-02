@@ -118,32 +118,6 @@ reTypewriter Snapshots v1
   import '../global.css';
   import swords_and_shields from '../data/swords_and_shields.json';
   import ClassicalText from './ClassicalText.svelte';
-  import ReadClipboard from './ReadClipboard.svelte';
-</script>
-
-<div style="display: flex; flex-direction: column; height: 100%;">
-  <div style="height: 70%; overflow-y: auto;">
-    <h2 style="text-align: center;">
-      Language Learning Reader 
-      <span class="chinese-font">語言學習閱讀器</span>
-    </h2>
-
-    <ClassicalText sentences={swords_and_shields} />
-  </div>
-
-  <div style="height: 30%; overflow-y: auto; padding: 1rem; border-top: 1px dashed gray;">
-    <ReadClipboard let:text>
-      <pre>{JSON.stringify(text, null, 2)}</pre>
-    </ReadClipboard>
-  </div>
-</div>
-
---08----------
-<script lang="ts">
-  import '../global.css';
-  import swords_and_shields from '../data/swords_and_shields.json';
-  import ClassicalText from './ClassicalText.svelte';
-  import ReadClipboard from './ReadClipboard.svelte';
   import ClassicalDefinitions from './ClassicalDefinitions.svelte';
 </script>
 
@@ -158,9 +132,55 @@ reTypewriter Snapshots v1
   </div>
 
   <div style="height: 30%; overflow-y: auto; padding: 1rem; border-top: 1px dashed gray;">
-    <ReadClipboard let:text>
-      <ClassicalDefinitions {text} />
-    </ReadClipboard>
+    <ClassicalDefinitions character={'矛'} />
+  </div>
+</div>
+
+--09----------
+<script lang="ts">
+  import '../global.css';
+  import swords_and_shields from '../data/swords_and_shields.json';
+  import ClassicalText from './ClassicalText.svelte';
+  import ClassicalDefinitions from './ClassicalDefinitions.svelte';
+</script>
+
+<div style="display: flex; flex-direction: column; height: 100%;">
+  <div style="height: 70%; overflow-y: auto;">
+    <h2 style="text-align: center;">
+      Language Learning Reader 
+      <span class="chinese-font">語言學習閱讀器</span>
+    </h2>
+
+    <ClassicalText sentences={swords_and_shields} on:study={(event) => alert(event.detail)} />
+  </div>
+
+  <div style="height: 30%; overflow-y: auto; padding: 1rem; border-top: 1px dashed gray;">
+    <ClassicalDefinitions character={'矛'} />
+  </div>
+</div>
+
+--10----------
+<script lang="ts">
+  import '../global.css';
+  import swords_and_shields from '../data/swords_and_shields.json';
+  import ClassicalText from './ClassicalText.svelte';
+  import ClassicalDefinitions from './ClassicalDefinitions.svelte';
+
+  let characterToStudy = '';
+</script>
+
+<div style="display: flex; flex-direction: column; height: 100%;">
+  <div style="height: 70%; overflow-y: auto;">
+    <h2 style="text-align: center;">
+      Language Learning Reader 
+      <span class="chinese-font">語言學習閱讀器</span>
+    </h2>
+
+    <ClassicalText sentences={swords_and_shields} on:study={(event) => (characterToStudy = event.detail)} />
+  </div>
+
+  <div style="height: 30%; overflow-y: auto; padding: 1rem; border-top: 1px dashed gray;">
+    <ClassicalDefinitions character={characterToStudy} />
   </div>
 </div>
 

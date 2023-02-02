@@ -69,6 +69,9 @@ reTypewriter Snapshots v1
   .box {
     padding: 0.5rem;
     border: 1px dashed lightgray;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
   }
 </style>
 
@@ -85,7 +88,7 @@ reTypewriter Snapshots v1
 
 {#each sentences as sentence}
   <div style="display: flex;">
-    <div style="flex: 2;" class="chinese-font box to-learn">
+    <div style="flex: 2;" class="chinese-font box">
       {#each sentence.classical as character}
         <div class="to-learn">
           {character}
@@ -105,12 +108,12 @@ reTypewriter Snapshots v1
   .box {
     padding: 0.5rem;
     border: 1px dashed lightgray;
-  }
-  .to-learn {
-    cursor: pointer;
     display: flex;
     flex-wrap: wrap;
     align-content: flex-start;
+  }
+  .to-learn {
+    cursor: pointer;
     font-size: 2rem;
   }
   .to-learn:hover {
@@ -131,10 +134,9 @@ reTypewriter Snapshots v1
 
 {#each sentences as sentence}
   <div style="display: flex;">
-    <div style="flex: 2;" class="chinese-font box to-learn"
-      on:click={() => alert(sentence.classical)}>
+    <div style="flex: 2;" class="chinese-font box">
       {#each sentence.classical as character}
-        <div class="to-learn" on:click|stopPropagation={() => alert(character)}>
+        <div class="to-learn" on:click={() => alert(character)}>
           {character}
         </div>
       {/each}
@@ -152,12 +154,112 @@ reTypewriter Snapshots v1
   .box {
     padding: 0.5rem;
     border: 1px dashed lightgray;
-  }
-  .to-learn {
-    cursor: pointer;
     display: flex;
     flex-wrap: wrap;
     align-content: flex-start;
+  }
+  .to-learn {
+    cursor: pointer;
+    font-size: 2rem;
+  }
+  .to-learn:hover {
+    background: hsla(0, 0%, 0%, 0.15);
+  }
+</style>
+
+--07----------
+<script lang="ts">
+  interface MultilingualSentence {
+    classical: string;
+    mandarin: string;
+    english: string;
+  }
+
+  export let sentences: MultilingualSentence[] = [];
+
+  import { createEventDispatcher } from 'svelte';
+  const dispatch = createEventDispatcher<{ study: string }>();
+</script>
+
+{#each sentences as sentence}
+  <div style="display: flex;">
+    <div style="flex: 2;" class="chinese-font box">
+      {#each sentence.classical as character}
+        <div class="to-learn" on:click={() => dispatch('study', character)}>
+          {character}
+        </div>
+      {/each}
+    </div>
+    <div style="flex: 1;" class="box">
+      {sentence.mandarin}
+    </div>
+    <div style="flex: 1;" class="box">
+      {sentence.english}
+    </div>
+  </div>
+{/each}
+
+<style>
+  .box {
+    padding: 0.5rem;
+    border: 1px dashed lightgray;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
+  }
+  .to-learn {
+    cursor: pointer;
+    font-size: 2rem;
+  }
+  .to-learn:hover {
+    background: hsla(0, 0%, 0%, 0.15);
+  }
+</style>
+
+--08----------
+<script lang="ts">
+  import Character from './Character.svelte';
+
+  interface MultilingualSentence {
+    classical: string;
+    mandarin: string;
+    english: string;
+  }
+
+  export let sentences: MultilingualSentence[] = [];
+
+  import { createEventDispatcher } from 'svelte';
+  const dispatch = createEventDispatcher<{ study: string }>();
+</script>
+
+{#each sentences as sentence}
+  <div style="display: flex;">
+    <div style="flex: 2;" class="chinese-font box">
+      {#each sentence.classical as character}
+        <div class="to-learn" on:click={() => dispatch('study', character)}>
+          <Character {character} />
+        </div>
+      {/each}
+    </div>
+    <div style="flex: 1;" class="box">
+      {sentence.mandarin}
+    </div>
+    <div style="flex: 1;" class="box">
+      {sentence.english}
+    </div>
+  </div>
+{/each}
+
+<style>
+  .box {
+    padding: 0.5rem;
+    border: 1px dashed lightgray;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
+  }
+  .to-learn {
+    cursor: pointer;
     font-size: 2rem;
   }
   .to-learn:hover {

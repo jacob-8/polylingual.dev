@@ -1,0 +1,159 @@
+reTypewriter Snapshots v1
+
+--01----------
+
+--02----------
+<script lang="ts">
+  export let character: string;
+</script>
+
+{character}
+
+--03----------
+<script lang="ts">
+  import type { ClassicalToMandarinDictionaryEntry } from "./ClassicalDefinitions.svelte";
+  import classical_to_mandarin_dictionary from "../data/classical_to_mandarin_dictionary_swords_shields.json";
+  const entries: ClassicalToMandarinDictionaryEntry[] = classical_to_mandarin_dictionary;
+  
+  export let character: string;
+
+  $: matchingEntry = entries.find((entry) => entry.word === character);
+  $: firstSense = matchingEntry?.explain
+    ? Object.entries(matchingEntry.explain)[0]
+    : null;
+  $: [pronunciation, explanations] = firstSense || ["", null];
+  $: firstExplanation = explanations?.[0] || "";
+  const isNotChinese = /[^\u4E00-\u9FA5]/g;
+  $: cleanExplanation = firstExplanation.replace(isNotChinese, "");
+  const charactersToShow = 6;
+  $: shortExplanation = cleanExplanation.slice(0, charactersToShow);
+</script>
+
+{character}, {pronunciation}, {shortExplanation}
+
+--04----------
+<script lang="ts">
+  import type { ClassicalToMandarinDictionaryEntry } from "./ClassicalDefinitions.svelte";
+  import classical_to_mandarin_dictionary from "../data/classical_to_mandarin_dictionary_swords_shields.json";
+  const entries: ClassicalToMandarinDictionaryEntry[] = classical_to_mandarin_dictionary;
+  
+  export let character: string;
+
+  $: matchingEntry = entries.find((entry) => entry.word === character);
+  $: firstSense = matchingEntry?.explain
+    ? Object.entries(matchingEntry.explain)[0]
+    : null;
+  $: [pronunciation, explanations] = firstSense || ["", null];
+  $: firstExplanation = explanations?.[0] || "";
+  const isNotChinese = /[^\u4E00-\u9FA5]/g;
+  $: cleanExplanation = firstExplanation.replace(isNotChinese, "");
+  const charactersToShow = 6;
+  $: shortExplanation = cleanExplanation.slice(0, charactersToShow);
+</script>
+
+<div style="width: 50px; text-align: center; margin-bottom: 12px;">
+  <div style="font-size: 50%; height: 1rem;">
+    {pronunciation}
+  </div>
+
+  <div class="chinese-font">
+    {character}
+  </div>
+
+  <div style="font-size: 40%;">
+    {shortExplanation}
+  </div>
+</div>
+
+--05----------
+<script lang="ts">
+  import type { ClassicalToMandarinDictionaryEntry } from "./ClassicalDefinitions.svelte";
+  import classical_to_mandarin_dictionary from "../data/classical_to_mandarin_dictionary_swords_shields.json";
+  const entries: ClassicalToMandarinDictionaryEntry[] = classical_to_mandarin_dictionary;
+  
+  export let character: string;
+
+  $: matchingEntry = entries.find((entry) => entry.word === character);
+  $: firstSense = matchingEntry?.explain
+    ? Object.entries(matchingEntry.explain)[0]
+    : null;
+  $: [pronunciation, explanations] = firstSense || ["", null];
+  $: firstExplanation = explanations?.[0] || "";
+  const isNotChinese = /[^\u4E00-\u9FA5]/g;
+  $: cleanExplanation = firstExplanation.replace(isNotChinese, "");
+  const charactersToShow = 6;
+  $: shortExplanation = cleanExplanation.slice(0, charactersToShow);
+
+  let knownCharacters = new Set(["人","有","陷","堅","能","物","又","何","以","不","可","同","世","立"]);
+  $: known = knownCharacters.has(character);
+</script>
+
+<div style="width: 50px; text-align: center; margin-bottom: 12px;">
+  <div style="font-size: 50%; height: 1rem;">
+    {#if !known}
+      {pronunciation}
+    {/if}
+  </div>
+
+  <div class="chinese-font">
+    {character}
+  </div>
+
+  <div style="font-size: 40%;">
+    {#if !known}
+      {shortExplanation}
+    {/if}
+  </div>
+</div>
+
+--06----------
+<script lang="ts">
+  import type { ClassicalToMandarinDictionaryEntry } from "./ClassicalDefinitions.svelte";
+  import classical_to_mandarin_dictionary from "../data/classical_to_mandarin_dictionary_swords_shields.json";
+  const entries: ClassicalToMandarinDictionaryEntry[] = classical_to_mandarin_dictionary;
+  
+  export let character: string;
+
+  $: matchingEntry = entries.find((entry) => entry.word === character);
+  $: firstSense = matchingEntry?.explain
+    ? Object.entries(matchingEntry.explain)[0]
+    : null;
+  $: [pronunciation, explanations] = firstSense || ["", null];
+  $: firstExplanation = explanations?.[0] || "";
+  const isNotChinese = /[^\u4E00-\u9FA5]/g;
+  $: cleanExplanation = firstExplanation.replace(isNotChinese, "");
+  const charactersToShow = 6;
+  $: shortExplanation = cleanExplanation.slice(0, charactersToShow);
+
+  let knownCharacters = new Set(["人","有","陷","堅","能","物","又","何","以","不","可","同","世","立"]);
+  $: known = knownCharacters.has(character);
+  
+  function toggle_known() {
+    if (known) {
+      knownCharacters.delete(character);
+    } else {
+      knownCharacters.add(character);
+    }
+    knownCharacters = knownCharacters;
+  }
+</script>
+
+<div style="width: 50px; text-align: center; margin-bottom: 12px;">
+  <div style="font-size: 50%; height: 1rem;">
+    {#if !known}
+      {pronunciation}
+    {/if}
+  </div>
+
+  <div class="chinese-font" on:contextmenu|preventDefault={toggle_known}>
+    {character}
+  </div>
+
+  <div style="font-size: 40%;">
+    {#if !known}
+      {shortExplanation}
+    {/if}
+  </div>
+</div>
+
+--------------
