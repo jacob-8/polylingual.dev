@@ -56,7 +56,7 @@
   <!-- svelte-ignore a11y-click-events-have-key-events -->
   <h1 class="grow px-1 truncate" on:click={() => (is_open = !is_open)}>
     <!-- {stage.location.project} -->
-    {prettifyName(stage.location.lesson)} <span class="opacity-30">/</span>
+    概念證明 {prettifyName(stage.location.lesson)} <span class="opacity-30">/</span>
     <strong class="text-blue-700">{prettifyName(stage.location.name)}</strong>
   </h1>
   {#if stage.next_stage_location}
@@ -92,7 +92,8 @@
               }
             }}
           >
-            {prettifyName(project.name)}
+            語言學習閱讀器 Language Learning Reader
+            <!-- {prettifyName(project.name)} -->
           </button>
 
           {#if projectExpanded}
@@ -105,7 +106,7 @@
                     on:click={() => (expanded_lesson = lesson.name)}
                   >
                     <span class:!rotate-90={lessonExpanded} class="i-carbon-chevron-right?bg" />
-                    {prettifyName(lesson.name)}
+                    概念證明 {prettifyName(lesson.name)}
                   </button>
 
                   {#if lessonExpanded}

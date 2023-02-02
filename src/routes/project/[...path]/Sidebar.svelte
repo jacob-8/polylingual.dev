@@ -32,7 +32,7 @@
       </div>
     {/if}
   </main>
-  <footer class="border-t p-3 mt-auto">
+  <footer class="border-t p-3 mt-auto flex">
     <a
       target="_blank"
       class="hover:underline"
@@ -42,5 +42,7 @@
       <span class="i-codicon-edit" />
       Edit this page
     </a>
+
+    <span class="ml-auto text-sm">Alt+T = EN/中</span>
   </footer>
 </div>

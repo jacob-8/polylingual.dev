@@ -14,12 +14,8 @@ Run the app with `pnpm dev` or `pnpm build && pnpm preview`.
 
 Projects live inside `projects`. Each project has a lesson consisting of stages which are each a markdown file, which is the instructions to the left, an `app` folder, which represents the initial  state along with corresponding steps files that will be referenced in the instructions markdown files. Files are marked as deleted in the finish state if their last step is blank.
 
-## TODO before first lesson
-
-- translate prose and stage titles
-- enlarge Chinese text if in both mode?
-
-## After first lesson
+## TODO
+- enlarge Chinese text if in both mode
 - adjust prose styles
 - update error page
 - add language toggle switch
