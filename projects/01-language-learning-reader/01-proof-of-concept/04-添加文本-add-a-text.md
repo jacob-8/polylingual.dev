@@ -8,7 +8,7 @@ Add an interface for a multilingual sentence with Classical Chinese, Mandarin, a
 > 我在構建組件時使用 `JSON.stringify` 輕鬆檢查數據。
 
 
-You may have noticed the `data` folder, which has a JSON file containing a small excerpt called "Swords and Shields" written by Hán Fēizǐ. Import this in our `+page.svelte` file and pass it to the `ClassicalText.svelte` component. :zh: 你可能已經註意到 `data` 文件夾，其中有一個 JSON 文件，有韓非子寫的名為《矛盾》的一小段摘錄。 將其導入我們的 `+page.svelte` 文件並將其給 `ClassicalText.svelte` 組件。
+You may have noticed the `data` folder, which has a JSON file containing a small excerpt called "Swords and Shields" written by Hán Fēi Zǐ (book of Legalist Philosophy authored by Hán Fēi 韓非 during the Warring States Period, 475-220 BC). Import this in our `+page.svelte` file and pass it to the `ClassicalText.svelte` component. :zh: 你可能已經註意到 `data` 文件夾，其中有一個 JSON 文件，有韓非子寫的名為《矛盾》的一小段摘錄。 將其導入我們的 `+page.svelte` 文件並將其給 `ClassicalText.svelte` 組件。
 
 [[src/routes/+page.svelte#06]]
 
