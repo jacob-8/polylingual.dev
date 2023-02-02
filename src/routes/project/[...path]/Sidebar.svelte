@@ -10,15 +10,15 @@
 
   let sidebar: HTMLElement;
 
-  afterNavigate(async () => {
+  afterNavigate(() => {
     sidebar.scrollTop = 0;
   });
 </script>
 
 <Menu {projects} {stage} />
 
-<div class="overflow-y-auto grow flex flex-col">
-  <main bind:this={sidebar} class="p-3">
+<div bind:this={sidebar} class="overflow-y-auto grow flex flex-col">
+  <main class="p-3">
     <Content {stage} />
 
     {#if stage.next_stage_location}

@@ -78,3 +78,5 @@ const casted = editor as IMyStandaloneCodeEditor;
 const range = new monaco.Range(1, 0, 1, 0);
 casted.setHiddenAreas([range]);
 ```
+
+Show custom feedback in certain lines: https://github.com/microsoft/monaco-editor/issues/1477#issuecomment-501220514
