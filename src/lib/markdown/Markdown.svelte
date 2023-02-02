@@ -7,11 +7,12 @@
 
   export let markdown: string;
 
-  $: chineseOnlyMarkdown = markdown.replace(/^.*:zh:/gm, '');
-  $: englishOnlyMarkdown = markdown.replace(/:zh:.*$/gm, '');
+  $: chineseOnlyMarkdown = markdown.replace(/^.*:zh:/gm, ''); 
+  // [^->] do not wype out initial list hyphen or blockquote caret // TODO: Fix 05-display-sentences without breaking code samples
+  $: englishOnlyMarkdown = markdown.replace(/:zh:.*/gm, '');
   $: bothLanguagesMarkdown = markdown.replace(/:zh:/gm, '\n\n');
 
-  let language: 'both' | 'en' | 'zh' = dev ? 'both' : 'zh';
+  let language: 'both' | 'en' | 'zh' = !dev ? 'both' : 'zh';
   $: source =
     language === 'both'
       ? bothLanguagesMarkdown
@@ -29,8 +30,8 @@
       } else {
         language = 'both';
       }
+      event.preventDefault();
     }
-    event.preventDefault();
   }
 </script>
 

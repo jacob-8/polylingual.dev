@@ -60,7 +60,7 @@ reTypewriter Snapshots v1
   <div style="height: 70%;">
     <h2 style="text-align: center;">
       Language Learning Reader 
-      <span class="chinese-font">語言學習閱讀器</span>
+      <span class="chinese_font">語言學習閱讀器</span>
     </h2>
   </div>
 
@@ -80,7 +80,7 @@ reTypewriter Snapshots v1
   <div style="height: 70%;">
     <h2 style="text-align: center;">
       Language Learning Reader 
-      <span class="chinese-font">語言學習閱讀器</span>
+      <span class="chinese_font">語言學習閱讀器</span>
     </h2>
 
     <ClassicalText sentences={swords_and_shields} />
@@ -102,7 +102,7 @@ reTypewriter Snapshots v1
   <div style="height: 70%; overflow-y: auto;">
     <h2 style="text-align: center;">
       Language Learning Reader 
-      <span class="chinese-font">語言學習閱讀器</span>
+      <span class="chinese_font">語言學習閱讀器</span>
     </h2>
 
     <ClassicalText sentences={swords_and_shields} />
@@ -125,7 +125,7 @@ reTypewriter Snapshots v1
   <div style="height: 70%; overflow-y: auto;">
     <h2 style="text-align: center;">
       Language Learning Reader 
-      <span class="chinese-font">語言學習閱讀器</span>
+      <span class="chinese_font">語言學習閱讀器</span>
     </h2>
 
     <ClassicalText sentences={swords_and_shields} />
@@ -148,7 +148,7 @@ reTypewriter Snapshots v1
   <div style="height: 70%; overflow-y: auto;">
     <h2 style="text-align: center;">
       Language Learning Reader 
-      <span class="chinese-font">語言學習閱讀器</span>
+      <span class="chinese_font">語言學習閱讀器</span>
     </h2>
 
     <ClassicalText sentences={swords_and_shields} on:study={(event) => alert(event.detail)} />
@@ -173,7 +173,7 @@ reTypewriter Snapshots v1
   <div style="height: 70%; overflow-y: auto;">
     <h2 style="text-align: center;">
       Language Learning Reader 
-      <span class="chinese-font">語言學習閱讀器</span>
+      <span class="chinese_font">語言學習閱讀器</span>
     </h2>
 
     <ClassicalText sentences={swords_and_shields} on:study={(event) => (characterToStudy = event.detail)} />

@@ -56,7 +56,7 @@ reTypewriter Snapshots v1
     {pronunciation}
   </div>
 
-  <div class="chinese-font">
+  <div class="chinese_font">
     {character}
   </div>
 
@@ -95,7 +95,7 @@ reTypewriter Snapshots v1
     {/if}
   </div>
 
-  <div class="chinese-font">
+  <div class="chinese_font">
     {character}
   </div>
 
@@ -145,7 +145,7 @@ reTypewriter Snapshots v1
     {/if}
   </div>
 
-  <div class="chinese-font" on:contextmenu|preventDefault={toggle_known}>
+  <div class="chinese_font" on:contextmenu|preventDefault={toggle_known}>
     {character}
   </div>
 

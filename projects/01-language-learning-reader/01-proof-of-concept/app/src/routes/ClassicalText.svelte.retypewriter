@@ -28,7 +28,7 @@ reTypewriter Snapshots v1
 
 {#each sentences as sentence}
   <div style="display: flex;">
-    <div style="flex: 1;" class="chinese-font">
+    <div style="flex: 1;" class="chinese_font">
       {sentence.classical}
     </div>
     <div style="flex: 1;">
@@ -53,7 +53,7 @@ reTypewriter Snapshots v1
 
 {#each sentences as sentence}
   <div style="display: flex;">
-    <div style="flex: 2;" class="chinese-font box">
+    <div style="flex: 2;" class="chinese_font box">
       {sentence.classical}
     </div>
     <div style="flex: 1;" class="box">
@@ -88,7 +88,7 @@ reTypewriter Snapshots v1
 
 {#each sentences as sentence}
   <div style="display: flex;">
-    <div style="flex: 2;" class="chinese-font box">
+    <div style="flex: 2;" class="chinese_font box">
       {#each sentence.classical as character}
         <div class="to-learn">
           {character}
@@ -134,7 +134,7 @@ reTypewriter Snapshots v1
 
 {#each sentences as sentence}
   <div style="display: flex;">
-    <div style="flex: 2;" class="chinese-font box">
+    <div style="flex: 2;" class="chinese_font box">
       {#each sentence.classical as character}
         <div class="to-learn" on:click={() => alert(character)}>
           {character}
@@ -183,7 +183,7 @@ reTypewriter Snapshots v1
 
 {#each sentences as sentence}
   <div style="display: flex;">
-    <div style="flex: 2;" class="chinese-font box">
+    <div style="flex: 2;" class="chinese_font box">
       {#each sentence.classical as character}
         <div class="to-learn" on:click={() => dispatch('study', character)}>
           {character}
@@ -234,7 +234,7 @@ reTypewriter Snapshots v1
 
 {#each sentences as sentence}
   <div style="display: flex;">
-    <div style="flex: 2;" class="chinese-font box">
+    <div style="flex: 2;" class="chinese_font box">
       {#each sentence.classical as character}
         <div class="to-learn" on:click={() => dispatch('study', character)}>
           <Character {character} />

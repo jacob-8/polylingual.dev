@@ -16,16 +16,13 @@ Projects live inside `projects`. Each project has a lesson consisting of stages 
 
 ## TODO before first lesson
 
-- simplify variable names
-- place steps into stages
-- write prose for stages
-- translate prose
-- handle multilingual :zh markers in content w/ toggle switch
-- adjust prose styles
-- pretty print stage titles
-- update error page
+- translate prose and stage titles
+- enlarge Chinese text if in both mode?
 
 ## After first lesson
+- adjust prose styles
+- update error page
+- add language toggle switch
 - handle scroll to top on stage navigation
 - auto focus on file in first step (unless it's adding a file)
 - add i18n

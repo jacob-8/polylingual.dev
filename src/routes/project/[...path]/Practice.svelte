@@ -88,6 +88,7 @@
     {#if browser}
       <Stackblitz
         hideExplorer={false}
+        hideNavigation={true}
         title={`${stage.location.project}, ${stage.location.lesson}, ${stage.location.name}`}
         files={$files}
       />

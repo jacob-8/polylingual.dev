@@ -7,7 +7,7 @@ reTypewriter Snapshots v1
   export let character: string;
 </script>
 
-<div class="chinese-font" style="font-size: 2rem;">
+<div class="chinese_font" style="font-size: 2rem;">
   {character}
 </div>
 
@@ -28,7 +28,7 @@ reTypewriter Snapshots v1
   export let character: string;
 </script>
 
-<div class="chinese-font" style="font-size: 2rem;">
+<div class="chinese_font" style="font-size: 2rem;">
   {character}
 </div>
 
@@ -51,7 +51,7 @@ reTypewriter Snapshots v1
   $: matchingEntry = entries.find((entry) => entry.word === character)
 </script>
 
-<div class="chinese-font" style="font-size: 2rem;">
+<div class="chinese_font" style="font-size: 2rem;">
   {character}
 </div>
 
@@ -76,7 +76,7 @@ reTypewriter Snapshots v1
   $: matchingEntry = entries.find((entry) => entry.word === character)
 </script>
 
-<div class="chinese-font" style="font-size: 2rem;">
+<div class="chinese_font" style="font-size: 2rem;">
   {character}
   {#if matchingEntry}
     {#each Object.entries(matchingEntry.explain) as [pronuncation, explanations]}
@@ -113,7 +113,7 @@ reTypewriter Snapshots v1
   $: matchingEntry = entries.find((entry) => entry.word === character)
 </script>
 
-<div class="chinese-font" style="font-size: 2rem; display: flex;">
+<div class="chinese_font" style="font-size: 2rem; display: flex;">
   {character}
   {#if matchingEntry}
     <div style="font-size: 75%; margin-left: 8px; width: 100%;">
