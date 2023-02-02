@@ -12,17 +12,18 @@ reTypewriter Snapshots v1
 </div>
 
 --03----------
-<script lang="ts">
-  import classical_to_mandarin_dictionary from '../data/classical_to_mandarin_dictionary_swords_shields.json';
-
-  interface ClassicalToMandarinDictionaryEntry {
+<script lang="ts" context="module">
+  export interface ClassicalToMandarinDictionaryEntry {
     word: string;
     explain: {
       [pronunciation: string]: string[];
     };
     url: string;
   }
+</script>
 
+<script lang="ts">
+  import classical_to_mandarin_dictionary from '../data/classical_to_mandarin_dictionary_swords_shields.json';
   const entries: ClassicalToMandarinDictionaryEntry[] =	classical_to_mandarin_dictionary;
 
   export let character: string;
@@ -33,17 +34,18 @@ reTypewriter Snapshots v1
 </div>
 
 --04----------
-<script lang="ts">
-  import classical_to_mandarin_dictionary from '../data/classical_to_mandarin_dictionary_swords_shields.json';
-
-  interface ClassicalToMandarinDictionaryEntry {
+<script lang="ts" context="module">
+  export interface ClassicalToMandarinDictionaryEntry {
     word: string;
     explain: {
       [pronunciation: string]: string[];
     };
     url: string;
   }
+</script>
 
+<script lang="ts">
+  import classical_to_mandarin_dictionary from '../data/classical_to_mandarin_dictionary_swords_shields.json';
   const entries: ClassicalToMandarinDictionaryEntry[] =	classical_to_mandarin_dictionary;
   
   export let character: string;
@@ -58,17 +60,18 @@ reTypewriter Snapshots v1
 <pre>{JSON.stringify(matching_entry, null, 2)}</pre>
 
 --05----------
-<script lang="ts">
-  import classical_to_mandarin_dictionary from '../data/classical_to_mandarin_dictionary_swords_shields.json';
-
-  interface ClassicalToMandarinDictionaryEntry {
+<script lang="ts" context="module">
+  export interface ClassicalToMandarinDictionaryEntry {
     word: string;
     explain: {
       [pronunciation: string]: string[];
     };
     url: string;
   }
+</script>
 
+<script lang="ts">
+  import classical_to_mandarin_dictionary from '../data/classical_to_mandarin_dictionary_swords_shields.json';
   const entries: ClassicalToMandarinDictionaryEntry[] =	classical_to_mandarin_dictionary;
   
   export let character: string;
@@ -95,17 +98,18 @@ reTypewriter Snapshots v1
 <pre>{JSON.stringify(matching_entry, null, 2)}</pre>
 
 --06----------
-<script lang="ts">
-  import classical_to_mandarin_dictionary from '../data/classical_to_mandarin_dictionary_swords_shields.json';
-
-  interface ClassicalToMandarinDictionaryEntry {
+<script lang="ts" context="module">
+  export interface ClassicalToMandarinDictionaryEntry {
     word: string;
     explain: {
       [pronunciation: string]: string[];
     };
     url: string;
   }
+</script>
 
+<script lang="ts">
+  import classical_to_mandarin_dictionary from '../data/classical_to_mandarin_dictionary_swords_shields.json';
   const entries: ClassicalToMandarinDictionaryEntry[] =	classical_to_mandarin_dictionary;
   
   export let character: string;
