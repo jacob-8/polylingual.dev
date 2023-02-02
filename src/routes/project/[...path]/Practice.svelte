@@ -58,8 +58,8 @@
           >
             {#if completed}
               復原
-              <!-- reset -->
               <!-- 重置 -->
+              <!-- reset -->
             {:else}
               解決
               <!-- solve -->
