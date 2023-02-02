@@ -90,7 +90,7 @@ reTypewriter Snapshots v1
   <div style="display: flex;">
     <div style="flex: 2;" class="chinese_font box">
       {#each sentence.classical as character}
-        <div class="to-learn">
+        <div class="to_learn">
           {character}
         </div>
       {/each}
@@ -112,11 +112,11 @@ reTypewriter Snapshots v1
     flex-wrap: wrap;
     align-content: flex-start;
   }
-  .to-learn {
+  .to_learn {
     cursor: pointer;
     font-size: 2rem;
   }
-  .to-learn:hover {
+  .to_learn:hover {
     background: hsla(0, 0%, 0%, 0.15);
   }
 </style>
@@ -136,7 +136,7 @@ reTypewriter Snapshots v1
   <div style="display: flex;">
     <div style="flex: 2;" class="chinese_font box">
       {#each sentence.classical as character}
-        <div class="to-learn" on:click={() => alert(character)}>
+        <div class="to_learn" on:click={() => alert(character)}>
           {character}
         </div>
       {/each}
@@ -158,11 +158,11 @@ reTypewriter Snapshots v1
     flex-wrap: wrap;
     align-content: flex-start;
   }
-  .to-learn {
+  .to_learn {
     cursor: pointer;
     font-size: 2rem;
   }
-  .to-learn:hover {
+  .to_learn:hover {
     background: hsla(0, 0%, 0%, 0.15);
   }
 </style>
@@ -185,7 +185,7 @@ reTypewriter Snapshots v1
   <div style="display: flex;">
     <div style="flex: 2;" class="chinese_font box">
       {#each sentence.classical as character}
-        <div class="to-learn" on:click={() => dispatch('study', character)}>
+        <div class="to_learn" on:click={() => dispatch('study', character)}>
           {character}
         </div>
       {/each}
@@ -207,11 +207,11 @@ reTypewriter Snapshots v1
     flex-wrap: wrap;
     align-content: flex-start;
   }
-  .to-learn {
+  .to_learn {
     cursor: pointer;
     font-size: 2rem;
   }
-  .to-learn:hover {
+  .to_learn:hover {
     background: hsla(0, 0%, 0%, 0.15);
   }
 </style>
@@ -236,7 +236,7 @@ reTypewriter Snapshots v1
   <div style="display: flex;">
     <div style="flex: 2;" class="chinese_font box">
       {#each sentence.classical as character}
-        <div class="to-learn" on:click={() => dispatch('study', character)}>
+        <div class="to_learn" on:click={() => dispatch('study', character)}>
           <Character {character} />
         </div>
       {/each}
@@ -258,11 +258,11 @@ reTypewriter Snapshots v1
     flex-wrap: wrap;
     align-content: flex-start;
   }
-  .to-learn {
+  .to_learn {
     cursor: pointer;
     font-size: 2rem;
   }
-  .to-learn:hover {
+  .to_learn:hover {
     background: hsla(0, 0%, 0%, 0.15);
   }
 </style>

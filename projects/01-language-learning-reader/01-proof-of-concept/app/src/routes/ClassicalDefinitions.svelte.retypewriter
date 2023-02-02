@@ -48,14 +48,14 @@ reTypewriter Snapshots v1
   
   export let character: string;
 
-  $: matchingEntry = entries.find((entry) => entry.word === character)
+  $: matching_entry = entries.find((entry) => entry.word === character)
 </script>
 
 <div class="chinese_font" style="font-size: 2rem;">
   {character}
 </div>
 
-<pre>{JSON.stringify(matchingEntry, null, 2)}</pre>
+<pre>{JSON.stringify(matching_entry, null, 2)}</pre>
 
 --05----------
 <script lang="ts">
@@ -73,13 +73,13 @@ reTypewriter Snapshots v1
   
   export let character: string;
 
-  $: matchingEntry = entries.find((entry) => entry.word === character)
+  $: matching_entry = entries.find((entry) => entry.word === character)
 </script>
 
 <div class="chinese_font" style="font-size: 2rem;">
   {character}
-  {#if matchingEntry}
-    {#each Object.entries(matchingEntry.explain) as [pronuncation, explanations]}
+  {#if matching_entry}
+    {#each Object.entries(matching_entry.explain) as [pronuncation, explanations]}
       {pronuncation}
       <div>
         {#each explanations as explanation}
@@ -92,7 +92,7 @@ reTypewriter Snapshots v1
   {/if}
 </div>
 
-<pre>{JSON.stringify(matchingEntry, null, 2)}</pre>
+<pre>{JSON.stringify(matching_entry, null, 2)}</pre>
 
 --06----------
 <script lang="ts">
@@ -110,14 +110,14 @@ reTypewriter Snapshots v1
   
   export let character: string;
 
-  $: matchingEntry = entries.find((entry) => entry.word === character)
+  $: matching_entry = entries.find((entry) => entry.word === character)
 </script>
 
 <div class="chinese_font" style="font-size: 2rem; display: flex;">
   {character}
-  {#if matchingEntry}
+  {#if matching_entry}
     <div style="font-size: 75%; margin-left: 8px; width: 100%;">
-      {#each Object.entries(matchingEntry.explain) as [pronuncation, explanations]}
+      {#each Object.entries(matching_entry.explain) as [pronuncation, explanations]}
         <div style="display: flex;">
           {pronuncation}
           <div style="width: 100%; margin: 2px 2px 2px 8px; padding: 2px; border: 1px dashed lightgray;">

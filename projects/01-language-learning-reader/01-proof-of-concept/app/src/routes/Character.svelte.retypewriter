@@ -17,19 +17,19 @@ reTypewriter Snapshots v1
   
   export let character: string;
 
-  $: matchingEntry = entries.find((entry) => entry.word === character);
-  $: firstSense = matchingEntry?.explain
-    ? Object.entries(matchingEntry.explain)[0]
+  $: matching_entry = entries.find((entry) => entry.word === character);
+  $: first_sense = matching_entry?.explain
+    ? Object.entries(matching_entry.explain)[0]
     : null;
-  $: [pronunciation, explanations] = firstSense || ["", null];
-  $: firstExplanation = explanations?.[0] || "";
-  const isNotChinese = /[^\u4E00-\u9FA5]/g;
-  $: cleanExplanation = firstExplanation.replace(isNotChinese, "");
-  const charactersToShow = 6;
-  $: shortExplanation = cleanExplanation.slice(0, charactersToShow);
+  $: [pronunciation, explanations] = first_sense || ["", null];
+  $: first_explanation = explanations?.[0] || "";
+  const is_not_chinese = /[^\u4E00-\u9FA5]/g;
+  $: clean_explanation = first_explanation.replace(is_not_chinese, "");
+  const CHARACTERS_TO_SHOW = 6;
+  $: short_explanation = clean_explanation.slice(0, CHARACTERS_TO_SHOW);
 </script>
 
-{character}, {pronunciation}, {shortExplanation}
+{character}, {pronunciation}, {short_explanation}
 
 --04----------
 <script lang="ts">
@@ -39,16 +39,16 @@ reTypewriter Snapshots v1
   
   export let character: string;
 
-  $: matchingEntry = entries.find((entry) => entry.word === character);
-  $: firstSense = matchingEntry?.explain
-    ? Object.entries(matchingEntry.explain)[0]
+  $: matching_entry = entries.find((entry) => entry.word === character);
+  $: first_sense = matching_entry?.explain
+    ? Object.entries(matching_entry.explain)[0]
     : null;
-  $: [pronunciation, explanations] = firstSense || ["", null];
-  $: firstExplanation = explanations?.[0] || "";
-  const isNotChinese = /[^\u4E00-\u9FA5]/g;
-  $: cleanExplanation = firstExplanation.replace(isNotChinese, "");
-  const charactersToShow = 6;
-  $: shortExplanation = cleanExplanation.slice(0, charactersToShow);
+  $: [pronunciation, explanations] = first_sense || ["", null];
+  $: first_explanation = explanations?.[0] || "";
+  const is_not_chinese = /[^\u4E00-\u9FA5]/g;
+  $: clean_explanation = first_explanation.replace(is_not_chinese, "");
+  const CHARACTERS_TO_SHOW = 6;
+  $: short_explanation = clean_explanation.slice(0, CHARACTERS_TO_SHOW);
 </script>
 
 <div style="width: 50px; text-align: center; margin-bottom: 12px;">
@@ -60,8 +60,8 @@ reTypewriter Snapshots v1
     {character}
   </div>
 
-  <div style="font-size: 40%;">
-    {shortExplanation}
+  <div style="font-size: 45%;">
+    {short_explanation}
   </div>
 </div>
 
@@ -73,19 +73,19 @@ reTypewriter Snapshots v1
   
   export let character: string;
 
-  $: matchingEntry = entries.find((entry) => entry.word === character);
-  $: firstSense = matchingEntry?.explain
-    ? Object.entries(matchingEntry.explain)[0]
+  $: matching_entry = entries.find((entry) => entry.word === character);
+  $: first_sense = matching_entry?.explain
+    ? Object.entries(matching_entry.explain)[0]
     : null;
-  $: [pronunciation, explanations] = firstSense || ["", null];
-  $: firstExplanation = explanations?.[0] || "";
-  const isNotChinese = /[^\u4E00-\u9FA5]/g;
-  $: cleanExplanation = firstExplanation.replace(isNotChinese, "");
-  const charactersToShow = 6;
-  $: shortExplanation = cleanExplanation.slice(0, charactersToShow);
+  $: [pronunciation, explanations] = first_sense || ["", null];
+  $: first_explanation = explanations?.[0] || "";
+  const is_not_chinese = /[^\u4E00-\u9FA5]/g;
+  $: clean_explanation = first_explanation.replace(is_not_chinese, "");
+  const CHARACTERS_TO_SHOW = 6;
+  $: short_explanation = clean_explanation.slice(0, CHARACTERS_TO_SHOW);
 
-  let knownCharacters = new Set(["人","有","陷","堅","能","物","又","何","以","不","可","同","世","立"]);
-  $: known = knownCharacters.has(character);
+  let known_characters = new Set(["人","有","陷","堅","能","物","又","何","以","不","可","同","世","立"]);
+  $: known = known_characters.has(character);
 </script>
 
 <div style="width: 50px; text-align: center; margin-bottom: 12px;">
@@ -99,9 +99,9 @@ reTypewriter Snapshots v1
     {character}
   </div>
 
-  <div style="font-size: 40%;">
+  <div style="font-size: 45%;">
     {#if !known}
-      {shortExplanation}
+      {short_explanation}
     {/if}
   </div>
 </div>
@@ -114,27 +114,27 @@ reTypewriter Snapshots v1
   
   export let character: string;
 
-  $: matchingEntry = entries.find((entry) => entry.word === character);
-  $: firstSense = matchingEntry?.explain
-    ? Object.entries(matchingEntry.explain)[0]
+  $: matching_entry = entries.find((entry) => entry.word === character);
+  $: first_sense = matching_entry?.explain
+    ? Object.entries(matching_entry.explain)[0]
     : null;
-  $: [pronunciation, explanations] = firstSense || ["", null];
-  $: firstExplanation = explanations?.[0] || "";
-  const isNotChinese = /[^\u4E00-\u9FA5]/g;
-  $: cleanExplanation = firstExplanation.replace(isNotChinese, "");
-  const charactersToShow = 6;
-  $: shortExplanation = cleanExplanation.slice(0, charactersToShow);
+  $: [pronunciation, explanations] = first_sense || ["", null];
+  $: first_explanation = explanations?.[0] || "";
+  const is_not_chinese = /[^\u4E00-\u9FA5]/g;
+  $: clean_explanation = first_explanation.replace(is_not_chinese, "");
+  const CHARACTERS_TO_SHOW = 6;
+  $: short_explanation = clean_explanation.slice(0, CHARACTERS_TO_SHOW);
 
-  let knownCharacters = new Set(["人","有","陷","堅","能","物","又","何","以","不","可","同","世","立"]);
-  $: known = knownCharacters.has(character);
+  let known_characters = new Set(["人","有","陷","堅","能","物","又","何","以","不","可","同","世","立"]);
+  $: known = known_characters.has(character);
   
   function toggle_known() {
     if (known) {
-      knownCharacters.delete(character);
+      known_characters.delete(character);
     } else {
-      knownCharacters.add(character);
+      known_characters.add(character);
     }
-    knownCharacters = knownCharacters;
+    known_characters = known_characters;
   }
 </script>
 
@@ -149,9 +149,9 @@ reTypewriter Snapshots v1
     {character}
   </div>
 
-  <div style="font-size: 40%;">
+  <div style="font-size: 45%;">
     {#if !known}
-      {shortExplanation}
+      {short_explanation}
     {/if}
   </div>
 </div>

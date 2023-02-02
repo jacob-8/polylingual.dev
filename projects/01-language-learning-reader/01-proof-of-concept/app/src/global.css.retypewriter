@@ -18,8 +18,8 @@ html, body {
 
 .chinese_font {
   font-family: 'biao_kaiti_windows', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI',
-    Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji',
-    'Segoe UI Emoji', 'Segoe UI Symbol';
+    Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif;
+  font-weight: 400;
 }
 
 @font-face {
