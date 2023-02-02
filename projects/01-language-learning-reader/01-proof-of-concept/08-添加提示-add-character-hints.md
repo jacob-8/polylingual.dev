@@ -14,5 +14,5 @@ Now let's style it. :zh: 現在讓我們設計它。
 
 [[src/routes/Character.svelte#04]]
 
-You'll notice that definitions for a few characters like "與" do not exist in our minimal dictionary. That may be because the meaning hasn't changed much between Classical and modern usage. In a full featured app we would catch this omission with either a small notice, or with a definiton from a modern Mandarin dictionary, but our purpose here is to create a quick and simple "proof of concept". :zh: 你會注意到像“與”這樣的幾個字符的定義在我們的最小字典中不存在。 這可能是因為含義在古典用法和現代用法之間沒有太大變化。 在一個功能齊全的應用程序中，我們會通過一個小通知或現代普通話詞典中的定義來捕捉這個遺漏，但我們在這裡的目的是創建一個快速簡單的“概念證明”。
+You'll notice that definitions for a few characters like "與" do not exist in our minimal dictionary. That may be because the meaning hasn't changed much between Classical and modern usage. In a full featured website we would catch this omission with either a small notice, or with a definiton from a modern Mandarin dictionary, but our purpose here is to create a quick and simple "proof of concept". :zh: 你會注意到像“與”這樣的幾個字符的定義在我們的最小字典中不存在。 這可能是因為含義在古典用法和現代用法之間沒有太大變化。 在一個功能齊全的網站中，我們會通過一個小通知或現代普通話詞典中的定義來捕捉這個遺漏，但我們在這裡的目的是創建一個快速簡單的“驗證”。
 

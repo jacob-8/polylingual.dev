@@ -36,3 +36,7 @@ Projects live inside `projects`. Each project has a lesson consisting of stages 
 Since we have no control over the iframe permissions, clipboard read and writes can't be done programmatically. If the following could be set properly there's a chance it could be workable:
 - `<iframe src="..." allow="clipboard-read; clipboard-write"></iframe>`
 - `clipboard-read self ${URL}; clipboard-write self ${URL};`
+
+## Terms
+
+- 網頁應用程式
