@@ -12,7 +12,7 @@
   $: englishOnlyMarkdown = markdown.replace(/:zh:.*/gm, '');
   $: bothLanguagesMarkdown = markdown.replace(/:zh:/gm, '\n\n');
 
-  let language: 'both' | 'en' | 'zh' = !dev ? 'both' : 'zh';
+  let language: 'both' | 'en' | 'zh' = dev ? 'both' : 'zh';
   $: source =
     language === 'both'
       ? bothLanguagesMarkdown
