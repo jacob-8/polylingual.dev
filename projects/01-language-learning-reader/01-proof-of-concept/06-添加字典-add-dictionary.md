@@ -14,7 +14,7 @@ Now let's lookup our character in the dictionary. :zh: 現在讓我們在字典�
 
 [[src/routes/ClassicalDefinitions.svelte#04]]
 
-Let's take that data and display it next to our character in a useful manner. You noticed that our character in focus is bolded with html so we'll use the `@html` syntax to render that properly. :zh: 讓我們獲取該數據並以有用的方式將其顯示在我們的角色旁邊。 您注意到我們的焦點字符用 html 加粗，因此我們將使用 `@html` 語法正確呈現它。
+Let's take that data and display it next to our character in a useful manner. You noticed that our character in focus is bolded with html so we'll use the `@html` syntax to render that properly. :zh: 讓我們獲取該數據並以有用的方式將其顯示在我們的角色旁邊。 你注意到我們的焦點字符用 html 加粗，因此我們將使用 `@html` 語法正確呈現它。
 
 [[src/routes/ClassicalDefinitions.svelte#05]]
 

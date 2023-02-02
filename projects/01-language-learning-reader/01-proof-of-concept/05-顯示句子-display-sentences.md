@@ -8,7 +8,7 @@ Let's turn that data into something useful by looping over it sentence by senten
 
 > If you are new to [Svelte](https://svelte.dev/) and want to understand better how to use its syntax, for example `{#each items as item}{item}{/each}`, please take some time to go through the [Svelte tutorial](https://svelte.dev/tutorial/basics). Afterwards, you can learn more about [SvelteKit](https://kit.svelte.dev/) using [learn.svelte.dev](https://learn.svelte.dev/), *of which this site is modeled after*. :zh:
 
-> 如果您是 [Svelte](https://svelte.dev/) 的新手並且想更好地了解如何使用它的語法，例如`{#each items as item}{item}{/each}`，請閱讀 花點時間閱讀 [Svelte 教程](https://svelte.dev/tutorial/basics)。 之後，您可以使用 [learn.svelte.dev](https://learn.svelte.dev/) 了解有關 [SvelteKit](https://kit.svelte.dev/) 的更多信息，*此站點是仿照的 後*。
+> 如果你是 [Svelte](https://svelte.dev/) 的新手並且想更好地了解如何使用它的語法，例如`{#each items as item}{item}{/each}`，請閱讀 花點時間閱讀 [Svelte 教程](https://svelte.dev/tutorial/basics)。 之後，你可以使用 [learn.svelte.dev](https://learn.svelte.dev/) 了解有關 [SvelteKit](https://kit.svelte.dev/) 的更多信息，*此站點是仿照的 後*。
 
 Place a border around each sentence and give the Classical text a little more space. :zh: 在每個句子周圍放置一個邊框，並給經典文本多一點空間。
 

@@ -43,6 +43,6 @@
       Edit this page
     </a>
 
-    <span class="ml-auto text-sm">Alt+T = EN/中</span>
+    <span class="ml-auto text-sm hidden md:block">Alt+T = EN/中</span>
   </footer>
 </div>
