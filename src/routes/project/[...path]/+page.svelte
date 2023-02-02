@@ -49,7 +49,7 @@
         type="button"
         on:click={() => (mobile_view = 'preview')}
       >
-        結果
+        成果
         <!-- Preview -->
       </button>
     </Header>
