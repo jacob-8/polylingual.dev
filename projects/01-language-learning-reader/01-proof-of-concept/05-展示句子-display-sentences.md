@@ -18,7 +18,7 @@ Let's emphasize our Classical text by using the `.chinese_font` class. We also w
 
 [[src/routes/ClassicalText.svelte#05]]
 
-Then we'll show a simple alert on character click so we know that we're heading the right direction. :zh: 然後我們將在字符單擊時顯示一個簡單的警報/通知，所以我們知道我們正朝著正確的方向前進。
+Then we'll show a simple alert on character click so we know that we're heading the right direction. :zh: 然後我們將在字單擊時顯示一個簡單的警報/通知，所以我們知道我們正朝著正確的方向前進。
 
 [[src/routes/ClassicalText.svelte#06]]
 

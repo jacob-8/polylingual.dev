@@ -1,4 +1,4 @@
-Now let's add a dictionary component named `ClassicalDefinitions.svelte` that will help us to study the unknown characters we click on. We'll start by simply exporting a `character` property and then displaying that using our `chinese_font` class at a larger size. :zh: 添加一個名為 `ClassicalDefinitions.svelte` 的字典組件，這將幫助我們了解未知字符。 我們將從簡單地導出一個 `character` 屬性開始。然後使用我們的 `.chinese_font` 類以更大的尺寸顯示它。
+Now let's add a dictionary component named `ClassicalDefinitions.svelte` that will help us to study the unknown characters we click on. We'll start by simply exporting a `character` property and then displaying that using our `chinese_font` class at a larger size. :zh: 添加一個名為 `ClassicalDefinitions.svelte` 的字典組件，這將幫助我們了解未知字。 我們將從簡單地導出一個 `character` 屬性開始。然後使用我們的 `.chinese_font` 類以更大的尺寸顯示它。
 
 [[src/routes/ClassicalDefinitions.svelte#02]]
 
@@ -10,7 +10,7 @@ We also have a minimal Classical Chinese to Mandarin Chinese dictionary prepared
 
 [[src/routes/ClassicalDefinitions.svelte#03]]
 
-Now let's lookup our character in the dictionary. :zh: 在字典中查找我們的字符。
+Now let's lookup our character in the dictionary. :zh: 在字典中查找我們的字。
 
 [[src/routes/ClassicalDefinitions.svelte#04]]
 
