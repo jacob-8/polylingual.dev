@@ -84,7 +84,7 @@ reTypewriter Snapshots v1
   const CHARACTERS_TO_SHOW = 6;
   $: short_explanation = clean_explanation.slice(0, CHARACTERS_TO_SHOW);
 
-  let known_characters = new Set(["人","有","陷","堅","能","物","又","何","以","不","可","同","世","立"]);
+  let known_characters = new Set(["之", "者", "子", "人","有","陷","堅","能","物","又","何","以","不","可","同","世","立"]);
   $: known = known_characters.has(character);
 </script>
 
@@ -125,7 +125,7 @@ reTypewriter Snapshots v1
   const CHARACTERS_TO_SHOW = 6;
   $: short_explanation = clean_explanation.slice(0, CHARACTERS_TO_SHOW);
 
-  let known_characters = new Set(["人","有","陷","堅","能","物","又","何","以","不","可","同","世","立"]);
+  let known_characters = new Set(["之", "者", "子", "人","有","陷","堅","能","物","又","何","以","不","可","同","世","立"]);
   $: known = known_characters.has(character);
   
   function toggle_known() {
