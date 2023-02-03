@@ -10,8 +10,9 @@
 
   let sidebar: HTMLElement;
 
-  afterNavigate(() => {
-    sidebar.scrollTop = 0;
+  afterNavigate(navigation => {
+    if (navigation.from?.params?.path !== navigation.to?.params?.path)
+      sidebar.scrollTop = 0;
   });
 </script>
 

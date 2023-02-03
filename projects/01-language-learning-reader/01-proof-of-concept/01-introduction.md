@@ -19,7 +19,7 @@ To build a web application we start with the **end** in mind, we determine our g
   - We will find it easier to read difficult material. :zh: 
   - 我們會發現閱讀困難的材料會更容易。
 
-Now that we know what we are going to build, I want you to join me in writing every single line of code, frontend and backend, so you can become better at building useful web applications. Then, if you're a language learner, and I hope you are, you can use it yourself and make it even better. :zh: 現在我們知道我們要構建什麼，我希望你和我一起編寫每一行代碼，前端和後端，這樣你可以更好地構建有用的網站。 然後，如果你是語言學習者（我希望你是），你可以自己使用它並使它變得更好。
+Now that we know what we are going to build, I want you to join me in writing every single line of code, frontend and backend, so you can become better at building useful web applications. Then, if you're a language learner, and I hope you are, you can use it yourself and make it even better. :zh: 現在我們知道我們要構建什麼，我希望你和我一起編寫每一行代碼，前台和後台，這樣你可以更好地構建有用的網站。 然後，如果你是語言學習者（我希望你是），你可以自己使用它並使它變得更好。
 
 In this first lesson, we will build a very simple version of our final product, something called a "proof of concept" which is to help us see if we like our tool. If we like it, can put more time into building it. :zh: 在第一課中，我們將構建一個非常簡單的最終產品版本，我們稱之為“驗證”，它可以幫助我們知道是否喜歡我們的工具。 如果我們喜歡它，可以投入更多時間來構建它。
 
