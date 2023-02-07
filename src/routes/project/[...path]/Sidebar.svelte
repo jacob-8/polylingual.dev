@@ -38,7 +38,7 @@
       target="_blank"
       class="hover:underline"
       rel="noreferrer"
-      href="https://github.com/jacob-8/learn.polylingual.dev/tree/main{stage.directory}"
+      href="https://github.com/jacob-8/polylingual.dev/tree/main{stage.directory}"
     >
       <span class="i-codicon-edit" />
       Edit this page

@@ -21,7 +21,7 @@
   const project: Project = {
     title,
     files,
-    description: 'Created by Polylingual Development for learning via learn.polylingual.dev',
+    description: 'Created by Polylingual Development for learning via polylingual.dev/learn',
     template: 'node',
     settings: {
       compile: { trigger: 'keystroke' },

@@ -1,5 +1,5 @@
 {
-  "name": "learn.polylingual.dev",
+  "name": "polylingual.dev",
   "version": "0.0.1",
   "scripts": {
     "dev": "vite dev",
@@ -15,6 +15,7 @@
     "check-packages": "pnpm update --interactive --recursive --latest"
   },
   "devDependencies": {
+    "@builder.io/partytown": "^0.7.5",
     "@iconify/json": "^2.2.13",
     "@stackblitz/sdk": "^1.8.2",
     "@sveltejs/adapter-vercel": "^1.0.5",

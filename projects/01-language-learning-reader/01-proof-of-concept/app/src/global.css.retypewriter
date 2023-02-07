@@ -24,6 +24,6 @@ html, body {
 
 @font-face {
   font-family: 'biao_kaiti_windows';
-  src: url('https://learn.polylingual.dev/fonts/biao_kaiti_windows.ttf') format('truetype');
+  src: url('https://polylingual.dev/fonts/biao_kaiti_windows.ttf') format('truetype');
 }
 --------------

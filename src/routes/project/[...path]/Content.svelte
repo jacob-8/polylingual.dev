@@ -4,7 +4,7 @@
   export let stage: Stage;
 
   function encourage_not_to_copy(e: ClipboardEvent) {
-    const namespace = 'learn.polylingual.dev';
+    const namespace = 'polylingual.dev/learn';
     const copy_enabled = `${namespace}:copy_enabled`;
 
     if (sessionStorage[copy_enabled]) return;
