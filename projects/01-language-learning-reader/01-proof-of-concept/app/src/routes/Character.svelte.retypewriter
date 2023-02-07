@@ -66,6 +66,12 @@ reTypewriter Snapshots v1
 </div>
 
 --05----------
+<script lang="ts" context="module">
+  import { writable } from 'svelte/store';
+  const MOCK_KNOWN_CHARACTERS = ["之", "者", "子", "人","有","陷","堅","能","物","又","何","以","不","可","同","世","立"];
+  const known_characters = writable(new Set(MOCK_KNOWN_CHARACTERS));
+</script>
+
 <script lang="ts">
   import type { ClassicalToMandarinDictionaryEntry } from "./ClassicalDefinitions.svelte";
   import classical_to_mandarin_dictionary from "../data/classical_to_mandarin_dictionary_swords_shields.json";
@@ -84,8 +90,7 @@ reTypewriter Snapshots v1
   const CHARACTERS_TO_SHOW = 6;
   $: short_explanation = clean_explanation.slice(0, CHARACTERS_TO_SHOW);
 
-  let known_characters = new Set(["之", "者", "子", "人","有","陷","堅","能","物","又","何","以","不","可","同","世","立"]);
-  $: known = known_characters.has(character);
+  $: known = $known_characters.has(character);
 </script>
 
 <div style="width: 50px; text-align: center; margin-bottom: 12px;">
@@ -107,6 +112,12 @@ reTypewriter Snapshots v1
 </div>
 
 --06----------
+<script lang="ts" context="module">
+  import { writable } from 'svelte/store';
+  const MOCK_KNOWN_CHARACTERS = ["之", "者", "子", "人","有","陷","堅","能","物","又","何","以","不","可","同","世","立"];
+  const known_characters = writable(new Set(MOCK_KNOWN_CHARACTERS));
+</script>
+
 <script lang="ts">
   import type { ClassicalToMandarinDictionaryEntry } from "./ClassicalDefinitions.svelte";
   import classical_to_mandarin_dictionary from "../data/classical_to_mandarin_dictionary_swords_shields.json";
@@ -125,16 +136,15 @@ reTypewriter Snapshots v1
   const CHARACTERS_TO_SHOW = 6;
   $: short_explanation = clean_explanation.slice(0, CHARACTERS_TO_SHOW);
 
-  let known_characters = new Set(["之", "者", "子", "人","有","陷","堅","能","物","又","何","以","不","可","同","世","立"]);
-  $: known = known_characters.has(character);
+  $: known = $known_characters.has(character);
   
   function toggle_known() {
     if (known) {
-      known_characters.delete(character);
+      $known_characters.delete(character);
     } else {
-      known_characters.add(character);
+      $known_characters.add(character);
     }
-    known_characters = known_characters;
+    $known_characters = $known_characters;
   }
 </script>
 
