@@ -4,15 +4,16 @@
   import Content from './Content.svelte';
   import type { Stage, Project } from '$lib/types';
   import { prettifyName } from './helpers/prettifyName';
+  import Giscus from '@giscus/svelte';
+  import { navigating } from '$app/stores';
 
   export let projects: Record<string, Project>;
   export let stage: Stage;
 
   let sidebar: HTMLElement;
 
-  afterNavigate(navigation => {
-    if (navigation.from?.params?.path !== navigation.to?.params?.path)
-      sidebar.scrollTop = 0;
+  afterNavigate((navigation) => {
+    if (navigation.from?.params?.path !== navigation.to?.params?.path) sidebar.scrollTop = 0;
   });
 </script>
 
@@ -33,6 +34,26 @@
       </div>
     {/if}
   </main>
+
+  <div class="p-3 border-t">
+    {#if !$navigating}
+      <Giscus
+        id="comments"
+        repo="jacob-8/polylingual.dev"
+        repoId="R_kgDOIyJzCQ"
+        category="Lesson Comments"
+        categoryId="DIC_kwDOIyJzCc4CUC87"
+        mapping="title"
+        reactionsEnabled="1"
+        emitMetadata="0"
+        inputPosition="bottom"
+        theme="light"
+        lang="zh-TW"
+        loading="lazy"
+      />
+    {/if}
+  </div>
+
   <footer class="border-t p-3 mt-auto flex">
     <a
       target="_blank"
@@ -41,7 +62,9 @@
       href="https://github.com/jacob-8/polylingual.dev/tree/main{stage.directory}"
     >
       <span class="i-codicon-edit" />
-      Edit this page
+      為此頁提供修改建議
+      <!-- 为此页提供修改建议 -->
+      <!-- Edit this page -->
     </a>
 
     <span class="ml-auto text-sm hidden md:block">Alt+T = EN/中</span>
