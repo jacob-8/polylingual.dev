@@ -7,10 +7,11 @@
   import { vs_dark_plus } from './monaco-themes';
   import type { editor } from 'monaco-editor/esm/vs/editor/editor.api.js';
   import { mapOfExtensionToLanguage } from './languages';
+    import { DEFAULT_MONACO_DIFF_OPTIONS, DEFAULT_MONACO_READ_ONLY_OPTIONS } from './options';
 
   export let original: string;
   export let modified: string;
-  export let options: editor.IDiffEditorConstructionOptions;
+  export let options: editor.IDiffEditorConstructionOptions = {};
   export let extension = 'html';
 
   let diffEditor: editor.IStandaloneDiffEditor;
@@ -36,24 +37,8 @@
     monaco.editor.defineTheme('vs-dark-plus', vs_dark_plus);
     monaco.editor.setTheme('vs-dark-plus');
     diffEditor = monaco.editor.createDiffEditor(container, {
+      ...DEFAULT_MONACO_DIFF_OPTIONS,
       ...options,
-      // lineNumbersMinChars: 2,
-      // @ts-ignore
-      lineNumbers: false,
-      automaticLayout: true,
-      scrollBeyondLastLine: false,
-      scrollbar: {
-        alwaysConsumeMouseWheel: false,
-      },
-      readOnly: true,
-      renderOverviewRuler: false,
-      wordWrap: 'on',
-      wrappingIndent: 'same',
-      renderIndicators: false,
-      padding: {
-        top: 8,
-        bottom: 8,
-      },
     });
 
     const language = mapOfExtensionToLanguage[extension] || extension;

@@ -8,9 +8,10 @@
   import type { editor } from 'monaco-editor/esm/vs/editor/editor.api.js';
   import { mapOfExtensionToLanguage } from './languages';
   import type { FileStub } from '$lib/types';
+  import { DEFAULT_MONACO_OPTIONS } from '$lib/monaco/options';
 
   export let stub: FileStub | null;
-  export let options: editor.IStandaloneEditorConstructionOptions;
+  export let options: editor.IStandaloneEditorConstructionOptions = {};
   let editor: editor.IStandaloneCodeEditor;
   let container: HTMLDivElement;
 
@@ -32,6 +33,7 @@
     monaco.editor.defineTheme('vs-dark-plus', vs_dark_plus);
     monaco.editor.setTheme('vs-dark-plus');
     editor = monaco.editor.create(container, {
+      ...DEFAULT_MONACO_OPTIONS,
       ...options,
       language: 'handlebars',
       value: '',

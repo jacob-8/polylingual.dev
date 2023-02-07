@@ -7,6 +7,7 @@
   import { vs_dark_plus } from './monaco-themes';
   import type { editor } from 'monaco-editor/esm/vs/editor/editor.api.js';
   import { mapOfExtensionToLanguage } from './languages';
+    import { DEFAULT_MONACO_DIFF_OPTIONS, DEFAULT_MONACO_READ_ONLY_OPTIONS } from './options';
 
   export let value: string;
   export let options: editor.IStandaloneEditorConstructionOptions = {};
@@ -35,28 +36,10 @@
     monaco.editor.defineTheme('vs-dark-plus', vs_dark_plus);
     monaco.editor.setTheme('vs-dark-plus');
     editor = monaco.editor.create(container, {
+      ...DEFAULT_MONACO_READ_ONLY_OPTIONS,
       ...options,
-      // lineNumbersMinChars: 2,
-      // @ts-ignore
-      lineNumbers: false,
-      minimap: {
-        enabled: false,
-      },
-      automaticLayout: true,
-      scrollBeyondLastLine: false,
-      scrollbar: {
-        alwaysConsumeMouseWheel: false,
-      },
-      readOnly: true,
-      wordWrap: 'on',
-      wrappingIndent: 'same',
       language,
       value,
-      padding: {
-        top: 8,
-        bottom: 8,
-      },
-      folding: false,
     });
 
     editor.onDidContentSizeChange(updateHeight);

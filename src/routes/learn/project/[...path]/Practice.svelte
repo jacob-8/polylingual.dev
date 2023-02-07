@@ -5,7 +5,6 @@
   import type { Stage, StageFiles } from '$lib/types';
   import Explorer from '$lib/filetree/Explorer.svelte';
   import MonacoEditorScripts from '$lib/monaco/MonacoEditorScripts.svelte';
-  import { DEFAULT_MONACO_OPTIONS } from '$lib/monaco/options';
   import Stackblitz from '$lib/stackblitz/Stackblitz.svelte';
   import { objectsAreSame } from './helpers/objectsAreSame';
   import { filesNotInTarget } from './helpers/filesNotInTarget';
@@ -76,7 +75,6 @@
             text: true,
             contents: $files[$selected],
           }}
-          options={DEFAULT_MONACO_OPTIONS}
           on:change={({ detail: stub }) => {
             $files[stub.name] = stub.contents;
           }}
