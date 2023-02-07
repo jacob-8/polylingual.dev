@@ -43,7 +43,7 @@
   {#if stage.previous_stage_location}
     <a
       class="hover:bg-gray-500/15 py-1 px-2 self-stretch"
-      href="/project/{stage.previous_stage_location.project}/{stage.previous_stage_location
+      href="/learn/project/{stage.previous_stage_location.project}/{stage.previous_stage_location
         .lesson}/{stage.previous_stage_location.name}"
       aria-label="Previous"
     >
@@ -62,7 +62,7 @@
   {#if stage.next_stage_location}
     <a
       class="hover:bg-gray-500/15 py-1 px-2 self-stretch"
-      href="/project/{stage.next_stage_location.project}/{stage.next_stage_location.lesson}/{stage
+      href="/learn/project/{stage.next_stage_location.project}/{stage.next_stage_location.lesson}/{stage
         .next_stage_location.name}"
       aria-label="Next"
     >
@@ -112,7 +112,7 @@
                   {#if lessonExpanded}
                     <ul class="ml-7">
                       {#each Object.values(lesson.stages) as stage}
-                        {@const stageUrl = `/project/${stage.location.project}/${stage.location.lesson}/${stage.location.name}`}
+                        {@const stageUrl = `/learn/project/${stage.location.project}/${stage.location.lesson}/${stage.location.name}`}
                         {@const current = $page.url.pathname === stageUrl}
 
                         <li

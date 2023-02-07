@@ -1,5 +1,5 @@
 <div class="bg-gray-500/10 border-b flex items-center">
-  <a class="p-2 font-semibold" href="/"> 了解 JavaScript: 語言學習閱讀器 </a>
+  <a class="p-2 font-semibold" href="/learn"> 了解 JavaScript: 語言學習閱讀器 </a>
   <!-- JavaScript Explained -->
   <div class="mr-auto"></div>
   <slot />

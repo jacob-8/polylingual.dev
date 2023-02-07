@@ -1,10 +1,12 @@
-import type { PageLoad } from './$types';
+import { redirect } from '@sveltejs/kit';
 import { projectsDirectory } from '$lib/content/raw-content';
-export const load = (async ({ params, parent }) => {
-    // const { pages } = await parent();
-    const [project, lesson, stage] = params.path.split('/'); // handle undefined with a reroute back home
-    // import { error } from '@sveltejs/kit';
-    // throw error(404, 'No such tutorial found');
+import type { PageLoad } from './$types';
+
+export const load = (async ({ params }) => {
+    const [project, lesson, stage] = params.path.split('/');
+    if (!project || !lesson || !stage) {
+        throw redirect(307, '/learn/project/01-language-learning-reader/01-proof-of-concept/01-introduction');
+    }
 
     return { projectsDirectory, project, lesson, stage };
 }) satisfies PageLoad;
