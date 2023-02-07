@@ -1,7 +1,6 @@
 # Roadmap
 
 ## TODO
-- add giscus
 - add title meta to easily use multiple languages for titles
 - add i18n
 - add language toggle switch
