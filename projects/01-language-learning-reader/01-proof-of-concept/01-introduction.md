@@ -11,21 +11,15 @@ You're here because you want to improve your understanding of JavaScript and how
 
 To build a web application we start with the **end** in mind, we determine our goal by asking a few questions: :zh: 當我們要構建一個網站，我們必須確定我們的**目的**。為了確定我們的目標，我們必須問幾個問題：
 
-- **What would we like to build?** :zh: 
-- **我們想建造什麼？**
-  - A language learning reader that can use any language to help you learn to read in any language. We'll start by using Mandarin to learn Classical Chinese. :zh: 
-  - 可以使用任何語言的語言學習閱讀器，幫助你學習使用任何語言閱讀。 我們將從使用中文來學習文言文開始。
-- **Why?** :zh: 
-- **為什麼？**
-  - Because we want to make language learning faster, more useful, and more enjoyable. :zh: 
-  - 因為我們想讓語言學習更快、更有用、更有趣。
-- **How will this tool improve our life after we build it?** :zh: 
-- **這個工具在我們構建之後將如何改善我們的生活？**
-  - We will find it easier to read difficult material. :zh: 
-  - 我們會發現閱讀困難的材料會更容易。
+- **What would we like to build?** :zh: - **我們想建造什麼？**
+  - A language learning reader that can use any language to help you learn to read in any language. We'll start by using Mandarin to learn Classical Chinese. :zh:   - 可以使用任何語言的語言學習閱讀器，幫助你學習使用任何語言閱讀。 我們將從使用中文來學習文言文開始。
+- **Why?** :zh: - **為什麼？**
+  - Because we want to make language learning faster, more useful, and more enjoyable. :zh:   - 因為我們想讓語言學習更快、更有用、更有趣。
+- **How will this tool improve our life after we build it?** :zh: - **這個工具在我們構建之後將如何改善我們的生活？**
+  - We will find it easier to read difficult material. :zh:   - 我們會發現閱讀困難的材料會更容易。
 
 Now that we know what we are going to build, I want you to join me in writing every single line of code, frontend and backend, so you can become better at building useful web applications. Then, if you're a language learner, and I hope you are, you can use it yourself and make it even better. :zh: 現在我們知道我們要構建什麼，我希望你和我一起編寫每一行代碼，前台和後台，這樣你可以更好地構建有用的網站。 然後，如果你是語言學習者（我希望你是），你可以自己使用它並使它變得更好。
 
-In this first lesson, we will build a very simple version of our final product, something called a "proof of concept" which is to help us see if we like our tool. If we like it, can put more time into building it. :zh: 在第一課中，我們將構建一個非常簡單的最終產品版本，我們稱之為“驗證”，它可以幫助我們知道是否喜歡我們的工具。 如果我們喜歡它，可以投入更多時間來構建它。
+In this first lesson, we will quickly build a very simple version of our final product. We call this a "proof of concept". It will have just enough features to allow us to try out our idea. This will give us more understanding our what our end goal should be. After we finish the "proof of concept" and move on to our second lesson, we will be more thorough and select only 1 area at a time to focus on. :zh: 在第一課中，我們將快速的構建一個非常簡單的最終產品版本。 我們稱之為“驗證”。 它的功能剛好足以讓我們嘗試我們的想法。建構驗證後 我們可以比較容易了解我們的最終目標應該的。 我們完成驗證，開始第二課，我們的方法會變成更仔細。每一課只選擇一個主題來重點關注。
 
 Let's get started! :zh: 我們開始吧！

@@ -9,15 +9,11 @@ Now that we have completed a proof of concept and discovered a little about how 
 
 Future lessons will each go through one of these tasks. We will learn many different important aspects of building a website, including but not limited to: :zh: 以後的課程將分別完成其中一項任務。 我們將學習構建網站的許多不同重要方面，包括：
 
-- User authentication :zh: 
-- 用戶認證
-- Database storage :zh: 
-- 數據庫存儲
-- Using a styles framework :zh: 
-- 使用樣式框架
-- Hosting :zh: 
-- 託管
-- And more! :zh:
-- 還有更多！
+- User authentication :zh: - 用戶認證
+- How to parse data :zh: - 怎麼解析數據
+- Database storage :zh: - 數據庫存儲
+- Using a styles framework :zh: - 使用樣式框架
+- Hosting :zh: - 託管
+- And more! :zh: - 還有更多！
 
-Be sure to join our [了解 JavaScript 高雄社區](https://www.facebook.com/groups/liaojiejavascript) for updates. See you next time! :zh: 請加入我們的 [了解 JavaScript 高雄社區](https://www.facebook.com/groups/liaojiejavascript) 以獲取更新。 下次見！
+We don't have an English group at the moment but you can still join our [了解 JavaScript 高雄社區](https://www.facebook.com/groups/liaojiejavascript) to receive updates on when future lessons are posted. See you next time! :zh: 請加入我們的 [了解 JavaScript 高雄社區](https://www.facebook.com/groups/liaojiejavascript) 以獲取更新。 下次見！

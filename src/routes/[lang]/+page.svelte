@@ -1,6 +1,9 @@
 <script>
   import { page } from '$app/stores';
+  import SeoMetaTags from '$lib/SeoMetaTags.svelte';
 </script>
+
+<SeoMetaTags title="Polylingual Development" />
 
 <main class="h-100vh bg-#242424 text-white/87 flex flex-col justify-center text-center p-3">
   <h1 class="text-4xl">Polylingual Development</h1>
@@ -22,12 +25,12 @@
   <div class="mt-10 mb-4">
     <a
       class:bg-black={$page.data.lang === 'en'}
-      class="bg-black py-1 px-2 rounded-lg border border-transparent hover:border-blue transition-border-color-300"
+      class="py-1 px-2 rounded-lg border border-transparent hover:border-blue transition-border-color-300"
       href="/en">EN</a
     >
     <a
       class:bg-black={$page.data.lang === 'zh-TW'}
-      class="bg-black py-1 px-2 rounded-lg border border-transparent hover:border-blue transition-border-color-300"
+      class="py-1 px-2 rounded-lg border border-transparent hover:border-blue transition-border-color-300"
       href="/zh-TW">中文</a
     >
   </div>
