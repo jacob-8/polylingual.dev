@@ -1,3 +1,8 @@
+---
+en: Add a Text
+zh-TW: 添加文本
+---
+
 Create a `ClassicalText.svelte` component to hold our first text that we want help reading. :zh: 創建一個 `ClassicalText.svelte` 組件。我們會把一本想要幫助閱讀的文本方在這裡。
 
 Add an interface for a multilingual sentence with Classical Chinese, Mandarin, and English. Then export a `sentences` property from the component which is typed as an array of multilingual sentences. :zh: 添加文言文、中文、英文的多語言句子界面。 然後從類型為多語言句子數組的組件中導出一個 `sentences` 屬性。

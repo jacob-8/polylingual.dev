@@ -9,7 +9,6 @@
   import Sidebar from './Sidebar.svelte';
   import Practice from './Practice.svelte';
   import SeoMetaTags from '$lib/SeoMetaTags.svelte';
-  import { prettifyName } from './helpers/prettifyName';
 
   export let data: PageData;
   $: projectsDirectory = $updatedProjectsDirectory || data.projectsDirectory;
@@ -70,8 +69,4 @@
 </div>
 
 <!-- Language Learning Reader - Proof of Concept -->
-<SeoMetaTags
-  title="語言學習閱讀器 - 驗證 - {prettifyName(
-    stage.location.name
-  )}"
-/>
+<SeoMetaTags title="語言學習閱讀器 - 驗證 - {stage.title['zh-TW']}" />

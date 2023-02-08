@@ -2,13 +2,13 @@
 
 ## TODO
 - add title meta to easily use multiple languages for titles
-- add i18n
 - add language toggle switch
 - flesh out how to how to make progression actionable with a click (especially add and remove files or rename)
   - auto focus on file in first step (unless it's adding a file)
 - improve :zh: parsing to allow for sentence beginning markdown marks
 - adjust prose styles
 - update error page
+- add i18n
 - allow deleting files that end in an empty step
   - scan last step of stepfiles to see which files to remove from app_finish and add remove buttons where appropriate
 - emit selected to queryparam from `Codeblock.svelte`

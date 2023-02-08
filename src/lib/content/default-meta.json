@@ -1,5 +1,7 @@
 {
-  "scope": {
-    "directory": "src"
+  "directory_to_show": "src",
+  "title": {
+    "en": "My Project",
+    "zh-TW": "我的專案"
   }
 }

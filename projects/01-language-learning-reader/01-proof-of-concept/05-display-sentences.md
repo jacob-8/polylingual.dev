@@ -1,4 +1,6 @@
 ---
+en: Display Sentences
+zh-TW: 展示句子
 file_to_focus: src/routes/ClassicalText.svelte
 ---
 

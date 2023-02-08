@@ -1,3 +1,8 @@
+---
+en: Conclusion
+zh-TW: 結論
+---
+
 We now have a working proof of concept. It's very simple and has lots of problems (e.g. dictionary definitions are in simplified and interface is in tradtional script), but it works! :zh: 我們現在有了一個的"驗證"。 它非常簡單並且有很多問題（例如，字典定義是簡體的，界面是繁體的），但它可以使用！
 
 Now that we have completed a proof of concept and discovered a little about how we could build a tool to help us read a Classical text, we can take a break from programming to make a list of tasks needing accomplished before this tool is actually useful for **anyone** reading **any** Classical text. :zh: 現在我們已經完成了驗證並發現了一些關於如何構建一個工具來幫助我們閱讀文言文本的知識。我們可以從編程中休息一下，列出在這個工具真正有用之前需要完成的任務 **任何人**閱讀**任何**文言文本。

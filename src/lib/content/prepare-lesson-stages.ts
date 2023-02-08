@@ -1,38 +1,48 @@
-import type { Lesson, Project, StepsByFilename } from "$lib/types";
+import type { Lesson, LessonRaw, Project, Stage, StageRaw, StepsByFilename } from "$lib/types";
 import { addStepsToMarkdown } from "./add-steps-to-markdown";
 import { parseSnapshots } from "./parse-snapshots";
 
 export function prepareLessonStages({ projects, project, lesson }: { projects: Record<string, Project>, project: string, lesson: string }): Lesson {
-  const projectObj = projects[project];
-  const lessonObj = projectObj.lessons[lesson];
-  const stepsByFilename = parseStepsFiles(lessonObj.steps_files);
+  const project_obj = projects[project];
+  const lesson_obj = project_obj.lessons[lesson];
+  const stepsByFilename = parseStepsFiles(lesson_obj.steps_files);
 
-  // The object comes ordered already but in case that doesn't always hold true we are manually sorting:
-  const sortedStages = Object.values(lessonObj.stages).sort((a, b) => {
-    if (a.location.name < b.location.name) {
+  const sorted_raw_stages = sort_stages_by_slug(lesson_obj);
+
+  const prepared_stages: Stage[] = [];
+  const prepared_lesson: Lesson = { stages: {} };
+
+  for (const [index, raw_stage] of sorted_raw_stages.entries()) {
+    const stage: Stage = { ...raw_stage, app_finish: {}, app_start: {}, directory_to_show: '', steps: {} };
+
+    if (index === 0) {
+      stage.app_start = lesson_obj.app_start
+    } else {
+      const previousStage = prepared_stages[index - 1]
+      stage.app_start = previousStage.app_finish
+    }
+    stage.directory_to_show = lesson_obj.meta.directory_to_show ?? project_obj.meta.directory_to_show as string; // allows using "" to indicate root, though maybe we should default to "/" to avoid tricky edge cases
+
+    const { markdown_with_steps, app_changes } = addStepsToMarkdown({ markdown: raw_stage.markdown, stepsByFilename });
+    stage.markdown_with_steps = markdown_with_steps;
+    stage.app_finish = { ...stage.app_start, ...app_changes };
+    prepared_stages.push(stage);
+    prepared_lesson.stages[stage.location.stage] = stage;
+  }
+  return prepared_lesson;
+}
+
+function sort_stages_by_slug(lessonObj: LessonRaw): StageRaw[] {
+  // redundant, but just in case
+  return Object.values(lessonObj.raw_stages).sort((a, b) => {
+    if (a.location.stage < b.location.stage) {
       return -1;
     }
-    if (a.location.name > b.location.name) {
+    if (a.location.stage > b.location.stage) {
       return 1;
     }
     return 0;
-  })
-  for (const [index, stage] of sortedStages.entries()) {
-    if (index === 0) {
-      stage.app_start = lessonObj.app_start
-    } else {
-      const previousStage = sortedStages[index - 1]
-      stage.app_start = previousStage.app_finish
-    }
-    stage.meta = { ...lessonObj.meta, ...projectObj.meta }
-
-    const { markdown_with_steps, app_changes } = addStepsToMarkdown({ markdown: stage.markdown, stepsByFilename });
-    stage.markdown_with_steps = markdown_with_steps;
-    stage.app_finish = { ...stage.app_start, ...app_changes };
-    lessonObj.stages[stage.location.name] = stage;
-  }
-
-  return lessonObj;
+  });
 }
 
 export function parseStepsFiles(steps_files: Record<string, string>): StepsByFilename {

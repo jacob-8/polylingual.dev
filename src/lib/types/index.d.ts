@@ -7,41 +7,64 @@ export type FileType =
   'lesson-steps' |
   'stage-markdown';
 
+
 export interface Project {
-  name: string;
-  lessons: Record<string, Lesson>;
-  // app: Record<string, string>; // common-app + project-common-app
+  slug: string;
   meta: Meta;
+  lessons: Record<string, LessonRaw>;
+}
+
+export interface LessonRaw {
+  slug: string;
+  meta: Meta;
+  raw_stages: Record<string, StageRaw>;
+  app_start: Record<string, string>; // common-app + project-common-app + lesson-app
+  steps_files: Record<string, string>; // retypewriter extension
 }
 
 export interface Lesson {
-  name: string;
   stages: Record<string, Stage>;
-  app_start: Record<string, string>; // common-app + project-common-app + lesson-app
-  steps_files: Record<string, string>; // retypewriter extension
-  meta?: Meta;
 }
 
-export interface Stage { // split into StageRaw and StagePrepared/Stage?
-  location: StageLocation;
+export interface StageRaw {
+  title: LanguageValues;
   directory: string;
   markdown: string;
   initial_url?: string;
   file_to_focus?: string;
+  location: StageLocation; // maybe rename to slugs
   previous_stage_location: StageLocation | null;
   next_stage_location: StageLocation | null;
-  meta: Meta; // inherited from project and lesson
-  // computed after tree parsing:
+}
+
+export interface Stage extends StageRaw {
+  directory_to_show: string; // inherited from project (or lesson if exists)
   steps: StepsByFilename;
   markdown_with_steps?: string;
   app_start: Record<string, string>;
-  app_finish: Record<string, string>; 
+  app_finish: Record<string, string>;
 }
+
+export interface Meta {
+  directory_to_show?: string; // '' for root, 'src/' for src (default), 'src/lib/' for src/lib
+  title: LanguageValues
+}
+
+type LanguageValues = {
+  'en': string;
+  'zh-TW': string;
+};
 
 export interface StageLocation {
   project: string;
   lesson: string;
-  name: string;
+  stage: string;
+}
+
+export interface StageFrontmatter {
+  title: LanguageValues;
+  initial_url?: string;
+  file_to_focus?: string;
 }
 
 export interface StepsByFilename {
@@ -51,14 +74,6 @@ export interface StepsByFilename {
 export interface Steps {
   [stepNumber: string]: string
 };
-
-export interface Scope {
-  directory: string; // '' for root, 'src/' for src (default), 'src/lib/' for src/lib
-}
-
-export interface Meta {
-  scope: Scope;
-}
 
 export interface Tree {
   [folderOrFilename: string]: Tree | string;
@@ -84,68 +99,8 @@ export interface FileStub {
 
 export type Stub = FileStub | DirectoryStub;
 
-
 export interface DirectoryStub {
   type: 'directory';
   name: string;
   basename: string;
-}
-
-// TREE
-
-export interface PartStub { // ProjectStub
-  slug: string;
-  meta: PartMeta;
-  chapters: ChapterStub[];
-}
-
-export interface PartMeta {
-  title: string;
-  focus: string;
-  scope: Scope;
-}
-
-export interface ChapterStub { // LessonStub
-  slug: string;
-  meta: ChapterMeta;
-  exercises: ExerciseRaw[];
-}
-
-export type ChapterMeta = PartMeta;
-
-export interface Exercise extends Omit<ExerciseRaw, 'markdown'> {
-  part: {
-    slug: string;
-    title: string;
-    index: number;
-  };
-  chapter: {
-    slug: string;
-    title: string;
-  };
-  scope: Scope;
-  html: string;
-  a: Record<string, Stub>;
-  b: Record<string, Stub>;
-}
-
-export interface ExerciseRaw { // PageStub
-  title: string;
-  slug: string;
-  prev: { slug: string } | null;
-  next: { slug: string; title: string } | null;
-  path: string; // the initial path to navigate to
-  focus: string;
-  dir: string;
-  meta: ExerciseMeta;
-  markdown: string;
-}
-
-export interface ExerciseMeta {
-  editing_constraints: EditingConstraints;
-}
-
-export interface EditingConstraints {
-  create: string[];
-  remove: string[];
 }

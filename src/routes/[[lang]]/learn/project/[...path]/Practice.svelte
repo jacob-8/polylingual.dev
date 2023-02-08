@@ -47,7 +47,7 @@
   <section class="h-full bg-black" slot="a">
     <SplitPane pos={27} max={100}>
       <section class="h-full flex flex-col border-r border-gray-500/50" slot="a">
-        <Explorer directoryPath={stage.meta.scope.directory} {files} {selected} {can_add_paths} />
+        <Explorer directoryPath={stage.directory_to_show} {files} {selected} {can_add_paths} />
 
         {#if !objectsAreSame(stage.app_start, stage.app_finish)}
           <button

@@ -1,4 +1,6 @@
 ---
+en: Foo
+zh-TW: 福
 # initial_url: /hello
 file_to_focus: /src/routes/+page.svelte
 ---

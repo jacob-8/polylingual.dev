@@ -1,4 +1,6 @@
 ---
+en: Improve Chinese Font
+zh-TW: 優化字體
 file_to_focus: src/global.css
 ---
 

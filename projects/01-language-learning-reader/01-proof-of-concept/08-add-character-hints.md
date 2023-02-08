@@ -1,3 +1,8 @@
+---
+en: Add Character Hints
+zh-TW: 添加提示
+---
+
 Let's use our dictionary to provide small bits of help text for reading characters. Start by creating a `Character.svelte` component. :zh: 使用我們的字典來提供一些怎麼閱讀提醒。 首先創建一個 `Character.svelte` 組件。
 
 [[src/routes/Character.svelte#02]]

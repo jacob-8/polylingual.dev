@@ -1,3 +1,8 @@
+---
+en: Save Known Characters
+zh-TW: 保存已知文字
+---
+
 As we read Classical Chinese there are many characters we already know well. Having hints show for them will just create extra noise and make it hard to read. Let's create a quick way to mark additional characters as known. :zh: 當我們閱讀文言文時，有許多我們已經熟知的字。 展示它們只會讓閱讀比較難。 讓我們創建一種快速方法來將其他字標記為已知。
 
 First we'll create a demo list of known characters and only show helps if a character is not already "known". :zh: 首先，我們將創建一個已知字的演示列表。 然後只不“已知”的字會有提示。

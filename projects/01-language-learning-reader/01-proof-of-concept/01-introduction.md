@@ -1,3 +1,8 @@
+---
+en: Introduction
+zh-TW: 介紹
+---
+
 Right now I'm learning Chinese. A year and a half ago I wanted a tool that helped me learn to read Chinese by giving pronunciation help and English definitions just for the characters I didn't know. I couldn't find a tool like this so I built one. :zh: 現在我正在學習中文。 一年半前，我想要一個工具，可以為我不認識的字，提供發音還有意思來幫助我閱讀中文。我找不到這樣的工具，所以我做了一個。
 
 That tool is like my own private Chinese teacher, always ready to help me read Chinese by explaining new characters using English. It's a wonderful help, but now I want to improve it. I want a tool that can help me learn to **read in any language using any language**, not just read Chinese using English. :zh: 那個工具就像我自己的私人中文老師，隨時能用英語解釋生字來幫助我閱讀中文。 這是一個很好的幫助，但現在我想改善它。 我想要一個工具，它可以幫助我學習**使用任何語言、閱讀任何語言**，而不僅僅是使用英語閱讀中文。

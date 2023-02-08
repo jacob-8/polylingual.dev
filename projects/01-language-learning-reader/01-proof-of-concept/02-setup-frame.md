@@ -1,3 +1,8 @@
+---
+en: Setup Frame
+zh-TW: 版面設計
+---
+
 Let's begin by splitting our layout into halves, the top for reading and the bottom for a dictionary. :zh: 讓我們首先將我們的網頁分成兩半，頂部用於閱讀，底部用於字典。
 
 > **Tip:** Add temporary background colors to help with initial layout design. :zh:

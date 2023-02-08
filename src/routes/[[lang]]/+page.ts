@@ -1,6 +1,7 @@
+import { redirect } from '@sveltejs/kit';
 import type { PageLoad } from './$types';
 
 export const load = (({ params }) => {
-	console.log({ params })
-	return { lang: params.lang || 'zh-TW' }
+	if (!params.lang) throw redirect(307, '/zh-TW');
+	return { lang: params.lang }
 }) satisfies PageLoad;

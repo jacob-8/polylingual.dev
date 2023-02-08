@@ -28,8 +28,8 @@
         <a
           class="text-blue-700 text-sm font-semibold hover:underline"
           href="/learn/project/{stage.next_stage_location.project}/{stage.next_stage_location
-            .lesson}/{stage.next_stage_location.name}"
-          >{prettifyName(stage.next_stage_location.name)} <span class="i-carbon-arrow-right" /></a
+            .lesson}/{stage.next_stage_location.stage}"
+          >{prettifyName(stage.next_stage_location.stage)} <span class="i-carbon-arrow-right" /></a
         >
       </div>
     {/if}

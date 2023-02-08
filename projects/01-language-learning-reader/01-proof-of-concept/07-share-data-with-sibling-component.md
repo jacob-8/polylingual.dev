@@ -1,3 +1,8 @@
+---
+en: Share Data with Sibling Components
+zh-TW: 與兄弟組件共享數據
+---
+
 Now we need take the characters clicked on in our `ClassicalText.svelte` component and pass them to our `ClassicalDefinitions.svelte` component. There are many ways to pass and share data between sibling components, and we'll choose to **dispatch** an event that will change a variable in the parent component. This variable can then be handed to the sibling component. :zh: 我們需要把 `ClassicalText.svelte` 組件中單擊的字給 `ClassicalDefinitions.svelte` 組件。 有很多方法可以在同級組件之間份享數據。我們將選擇**發出**一個將更改父組件中的變量的事件。 然後可以將該變量給兄弟組件。
 
 Emit an event when a character is clicked on: :zh: 單擊字時發出事件：

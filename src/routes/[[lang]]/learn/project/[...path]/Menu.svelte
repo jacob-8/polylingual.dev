@@ -2,7 +2,6 @@
   import { page } from '$app/stores';
   import { slide } from 'svelte/transition';
   import type { Stage, Project } from '$lib/types';
-  import { prettifyName } from './helpers/prettifyName';
 
   export let projects: Record<string, Project>;
   export let stage: Stage;
@@ -43,8 +42,8 @@
   {#if stage.previous_stage_location}
     <a
       class="hover:bg-gray-500/15 py-1 px-2 self-stretch"
-      href="/learn/project/{stage.previous_stage_location.project}/{stage.previous_stage_location
-        .lesson}/{stage.previous_stage_location.name}"
+      href="/{$page.data.lang}/learn/project/{stage.previous_stage_location.project}/{stage
+        .previous_stage_location.lesson}/{stage.previous_stage_location.stage}"
       aria-label="Previous"
     >
       <span class="i-carbon-arrow-left" />
@@ -55,15 +54,14 @@
 
   <!-- svelte-ignore a11y-click-events-have-key-events -->
   <h1 class="grow px-1 truncate" on:click={() => (is_open = !is_open)}>
-    <!-- {stage.location.project} -->
-    驗證 {prettifyName(stage.location.lesson)} <span class="opacity-30">/</span>
-    <strong class="text-blue-700">{prettifyName(stage.location.name)}</strong>
+    驗證 <span class="opacity-30">/</span>
+    <strong class="text-blue-700">{stage.title['zh-TW']}</strong>
   </h1>
   {#if stage.next_stage_location}
     <a
       class="hover:bg-gray-500/15 py-1 px-2 self-stretch"
-      href="/learn/project/{stage.next_stage_location.project}/{stage.next_stage_location.lesson}/{stage
-        .next_stage_location.name}"
+      href="/{$page.data.lang}/learn/project/{stage.next_stage_location.project}/{stage
+        .next_stage_location.lesson}/{stage.next_stage_location.stage}"
       aria-label="Next"
     >
       <span class="i-carbon-arrow-right" />
@@ -80,39 +78,38 @@
   >
     <ul>
       {#each Object.values(projects) as project}
-        {@const projectExpanded = project.name === expanded_project}
+        {@const projectExpanded = project.slug === expanded_project}
 
         <li>
           <button
             class:font-semibold={projectExpanded}
             on:click={() => {
               if (!projectExpanded) {
-                expanded_project = project.name;
+                expanded_project = project.slug;
                 expanded_lesson = Object.keys(project.lessons)[0];
               }
             }}
           >
-            語言學習閱讀器 Language Learning Reader
-            <!-- {prettifyName(project.name)} -->
+            {project.meta.title['zh-TW']}
           </button>
 
           {#if projectExpanded}
             <ul class="ml-3">
               {#each Object.values(project.lessons) as lesson}
-                {@const lessonExpanded = lesson.name === expanded_lesson}
+                {@const lessonExpanded = lesson.slug === expanded_lesson}
                 <li>
                   <button
                     class:font-semibold={lessonExpanded}
-                    on:click={() => (expanded_lesson = lesson.name)}
+                    on:click={() => (expanded_lesson = lesson.slug)}
                   >
                     <span class:!rotate-90={lessonExpanded} class="i-carbon-chevron-right?bg" />
-                    驗證 {prettifyName(lesson.name)}
+                    {lesson.meta.title['zh-TW']}
                   </button>
 
                   {#if lessonExpanded}
                     <ul class="ml-7">
-                      {#each Object.values(lesson.stages) as stage}
-                        {@const stageUrl = `/learn/project/${stage.location.project}/${stage.location.lesson}/${stage.location.name}`}
+                      {#each Object.values(lesson.raw_stages) as stage}
+                        {@const stageUrl = `/${$page.data.lang}/learn/project/${stage.location.project}/${stage.location.lesson}/${stage.location.stage}`}
                         {@const current = $page.url.pathname === stageUrl}
 
                         <li
@@ -121,7 +118,7 @@
                           aria-current={current ? 'page' : undefined}
                         >
                           <a href={stageUrl} on:click={() => (is_open = false)}>
-                            {prettifyName(stage.location.name)}
+                            {stage.title['zh-TW']}
                           </a>
                         </li>
                       {/each}
