@@ -9,9 +9,7 @@ Emit an event when a character is clicked on: :zh: 單擊字時發出事件：
 
 [[src/routes/ClassicalText.svelte#07]]
 
-> Tip: It is a good idea to place your `import` statements at the top of the `script` block. Sometimes during this tutorial, however, to make our code changes easier to follow we will include the `import` statements right next to where they're needed. :zh:
->
-> 提示：將 `import` 語句放在 `script` 的頂部是個好主意。 然而，在本教程中，有時為了使我們的代碼更改更容易理解，我們將在需要它們的地方添加 `import` 語句。我們將在靠近使用它們的地方添加 `import` 語句。
+> Tip: It is a good idea to place your `import` statements at the top of the `script` block. Sometimes during this tutorial, however, to make our code changes easier to follow we will include the `import` statements right next to where they're needed. :zh: > 提示：將 `import` 語句放在 `script` 的頂部是個好主意。 然而，在本教程中，有時為了使我們的代碼更改更容易理解，我們將在需要它們的地方添加 `import` 語句。我們將在靠近使用它們的地方添加 `import` 語句。
 
 Let's listen to that event in the parent with a simple alert and try clicking on a few characters to test. :zh: 我們用一個簡單的警報在父級中收聽該事件。然後單擊幾個字。
 

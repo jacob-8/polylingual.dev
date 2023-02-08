@@ -8,6 +8,7 @@
   import Stackblitz from '$lib/stackblitz/Stackblitz.svelte';
   import { objectsAreSame } from './helpers/objectsAreSame';
   import { filesNotInTarget } from './helpers/filesNotInTarget';
+  import { page } from '$app/stores';
 
   export let stage: Stage;
   export let mobile: boolean;
@@ -56,12 +57,9 @@
             class="bg-blue text-white p-2 text-lg"
           >
             {#if completed}
-              復原
-              <!-- 重置 -->
-              <!-- reset -->
-            {:else}
-              解決
-              <!-- solve -->
+              {$page.data.lang === 'zh-TW' ? '復原' : 'reset'}
+              {:else}
+              {$page.data.lang === 'zh-TW' ? '解決' : 'solve'}
               <span class="i-carbon-arrow-right" />
             {/if}
           </button>

@@ -9,8 +9,7 @@ First we'll create a demo list of known characters and only show helps if a char
 
 [[src/routes/Character.svelte#05]]
 
-> We use the [module context](https://svelte.dev/tutorial/sharing-code) script block, `<script lang="ts" context="module">`, to easily share state between component instances (each individual character). :zh: 
-> 在組件實例之間，如果你要容易得分享狀態，可以使用 [module context](https://svelte.dev/tutorial/sharing-code) 腳本塊，`<script lang="ts" context="module">`。
+> We use the [module context](https://svelte.dev/tutorial/sharing-code) script block, `<script lang="ts" context="module">`, to easily share state between component instances (each individual character). :zh: > 在組件實例之間，如果你要容易得分享狀態，可以使用 [module context](https://svelte.dev/tutorial/sharing-code) 腳本塊，`<script lang="ts" context="module">`。
 
 Then add the ability to use the right-click button to toggle known status. *In the future, we'll save known characters to a database.* :zh: 然後添加使用右鍵單擊按鈕切換已知狀態的功能。 *將來，我們會將已知字保存到數據庫中。*
 

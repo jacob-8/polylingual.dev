@@ -3,9 +3,8 @@
   import Menu from './Menu.svelte';
   import Content from './Content.svelte';
   import type { Stage, Project } from '$lib/types';
-  import { prettifyName } from './helpers/prettifyName';
   import Giscus from '@giscus/svelte';
-  import { navigating } from '$app/stores';
+  import { navigating, page } from '$app/stores';
 
   export let projects: Record<string, Project>;
   export let stage: Stage;
@@ -27,9 +26,12 @@
       <div class="my-4">
         <a
           class="text-blue-700 text-sm font-semibold hover:underline"
-          href="/learn/project/{stage.next_stage_location.project}/{stage.next_stage_location
+          href="/{$page.data.lang === 'zh-TW' ? 'zh-TW' : 'en'}/learn/project/{stage.next_stage_location.project}/{stage.next_stage_location
             .lesson}/{stage.next_stage_location.stage}"
-          >{prettifyName(stage.next_stage_location.stage)} <span class="i-carbon-arrow-right" /></a
+          >{projects[stage.next_stage_location.project].lessons[stage.next_stage_location.lesson]
+            .raw_stages[stage.next_stage_location.stage].title[
+            $page.data.lang === 'zh-TW' ? 'zh-TW' : 'en'
+          ]} <span class="i-carbon-arrow-right" /></a
         >
       </div>
     {/if}
@@ -48,7 +50,7 @@
         emitMetadata="0"
         inputPosition="bottom"
         theme="light"
-        lang="zh-TW"
+        lang={$page.data.lang === 'zh-TW' ? 'zh-TW' : 'en'}
         loading="lazy"
       />
     {/if}
@@ -62,11 +64,13 @@
       href="https://github.com/jacob-8/polylingual.dev/tree/main{stage.directory}"
     >
       <span class="i-codicon-edit" />
-      為此頁提供修改建議
-      <!-- 为此页提供修改建议 -->
-      <!-- Edit this page -->
+      {#if $page.data.lang === 'zh-TW'}
+        為此頁提供修改建議
+      {:else}
+        Suggest edits to this page
+      {/if}
     </a>
 
-    <span class="ml-auto text-sm hidden md:block">Alt+T = EN/中</span>
+    <span class="ml-auto text-sm hidden md:block">Alt+T = EN+中文</span>
   </footer>
 </div>

@@ -8,9 +8,7 @@ Let's turn that data into something useful by looping over it sentence by senten
 
 [[src/routes/ClassicalText.svelte#03]]
 
-> If you are new to [Svelte](https://svelte.dev/) and want to understand better how to use its syntax, for example `{#each...`, please take some time to go through the [Svelte tutorial](https://svelte.dev/tutorial/basics). Afterwards, you can learn more about [SvelteKit](https://kit.svelte.dev/) using [learn.svelte.dev](https://learn.svelte.dev/). :zh:
-
-> 如果你是 [Svelte](https://svelte.dev/) 的新手，並且想更好地了解如何使用它的語法，例如`{#each...`，請花一些時間閱讀 [Svelte 教程](https://svelte.dev/tutorial/basics)。 之後，你可以使用 [learn.svelte.dev](https://learn.svelte.dev/) 了解有關 [SvelteKit](https://kit.svelte.dev/) 的更多信息。
+> If you are new to [Svelte](https://svelte.dev/) and want to understand better how to use its syntax, for example `{#each...`, please take some time to go through the [Svelte tutorial](https://svelte.dev/tutorial/basics). Afterwards, you can learn more about [SvelteKit](https://kit.svelte.dev/) using [learn.svelte.dev](https://learn.svelte.dev/). :zh: > 如果你是 [Svelte](https://svelte.dev/) 的新手，並且想更好地了解如何使用它的語法，例如`{#each...`，請花一些時間閱讀 [Svelte 教程](https://svelte.dev/tutorial/basics)。 之後，你可以使用 [learn.svelte.dev](https://learn.svelte.dev/) 了解有關 [SvelteKit](https://kit.svelte.dev/) 的更多信息。
 
 Place a border around each sentence and give the Classical text a little more space. :zh: 在每個句子周圍放置一個邊框，並給文言文本多一點空間。
 

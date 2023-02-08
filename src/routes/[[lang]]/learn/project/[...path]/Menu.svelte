@@ -54,8 +54,17 @@
 
   <!-- svelte-ignore a11y-click-events-have-key-events -->
   <h1 class="grow px-1 truncate" on:click={() => (is_open = !is_open)}>
-    驗證 <span class="opacity-30">/</span>
-    <strong class="text-blue-700">{stage.title['zh-TW']}</strong>
+    {#if $page.data.lang === 'zh-TW'}
+      {projects[stage.location.project].meta.title[$page.data.lang === 'zh-TW' ? 'zh-TW' : 'en']}
+      <span class="opacity-30">/</span>
+    {/if}
+    {projects[stage.location.project].lessons[stage.location.lesson].meta.title[
+      $page.data.lang === 'zh-TW' ? 'zh-TW' : 'en'
+    ]}
+    <span class="opacity-30">/</span>
+    <strong class="text-blue-700"
+      >{stage.title[$page.data.lang === 'zh-TW' ? 'zh-TW' : 'en']}</strong
+    >
   </h1>
   {#if stage.next_stage_location}
     <a
@@ -90,7 +99,7 @@
               }
             }}
           >
-            {project.meta.title['zh-TW']}
+            {project.meta.title[$page.data.lang === 'zh-TW' ? 'zh-TW' : 'en']}
           </button>
 
           {#if projectExpanded}
@@ -103,7 +112,7 @@
                     on:click={() => (expanded_lesson = lesson.slug)}
                   >
                     <span class:!rotate-90={lessonExpanded} class="i-carbon-chevron-right?bg" />
-                    {lesson.meta.title['zh-TW']}
+                    {lesson.meta.title[$page.data.lang === 'zh-TW' ? 'zh-TW' : 'en']}
                   </button>
 
                   {#if lessonExpanded}
@@ -118,7 +127,7 @@
                           aria-current={current ? 'page' : undefined}
                         >
                           <a href={stageUrl} on:click={() => (is_open = false)}>
-                            {stage.title['zh-TW']}
+                            {stage.title[$page.data.lang === 'zh-TW' ? 'zh-TW' : 'en']}
                           </a>
                         </li>
                       {/each}

@@ -13,8 +13,7 @@ Add the new component to `ClassicalText.svelte`. :zh: 將新組件添加到 `Cla
 
 Let's import our dictionary again. *In future lessons, we will improve our code so that we only need to import the dictionary once, but right now we are just trying to go fast in order to try our proof of concept.* Use the dictionary to find the matching entry and isolate the first pronunciation, and the beginning of the first explanation but without punctuation. :zh: 我們再次導入我們的字典。 *在以後的課程中，我們將改善我們的代碼，這樣我們只需要導入字典一次，但現在我們只是想快點來嘗試我們的驗證。*使用字典找到匹配的條目和第一個發音和第一個解釋的開頭。但沒有標點符號。
 
-> You should know that the `$:` indicates a variable that reacts to updates of other variables. :zh: 
-> 你應該知道 `$:` 表示一個對其它變量的更新做出反應的變量。
+> You should know that the `$:` indicates a variable that reacts to updates of other variables. :zh: > 你應該知道 `$:` 表示一個對其它變量的更新做出反應的變量。
 
 [[src/routes/Character.svelte#03]]
 

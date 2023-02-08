@@ -4,6 +4,7 @@
   import type { StageFiles } from '$lib/types';
   import Folder from './Folder.svelte';
   import { placeFilesIntoDirectories, zoomIntoScope } from './placeFilesIntoDirectories';
+  import { page } from '$app/stores';
 
   export let directoryPath: string;
   export let files: Writable<StageFiles>;
@@ -19,15 +20,15 @@
       $files = { ...$files, [pathname]: '\n' };
       $selected = pathname;
       return true;
-    } else {
-      instruct &&
-        alert(
-          `${pathname} does not need to be added. ${can_add_paths
-            .map((path) => path.split('/').pop())
-            .join(', ')} are your options.`
-        );
-      return false;
+    } else if (instruct) {
+      const options = can_add_paths.map((path) => path.split('/').pop()).join(', ');
+      alert(
+        $page.data.lang === 'zh-TW'
+          ? `不需要添加 ${pathname} 。${options} 是你的選擇。`
+          : `${pathname} does not need to be added. ${options} are your options.`
+      );
     }
+    return false;
   }
 
   afterNavigate((navigation) => {

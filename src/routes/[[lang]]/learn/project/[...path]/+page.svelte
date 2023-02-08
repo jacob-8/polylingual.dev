@@ -9,6 +9,7 @@
   import Sidebar from './Sidebar.svelte';
   import Practice from './Practice.svelte';
   import SeoMetaTags from '$lib/SeoMetaTags.svelte';
+  import { page } from '$app/stores';
 
   export let data: PageData;
   $: projectsDirectory = $updatedProjectsDirectory || data.projectsDirectory;
@@ -19,7 +20,14 @@
   let width = browser ? window.innerWidth : 1000;
   $: mobile = width < 768;
   let mobile_view: 'tutorial' | 'editor' | 'preview' = 'tutorial';
+
+  $: title =
+    $page.data.lang === 'zh-TW'
+      ? `語言學習閱讀器 - 驗證 - ${stage.title['zh-TW']}`
+      : `Language Learning Reader - Proof of Concept - ${stage.title['en']}`;
 </script>
+
+<SeoMetaTags {title} />
 
 <svelte:window bind:innerWidth={width} />
 
@@ -32,8 +40,7 @@
         type="button"
         on:click={() => (mobile_view = 'tutorial')}
       >
-        課程
-        <!-- Tutorial -->
+        {$page.data.lang === 'zh-TW' ? '課程' : 'Tutorial'}
       </button>
       <button
         class="text-xs py-1 px-2 rounded"
@@ -41,8 +48,7 @@
         type="button"
         on:click={() => (mobile_view = 'editor')}
       >
-        編輯器
-        <!-- Editor -->
+        {$page.data.lang === 'zh-TW' ? '編輯器' : 'Editor'}
       </button>
       <button
         class="text-xs py-1 px-2 rounded"
@@ -50,8 +56,7 @@
         type="button"
         on:click={() => (mobile_view = 'preview')}
       >
-        成果
-        <!-- Preview -->
+        {$page.data.lang === 'zh-TW' ? '成果' : 'Preview'}
       </button>
     </Header>
   {/if}
@@ -67,6 +72,3 @@
     </SplitPane>
   </div>
 </div>
-
-<!-- Language Learning Reader - Proof of Concept -->
-<SeoMetaTags title="語言學習閱讀器 - 驗證 - {stage.title['zh-TW']}" />

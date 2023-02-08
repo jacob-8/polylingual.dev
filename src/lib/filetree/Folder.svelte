@@ -5,6 +5,7 @@
   import Item from './Item.svelte';
   import File from './File.svelte';
   import { directoryPathIncludesAddableFilepath } from './canAdd';
+    import { page } from '$app/stores';
 
   export let directory: Directory;
   export let depth: number;
@@ -26,7 +27,8 @@
   const dispatch = createEventDispatcher<{ add: string }>();
 
   function add_file() {
-    const name = prompt('File name?');
+
+    const name = prompt($page.data.lang === 'zh-TW' ? '文件名？' :'File name?');
     if (name) dispatch('add', `${directoryPath}/${name}`);
   }
 </script>
