@@ -8,5 +8,5 @@ export const load = (async ({ params }) => {
         throw redirect(307, 'project/01-language-learning-reader/01-proof-of-concept/01-introduction');
     }
 
-    return { projectsDirectory, project, lesson, stage, lang: params.lang };
+    return { projectsDirectory, project, lesson, stage };
 }) satisfies PageLoad;
