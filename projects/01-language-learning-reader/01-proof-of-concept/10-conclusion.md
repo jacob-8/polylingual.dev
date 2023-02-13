@@ -14,6 +14,7 @@ Future lessons will each go through one of these tasks. We will learn many diffe
 - Database storage :zh: - 數據庫存儲
 - Using a styles framework :zh: - 使用樣式框架
 - Hosting :zh: - 託管
+- Using AI :zh: - 使用人工智能
 - And more! :zh: - 還有更多！
 
 We don't have an English group at the moment but you can still join our [了解 JavaScript 高雄社區](https://www.facebook.com/groups/liaojiejavascript) to receive updates on when future lessons are posted. See you next time! :zh: 請加入我們的 [了解 JavaScript 高雄社區](https://www.facebook.com/groups/liaojiejavascript) 以獲取更新。 下次見！
