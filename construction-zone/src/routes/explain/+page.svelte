@@ -1,32 +1,39 @@
 <script lang="ts">
-  import { enhance } from '$app/forms';
-  let classical_text = '';
+  import { paraphrase } from './paraphrase';
 
   let asking = false;
+  let classical_text = '';
+  let mandarin_paraphrase = '';
+  let error: any;
+
+  async function on_submit() {
+    if (!classical_text) return;
+    asking = true;
+    try {
+      mandarin_paraphrase = await paraphrase(classical_text);
+    } catch (err) {
+      console.error(err);
+      error = err;
+    }
+    asking = false;
+  }
 </script>
 
 <div style="display: flex;">
-  <form
-    style="flex: 2; display: flex; padding: 0 8px;"
-    method="POST"
-    use:enhance={() => {
-      asking = true;
-
-      return async ({ update }) => {
-        await update();
-        asking = false;
-      };
-    }}
-  >
+  <form style="flex: 1;" on:submit={on_submit}>
+    <div>文言文</div>
     <input
-      name="text_to_explain"
-      style="width: 100%;"
+      style="width: 92%;"
       bind:value={classical_text}
-      placeholder="Paste a sentence of Classical Chinese here"
+      placeholder="文言文句子"
     />
   </form>
   <div style="flex: 1;">
-    Chinese {asking ? 'asking...' : '...'}
+    <div>Mandarin</div>
+    {asking ? '在問...' : mandarin_paraphrase}
   </div>
-  <div style="flex: 1;">English</div>
 </div>
+
+{#if error}
+  <div style="color: red;"><pre>{error}</pre></div>
+{/if}

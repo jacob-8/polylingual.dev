@@ -16,33 +16,40 @@ export const POST: RequestHandler = async ({ request }) => {
   const authenticated = auth_token === 'ADD_FIREBASE_AUTH_TO_SET_THIS_UP';
   if (!authenticated) throw error(400, "Unauthorized usage");
 
-  console.log(`explaining: ${text}`)
+  console.log(`paraphrasing: ${text}`)
 
   try {
     const completion = await openai.createCompletion({
-      model: "text-davinci-003",
-      prompt: generatePrompt(text),
-      temperature: 0.6,
-      max_tokens: 40,
+      model: "text-davinci-003", // text-curie-001, text-davinci-003
+      prompt: generate_chinese_prompt(text),
+      temperature: 0,
+      max_tokens: 256,
     });
     const explanation = completion.data.choices[0].text;
     console.log({ completion, explanation })
     return json(explanation);
-
-  } catch (error: any) {
-    if (error.response) {
-      console.error(error.response.status, error.response.data);
-      throw error(error.response.status, error.response.data)
+  } catch (err: any) {
+    if (err.response) {
+      console.error(err.response.status, err.response.data);
+      throw error(err.response.status, err.response.data)
     } else {
-      console.error(`Error with OpenAI API request: ${error.message}`);
+      console.error(`Error with OpenAI API request: ${err.message}`);
       throw error(500, 'An error occurred during your request.')
     }
   }
 
 };
 
-function generatePrompt(text: string) {
-  return `${text.slice(0, 1000)}
+function generate_chinese_prompt(text: string) {
+  return `用一年級學生能理解的簡單中文重述以下文言文句子。
 
-Summarize the above text in English:`;
+文言文：${text}
+中文：`;
 }
+
+// function generate_english_prompt(text: string) {
+//   return `Restate the following Classical Chinese sentence using simple Mandarin Chinese that a first-grade student would understand.
+
+// Classical Chinese: ${text}
+// Mandarin Chinese:`;
+// }
