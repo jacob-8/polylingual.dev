@@ -21,10 +21,11 @@
   $: mobile = width < 768;
   let mobile_view: 'tutorial' | 'editor' | 'preview' = 'tutorial';
 
-  $: title =
-    $page.data.lang === 'zh-TW'
-      ? `語言學習閱讀器 - 驗證 - ${stage.title['zh-TW']}`
-      : `Language Learning Reader - Proof of Concept - ${stage.title['en']}`;
+  let lang: 'zh-TW' | 'en';
+  $: lang = $page.data.lang === 'zh-TW' ? 'zh-TW' : 'en';
+  $: title = `${projects[stage.location.project].meta.title[lang]} - ${
+    projects[stage.location.project].lessons[stage.location.lesson].meta.title[lang]
+  } - ${stage.title[lang]}`;
 </script>
 
 <SeoMetaTags {title} />

@@ -1,7 +1,7 @@
 <script lang="ts">
   import { page } from '$app/stores';
-  import { slide } from 'svelte/transition';
   import type { Stage, Project } from '$lib/types';
+  import { extract_number } from './helpers/extract_number';
 
   export let projects: Record<string, Project>;
   export let stage: Stage;
@@ -62,8 +62,9 @@
       $page.data.lang === 'zh-TW' ? 'zh-TW' : 'en'
     ]}
     <span class="opacity-30">/</span>
-    <strong class="text-blue-700"
-      >{stage.title[$page.data.lang === 'zh-TW' ? 'zh-TW' : 'en']}</strong
+    <strong class="text-blue-700">
+      {extract_number(stage.location.stage)}
+      {stage.title[$page.data.lang === 'zh-TW' ? 'zh-TW' : 'en']}</strong
     >
   </h1>
   {#if stage.next_stage_location}
@@ -79,12 +80,7 @@
 </header>
 
 {#if is_open}
-  <nav
-    transition:slide
-    class="p-3 border-b bg-gray-500/10"
-    use:close_when_focus_leaves
-    aria-label="project lessons"
-  >
+  <nav class="p-3 border-b bg-gray-500/10" use:close_when_focus_leaves aria-label="project lessons">
     <ul>
       {#each Object.values(projects) as project}
         {@const projectExpanded = project.slug === expanded_project}
@@ -127,6 +123,7 @@
                           aria-current={current ? 'page' : undefined}
                         >
                           <a href={stageUrl} on:click={() => (is_open = false)}>
+                            {extract_number(stage.location.stage)}
                             {stage.title[$page.data.lang === 'zh-TW' ? 'zh-TW' : 'en']}
                           </a>
                         </li>
