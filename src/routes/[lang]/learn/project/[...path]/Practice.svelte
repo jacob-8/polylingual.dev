@@ -57,7 +57,7 @@
           >
             {#if completed}
               {$page.data.lang === 'zh-TW' ? '復原' : 'reset'}
-              {:else}
+            {:else}
               {$page.data.lang === 'zh-TW' ? '解決' : 'solve'}
               <span class="i-carbon-arrow-right" />
             {/if}
@@ -83,9 +83,12 @@
     {#if browser}
       <Stackblitz
         hideExplorer={false}
-        hideNavigation={true}
-        title={`${stage.location.project}, ${stage.location.lesson}, ${stage.location.name}`}
+        hideNavigation={false}
+        title={`${stage.location.project}, ${stage.location.lesson}, ${
+          stage.title[$page.data.lang === 'zh-TW' ? 'zh-TW' : 'en']
+        }`}
         files={$files}
+        url={stage.initial_url || '/'}
       />
     {/if}
   </section>

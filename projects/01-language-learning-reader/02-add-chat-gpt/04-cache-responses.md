@@ -1,1 +1,0 @@
-Since we haven't set up a database yet, we will just cache responses in localStorage for now to avoid using up our initial $18 ChatGPT credit too fast.

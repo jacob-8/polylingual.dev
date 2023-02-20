@@ -4,7 +4,39 @@ reTypewriter Snapshots v1
 
 --02----------
 export async function paraphrase(text: string): Promise<string> {
+  const response = await fetch('/api/paraphrase', {
+    method: 'POST',
+    body: JSON.stringify({ text }),
+    headers: {
+      'content-type': 'application/json'
+    }
+  });
 
+  const body = await response.json();
+  return body;
+}
+
+--03----------
+export async function paraphrase(text: string): Promise<string> {
+  const response = await fetch('/api/paraphrase', {
+    method: 'POST',
+    body: JSON.stringify({ text }),
+    headers: {
+      'content-type': 'application/json'
+    }
+  });
+
+  const body = await response.json();
+
+  if (response.status !== 200) {
+    throw new Error(`Status: ${response.status}, Error: ${JSON.stringify(body, null, 2)}`);
+  }
+
+  return body;
+}
+
+--04----------
+export async function paraphrase(text: string): Promise<string> {
   const response = await fetch('/api/paraphrase', {
     method: 'POST',
     body: JSON.stringify({

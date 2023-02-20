@@ -1,6 +1,10 @@
 # Roadmap
 
 ## TODO
+- fix Stackblitz title
+- handle adding files in a subdirectory not yet existing
+- don't crash if improper step file referred to
+- handle links to file in root directory (/ issue)
 - make progression actionable with a click (especially add and remove files or rename)
   - auto focus on file in first step (unless it's adding a file)
 - update error page

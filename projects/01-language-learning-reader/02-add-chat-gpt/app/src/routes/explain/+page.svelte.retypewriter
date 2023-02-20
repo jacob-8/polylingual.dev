@@ -3,6 +3,158 @@ reTypewriter Snapshots v1
 --01----------
 
 --02----------
+<div style="display: flex;">
+  <form style="flex: 1;">
+    <div>文言文</div>
+  </form>
+  
+  <div style="flex: 1;">
+    <div>Mandarin</div>  
+  </div>
+</div>
+
+--03----------
+<script lang="ts">
+  let classical_text = '';
+</script>
+
+<div style="display: flex;">
+  <form style="flex: 1;">
+    <div>文言文</div>
+    <input bind:value={classical_text} placeholder="文言文句子" style="width: 92%;" required />
+  </form>
+  
+  <div style="flex: 1;">
+    <div>Mandarin</div>  
+    {classical_text}
+  </div>
+</div>
+
+--04----------
+<script lang="ts">
+  let classical_text = '';
+
+  async function on_submit() {
+    if (!classical_text) return;
+    alert(`Explaining: ${classical_text}`);
+  }
+</script>
+
+<div style="display: flex;">
+  <form style="flex: 1;" on:submit={on_submit}>
+    <div>文言文</div>
+    <input bind:value={classical_text} placeholder="文言文句子" style="width: 92%;" required />
+  </form>
+  
+  <div style="flex: 1;">
+    <div>Mandarin</div>  
+    {classical_text}
+  </div>
+</div>
+
+--05----------
+<script lang="ts">
+  import { paraphrase } from './paraphrase';
+
+  let classical_text = '';
+  let mandarin_paraphrase = '';
+
+  async function on_submit() {
+    if (!classical_text) return;
+    try {
+      mandarin_paraphrase = await paraphrase(classical_text);
+    } catch (err) {
+      alert(err);
+    }
+  }
+</script>
+
+<div style="display: flex;">
+  <form style="flex: 1;" on:submit={on_submit}>
+    <div>文言文</div>
+    <input bind:value={classical_text} placeholder="文言文句子" style="width: 92%;" required />
+  </form>
+  
+  <div style="flex: 1;">
+    <div>Mandarin</div>  
+    {mandarin_paraphrase}
+  </div>
+</div>
+
+--06----------
+<script lang="ts">
+  import { paraphrase } from './paraphrase';
+
+  let classical_text = '';
+  let mandarin_paraphrase = '';
+  let error: any;
+
+  async function on_submit() {
+    if (!classical_text) return;
+    try {
+      mandarin_paraphrase = await paraphrase(classical_text);
+    } catch (err) {
+      console.error(err);
+      error = err;
+    }
+  }
+</script>
+
+<div style="display: flex;">
+  <form style="flex: 1;" on:submit={on_submit}>
+    <div>文言文</div>
+    <input bind:value={classical_text} placeholder="文言文句子" style="width: 92%;" required />
+  </form>
+  
+  <div style="flex: 1;">
+    <div>Mandarin</div>  
+    {mandarin_paraphrase}
+  </div>
+</div>
+
+{#if error}
+  <div style="color: red;"><pre>{error}</pre></div>
+{/if}
+
+--07----------
+<script lang="ts">
+  import { paraphrase } from './paraphrase';
+
+  let classical_text = '';
+  let mandarin_paraphrase = '';
+  let error: any;
+  let asking = false;
+
+  async function on_submit() {
+    if (!classical_text || asking) return;
+    asking = true;
+    try {
+      mandarin_paraphrase = await paraphrase(classical_text);
+    } catch (err) {
+      console.error(err);
+      error = err;
+    }
+    asking = false;
+  }
+</script>
+
+<div style="display: flex;">
+  <form style="flex: 1;" on:submit={on_submit}>
+    <div>文言文</div>
+    <input bind:value={classical_text} placeholder="文言文句子" style="width: 92%;" required />
+  </form>
+  
+  <div style="flex: 1;">
+    <div>Mandarin</div>  
+    {asking ? '在問...' : mandarin_paraphrase}
+  </div>
+</div>
+
+{#if error}
+  <div style="color: red;"><pre>{error}</pre></div>
+{/if}
+
+--08----------
 <script lang="ts">
   import { paraphrase } from './paraphrase';
 
@@ -30,7 +182,7 @@ reTypewriter Snapshots v1
     <input
       style="width: 92%;"
       bind:value={classical_text}
-      placeholder="文言文句子"
+      placeholder="文言文句子"  required
     />
   </form>
   <div style="flex: 1;">
