@@ -1,3 +1,8 @@
+reTypewriter Snapshots v1
+
+--01----------
+
+--02----------
 import type { RequestHandler } from './$types';
 import { json, error } from '@sveltejs/kit';
 import { OPENAI_API_KEY } from '$env/static/private';
@@ -50,3 +55,5 @@ function generate_chinese_prompt(text: string) {
 // `Restate the following Classical Chinese sentence using simple Mandarin Chinese that a first-grade student would understand.
 // Classical Chinese: ${text}
 // Mandarin Chinese:`
+
+--------------
