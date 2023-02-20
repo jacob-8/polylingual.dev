@@ -1,6 +1,6 @@
 ---
 en: Call Server From Client
-zh-TW: ____
+zh-TW: 使用服務器端點
 initial_url: /explain
 file_to_focus: src/routes/explain/+page.svelte
 ---

@@ -1,6 +1,6 @@
 ---
 en: Display Errors
-zh-TW: ____
+zh-TW: 展示錯誤
 initial_url: /explain
 file_to_focus: src/routes/api/paraphrase/+server.ts
 ---

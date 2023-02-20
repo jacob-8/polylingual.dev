@@ -1,6 +1,6 @@
 ---
 en: Add Loading State
-zh-TW: ____
+zh-TW: 添加加載狀態
 initial_url: /explain
 file_to_focus: src/routes/explain/+page.svelte
 ---

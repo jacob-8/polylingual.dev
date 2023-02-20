@@ -1,6 +1,6 @@
 ---
 en: Add Server Endpoint
-zh-TW: ____
+zh-TW: 添加服務器端點
 initial_url: /explain
 file_to_focus: src/routes/explain/+page.svelte
 ---

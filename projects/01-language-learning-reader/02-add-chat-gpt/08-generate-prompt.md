@@ -1,6 +1,6 @@
 ---
 en: Generate Prompt
-zh-TW: ____
+zh-TW: 生成提示
 initial_url: /explain
 file_to_focus: src/routes/api/paraphrase/+server.ts
 ---

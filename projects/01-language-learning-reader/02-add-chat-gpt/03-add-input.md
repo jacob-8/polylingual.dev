@@ -1,6 +1,6 @@
 ---
 en: Add Input
-zh-TW: ____
+zh-TW: 添加輸入
 initial_url: /explain
 file_to_focus: src/routes/explain/+page.svelte
 ---

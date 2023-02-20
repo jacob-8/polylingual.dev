@@ -1,6 +1,6 @@
 ---
 en: Add New Route
-zh-TW: ____
+zh-TW: 添加新路由
 ---
 
 Start by adding an `/explain` route where we can place our new interface. We do this in SvelteKit by adding a `src/routes/explain/+page.svelte` file.

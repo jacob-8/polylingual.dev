@@ -1,6 +1,6 @@
 ---
 en: Add OpenAI
-zh-TW: ____
+zh-TW: 添加 OpenAI
 initial_url: /explain
 file_to_focus: src/routes/explain/+page.svelte
 ---

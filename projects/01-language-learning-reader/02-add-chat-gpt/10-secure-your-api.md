@@ -1,6 +1,6 @@
 ---
 en: Secure Your API
-zh-TW: ____
+zh-TW: 保護 API
 initial_url: /explain
 file_to_focus: src/routes/api/paraphrase/+server.ts
 ---
