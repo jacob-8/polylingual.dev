@@ -12,7 +12,7 @@
 {:else if ext === 'ts'}
   <span class="i-vscode-icons-file-type-typescript" />
 {:else if ext === 'js'}
-<span class="i-vscode-icons-file-type-js" />
+  <span class="i-vscode-icons-file-type-js" />
 {:else if ext === 'css'}
   <span class="i-vscode-icons-file-type-css" />
 {:else if ext === 'json'}
@@ -23,4 +23,10 @@
   <span class="i-vscode-icons-file-type-markdown" />
 {:else if ['png', 'svg', 'jpg', 'jpeg'].includes(ext)}
   <span class="i-vscode-icons-file-type-image" />
+{:else if basename.startsWith('.env')}
+  <span class="i-vscode-icons-file-type-config" />
+{:else if basename === '.gitignore'}
+  <span class="i-vscode-icons-file-type-git" />
+{:else}
+  <span class="i-vscode-icons-default-file" />
 {/if}

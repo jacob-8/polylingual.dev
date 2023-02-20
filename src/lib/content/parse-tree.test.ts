@@ -148,6 +148,8 @@ describe('parseTree', () => {
             },
             "02-second-lesson": {
               "app_start": {
+                ".env": "PUBLIC_FOO=hello",
+                ".env.local": "BAZ=world",
                 "package.txt": "root level",
                 "src/a.txt": "I'm shared by all lessons in the first projects, but should be overwritten in the first project by it's common \`a.txt\` file, but I should be in the first project's 2nd lesson.",
                 "src/b.txt": "I'm shared by all lessons in this project.",

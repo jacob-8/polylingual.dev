@@ -24,10 +24,10 @@
   }
 
   function setFocus() {
-    const baseRouteFile = 'src/routes/+page.svelte';
-    const firstFile = Object.keys($files)[0];
-    const defaultFile = $files[baseRouteFile] ? baseRouteFile : firstFile;
-    $selected = stage.file_to_focus || defaultFile;
+    const BASE_ROUTE_FILE = 'src/routes/+page.svelte';
+    const first_file = Object.keys($files)[0];
+    const default_file = $files[BASE_ROUTE_FILE] ? BASE_ROUTE_FILE : first_file;
+    $selected = stage.file_to_focus || default_file;
   }
 
   $: completed = objectsAreSame($files, stage.app_finish);
@@ -49,7 +49,6 @@
     <SplitPane pos={27} max={100}>
       <section class="h-full flex flex-col border-r border-gray-500/50" slot="a">
         <Explorer directoryPath={stage.directory_to_show} {files} {selected} {can_add_paths} />
-
         {#if !objectsAreSame(stage.app_start, stage.app_finish)}
           <button
             class:bg-gray-500={completed}

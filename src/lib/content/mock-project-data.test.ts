@@ -1,4 +1,4 @@
-export const mockProjectsDirectory = import.meta.glob(['/src/lib/content/mock-projects/**'], { as: 'raw', eager: true });
+export const mockProjectsDirectory = import.meta.glob(['/src/lib/content/mock-projects/**', '/src/lib/content/mock-projects/**/.env*', '/src/lib/content/mock-projects/**/.gitignore'], { as: 'raw', eager: true });
 export const mockProjectsInitialPath = '/src/lib/content/mock-projects/';
 export const mockProjectsFirstProjectName = '01-first-project';
 export const mockProjectsFirstLessonName = '01-first-lesson';
@@ -84,6 +84,8 @@ test('mockProjectsDirectory', () => {
     ---
 
     1st project, 2nd lesson, 1st stage; no frills",
+      "/src/lib/content/mock-projects/01-first-project/02-second-lesson/app/.env": "PUBLIC_FOO=hello",
+      "/src/lib/content/mock-projects/01-first-project/02-second-lesson/app/.env.local": "BAZ=world",
       "/src/lib/content/mock-projects/01-first-project/02-second-lesson/app/src/routes/+page.svelte": "I'm a simple page with nothing that will be added to me.",
       "/src/lib/content/mock-projects/01-first-project/02-second-lesson/meta.json": "{
       \\"title\\": {
@@ -102,6 +104,7 @@ test('mockProjectsDirectory', () => {
     }
     ",
       "/src/lib/content/mock-projects/02-second-project/01-first-lesson-in-2nd-project/01-2nd-project-1st-lesson-1st-stage.md": "I'm the first stage in the 2nd project's first lesson.",
+      "/src/lib/content/mock-projects/common/.gitignore": "node_modules",
       "/src/lib/content/mock-projects/common/package.txt": "root level",
       "/src/lib/content/mock-projects/common/src/a.txt": "I'm shared by all projects, but should be overwritten in the first project by it's common \`a.txt\` and it's first lesson's \`a.txt\` file.",
       "/src/lib/content/mock-projects/common/src/b.txt": "I'm shared by all projects, but should be overwritten in the first project by it's common \`b.txt\` file. I'll be in the 2nd project though.",
