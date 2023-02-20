@@ -3,6 +3,9 @@ import { browser } from '$app/environment';
 
 export function check_or_ask_for_key(files: ProjectFiles): ProjectFiles {
   if (!browser) return files;
+  
+  const needs_key = files['.env.local']?.includes('<ask-me-then-save-in-localStorage>');
+  if (!needs_key) return files;
 
   const openai_api_key = localStorage['OPENAI_API_KEY'] as string;
   if (openai_api_key) return add_keys_to_files(files, openai_api_key);
