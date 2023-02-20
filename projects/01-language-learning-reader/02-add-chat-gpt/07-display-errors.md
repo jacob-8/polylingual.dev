@@ -1,0 +1,18 @@
+---
+en: Display Errors
+zh-TW: ____
+initial_url: /explain
+file_to_focus: src/routes/api/paraphrase/+server.ts
+---
+
+Let's make sure we catch any errors that occur when we call OpenAI.
+
+[[src/routes/api/paraphrase/+server.ts#06]]
+
+Then we format the error in our paraphrase helper function:
+
+[[src/routes/explain/paraphrase.ts#03]]
+
+And display it in our component:
+
+[[src/routes/explain/+page.svelte#06]]

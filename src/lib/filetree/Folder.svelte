@@ -5,7 +5,7 @@
   import Item from './Item.svelte';
   import File from './File.svelte';
   import { directoryPathIncludesAddableFilepath } from './canAdd';
-    import { page } from '$app/stores';
+  import { page } from '$app/stores';
 
   export let directory: Directory;
   export let depth: number;
@@ -17,7 +17,8 @@
 
   $: openFolderOfSelected($selected);
   function openFolderOfSelected(selected: string) {
-    if (selected.startsWith(directoryPath)) {
+    const directory_path_without_leading_slash = directoryPath.replace(/^\//, ''); // when "directory_to_show": "", the directoryPath will be the root and having a leading slash causes problems - may need to switch to always starting with a leading slash to avoid problems like this
+    if (selected.startsWith(directory_path_without_leading_slash)) {
       expanded = true;
     }
   }
@@ -27,8 +28,7 @@
   const dispatch = createEventDispatcher<{ add: string }>();
 
   function add_file() {
-
-    const name = prompt($page.data.lang === 'zh-TW' ? '文件名？' :'File name?');
+    const name = prompt($page.data.lang === 'zh-TW' ? '文件名？' : 'File name?');
     if (name) dispatch('add', `${directoryPath}/${name}`);
   }
 </script>

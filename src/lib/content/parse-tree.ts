@@ -45,6 +45,7 @@ export function parseTree(rawProjects: Record<string, string>, pathInitial = '/p
 
       if (previous_stage)
         previous_stage.next_stage_location = location;
+
       previous_stage = raw_stage;
 
     } else if (type === 'lesson-app') {

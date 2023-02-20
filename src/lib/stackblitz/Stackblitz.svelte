@@ -1,8 +1,5 @@
 <script lang="ts">
   // https://developer.stackblitz.com/platform/api/javascript-sdk-vm
-  // await vm.editor.setTheme('light');
-  // await vm.preview.setUrl('/about');
-  // const url = await vm.preview.getUrl();
 
   import { filesWithChanges } from './filesWithChanges';
   import sdk, {
@@ -12,21 +9,15 @@
     type ProjectFiles,
   } from '@stackblitz/sdk';
   import { onMount } from 'svelte';
+  import { check_or_ask_for_key } from './add_keys_to_files';
 
   export let files: ProjectFiles;
   export let title: string;
   export let hideExplorer = false;
   export let hideNavigation = false;
+  export let url = '/';
 
-  const project: Project = {
-    title,
-    files,
-    description: 'Created by Polylingual Development for learning via polylingual.dev/learn',
-    template: 'node',
-    settings: {
-      compile: { trigger: 'keystroke' },
-    },
-  };
+  $: files_with_keys = check_or_ask_for_key(files);
 
   const embedOptions: EmbedOptions = {
     hideNavigation,
@@ -40,22 +31,33 @@
   let filesSentToVM: ProjectFiles;
 
   onMount(async () => {
+    const project: Project = {
+      title,
+      files: files_with_keys,
+      description: 'Created by Polylingual Development for learning via polylingual.dev/learn',
+      template: 'node',
+      settings: {
+        compile: { trigger: 'keystroke' },
+      },
+    };
+
     stackblitzVM = await sdk.embedProject(embedElement, project, embedOptions);
     filesSentToVM = { ...project.files };
   });
 
-  $: updateFiles(files);
+  $: updateFiles(files_with_keys);
+  $: stackblitzVM?.preview.setUrl(url);
 
   async function updateFiles(updatedFiles: ProjectFiles) {
     if (!stackblitzVM) return;
 
     const { filesToCreate, filenamesToDestroy } = filesWithChanges(filesSentToVM, updatedFiles);
-    const hasFilesToCreate = Object.keys(filesToCreate).length > 0;
-    const hasFilenamesToDestroy = filenamesToDestroy.length > 0;
-    if (hasFilesToCreate || hasFilenamesToDestroy) {
+    const has_files_to_create = Object.keys(filesToCreate).length > 0;
+    const has_filenames_to_destroy = filenamesToDestroy.length > 0;
+    if (has_files_to_create || has_filenames_to_destroy) {
       writeToFiles(filesToCreate, filenamesToDestroy);
-      filesSentToVM = { ...updatedFiles};
-    } 
+      filesSentToVM = { ...updatedFiles };
+    }
   }
 
   async function writeToFiles(filesToCreate: ProjectFiles, deletedFilenames: string[] = []) {

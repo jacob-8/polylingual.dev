@@ -1,12 +1,18 @@
 export function directoryPathIncludesAddableFilepath(directoryPath: string, can_add_paths: string[]): boolean {
   if (!can_add_paths || can_add_paths.length === 0) return false;
   for (const path of can_add_paths) {
-    const can_add_path_directory = path.split('/').slice(0, -1).join('/');
+    const can_add_path_directory = remove_last_item_from_path(path);
     if (can_add_path_directory === directoryPath) {
       return true;
     }
   }
   return false;
+}
+
+function remove_last_item_from_path(path: string): string {
+  const split = path.split('/');
+  split.pop();
+  return split.join('/');
 }
 
 if (import.meta.vitest) {
@@ -20,6 +26,12 @@ if (import.meta.vitest) {
     test('handles src/routes directory', () => {
       const directoryPath = 'src/routes'
       const can_add_paths = ['src/global.css', 'src/routes/+page.svelte']
+      expect(directoryPathIncludesAddableFilepath(directoryPath, can_add_paths)).toBeTruthy();
+    });
+
+    test('handles adding subdirectories from which explain/+page.svelte file can be added', () => {
+      const directoryPath = 'src/routes'
+      const can_add_paths = ['src/routes/explain']
       expect(directoryPathIncludesAddableFilepath(directoryPath, can_add_paths)).toBeTruthy();
     });
 

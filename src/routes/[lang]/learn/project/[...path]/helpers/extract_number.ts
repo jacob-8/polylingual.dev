@@ -1,3 +1,20 @@
+export function extract_number(name:string): number {
+  const parts = name.split('-');
+  const first = parts[0];
+  const number = parseInt(first, 10);
+  return number;
+}
+
+if (import.meta.vitest) {
+  describe('extract_number', () => {
+    test('pulls from leading 01- and 10-', () => {
+      expect(extract_number('01-introduction')).toEqual(1);
+      expect(extract_number('10-foo')).toEqual(10);
+    });
+  });
+}
+
+
 // const DO_NOT_CAPITALIZE = ['of', 'in', 'to', 'for', 'the'];
 
 // export function prettifyName(name: string): string {

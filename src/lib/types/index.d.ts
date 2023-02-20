@@ -64,7 +64,7 @@ export interface StageLocation {
 export interface StageFrontmatter {
   title: LanguageValues;
   initial_url?: string;
-  file_to_focus?: string;
+  file_to_focus?: string; // file_to_focus: src/routes/Text.svelte
 }
 
 export interface StepsByFilename {
