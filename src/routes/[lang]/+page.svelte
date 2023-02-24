@@ -9,17 +9,34 @@
   <h1 class="text-4xl">Polylingual Development</h1>
   <div class="my-10">
     {#if $page.data.lang === 'zh-TW'}
-      <a
-        class="bg-black py-2 px-4 rounded-lg text-2xl border border-black hover:border-blue transition-border-color-300"
-        href="/zh-TW/learn">學習 <span class="i-carbon-arrow-right mb-1" /></a
-      >
+      <div>
+        <a
+          class="bg-black py-2 px-4 rounded-lg text-2xl border border-black hover:border-blue transition-border-color-300"
+          href="/zh-TW/learn">學習 <span class="i-carbon-arrow-right mb-1" /></a
+        >
+      </div>
+      <div class="h-10" />
+      <div>
+        <a
+          class="bg-black py-2 px-4 rounded-lg text-2xl border border-black hover:border-blue transition-border-color-300"
+          href="/zh-TW/search">搜索 <span class="i-carbon-search mb-1" /></a
+        >
+      </div>
     {:else}
-      <a
-        class="bg-black py-2 px-4 rounded-lg text-2xl border border-black hover:border-blue transition-border-color-300"
-        href="/en/learn">Learn <span class="i-carbon-arrow-right mb-1" /></a
-      >
+      <div>
+        <a
+          class="bg-black py-2 px-4 rounded-lg text-2xl border border-black hover:border-blue transition-border-color-300"
+          href="/en/learn">Learn <span class="i-carbon-arrow-right mb-1" /></a
+        >
+      </div>
+      <div class="h-10" />
+      <div>
+        <a
+          class="bg-black py-2 px-4 rounded-lg text-2xl border border-black hover:border-blue transition-border-color-300"
+          href="/en/search">Search <span class="i-carbon-search mb-1" /></a
+        >
+      </div>
     {/if}
-    <div class="h-6" />
   </div>
 
   <div class="mt-10 mb-4">
