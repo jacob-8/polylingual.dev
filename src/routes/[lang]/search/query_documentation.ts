@@ -1,5 +1,5 @@
-export async function get_embedding(text: string): Promise<string> {
-  const response = await fetch('/api/embedding', {
+export async function query_documentation(text: string): Promise<string> {
+  const response = await fetch('/api/query', {
     method: 'POST',
     body: JSON.stringify({
       text,
