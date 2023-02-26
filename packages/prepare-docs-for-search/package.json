@@ -5,10 +5,12 @@
   "main": "index.ts",
   "scripts": {
     "dev": "tsx index.ts",
+    "generate-embedding": "tsx embeddings/generate_embedding.ts",
     "test": "vitest",
     "test:ui": "vitest --ui"
   },
   "devDependencies": {
+    "dotenv": "^16.0.3",
     "openai": "^3.1.0",
     "tsx": "^3.12.3",
     "typescript": "~4.9.4",

@@ -1,10 +1,16 @@
 import { writeFileSync } from 'fs';
 import { Configuration, OpenAIApi } from "openai";
-const OPENAI_API_KEY = "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"
-const configuration = new Configuration({ apiKey: OPENAI_API_KEY });
-const openai = new OpenAIApi(configuration);
+import dotenv from 'dotenv';
+
+dotenv.config({ path: '../../.env.local' });
 
 async function generateEmbedding(document: string) {
+  if (!process.env.OPENAI_API_KEY)
+    return console.warn('OPENAI_API_KEY environment variable required: skipping embeddings generation')
+
+  const configuration = new Configuration({ apiKey: process.env.OPENAI_API_KEY });
+  const openai = new OpenAIApi(configuration);
+
   const input = document.replace(/\n/g, ' ')
 
   const embeddingResponse = await openai.createEmbedding({
