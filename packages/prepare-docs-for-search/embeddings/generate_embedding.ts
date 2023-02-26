@@ -1,26 +1,25 @@
-import { writeFileSync } from 'fs';
 import { Configuration, OpenAIApi } from "openai";
 import dotenv from 'dotenv';
 
 dotenv.config({ path: '../../.env.local' });
 
-async function generateEmbedding(document: string) {
+export async function generate_embedding(document: string): Promise<number[] | void> {
   if (!process.env.OPENAI_API_KEY)
     return console.warn('OPENAI_API_KEY environment variable required: skipping embeddings generation')
 
   const configuration = new Configuration({ apiKey: process.env.OPENAI_API_KEY });
   const openai = new OpenAIApi(configuration);
 
-  const input = document.replace(/\n/g, ' ')
-
-  const embeddingResponse = await openai.createEmbedding({
+  const input = document.replace(/\n/g, ' '); // OpenAI recommends replacing newlines with spaces for best results (specific to embeddings)
+  
+  const embedding_response = await openai.createEmbedding({
     model: 'text-embedding-ada-002',
     input,
   })
 
-  const [{ embedding }] = embeddingResponse.data.data;
-
-  return writeFileSync(`embeddings/samples/${input}.json`, JSON.stringify(embedding));
+  const [{ embedding }] = embedding_response.data.data;
+  return embedding;
 }
 
-generateEmbedding('a piece of metal');
+// import { writeFileSync } from 'fs';
+// writeFileSync(`embeddings/samples/${input}.json`, JSON.stringify(embedding));

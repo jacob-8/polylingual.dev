@@ -6,10 +6,8 @@ Needed:
     - https://github.com/sveltejs/kit/tree/master/documentation/docs 
     - https://github.com/sveltejs/vite-plugin-svelte/tree/main/docs
     - https://github.com/sveltejs/svelte/tree/master/site/content
-   - preprocess mdx example: https://github.com/supabase/supabase/blob/master/apps/docs/scripts/generate-embeddings.ts
-   - remove newlines
-- Generate embeddings in a repeatable fashion: https://github.com/supabase/supabase/blob/master/apps/docs/scripts/generate-embeddings.ts
-- store embeddings in a file (500 sections x 20 kilobytes per embedding =
+   - preprocess mdx and generate embeddings example: https://github.com/supabase/supabase/blob/master/apps/docs/scripts/generate-embeddings.ts
+- store embeddings in csv file (500 sections x 20 kilobytes per embedding =
 10 megabytes)
 <!-- - DONE: get embedding for user query -->
 <!-- - perform a similarity search against my pre-processed embeddings -->
