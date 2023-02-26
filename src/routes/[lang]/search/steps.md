@@ -2,10 +2,12 @@ https://supabase.com/blog/chatgpt-supabase-docs
 https://supabase.com/blog/openai-embeddings-postgres-vector
 
 Needed:
-- preprocess knowledge base and create embeddings of Svelte resources (start with a few samples): https://github.com/sveltejs/kit/tree/master/documentation/docs 
+- preprocess knowledge base and create embeddings of Svelte resources (start with a few samples): 
+    - https://github.com/sveltejs/kit/tree/master/documentation/docs 
+    - https://github.com/sveltejs/vite-plugin-svelte/tree/main/docs
+    - https://github.com/sveltejs/svelte/tree/master/site/content
    - preprocess mdx example: https://github.com/supabase/supabase/blob/master/apps/docs/scripts/generate-embeddings.ts
    - remove newlines
-   - convert relative links to absolute links
 - Generate embeddings in a repeatable fashion: https://github.com/supabase/supabase/blob/master/apps/docs/scripts/generate-embeddings.ts
 - store embeddings in a file (500 sections x 20 kilobytes per embedding =
 10 megabytes)
@@ -18,6 +20,9 @@ Needed:
 
 Future:
 - bring in updated UnoCSS for dark mode prose
+- Add links to where the answer came from
+- convert relative links to absolute links
+- learn from https://download-directory.github.io/ to download docs changes
 
 ----
 Further inspiration:
