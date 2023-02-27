@@ -63,6 +63,7 @@ importers:
   packages/prepare-docs-for-search:
     specifiers:
       '@types/mdast': ^3.0.10
+      '@vitest/ui': latest
       csv-stringify: ^6.2.4
       dotenv: ^16.0.3
       openai: ^3.1.0
@@ -74,6 +75,7 @@ importers:
       vitest: ^0.28.4
     devDependencies:
       '@types/mdast': 3.0.10
+      '@vitest/ui': 0.29.1
       csv-stringify: 6.2.4
       dotenv: 16.0.3
       openai: 3.1.0
@@ -82,7 +84,7 @@ importers:
       tsx: 3.12.3
       typescript: 4.9.4
       unified: 10.1.2
-      vitest: 0.28.5
+      vitest: 0.28.5_@vitest+ui@0.29.1
 
 packages:
 
@@ -3750,7 +3752,7 @@ packages:
       - terser
     dev: true
 
-  /vitest/0.28.5:
+  /vitest/0.28.5_@vitest+ui@0.29.1:
     resolution: {integrity: sha512-pyCQ+wcAOX7mKMcBNkzDwEHRGqQvHUl0XnoHR+3Pb1hytAHISgSxv9h0gUiSiYtISXUU3rMrKiKzFYDrI6ZIHA==}
     engines: {node: '>=v14.16.0'}
     hasBin: true
@@ -3778,6 +3780,7 @@ packages:
       '@vitest/expect': 0.28.5
       '@vitest/runner': 0.28.5
       '@vitest/spy': 0.28.5
+      '@vitest/ui': 0.29.1
       '@vitest/utils': 0.28.5
       acorn: 8.8.2
       acorn-walk: 8.2.0

@@ -4,7 +4,7 @@ export function flatten_sections(sections: Section[], parent_titles: string[] = 
   return sections.reduce((acc, section) => {
     const { title, children, ...rest } = section;
     const section_titles = title ? [...parent_titles, title] : parent_titles;
-    if (rest.content) acc.push({ ...rest, title: section_titles.join(' > ') });
+    if (rest.content) acc.push({ ...rest, title, combined_title: section_titles.join(' > ') });
     if (children) {
       acc.push(...flatten_sections(children, section_titles));
     }
@@ -45,34 +45,39 @@ if (import.meta.vitest) {
       expect(result).toEqual([
         {
           title: 'Section 1',
+          combined_title: 'Section 1',
           content: 'Section 1 content',
         },
         {
-          title: 'Section 1 > Section 1.1',
+          title: 'Section 1.1',
+          combined_title: 'Section 1 > Section 1.1',
           content: 'Section 1.1 content',
         },
         {
-          title: 'Section 1 > Section 1.2',
+          title: 'Section 1.2',
+          combined_title: 'Section 1 > Section 1.2',
           content: 'Section 1.2 content',
         },
         {
-          title: 'Section 1 > Section 1.2 > Section 1.2.1',
+          title: 'Section 1.2.1',
+          combined_title: 'Section 1 > Section 1.2 > Section 1.2.1',
           content: 'Section 1.2.1 content',
         },
         {
           title: 'Section 2',
+          combined_title: 'Section 2',
           content: 'Section 2 content',
         },
       ]);
     });
 
-    test('does not add section if it has no content', () => {
+    test('returns an empty array when given an empty array', () => {
       const sections: Section[] = [];
       const result = flatten_sections(sections);
       expect(result).toEqual([]);
     });
 
-    test('returns an empty array when given an empty array', () => {
+    test('skips section if it has no content', () => {
       const sections: Section[] = [{ title: 'No Content', content: '', },];
       expect(flatten_sections(sections)).toEqual([]);
     });

@@ -7,6 +7,7 @@ export function write_doc_data_csv(docs: ProcessedDoc[]) {
     'hash',
     'token_count',
     'title',
+    'combined_title',
     'filename',
     'content',
   ];
@@ -28,6 +29,7 @@ function convert_docs_to_doc_section_data(docs: ProcessedDoc[]): DocSectionData[
         hash: section.hash,
         token_count: section.token_count,
         title: section.title,
+        combined_title: section.combined_title,
         filename: doc.filename,
         content: section.content,
       });
@@ -47,13 +49,15 @@ if (import.meta.vitest) {
               hash: 'abc123',
               token_count: 3,
               title: 'Section 1',
+              combined_title: 'Section 1',
               content: 'This is section 1',
             },
             {
               hash: 'def456',
               token_count: 3,
-              title: 'Section 2',
-              content: 'This is section 2',
+              title: 'Section 1.1',
+              combined_title: 'Section 1 > Section 1.1',
+              content: 'This is section 1.1',
             },
           ],
         },
@@ -63,8 +67,9 @@ if (import.meta.vitest) {
             {
               hash: 'ghi789',
               token_count: 3,
-              title: 'Section 3',
-              content: 'This is section 3',
+              title: 'Section 1',
+              combined_title: 'Section 1',
+              content: 'This is section 1',
             },
           ],
         },
@@ -75,22 +80,25 @@ if (import.meta.vitest) {
           hash: 'abc123',
           token_count: 3,
           title: 'Section 1',
+          combined_title: 'Section 1',
           filename: 'doc1.txt',
           content: 'This is section 1',
         },
         {
           hash: 'def456',
           token_count: 3,
-          title: 'Section 2',
+          title: 'Section 1.1',
+          combined_title: 'Section 1 > Section 1.1',
           filename: 'doc1.txt',
-          content: 'This is section 2',
+          content: 'This is section 1.1',
         },
         {
           hash: 'ghi789',
           token_count: 3,
-          title: 'Section 3',
+          title: 'Section 1',
+          combined_title: 'Section 1',
           filename: 'doc2.txt',
-          content: 'This is section 3',
+          content: 'This is section 1',
         },
       ]);
     });
@@ -118,16 +126,21 @@ export function write_doc_embeddings_csv(docs: ProcessedDoc[]) {
   stringifier.pipe(writeable_stream);
 }
 
+const ADA_EMBEDDING_COST_PER_THOUSAND_TOKENS = 0.0004;
+
 function convert_docs_to_doc_section_embedding(docs: ProcessedDoc[]): DocSectionEmbedding[] {
-  const sections: DocSectionEmbedding[] = []
+  const sections: DocSectionEmbedding[] = [];
+  let total_tokens = 0;
   for (const doc of docs) {
     for (const section of doc.sections) {
       sections.push({
         hash: section.hash,
         embedding: section.embedding,
       });
+      total_tokens += section.token_count;
     }
   }
+  console.log(`Embeddings fetched for ${total_tokens} tokens at a cost of $${(total_tokens / 1000) * ADA_EMBEDDING_COST_PER_THOUSAND_TOKENS}`)
   return sections;
 }
 

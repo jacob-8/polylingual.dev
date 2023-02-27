@@ -11,8 +11,6 @@ https://supabase.com/blog/openai-embeddings-postgres-vector
 - preprocess knowledge base and create embeddings of docs
   - preprocess mdx and generate embeddings example: https://github.com/supabase/supabase/blob/master/apps/docs/scripts/generate-embeddings.ts
   - store embeddings in csv file (500 sections x 20 kilobytes per embedding = 10 megabytes)
-<!-- TODO: make combined titles a new field when flattening sections -->
-<!-- TODO: update token count to include combined title -->
 <!-- TODO: process medium size section of docs -->
 <!-- TODO: connect embeddings to server endpoint by reading CSV -->
 - get embedding for user query
@@ -21,8 +19,10 @@ https://supabase.com/blog/openai-embeddings-postgres-vector
 - show answer in markdown
 <!-- TODO - secure with firebase auth -->
 <!-- TODO - add openai key to vercel -->
-<!-- TODO: test and then process large size section of docs -->
 <!-- TODO: expand license notices -->
+<!-- TODO: should we still remove line breaks from code samples -->
+<!-- TODO: should we pull out "cut" from twoslash markdown? -->
+<!-- TODO: test and then process large size section of docs -->
 
 ## Future
 - bring in updated UnoCSS for dark mode prose
