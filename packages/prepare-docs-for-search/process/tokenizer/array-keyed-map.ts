@@ -1,4 +1,4 @@
-// esm port of array-keyed-map
+// ESM port of array-keyed-map
 
 const dataSymbol = Symbol('path-store-trunk')
 

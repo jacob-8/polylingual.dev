@@ -115,15 +115,6 @@ export function write_doc_embeddings_csv(docs: ProcessedDoc[]) {
   const sections = convert_docs_to_doc_section_embedding(docs);
   for (const section of sections) stringifier.write(section);
 
-  for (const doc of docs) {
-    for (const section of doc.sections) {
-      stringifier.write({
-        hash: section.hash,
-        embedding: section.embedding,
-      });
-    }
-  }
-
   stringifier.pipe(writeable_stream);
 }
 

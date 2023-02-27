@@ -1,3 +1,5 @@
+// ESM port of gpt3-tokenizer
+
 import util from 'util';
 import { ArrayKeyedMap } from './array-keyed-map';
 import { bpeVocab, encodings, bpeRegex } from './vocab';
