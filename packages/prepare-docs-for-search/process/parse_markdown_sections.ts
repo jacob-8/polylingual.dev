@@ -2,12 +2,7 @@ import { unified } from 'unified';
 import remarkParse from 'remark-parse';
 import stringify from 'remark-stringify';
 import type { Content, Parent, Root } from 'mdast'
-
-export interface Section {
-  title?: string;
-  content?: string;
-  children?: Section[];
-}
+import { Section } from '../types';
 
 export function parse_markdown_sections(markdown: string): Section[] {
   const root: Section = { content: '', children: [] };
@@ -56,7 +51,6 @@ function get_text_content(node: Content): string {
   return '';
 }
 
-
 function convert_frontmatter_title_to_h1(markdown: string): string {
   return markdown.replace(/---\s*\n\s*title:\s*(.*?)\s*\n\s*---\n/, "# $1");
 }
@@ -69,14 +63,3 @@ if (import.meta.vitest) {
     expect(convert_frontmatter_title_to_h1(markdown)).toEqual(expectedHeading);
   });
 }
-
-// function flattenSections(sections: Section[]): Section[] {
-//   return sections.reduce((acc, section) => {
-//     const { children, ...rest } = section;
-//     acc.push(rest);
-//     if (children) {
-//       acc.push(...flattenSections(children));
-//     }
-//     return acc;
-//   }, [] as Section[]);
-// };

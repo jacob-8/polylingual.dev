@@ -3,15 +3,15 @@ import dotenv from 'dotenv';
 
 dotenv.config({ path: '../../.env.local' });
 
-export async function generate_embedding(document: string): Promise<number[] | void> {
+export async function generate_embedding(document: string): Promise<number[]> {
   if (!process.env.OPENAI_API_KEY)
-    return console.warn('OPENAI_API_KEY environment variable required: skipping embeddings generation')
+    throw new Error('OPENAI_API_KEY environment variable required: skipping embeddings generation')
 
   const configuration = new Configuration({ apiKey: process.env.OPENAI_API_KEY });
   const openai = new OpenAIApi(configuration);
 
   const input = document.replace(/\n/g, ' '); // OpenAI recommends replacing newlines with spaces for best results (specific to embeddings)
-  
+
   const embedding_response = await openai.createEmbedding({
     model: 'text-embedding-ada-002',
     input,

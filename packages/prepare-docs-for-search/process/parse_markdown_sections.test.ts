@@ -1,4 +1,5 @@
-import { parse_markdown_sections, Section } from "./parse_markdown_sections";
+import { Section } from "../types";
+import { parse_markdown_sections } from "./parse_markdown_sections";
 
 describe('parse_markdown_sections', () => {
   test('handles title in frontmatter', () => {

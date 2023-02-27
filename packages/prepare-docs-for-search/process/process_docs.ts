@@ -1,15 +1,8 @@
 import { readdir, readFile, stat } from 'fs/promises';
 import { join } from 'path';
-import { parse_markdown_sections, Section } from './parse_markdown_sections';
-// import { createHash } from 'crypto';
+import { ProcessedDoc } from '../types';
+import { parse_markdown_sections } from './parse_markdown_sections';
 
-interface ProcessedDoc {
-  filename: string;
-  sections: Section[];
-  // frontmatter: any;
-}
-
-// process_docs('docs/sveltejs.kit/docs/10-getting-started');
 export async function process_docs(directory: string): Promise<ProcessedDoc[]> {
   const markdown_files = (await walk(directory))
     .filter((fileName) => /\.md$/.test(fileName))
@@ -19,7 +12,6 @@ export async function process_docs(directory: string): Promise<ProcessedDoc[]> {
   const parsed_docs: ProcessedDoc[] = await Promise.all(markdown_files.map(async (file) => {
     const content = await readFile(file, 'utf8');
     const sections = parse_markdown_sections(content);
-    // const checksum = createHash('sha256').update(content).digest('base64');
     const filename_without_directory = file.replace(/\\/g, '/').replace(directory, '');
     return { filename: filename_without_directory, sections };
   }));
