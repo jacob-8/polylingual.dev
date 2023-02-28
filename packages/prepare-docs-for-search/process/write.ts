@@ -114,7 +114,7 @@ if (import.meta.vitest) {
 export function write_doc_embeddings_csv(docs: ProcessedDoc[]) {
   const embeddings_columns: Array<keyof DocSectionEmbedding> = [
     'hash',
-    'embedding',
+    'values',
   ]
 
   const writeable_stream = createWriteStream('output/doc_embeddings.csv');
@@ -135,7 +135,7 @@ function convert_docs_to_doc_section_embedding(docs: ProcessedDoc[]): DocSection
     for (const section of doc.sections) {
       sections.push({
         hash: section.hash,
-        embedding: section.embedding,
+        values: section.embedding,
       });
       total_tokens += section.token_count;
     }

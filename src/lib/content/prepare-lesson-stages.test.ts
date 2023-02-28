@@ -10,6 +10,7 @@ describe('prepareLessonStages', () => {
         "stages": {
           "01-introduction": {
             "app_finish": {
+              ".gitignore": "node_modules",
               "package.txt": "root level",
               "src/a.txt": "I'm just in the first project's first lesson and should overwrite the common \`a.txt\` file and the project's common \`a.txt\` file.",
               "src/b.txt": "I'm shared by all lessons in this project.",
@@ -25,6 +26,7 @@ describe('prepareLessonStages', () => {
       ",
             },
             "app_start": {
+              ".gitignore": "node_modules",
               "package.txt": "root level",
               "src/a.txt": "I'm just in the first project's first lesson and should overwrite the common \`a.txt\` file and the project's common \`a.txt\` file.",
               "src/b.txt": "I'm shared by all lessons in this project.",
@@ -94,6 +96,7 @@ describe('prepareLessonStages', () => {
           },
           "02-simplfy-into-class": {
             "app_finish": {
+              ".gitignore": "node_modules",
               "package.txt": "root level",
               "src/a.txt": "I'm just in the first project's first lesson and should overwrite the common \`a.txt\` file and the project's common \`a.txt\` file.",
               "src/b.txt": "I'm shared by all lessons in this project.",
@@ -109,6 +112,7 @@ describe('prepareLessonStages', () => {
       ",
             },
             "app_start": {
+              ".gitignore": "node_modules",
               "package.txt": "root level",
               "src/a.txt": "I'm just in the first project's first lesson and should overwrite the common \`a.txt\` file and the project's common \`a.txt\` file.",
               "src/b.txt": "I'm shared by all lessons in this project.",
@@ -170,6 +174,7 @@ describe('prepareLessonStages', () => {
           },
           "03-another": {
             "app_finish": {
+              ".gitignore": "node_modules",
               "package.txt": "root level",
               "src/a.txt": "I'm just in the first project's first lesson and should overwrite the common \`a.txt\` file and the project's common \`a.txt\` file.",
               "src/b.txt": "I'm shared by all lessons in this project.",
@@ -185,6 +190,7 @@ describe('prepareLessonStages', () => {
       ",
             },
             "app_start": {
+              ".gitignore": "node_modules",
               "package.txt": "root level",
               "src/a.txt": "I'm just in the first project's first lesson and should overwrite the common \`a.txt\` file and the project's common \`a.txt\` file.",
               "src/b.txt": "I'm shared by all lessons in this project.",

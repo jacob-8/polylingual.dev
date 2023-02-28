@@ -26,5 +26,5 @@ export interface DocSectionData {
 
 export interface DocSectionEmbedding {
   hash: string;
-  embedding: number[];
+  values: number[];
 }

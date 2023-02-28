@@ -11,16 +11,20 @@ https://supabase.com/blog/openai-embeddings-postgres-vector
 - preprocess knowledge base and create embeddings of docs
   - preprocess mdx and generate embeddings example: https://github.com/supabase/supabase/blob/master/apps/docs/scripts/generate-embeddings.ts
   - store embeddings in csv file (270 embeddings ~= 5 megabytes)
-<!-- TODO: connect embeddings to server endpoint by reading CSV -->
+- connect embeddings to server endpoint by reading CSV
 - get embedding for user query
 - perform a similarity search against my pre-processed embeddings
 - Send these embedding along with query at end of prompt to openai to get answer
 - show answer in markdown
-<!-- TODO secure with firebase auth -->
-<!-- TODO add openai key to vercel -->
-<!-- TODO: test and prepare presentation  -->
+<!-- TODO secure with firebase auth, just listed users -->
+<!-- TODO add openai key to vercel, solve build error -->
+<!-- TODO improve appearance of answers -->
+<!-- TODO: prepare presentation  -->
 
 ## Future
+- query for appropriateness
+- improve logging
+- Sort Sapper responses to the end
 - expand license notices
 - bring in updated UnoCSS for dark mode prose
 - process other docs sections

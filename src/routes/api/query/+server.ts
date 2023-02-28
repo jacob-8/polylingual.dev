@@ -2,12 +2,30 @@ import type { RequestHandler } from './$types';
 import { json, error } from '@sveltejs/kit';
 import { OPENAI_API_KEY } from '$env/static/private';
 import { Configuration, OpenAIApi } from "openai";
-import GPT3Tokenizer from 'gpt3-tokenizer';
+import { find_closest_embeddings_cosine, type Embedding } from './find_closest_embeddings';
+import { map_nearest_embeddings_to_documents } from './map_nearest_embeddings_to_documents';
+import { load_docs_and_embeddings } from './load_docs_and_embeddings';
+import { concat_matched_documents } from './concat_matched_documents';
 
 const configuration = new Configuration({ apiKey: OPENAI_API_KEY });
 const openai = new OpenAIApi(configuration);
 
-export const POST: RequestHandler = async ({ request }) => {
+let doc_embeddings: Embedding[] = [];
+let doc_sections: DocSectionData[] = [];
+
+const MAX_DOCS_TO_RETURN = 15;
+
+// TODO: unduplicate with process package
+export interface DocSectionData {
+  hash: string;
+  token_count: number;
+  title: string;
+  combined_title?: string;
+  filename: string;
+  content: string;
+}
+
+export const POST: RequestHandler = async ({ request, fetch }) => {
   if (!configuration.apiKey) throw error(400, "OpenAI API key not configured");
 
   const { text, auth_token } = await request.json();
@@ -15,10 +33,10 @@ export const POST: RequestHandler = async ({ request }) => {
 
   const authenticated = auth_token === 'ADD_FIREBASE_AUTH_TO_SET_THIS_UP';
   if (!authenticated) throw error(400, "Unauthorized usage");
-  
+
   const query = text;
   const query_without_newlines = query.replace(/\n/g, ' '); // OpenAI recommends replacing newlines with spaces for best results (specific to embeddings)
-  
+
   console.log(`getting embedding: ${query_without_newlines}`)
 
   try {
@@ -28,13 +46,21 @@ export const POST: RequestHandler = async ({ request }) => {
       user: 'add-user-id-here',
     });
 
-    const embedding = embeddingResponse.data.data[0].embedding;
-    const nearest_documents = find_most_related_documents(embedding);
+    const query_embedding = embeddingResponse.data.data[0].embedding;
+
+    if (doc_sections.length === 0 || doc_embeddings.length === 0) {
+      ({ doc_embeddings, doc_sections } = await load_docs_and_embeddings('sveltejs.kit/docs', fetch))
+    }
+
+    const nearest_matches = find_closest_embeddings_cosine(query_embedding, doc_embeddings, MAX_DOCS_TO_RETURN);
+    const nearest_documents = map_nearest_embeddings_to_documents(nearest_matches, doc_sections);
     const document_context = concat_matched_documents(nearest_documents);
+
+    const prompt = generate_prompt(document_context, query);
 
     const completionResponse = await openai.createCompletion({
       model: 'text-davinci-003',
-      prompt: generate_prompt(document_context, query),
+      prompt,
       max_tokens: 512,
       temperature: 0,
     })
@@ -52,36 +78,8 @@ export const POST: RequestHandler = async ({ request }) => {
   }
 };
 
-export interface DocumentationChunk {
-  title?: string;
-  content: string;
-  embedding: number[];
-}
-
-const MAX_CONTENT_TOKENS = 1500;
-
-function concat_matched_documents(documents: DocumentationChunk[]): string {
-  const tokenizer = new GPT3Tokenizer({ type: 'gpt3' })
-  let token_count = 0
-  let context_text = ''
-
-  for (const document of documents) {
-    const content = document.content
-    const encoded = tokenizer.encode(content)
-    token_count += encoded.text.length
-
-    if (token_count > MAX_CONTENT_TOKENS) {
-      break
-    }
-
-    context_text += `${content.trim()}\n---\n`
-  }
-  console.log({ token_count, length: context_text.length })
-  return context_text;
-}
-
 function generate_prompt(document_context: string, query: string) {
-  return `You love to help people understand how to use Svelte and SvelteKit to build full-stack websites. Given the following sections from various documentation sites, answer the question using only that information, outputted in markdown format. If you are unsure and the answer is not explicitly written in the documentation, say "Sorry, I don't know how to help with that."
+  return `You love to help people understand how to use Svelte and SvelteKit to build full-stack websites. Given the following context sections from various documentation sites, answer the question using only that information, outputted in markdown format. If you are unsure and the answer is not explicitly written in the context sections, say "Sorry, I don't know how to help with that."
 
 Context sections:
 ${document_context}

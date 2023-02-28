@@ -1,6 +1,4 @@
-import type { DocumentationChunk } from "./+server";
-
-export const documents: DocumentationChunk[] = [
+export const documents = [
   {
     title: 'What is SvelteKit?',
     content: `What is SvelteKit?
