@@ -3,7 +3,6 @@ import { json, error } from '@sveltejs/kit';
 import { OPENAI_API_KEY } from '$env/static/private';
 import { Configuration, OpenAIApi } from "openai";
 import GPT3Tokenizer from 'gpt3-tokenizer';
-import { find_most_related_documents } from './find_most_related_documents';
 
 const configuration = new Configuration({ apiKey: OPENAI_API_KEY });
 const openai = new OpenAIApi(configuration);
@@ -16,14 +15,16 @@ export const POST: RequestHandler = async ({ request }) => {
 
   const authenticated = auth_token === 'ADD_FIREBASE_AUTH_TO_SET_THIS_UP';
   if (!authenticated) throw error(400, "Unauthorized usage");
-
-  const query = text.replace(/\n/g, ' ');
-  console.log(`getting embedding: ${query}`)
+  
+  const query = text;
+  const query_without_newlines = query.replace(/\n/g, ' '); // OpenAI recommends replacing newlines with spaces for best results (specific to embeddings)
+  
+  console.log(`getting embedding: ${query_without_newlines}`)
 
   try {
     const embeddingResponse = await openai.createEmbedding({
       model: "text-embedding-ada-002",
-      input: query,
+      input: query_without_newlines,
       user: 'add-user-id-here',
     });
 

@@ -2,6 +2,70 @@ import { Section } from "../types";
 import { parse_markdown_sections } from "./parse_markdown_sections";
 
 describe('parse_markdown_sections', () => {
+  test('removes ---cut---', () => {
+    const markdown = `---
+title: Routing
+---
+
+At the heart
+
+## +page
+
+### +page.svelte
+
+A component defines a page of your app.
+      
+\`\`\`js
+/// file: src/routes/blog/[slug]/+page.server.js
+
+// @filename: ambient.d.ts
+declare global {}
+
+// @filename: index.js
+// ---cut---
+import { error } from '@sveltejs/kit';
+\`\`\`
+
+## +error
+
+Hello
+    `
+
+    expect(parse_markdown_sections(markdown)).toMatchInlineSnapshot(`
+      [
+        {
+          "children": [
+            {
+              "children": [
+                {
+                  "content": "A component defines a page of your app. \`\`\`js
+      /// file: src/routes/blog/[slug]/+page.server.js
+
+      // @filename: ambient.d.ts
+      declare global {}
+
+      // @filename: index.js
+      // 
+      import { error } from '@sveltejs/kit';
+      \`\`\` ",
+                  "title": "+page.svelte",
+                },
+              ],
+              "content": "",
+              "title": "+page",
+            },
+            {
+              "content": "Hello ",
+              "title": "+error",
+            },
+          ],
+          "content": "At the heart ",
+          "title": "Routing",
+        },
+      ]
+    `);
+  });
+
   test('handles title in frontmatter', () => {
     const markdown = `---
 title: Introduction
@@ -30,6 +94,42 @@ SvelteKit is`
           ],
           "content": "",
           "title": "Introduction",
+        },
+      ]
+    `);
+  });
+
+  test('handles other attributes in frontmatter', () => {
+    const markdown = `---
+title: Migrating from Sapper
+rank: 1
+---
+
+SvelteKit is the successor to Sapper and shares many elements of its design.
+
+## package.json
+
+### type: module
+
+newer`
+
+    expect(parse_markdown_sections(markdown)).toMatchInlineSnapshot(`
+      [
+        {
+          "children": [
+            {
+              "children": [
+                {
+                  "content": "newer ",
+                  "title": "type: module",
+                },
+              ],
+              "content": "",
+              "title": "package.json",
+            },
+          ],
+          "content": "SvelteKit is the successor to Sapper and shares many elements of its design. ",
+          "title": "Migrating from Sapper",
         },
       ]
     `);

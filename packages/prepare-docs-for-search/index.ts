@@ -6,7 +6,7 @@ import { ProcessedDoc } from "./types";
 import { add_tokens } from "./process/add_tokens";
 import { get_embeddings } from "./process/get_embeddings";
 
-const directory = 'docs/sveltejs.kit/docs/10-getting-started';
+const directory = 'docs/sveltejs.kit/docs';
 const docs_nested_sections = await process_docs(directory);
 
 const docs_flattened_sections: ProcessedDoc[] = docs_nested_sections.map(doc => {
@@ -21,14 +21,15 @@ const docs_flattened_sections: ProcessedDoc[] = docs_nested_sections.map(doc => 
 
 write_doc_data_csv(docs_flattened_sections);
 
-const docs_flattened_and_embedded_sections: ProcessedDoc[] = await Promise.all(docs_flattened_sections.map(async doc => {
-  const sections_with_embeddings = await get_embeddings(doc.sections);
+const docs_flattened_and_embedded_sections: ProcessedDoc[] = []
 
-  return {
+for (const doc of docs_flattened_sections) {
+  const sections_with_embeddings = await get_embeddings(doc.sections);
+  docs_flattened_and_embedded_sections.push({
     ...doc,
     sections: sections_with_embeddings,
-  }
-}));
+  })
+};
 
 write_doc_embeddings_csv(docs_flattened_and_embedded_sections);
 
