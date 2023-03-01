@@ -22,7 +22,10 @@ https://supabase.com/blog/openai-embeddings-postgres-vector
 <!-- TODO: prepare presentation  -->
 
 ## Future
-- query for appropriateness
+- stream response
+- remove error upon next query
+- refine allowed response length, I would rather tell it the max characters than just cut it off as is the current case.
+- query for appropriateness: https://platform.openai.com/docs/api-reference/moderations/create
 - improve logging
 - Sort Sapper responses to the end
 - expand license notices

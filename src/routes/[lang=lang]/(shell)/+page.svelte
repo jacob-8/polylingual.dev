@@ -5,7 +5,6 @@
 
 <SeoMetaTags title="Polylingual Development" />
 
-<main class="h-100vh bg-#242424 text-white/87 flex flex-col justify-center text-center p-3">
   <h1 class="text-4xl">Polylingual Development</h1>
   <div class="my-10">
     {#if $page.data.lang === 'zh-TW'}
@@ -61,4 +60,3 @@
       <span class="i-mdi-github" />
     </a>
   </div>
-</main>
