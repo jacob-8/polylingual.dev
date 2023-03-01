@@ -17,17 +17,16 @@ https://supabase.com/blog/openai-embeddings-postgres-vector
 - Send these embedding along with query at end of prompt to openai to get answer
 - show answer in markdown
 - secure with firebase auth
-<!-- TODO add openai and firebase key to vercel, solve build error -->
+- add openai and firebase key to vercel
 <!-- TODO improve appearance of answers -->
 <!-- TODO: prepare presentation  -->
 
 ## Future
 - redirect-not-authed
-- stream response
-- remove error upon next query
-- refine allowed response length, I would rather tell it the max characters than just cut it off as is the current case.
-- query for appropriateness: https://platform.openai.com/docs/api-reference/moderations/create
-- improve logging
+- save queries and answers and show
+- stream response, remove error upon next query
+- refine allowed response length, better to tell it the max characters than just cut it off as is the current case.
+- query for appropriateness: https://platform.openai.com/docs/api-reference/moderations/create and log if a user is flagged
 - Sort Sapper responses to the end
 - expand license notices
 - bring in updated UnoCSS for dark mode prose

@@ -8,7 +8,10 @@ const config = {
   preprocess: vitePreprocess(),
 
   kit: {
-    adapter: adapter({ edge: true })
+    adapter: adapter({
+      // external: ['node-fetch'],
+      runtime: 'nodejs18.x',
+    })
   },
 
   vitePlugin: {
