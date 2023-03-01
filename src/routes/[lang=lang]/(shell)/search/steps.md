@@ -18,6 +18,7 @@ https://supabase.com/blog/openai-embeddings-postgres-vector
 - show answer in markdown
 - secure with firebase auth
 - add openai and firebase key to vercel
+- solve build error
 <!-- TODO improve appearance of answers -->
 <!-- TODO: prepare presentation  -->
 
