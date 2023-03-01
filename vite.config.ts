@@ -5,21 +5,28 @@ import { partytownVite } from '@builder.io/partytown/utils';
 import { join } from 'path';
 
 const config: UserConfig = {
-	build: {
-		target: 'esnext'
-	},
-	plugins: [
-		UnoCSS({
-			mode: 'svelte-scoped',
-		}),
-		sveltekit(),
-		partytownVite({ dest: join(process.cwd(), 'static', '~partytown') }),
-	],
-	test: {
-		globals: true,
-		includeSource: ['src/**/*.ts'],
-		include: ['src/**/*.test.ts']
-	}
+  build: {
+    target: 'esnext'
+  },
+  plugins: [
+    UnoCSS({
+      mode: 'svelte-scoped',
+    }),
+    sveltekit(),
+    partytownVite({ dest: join(process.cwd(), 'static', '~partytown') }),
+  ],
+  // optimizeDeps: {
+  // 	exclude: ['firebase-admin']
+  //  include: ['firebase > node-fetch'],
+  // },
+  // ssr: {
+  //   noExternal: ['firebase']
+  // },
+  test: {
+    globals: true,
+    includeSource: ['src/**/*.ts'],
+    include: ['src/**/*.test.ts']
+  }
 };
 
 export default config;
