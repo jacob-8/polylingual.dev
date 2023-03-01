@@ -29,6 +29,7 @@
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-svelte3": "^4.0.0",
     "firebase": "^9.17.1",
+    "firebase-admin": "^11.5.0",
     "gpt3-tokenizer": "^1.1.5",
     "magic-string": "^0.27.0",
     "monaco-editor": "^0.34.1",

@@ -2,6 +2,8 @@
   import SeoMetaTags from '$lib/SeoMetaTags.svelte';
   import SvelteMarkdown from 'svelte-markdown';
   import { query_documentation } from './query_documentation';
+  import { goto } from '$app/navigation';
+    import { user } from '$lib/user';
 
   let answer: string;
   let query = '';
@@ -9,6 +11,10 @@
   let error: any;
 
   async function on_submit() {
+    if (!$user) {
+      alert('請先登入！');
+    } 
+
     if (!query || asking) return;
     asking = true;
     try {

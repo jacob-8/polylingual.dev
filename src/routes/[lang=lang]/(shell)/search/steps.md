@@ -16,12 +16,13 @@ https://supabase.com/blog/openai-embeddings-postgres-vector
 - perform a similarity search against my pre-processed embeddings
 - Send these embedding along with query at end of prompt to openai to get answer
 - show answer in markdown
-<!-- TODO secure with firebase auth, just listed users -->
-<!-- TODO add openai key to vercel, solve build error -->
+- secure with firebase auth
+<!-- TODO add openai and firebase key to vercel, solve build error -->
 <!-- TODO improve appearance of answers -->
 <!-- TODO: prepare presentation  -->
 
 ## Future
+- redirect-not-authed
 - stream response
 - remove error upon next query
 - refine allowed response length, I would rather tell it the max characters than just cut it off as is the current case.

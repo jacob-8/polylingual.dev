@@ -6,6 +6,7 @@ import { find_closest_embeddings_cosine, type Embedding } from './find_closest_e
 import { map_nearest_embeddings_to_documents } from './map_nearest_embeddings_to_documents';
 import { load_docs_and_embeddings } from './load_docs_and_embeddings';
 import { concat_matched_documents } from './concat_matched_documents';
+import { decodeToken } from '$lib/server/firebase-admin';
 
 const configuration = new Configuration({ apiKey: OPENAI_API_KEY });
 const openai = new OpenAIApi(configuration);
@@ -31,7 +32,9 @@ export const POST: RequestHandler = async ({ request, fetch }) => {
   const { text, auth_token } = await request.json();
   if (!text) throw error(400, "No text property found in request body");
 
-  const authenticated = auth_token === 'ADD_FIREBASE_AUTH_TO_SET_THIS_UP';
+  const decodedToken = await decodeToken(auth_token);
+  const uid = decodedToken?.uid;
+  const authenticated = uid.endsWith('EFVxKpJC5BkTHy22');
   if (!authenticated) throw error(400, "Unauthorized usage");
 
   const query = text;
