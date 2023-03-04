@@ -1,4 +1,4 @@
 packages:
   - packages/*
-  - "!projects"
-  - "!construction-zone"
+  - "!packages/site/projects"
+  - "!packages/construction-zone"
