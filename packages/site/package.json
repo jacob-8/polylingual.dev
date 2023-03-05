@@ -24,6 +24,7 @@
     "svelte-check": "^3.0.4",
     "svelte-markdown": "^0.2.3",
     "svelte-pieces": "^1.0.57",
+    "sveltefirets": "^0.0.32",
     "tslib": "^2.5.0",
     "typescript": "^4.9.5",
     "unocss": "^0.50.3",
