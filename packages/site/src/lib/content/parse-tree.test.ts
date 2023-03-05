@@ -10,6 +10,7 @@ describe('parseTree', () => {
           "lessons": {
             "01-first-lesson": {
               "app_start": {
+                ".gitignore": "node_modules",
                 "package.txt": "root level",
                 "src/a.txt": "I'm just in the first project's first lesson and should overwrite the common \`a.txt\` file and the project's common \`a.txt\` file.",
                 "src/b.txt": "I'm shared by all lessons in this project.",
@@ -150,6 +151,7 @@ describe('parseTree', () => {
               "app_start": {
                 ".env": "PUBLIC_FOO=hello",
                 ".env.local": "BAZ=world",
+                ".gitignore": "!.env*",
                 "package.txt": "root level",
                 "src/a.txt": "I'm shared by all lessons in the first projects, but should be overwritten in the first project by it's common \`a.txt\` file, but I should be in the first project's 2nd lesson.",
                 "src/b.txt": "I'm shared by all lessons in this project.",
@@ -206,6 +208,7 @@ describe('parseTree', () => {
           "lessons": {
             "01-first-lesson-in-2nd-project": {
               "app_start": {
+                ".gitignore": "node_modules",
                 "package.txt": "root level",
                 "src/a.txt": "I'm shared by all projects, but should be overwritten in the first project by it's common \`a.txt\` and it's first lesson's \`a.txt\` file.",
                 "src/b.txt": "I'm shared by all projects, but should be overwritten in the first project by it's common \`b.txt\` file. I'll be in the 2nd project though.",

@@ -86,6 +86,7 @@ test('mockProjectsDirectory', () => {
     1st project, 2nd lesson, 1st stage; no frills",
       "/src/lib/content/mock-projects/01-first-project/02-second-lesson/app/.env": "PUBLIC_FOO=hello",
       "/src/lib/content/mock-projects/01-first-project/02-second-lesson/app/.env.local": "BAZ=world",
+      "/src/lib/content/mock-projects/01-first-project/02-second-lesson/app/.gitignore": "!.env*",
       "/src/lib/content/mock-projects/01-first-project/02-second-lesson/app/src/routes/+page.svelte": "I'm a simple page with nothing that will be added to me.",
       "/src/lib/content/mock-projects/01-first-project/02-second-lesson/meta.json": "{
       \\"title\\": {
