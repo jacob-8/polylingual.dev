@@ -30,5 +30,8 @@
     "vite": "^4.1.4",
     "vitest": "^0.29.2"
   },
-  "type": "module"
+  "type": "module",
+  "dependencies": {
+    "firebase-admin": "^11.5.0"
+  }
 }
