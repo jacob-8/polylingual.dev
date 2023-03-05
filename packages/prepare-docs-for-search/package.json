@@ -1,0 +1,27 @@
+{
+  "name": "prepare-docs-for-search",
+  "version": "0.0.1",
+  "type": "module",
+  "main": "index.ts",
+  "scripts": {
+    "dev": "tsx index.ts",
+    "write": "tsx process/write.ts",
+    "process-docs": "tsx embeddings/process_docs.ts",
+    "generate-embedding": "tsx embeddings/generate_embedding.ts",
+    "test": "vitest",
+    "test:ui": "vitest --ui"
+  },
+  "devDependencies": {
+    "@types/mdast": "^3.0.10",
+    "@vitest/ui": "^0.29.2",
+    "csv-stringify": "^6.2.4",
+    "dotenv": "^16.0.3",
+    "openai": "^3.1.0",
+    "remark-parse": "^10.0.1",
+    "remark-stringify": "^10.0.2",
+    "tsx": "^3.12.3",
+    "typescript": "~4.9.5",
+    "unified": "^10.1.2",
+    "vitest": "^0.29.2"
+  }
+}
