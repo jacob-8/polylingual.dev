@@ -1,6 +1,6 @@
 // ESM port of gpt3-tokenizer
 
-import util from 'util';
+// import util from 'util';
 import { ArrayKeyedMap } from './array-keyed-map';
 import { bpeVocab, encodings, bpeRegex } from './vocab';
 
@@ -14,12 +14,12 @@ export class GPT3Tokenizer {
   byteEncoder: Map<any, any>;
   byteDecoder: Map<any, any>;
   cache: {};
-  textEncoder: util.TextEncoder;
-  textDecoder: util.TextDecoder;
+  textEncoder: TextEncoder;
+  textDecoder: TextDecoder;
 
   constructor(options) {
-    this.textEncoder = new util.TextEncoder();
-    this.textDecoder = new util.TextDecoder();
+    this.textEncoder = new TextEncoder();
+    this.textDecoder = new TextDecoder();
     this.encodings = encodings;
     this.vocab = bpeVocab;
     this.nMergedSpaces = options.type === 'codex' ? 24 : 0;
@@ -147,15 +147,15 @@ export class GPT3Tokenizer {
     return word;
   }
   
-  encodeUtf8(text) {
+  encodeUtf8(text: string) {
     return this.textEncoder.encode(text);
   }
 
-  decodeUtf8(bytes) {
+  decodeUtf8(bytes: Uint8Array) {
     return this.textDecoder.decode(bytes);
   }
 
-  encode(text) {
+  encode(text: string) {
     let bpeTokens = [];
     let texts = [];
     const matches = text.match(bpeRegex) || [];
