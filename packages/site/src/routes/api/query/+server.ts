@@ -28,7 +28,7 @@ export interface DocSectionData {
   content: string;
 }
 
-export const POST: RequestHandler = async ({ request, fetch }) => {
+export const POST: RequestHandler = async ({ request }) => {
   try {
     if (!OPENAI_API_KEY) throw new Error("OPENAI_API_KEY env variable not configured");
 
