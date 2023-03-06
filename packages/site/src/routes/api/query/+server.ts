@@ -26,16 +26,16 @@ export interface DocSectionData {
 
 export const POST: RequestHandler = async ({ request, fetch }) => {
   try {
-    if (!OPENAI_API_KEY) throw error(400, "OPENAI_API_KEY env variable not configured");
+    if (!OPENAI_API_KEY) throw new Error("OPENAI_API_KEY env variable not configured");
 
     const { query, auth_token } = await request.json();
-    if (!query) throw error(400, "No query found in request body");
-    if (!auth_token) throw error(400, "No auth_token found in request body");
+    if (!query) throw new Error("No query found in request body");
+    if (!auth_token) throw new Error("No auth_token found in request body");
 
     const decodedToken = await decodeToken(auth_token);
     const uid = decodedToken?.uid;
     const authenticated = uid.endsWith('EFVxKpJC5BkTHy22');
-    if (!authenticated) throw error(400, "Unauthorized usage");
+    if (!authenticated) throw new Error("Unauthorized usage");
 
     const moderation_request: CreateModerationRequest = { input: query }
     const moderation_response = await fetch('https://api.openai.com/v1/moderations', {
@@ -47,7 +47,7 @@ export const POST: RequestHandler = async ({ request, fetch }) => {
       body: JSON.stringify(moderation_request)
     })
     const { results: [{ flagged }] } = await moderation_response.json() as CreateModerationResponse;
-    if (flagged) throw error(400, 'Query content does not comply with OpenAI usage policies.')
+    if (flagged) throw new Error('Query content does not comply with OpenAI usage policies.')
 
     const query_without_newlines = query.replace(/\n/g, ' '); // OpenAI recommends replacing newlines with spaces for best results (specific to embeddings)
     console.log(`getting embedding: ${query_without_newlines}`)
@@ -73,6 +73,7 @@ export const POST: RequestHandler = async ({ request, fetch }) => {
 
     const nearest_matches = find_closest_embeddings_cosine(query_embedding, doc_embeddings, MAX_DOCS_TO_RETURN);
     const nearest_documents = map_nearest_embeddings_to_documents(nearest_matches, doc_sections);
+    if (nearest_documents.length === 0) throw new Error('No related documents found for query.');
     const document_context = concat_matched_documents(nearest_documents);
 
     const messages: ChatCompletionRequestMessage[] = [
@@ -100,7 +101,7 @@ export const POST: RequestHandler = async ({ request, fetch }) => {
 
     if (!chat_response.ok) {
       const err = await chat_response.json();
-      throw error(400, err)
+      throw new Error(err)
     }
 
     return new Response(chat_response.body, {
@@ -114,8 +115,7 @@ export const POST: RequestHandler = async ({ request, fetch }) => {
       throw error(err.response.status, err.response.data)
     } else {
       console.error(`Error with OpenAI API request: ${err.message}`);
-      throw error(500, 'An error occurred during your request.')
+      throw error(500, `Error with OpenAI API request: ${err.message}`)
     }
   }
 };
-

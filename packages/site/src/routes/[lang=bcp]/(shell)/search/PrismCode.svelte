@@ -10,8 +10,8 @@
   $: highlighted_code = highlight_code(code, lang);
 </script>
 
-<div class="bg-gray-900 overflow-hidden rounded text-white">
-  <div class="p-3 bg-gray-700 flex">
+<div class="bg-gray-900 overflow-hidden rounded text-white mb-4">
+  <div class="pl-3 pr-1 py-1 bg-gray-700 flex items-center">
     <span class="font-mono">
       {filename || lang}
     </span>

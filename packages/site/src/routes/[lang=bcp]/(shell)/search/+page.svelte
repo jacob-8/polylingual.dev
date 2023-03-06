@@ -7,10 +7,15 @@
   import { samples } from './sample-q-a';
   import { page } from '$app/stores';
   import Answer from './Answer.svelte';
+  import Auth from './Auth.svelte';
 
-  let answer = '';
-  answer = samples[1].a;
   let query = '';
+  let answer = '';
+
+  // const staged = samples[4];
+  // query = staged.q;
+  // answer = staged.a;
+
   let asking = false;
   // let chatMessages: ChatCompletionRequestMessage[] = [];
   let error: any;
@@ -40,8 +45,8 @@
       },
       payload: JSON.stringify({ query, auth_token }),
     });
-    eventSource.addEventListener('error', handleError);
     eventSource.addEventListener('message', handle_message);
+    eventSource.addEventListener('error', handleError);
     eventSource.stream();
     // query = ''
     // scroll_to_bottom();
@@ -89,30 +94,38 @@
     {$page.data.lang === 'zh-TW' ? '問' : 'Ask'} Svelte
   </h1>
 
-  <form on:submit={on_submit}>
-    <div class="relative">
-      <input
-        type="search"
-        required
-        bind:value={query}
-        placeholder="{$page.data.lang === 'zh-TW'
-          ? '問關於 Svelte 的任何問題'
-          : 'Ask me anything about Svelte'}..."
-        class="w-full p-3 rounded text-black placeholder:text-gray-500"
-      />
-      {#if asking}
-        <span class="i-svg-spinners-3-dots-fade absolute top-3.5 right-10 text-black text-2xl" />
+  <Auth let:user>
+    <form class="flex" on:submit={on_submit}>
+      {#if user?.photoURL}
+        <img src={user.photoURL} class="h-12 w-12 mr-2 rounded" />
       {/if}
-    </div>
-  </form>
+      <!-- {#if user?.displayName}
+        {user.displayName.charAt(0).toUpperCase()}
+      {/if} -->
+      <div class="relative grow-1">
+        <input
+          type="search"
+          required
+          bind:value={query}
+          placeholder="{$page.data.lang === 'zh-TW'
+            ? '問關於 Svelte 的任何問題'
+            : 'Ask me anything about Svelte'}..."
+          class="w-full p-3 rounded text-black placeholder:text-gray-500"
+        />
+        {#if asking}
+          <span class="i-svg-spinners-3-dots-fade absolute top-3.5 right-10 text-black text-2xl" />
+        {/if}
+      </div>
+    </form>
 
-  <div class="mt-5" />
+    <div class="mt-5" />
 
-  {#if answer}
-    <Answer {answer} />
-  {/if}
+    {#if answer || asking}
+      <Answer answer={answer || '...'} {asking} />
+    {/if}
 
-  {#if error}
-    <div style="color: red;"><pre>{JSON.stringify(error, null, 2)}</pre></div>
-  {/if}
+    {#if error?.data}
+      <pre class="text-red">{JSON.stringify(JSON.parse(error?.data).message, null, 2)}</pre>
+    {/if}
+  </Auth>
 </div>

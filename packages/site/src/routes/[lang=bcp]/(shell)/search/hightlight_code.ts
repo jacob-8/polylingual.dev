@@ -1,5 +1,6 @@
 import Prism from 'prismjs';
 import 'prismjs/components/prism-typescript';
+import 'prismjs/components/prism-diff';
 import 'prism-svelte';
 
 export function highlight_code(code: string, lang: string) {

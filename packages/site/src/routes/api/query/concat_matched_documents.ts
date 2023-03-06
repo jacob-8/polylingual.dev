@@ -10,13 +10,13 @@ export function concat_matched_documents(documents: DocSectionData[]): string {
 
   for (const document of documents) {
     const content = document.content
-    const encoded = tokenizer.encode(content)
-    token_count += encoded.text.length
+    const { text: token_array } = tokenizer.encode(content)
+    const new_token_count = token_count + token_array.length;
 
-    if (token_count > MAX_CONTENT_TOKENS) {
-      break
-    }
+    if (new_token_count > MAX_CONTENT_TOKENS) break
 
+    console.log({ content })
+    token_count = new_token_count;
     context_text += `${content.trim()}\n---\n`
   }
   console.log({ token_count, length: context_text.length })

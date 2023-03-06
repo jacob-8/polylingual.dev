@@ -6,7 +6,8 @@
 
 {#if $authState !== undefined}
   {#if $user}
-    <pre>{JSON.stringify($user, null, 2)}</pre>
+    <slot user={$user} />
+    <!-- <pre>{JSON.stringify($user, null, 2)}</pre> -->
   {:else}
     <FirebaseUiAuth
       languageCode={$page.data.lang === 'en' ? 'en' : 'zh_tw'}
