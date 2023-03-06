@@ -7,7 +7,7 @@
   $: answer_plus_line = answer + '\n'; // allows code blocks in progress of being written to be highlighted - this avoids the annoying flash back and forth between highlighting and not highlighting while the answer is streaming in.
 </script>
 
-<div class:streaming={asking} class="text-left tw-prose bg-white p-3 rounded max-w-full text-lg">
+<div class:streaming={asking} class="text-left tw-prose bg-white p-3 rounded max-w-full">
   {#if answer === '1234'}
     {$page.data.lang === 'zh-TW'
       ? '抱歉，我不知道如何回答這個問題。'
@@ -42,5 +42,9 @@
     content: '▋';
     margin-left: 0.25rem;
     vertical-align: baseline;
+  }
+
+  :global(.tw-prose p) {
+    font-size: 110%;
   }
 </style>

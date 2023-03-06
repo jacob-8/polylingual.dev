@@ -1,6 +1,6 @@
 export const samples = [
   {
-    q: 'How do I create a page route?',
+    q: 'How do I create a page route?', // 如何創建頁面路由？ (1)
     // q: 'How do I create a new page route?', Note difference
     a: `To create a page route, you can define a \`+page.svelte\` component in the \`src/routes\` directory. By default, pages are rendered both on the server ([SSR](glossary#ssr)) for the initial request and in the browser ([CSR](glossary#csr)) for subsequent navigation. For example, to create a page with the path \`/about\`, you can create a \`+page.svelte\` component in the \`src/routes/about\` directory:
 
@@ -18,7 +18,7 @@ Note that SvelteKit uses \`<a>\` elements to navigate between routes, rather tha
     a: 'You can create new routes by adding new directories in the `src/routes` directory. For example, adding `src/routes/about` will create a `/about` route, and adding `src/routes/blog/[slug]` will create a route with a `slug` parameter that can dynamically load data when the user requests the `/blog/hello-world` page.'
   },
   {
-    q: "What are snapshots?",
+    q: "What are snapshots?", // 什麼是快照？ // 什麼是 snapshots？// 什麼是快照？ 請舉個例子 (2,3,4)
     a: `Snapshots are a way to preserve ephemeral DOM state, like scroll positions or input values, when navigating between pages. To use snapshots, you can export a \`snapshot\` object with \`capture\` and \`restore\` methods from a \`+page.svelte\` or \`+layout.svelte\` file. The \`capture\` function is called before the page updates, and the returned value is associated with the current entry in the browser's history stack. If you navigate back, the \`restore\` function is called with the stored value as soon as the page is updated. The data must be serializable as JSON so that it can be persisted to \`sessionStorage\`. Here's an example of how to use snapshots:
 
 \`\`\`svelte
@@ -44,11 +44,11 @@ In this example, the \`capture\` function returns the value of the \`comment\` v
     // For reference: https://kit.svelte.dev/docs/snapshots
   },
   {
-    q: "你最喜歡 SvelteKit 的什麼？",
+    q: "你最喜歡 SvelteKit 的什麼？", // don't use
     a: "我最喜歡 SvelteKit 的是它提供了許多現代最佳實踐，例如建置最佳化，離線支援，預載頁面，可配置渲染，以及其他許多功能。它使用 [Vite](https://vitejs.dev/) 和 [Svelte 插件](https://github.com/sveltejs/vite-plugin-svelte) 來實現 [熱模塊替換 (HMR)](https://github.com/sveltejs/vite-plugin-svelte/blob/main/docs/config.md#hot)，可以立即反映代碼的更改，提供閃電般快速和功能豐富的開發體驗。"
   },
   {
-    q: "如何創建新路線？",
+    q: "如何創建新路線？", // don't use
     a: "可以通過在 src/routes 目錄中添加新的目錄來創建新路線。例如，添加 src/routes/about 將創建一個 /about 路線，添加 src/routes/blog/[slug] 將創建一個帶有參數 slug 的路線，可以在用戶請求 /blog/hello-world 頁面時動態加載數據。可以通過在 `src/routes` 目錄中添加新的目錄來創建新路線。例如，添加 `src/routes/about` 將創建一個 `/about` 路線，添加 `src/routes/blog/[slug]` 將創建一個帶有參數 `slug` 的路線，可以在用戶請求 `/blog/hello-world` 頁面時動態加載數據。 "
   },
   {
@@ -60,7 +60,7 @@ const foo: string = 'hello';
 `
   },
   {
-    q: 'How do I create a layout reset?',
+    q: 'How do I create a layout reset?', // 如何創建佈局重置？ (5)
     a: `To create a layout reset, you can create a layout component with the name \`+layout@.svelte\`. This layout component will reset the hierarchy for all its child routes. Here's an example of how to use it:
 
 \`\`\`
@@ -118,15 +118,15 @@ Matchers run both on the server and in the browser.`
 
 // similar responses but the latter gives more explanation:
 // how do I reset to a named layout other than root?
-// tell me about layout resets
+// tell me about layout resets // 告訴我關於 layout resets // 告訴我關於 layout resets 並給我一個例子 (6,7)
 
-// How do I create an api?
-// How do I create an api? Call it "embedding"
+// How do I create an api? // 如何創建 api？ // 如何創建 api？ 告訴我如何在我的應用程序中使用它 (8)
+// How do I create an api? Call it "embedding" // 如何創建 api？ 稱之為“嵌入” << doesn't understand Chinese request to call it embedding, ignores that part
 
 // How do I create a new page route?
-// What is the +error file?
+// What is the +error file? // +error 文件是什麼？ (9)
 
-// What is SvelteKit useful for?
+// What is SvelteKit useful for? // SvelteKit 有什麼用？ (10)
 
 // Doesn't know: Who created SvelteKit? // 誰創造了 SvelteKit？
 
