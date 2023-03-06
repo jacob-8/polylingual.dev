@@ -2,10 +2,9 @@
   import { page } from '$app/stores';
 
   export let title: string;
-  export let description =
-    'A hands-on multilingual interactive tutorial on how to build real world complex web apps with Svelte.';
+  export let description = 'Multilingual Tools for Developers';
   export let keywords =
-    'JavaScript Explained, learn JavaScript, learn to code, learn by doing, Learn Svelte, Svelte, SvelteKit';
+    'multilingual, polylingual, JavaScript Explained, learn JavaScript, learn to code, learn by doing, Learn Svelte, Svelte, SvelteKit';
   export let type: 'video' | 'website' = 'website'; // https://ogp.me/#types
   export let norobots = false;
   export let handle = 'jacobbowdoin';

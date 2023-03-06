@@ -5,8 +5,11 @@
   // import type { ChatCompletionRequestMessage } from 'openai';
   import { SSE } from 'sse.js';
   import { authState } from 'sveltefirets';
+  import { samples } from './sample-q-a';
+  import { page } from '$app/stores';
 
   let answer = '';
+  // answer = samples[0].a;
   let query = '';
   let asking = false;
   // let chatMessages: ChatCompletionRequestMessage[] = [];
@@ -22,7 +25,8 @@
   async function on_submit() {
     if (!query || asking) return;
     if (!$user) {
-      alert('請先登入！');
+      alert('請先登入！'); // TODO: don't let search if not authenticated
+      return;
     }
 
     asking = true;
@@ -37,11 +41,9 @@
       payload: JSON.stringify({ query, auth_token }),
     });
     eventSource.addEventListener('error', handleError);
-
-    // query = ''
-
     eventSource.addEventListener('message', handle_message);
     eventSource.stream();
+    // query = ''
     // scroll_to_bottom();
   }
 
@@ -75,30 +77,41 @@
   }
 </script>
 
-<SeoMetaTags title="Svelte Semantic Search" />
+<SeoMetaTags
+  title="Ask Svelte"
+  description="Semantic Search of Svelte Documentation using AI"
+  keywords="multilingual, polylingual, ai, openai, learn, Svelte, SvelteKit"
+/>
 
 <div class="w-800px max-w-full mx-auto mt-5 md:mt-20">
-  <h1 class="text-4xl mb-5"><span class="i-carbon-search mb-1" /> Ask Svelte</h1>
+  <h1 class="text-4xl mb-5">
+    <span class="i-carbon-search mb-1" />
+    {$page.data.lang === 'zh-TW' ? '問' : 'Ask'} Svelte
+  </h1>
 
   <form on:submit={on_submit}>
-    <input
-      type="search"
-      required
-      bind:value={query}
-      placeholder="Ask me anything about Svelte..."
-      class="w-full p-3 rounded text-black placeholder:text-gray-500"
-    />
+    <div class="relative">
+      <input
+        type="search"
+        required
+        bind:value={query}
+        placeholder="{$page.data.lang === 'zh-TW'
+          ? '問關於 Svelte 的任何問題'
+          : 'Ask me anything about Svelte'}..."
+        class="w-full p-3 rounded text-black placeholder:text-gray-500"
+      />
+      {#if asking}
+        <span class="i-svg-spinners-3-dots-fade absolute top-3.5 right-10 text-black text-2xl" />
+      {/if}
+    </div>
   </form>
 
   <div class="mt-5" />
 
-  <div>{asking ? '在問...' : ''}</div>
-
   {#if answer}
     <div class="text-left tw-prose bg-white p-3 rounded max-w-full">
-      <h3>Answer:</h3>
+      <!-- <h3>{$page.data.lang === 'zh-TW' ? '答案' : 'Answer'}:</h3> -->
       <SvelteMarkdown source={answer} />
-      {answer}
     </div>
   {/if}
 

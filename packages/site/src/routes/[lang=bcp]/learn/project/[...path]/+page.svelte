@@ -28,7 +28,11 @@
   } - ${stage.title[lang]}`;
 </script>
 
-<SeoMetaTags {title} />
+<SeoMetaTags
+  {title}
+  description="A hands-on multilingual interactive tutorial on how to build real world complex web apps with Svelte."
+  keywords="JavaScript Explained, learn JavaScript, learn to code, learn by doing, Learn Svelte, Svelte, SvelteKit"
+/>
 
 <svelte:window bind:innerWidth={width} />
 
