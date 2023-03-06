@@ -59,9 +59,11 @@ importers:
       '@sveltejs/adapter-vercel': ^2.3.0
       '@sveltejs/kit': ^1.10.0
       '@vitest/ui': latest
+      csv-parse: ^5.3.6
       firebase-admin: ^11.5.0
       magic-string: ^0.27.0
       monaco-editor: ^0.34.1
+      openai: ^3.1.0
       svelte: ^3.54.0
       svelte-check: ^3.0.4
       svelte-markdown: ^0.2.3
@@ -73,6 +75,7 @@ importers:
       vite: ^4.1.4
       vitest: ^0.29.2
     dependencies:
+      csv-parse: 5.3.6
       firebase-admin: 11.5.0
     devDependencies:
       '@builder.io/partytown': 0.7.5
@@ -84,6 +87,7 @@ importers:
       '@vitest/ui': 0.29.2
       magic-string: 0.27.0
       monaco-editor: 0.34.1
+      openai: 3.2.1
       svelte: 3.55.1
       svelte-check: 3.0.4_svelte@3.55.1
       svelte-markdown: 0.2.3_svelte@3.55.1
@@ -2297,6 +2301,10 @@ packages:
       mdn-data: 2.0.30
       source-map-js: 1.0.2
     dev: true
+
+  /csv-parse/5.3.6:
+    resolution: {integrity: sha512-WI330GjCuEioK/ii8HM2YE/eV+ynpeLvU+RXw4R8bRU8R0laK5zO3fDsc4gH8s472e3Ga38rbIjCAiQh+tEHkw==}
+    dev: false
 
   /csv-stringify/6.3.0:
     resolution: {integrity: sha512-kTnnBkkLmAR1G409aUdShppWUClNbBQZXhrKrXzKYBGw4yfROspiFvVmjbKonCrdGfwnqwMXKLQG7ej7K/jwjg==}

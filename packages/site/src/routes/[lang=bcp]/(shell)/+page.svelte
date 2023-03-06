@@ -4,8 +4,6 @@
 </script>
 
 <SeoMetaTags title="Polylingual Development" />
-
-  <h1 class="text-4xl">Polylingual Development</h1>
   <div class="my-10">
     {#if $page.data.lang === 'zh-TW'}
       <div>
