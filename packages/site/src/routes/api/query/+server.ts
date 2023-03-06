@@ -6,8 +6,12 @@ import { find_closest_embeddings_cosine, type Embedding } from './find_closest_e
 import { map_nearest_embeddings_to_documents } from './map_nearest_embeddings_to_documents';
 import { load_docs_and_embeddings } from './load_docs_and_embeddings';
 import { concat_matched_documents } from './concat_matched_documents';
-import { decodeToken } from '$lib/server/firebase-admin';
 import { generate_user_prompt, system_message } from './prompts';
+import type { Config } from '@sveltejs/adapter-vercel'
+
+export const config: Config = {
+	runtime: 'edge'
+}
 
 let doc_embeddings: Embedding[] = [];
 let doc_sections: DocSectionData[] = [];
@@ -32,8 +36,14 @@ export const POST: RequestHandler = async ({ request, fetch }) => {
     if (!query) throw new Error("No query found in request body");
     if (!auth_token) throw new Error("No auth_token found in request body");
 
-    const decodedToken = await decodeToken(auth_token);
-    const uid = decodedToken?.uid;
+    const decodedToken = await fetch('/api/decode-token', {
+      method: 'POST',
+      body: JSON.stringify({ auth_token }),
+      headers: {
+        'Content-Type': 'application/json'
+      },
+    });
+    const { uid } = await decodedToken.json();
     const authenticated = uid.endsWith('EFVxKpJC5BkTHy22');
     if (!authenticated) throw new Error("Unauthorized usage: Wait a little bit - right now only Jacob can use this. If you can't wait, ask him when it'll be ready.");
 
