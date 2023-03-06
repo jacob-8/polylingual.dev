@@ -24,10 +24,10 @@
   <!-- https://ogp.me -->
   <meta property="og:title" content={title} />
   <meta property="og:description" content={description} />
-  <meta property="og:site_name" content="Living Dictionaries" />
+  <meta property="og:site_name" content="Polylingual Development" />
   <meta property="og:type" content={type} />
   <meta property="og:url" content={url} />
-  <meta property="og:locale" content="en" />
+  <meta property="og:locale" content={$page.params.lang} />
 
   <!-- <meta property="og:image" content={imageUrl} />
   <meta property="og:image:secure_url" content={imageUrl} />

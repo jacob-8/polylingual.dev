@@ -27,6 +27,7 @@ https://supabase.com/blog/openai-embeddings-postgres-vector
 https://github.com/supabase/supabase/blob/master/apps/docs/scripts/generate-embeddings.ts
 
 ## Further inspiration:
-- https://github.com/supabase/supabase/blob/master/apps/docs/components/Search/SearchModal.tsx
+- https://github.com/huntabyte/chatty
+- https://github.com/supabase/supabase/blob/master/apps/docs/components/Search/SearchModal.tsx, https://supabase.com/docs
 - https://all-in-on-ai.vercel.app/
 - https://prmpts.ai/
