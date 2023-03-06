@@ -4,7 +4,7 @@ import { OPENAI_API_KEY } from '$env/static/private';
 import type { CreateModerationRequest, CreateModerationResponse, CreateEmbeddingRequest, CreateEmbeddingResponse, CreateChatCompletionRequest, ChatCompletionRequestMessage, } from 'openai'
 import { find_closest_embeddings_cosine, type Embedding } from './find_closest_embeddings';
 import { map_nearest_embeddings_to_documents } from './map_nearest_embeddings_to_documents';
-import { load_docs_and_embeddings } from './load_docs_and_embeddings';
+// import { load_docs_and_embeddings } from './load_docs_and_embeddings';
 import { concat_matched_documents } from './concat_matched_documents';
 import { generate_user_prompt, system_message } from './prompts';
 import type { Config } from '@sveltejs/adapter-vercel'
@@ -78,7 +78,7 @@ export const POST: RequestHandler = async ({ request, fetch }) => {
     const { data: [{ embedding: query_embedding }] } = await embedding_response.json() as CreateEmbeddingResponse;
 
     if (doc_sections.length === 0 || doc_embeddings.length === 0) {
-      ({ doc_embeddings, doc_sections } = await load_docs_and_embeddings('sveltejs.kit/docs', fetch))
+      // ({ doc_embeddings, doc_sections } = await load_docs_and_embeddings('sveltejs.kit/docs', fetch))
     }
 
     const nearest_matches = find_closest_embeddings_cosine(query_embedding, doc_embeddings, MAX_DOCS_TO_RETURN);
