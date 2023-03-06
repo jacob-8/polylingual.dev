@@ -6,7 +6,7 @@ import { find_closest_embeddings_cosine, type Embedding } from './find_closest_e
 import { map_nearest_embeddings_to_documents } from './map_nearest_embeddings_to_documents';
 import { load_docs_and_embeddings } from './load_docs_and_embeddings';
 import { concat_matched_documents } from './concat_matched_documents';
-// import { decodeToken } from '$lib/server/firebase-admin';
+import { decodeToken } from '$lib/server/firebase-admin';
 
 let doc_embeddings: Embedding[] = [];
 let doc_sections: DocSectionData[] = [];
@@ -31,11 +31,10 @@ export const POST: RequestHandler = async ({ request, fetch }) => {
     if (!text) throw error(400, "No text found in request body");
     if (!auth_token) throw error(400, "No auth_token found in request body");
 
-    // const decodedToken = await decodeToken(auth_token);
-    // const uid = decodedToken?.uid;
-    // const authenticated = uid.endsWith('EFVxKpJC5BkTHy22');
-    // if (!authenticated) throw error(400, "Unauthorized usage");
-    const uid = 'test';
+    const decodedToken = await decodeToken(auth_token);
+    const uid = decodedToken?.uid;
+    const authenticated = uid.endsWith('EFVxKpJC5BkTHy22');
+    if (!authenticated) throw error(400, "Unauthorized usage");
 
     const moderation_request: CreateModerationRequest = { input: text }
     const moderation_response = await fetch('https://api.openai.com/v1/moderations', {
