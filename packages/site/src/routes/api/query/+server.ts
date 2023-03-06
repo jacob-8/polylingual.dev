@@ -7,6 +7,7 @@ import { map_nearest_embeddings_to_documents } from './map_nearest_embeddings_to
 import { load_docs_and_embeddings } from './load_docs_and_embeddings';
 import { concat_matched_documents } from './concat_matched_documents';
 import { decodeToken } from '$lib/server/firebase-admin';
+import { generate_user_prompt, system_message } from './prompts';
 
 let doc_embeddings: Embedding[] = [];
 let doc_sections: DocSectionData[] = [];
@@ -27,8 +28,8 @@ export const POST: RequestHandler = async ({ request, fetch }) => {
   try {
     if (!OPENAI_API_KEY) throw error(400, "OPENAI_API_KEY env variable not configured");
 
-    const { text, auth_token } = await request.json();
-    if (!text) throw error(400, "No text found in request body");
+    const { query, auth_token } = await request.json();
+    if (!query) throw error(400, "No query found in request body");
     if (!auth_token) throw error(400, "No auth_token found in request body");
 
     const decodedToken = await decodeToken(auth_token);
@@ -36,7 +37,7 @@ export const POST: RequestHandler = async ({ request, fetch }) => {
     const authenticated = uid.endsWith('EFVxKpJC5BkTHy22');
     if (!authenticated) throw error(400, "Unauthorized usage");
 
-    const moderation_request: CreateModerationRequest = { input: text }
+    const moderation_request: CreateModerationRequest = { input: query }
     const moderation_response = await fetch('https://api.openai.com/v1/moderations', {
       headers: {
         'Content-Type': 'application/json',
@@ -48,7 +49,6 @@ export const POST: RequestHandler = async ({ request, fetch }) => {
     const { results: [{ flagged }] } = await moderation_response.json() as CreateModerationResponse;
     if (flagged) throw error(400, 'Query content does not comply with OpenAI usage policies.')
 
-    const query = text;
     const query_without_newlines = query.replace(/\n/g, ' '); // OpenAI recommends replacing newlines with spaces for best results (specific to embeddings)
     console.log(`getting embedding: ${query_without_newlines}`)
 
@@ -75,9 +75,9 @@ export const POST: RequestHandler = async ({ request, fetch }) => {
     const nearest_documents = map_nearest_embeddings_to_documents(nearest_matches, doc_sections);
     const document_context = concat_matched_documents(nearest_documents);
 
-    const prompt = generate_prompt(document_context, query);
     const messages: ChatCompletionRequestMessage[] = [
-      { role: 'system', content: prompt },
+      { role: 'system', content: system_message },
+      { role: 'user', content: generate_user_prompt(document_context, query) },
     ]
 
     const chat_completion_request: CreateChatCompletionRequest = {
@@ -119,16 +119,3 @@ export const POST: RequestHandler = async ({ request, fetch }) => {
   }
 };
 
-function generate_prompt(document_context: string, query: string) {
-  return `You love to help people understand how to use Svelte and SvelteKit to build full-stack websites. Given the following context sections from various documentation sites, answer the question using only that information, outputted in markdown format. If you are unsure and the answer is not explicitly written in the context sections, say "Sorry, I don't know how to help with that."
-
-Context sections:
-${document_context}
-
-Question: """
-${query}
-"""
-
-Answer as markdown in the same language as the question (including related code snippets if available):
-`
-}
