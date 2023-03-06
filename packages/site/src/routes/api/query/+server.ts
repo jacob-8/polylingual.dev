@@ -35,7 +35,7 @@ export const POST: RequestHandler = async ({ request, fetch }) => {
     const decodedToken = await decodeToken(auth_token);
     const uid = decodedToken?.uid;
     const authenticated = uid.endsWith('EFVxKpJC5BkTHy22');
-    if (!authenticated) throw new Error("Unauthorized usage");
+    if (!authenticated) throw new Error("Unauthorized usage: Wait a little bit - right now only Jacob can use this. If you can't wait, ask him when it'll be ready.");
 
     const moderation_request: CreateModerationRequest = { input: query }
     const moderation_response = await fetch('https://api.openai.com/v1/moderations', {
