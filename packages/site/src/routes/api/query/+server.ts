@@ -7,11 +7,6 @@ import { map_nearest_embeddings_to_documents } from './map_nearest_embeddings_to
 import { load_docs_and_embeddings } from './load_docs_and_embeddings';
 import { concat_matched_documents } from './concat_matched_documents';
 // import { decodeToken } from '$lib/server/firebase-admin';
-import type { Config } from '@sveltejs/adapter-vercel'
-
-export const config: Config = {
-  runtime: 'edge'
-}
 
 let doc_embeddings: Embedding[] = [];
 let doc_sections: DocSectionData[] = [];
