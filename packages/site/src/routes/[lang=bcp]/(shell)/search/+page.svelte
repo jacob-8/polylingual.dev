@@ -1,15 +1,15 @@
 <script lang="ts">
   import SeoMetaTags from '$lib/SeoMetaTags.svelte';
-  import SvelteMarkdown from 'svelte-markdown';
   import { user } from '$lib/user';
   // import type { ChatCompletionRequestMessage } from 'openai';
   import { SSE } from 'sse.js';
   import { authState } from 'sveltefirets';
   import { samples } from './sample-q-a';
   import { page } from '$app/stores';
+  import Answer from './Answer.svelte';
 
   let answer = '';
-  // answer = samples[0].a;
+  answer = samples[1].a;
   let query = '';
   let asking = false;
   // let chatMessages: ChatCompletionRequestMessage[] = [];
@@ -109,10 +109,7 @@
   <div class="mt-5" />
 
   {#if answer}
-    <div class="text-left tw-prose bg-white p-3 rounded max-w-full">
-      <!-- <h3>{$page.data.lang === 'zh-TW' ? '答案' : 'Answer'}:</h3> -->
-      <SvelteMarkdown source={answer} />
-    </div>
+    <Answer {answer} />
   {/if}
 
   {#if error}

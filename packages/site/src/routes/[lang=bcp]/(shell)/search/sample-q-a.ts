@@ -4,8 +4,35 @@ export const samples = [
     a: 'You can create new routes by adding new directories in the `src/routes` directory. For example, adding `src/routes/about` will create a `/about` route, and adding `src/routes/blog/[slug]` will create a route with a `slug` parameter that can dynamically load data when the user requests the `/blog/hello-world` page.'
   },
   {
+    q: 'Typescript example for testing',
+    a: `Here is a little Typescript:
+\`\`\`typescript
+const foo: string = 'hello';
+\`\`\`
+`
+  },
+  {
     q: "What are snapshots?",
-    a: "Snapshots are objects with `capture` and `restore` methods that can be exported from a `+page.svelte` or `+layout.svelte` to preserve ephemeral DOM state, like scroll positions on sidebars, the content of `<input>` elements, and so on. When you navigate away from a page, the `capture` function is called immediately before the page updates, and the returned value is associated with the current entry in the browser's history stack. If you navigate back, the `restore` function is called with the stored value as soon as the page is updated. The data must be serializable as JSON so that it can be persisted to `sessionStorage`. ```svelte /// file: +page.svelte <script> let comment = ''; /** @type {import('./$types').Snapshot<string>} */ export const snapshot = { capture: () => comment, restore: (value) => comment = value }; </script> <form method=\"POST\"> <label for=\"comment\">Comment</label> <textarea id=\"comment\" bind:value={comment} /> <button>Post comment</button> </form> ```"
+    a: `Snapshots are objects with \`capture\` and \`restore\` methods that can be exported from a \`+page.svelte\` or \`+layout.svelte\` to preserve ephemeral DOM state, like scroll positions on sidebars, the content of \`<input>\` elements, and so on. When you navigate away from a page, the \`capture\` function is called immediately before the page updates, and the returned value is associated with the current entry in the browser's history stack. If you navigate back, the \`restore\` function is called with the stored value as soon as the page is updated. The data must be serializable as JSON so that it can be persisted to \`sessionStorage\`.
+
+\`\`\`svelte 
+/// file: +page.svelte 
+<script> 
+  let comment = ''; 
+  /** @type {import('./$types').Snapshot<string>} */ 
+  export const snapshot = { 
+    capture: () => comment, 
+    restore: (value) => comment = value 
+  }; 
+</script> 
+
+<form method="POST"> 
+  <label for="comment">Comment</label> 
+  <textarea id="comment" bind:value={comment} /> 
+  <button>Post comment</button> 
+</form> 
+\`\`\`
+`
     // For reference: https://kit.svelte.dev/docs/snapshots
   },
   {
