@@ -8,5 +8,10 @@
       "source": "/proxytown/ga",
       "destination": "https://www.google-analytics.com/analytics.js"
     }
-  ]
+  ],
+  "functions": {
+    "api/**": {
+      "maxDuration": 60
+    }
+  }
 }

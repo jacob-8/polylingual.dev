@@ -8,7 +8,10 @@
 </script>
 
 <div class:streaming={asking} class="text-left tw-prose bg-white p-3 rounded max-w-full">
-  {#if answer === '1234'}
+  {#if !answer}
+    <p />
+    <!-- needed for blinking cursor while answer is still coming -->
+  {:else if answer === '1234'}
     {$page.data.lang === 'zh-TW'
       ? '抱歉，我不知道如何回答這個問題。'
       : `Sorry, I don't know how to help with that.`}

@@ -135,3 +135,17 @@ Matchers run both on the server and in the browser.`
 
 // Q: How do you spin routes backwards?
 // A: Has no answer so will give "1234"
+
+// How do you write links? // 如何寫鏈接？ (11)
+
+// In SvelteKit, `<a>` elements (rather than framework-specific `<Link>` components) are used to navigate between the routes of your app. If the user clicks on a link whose `href` is 'owned' by the app (as opposed to, say, a link to an external site) then SvelteKit will navigate to the new page by importing its code and then calling any `load` functions it needs to fetch data. You can customise the behaviour of links with `data-sveltekit-*` attributes. These can be applied to the `<a>` itself, or to a parent element.
+
+// To disable the default scrolling behaviour when navigating to internal links, add a `data-sveltekit-noscroll` attribute to the link.
+
+// To tell SvelteKit not to handle a link, but allow the browser to handle it, add a `data-sveltekit-reload` attribute to the link. Links with a `rel="external"` attribute will receive the same treatment. In addition, they will be ignored during prerendering.
+
+// To write a link, use the `<a>` element with an `href` attribute that points to the desired URL. For example: ```html
+// <a href="/path/to/page">Link text</a>
+// ```
+
+// TODO: If ChatGPT forgets to add a newline before triple-hash, do it for them as seen is needed in the response above.

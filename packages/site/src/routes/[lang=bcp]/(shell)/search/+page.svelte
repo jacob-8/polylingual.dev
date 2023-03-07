@@ -121,7 +121,7 @@
     <div class="mt-5" />
 
     {#if answer || asking}
-      <Answer answer={answer || '...'} {asking} />
+      <Answer {answer} {asking} />
     {/if}
 
     {#if error?.data}
