@@ -10,7 +10,7 @@
       <div>
         <a
           class="bg-black py-2 px-4 rounded-lg text-2xl border border-black hover:border-blue transition-border-color-300"
-          href="/zh-TW/search"><span class="i-carbon-search mb-1" /> 問 Svelte</a
+          href="/zh-TW/search"><span class="i-carbon-search mb-1" /> 問 SvelteKit</a
         >
       </div>
       <div class="h-10" />

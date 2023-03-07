@@ -91,7 +91,7 @@
 <div class="w-800px max-w-full mx-auto mt-5 md:mt-20">
   <h1 class="text-4xl mb-5">
     <span class="i-carbon-search mb-1" />
-    {$page.data.lang === 'zh-TW' ? '問' : 'Ask'} Svelte
+    {$page.data.lang === 'zh-TW' ? '問' : 'Ask'} SvelteKit
   </h1>
 
   <Auth let:user>
@@ -108,8 +108,8 @@
           required
           bind:value={query}
           placeholder="{$page.data.lang === 'zh-TW'
-            ? '問關於 Svelte 的任何問題'
-            : 'Ask me anything about Svelte'}..."
+            ? '問關於 SvelteKit 的任何問題'
+            : 'Ask me anything about SvelteKit'}..."
           class="w-full p-3 rounded text-black placeholder:text-gray-500"
         />
         {#if asking}
